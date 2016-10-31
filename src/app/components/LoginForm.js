@@ -17,7 +17,6 @@ class Login extends React.Component{
         };
     };
 
-
     handleLoginChange = (evt) => {
         if(this.loginValidationState !== ''){
             this.setState({loginValidationState: ''});

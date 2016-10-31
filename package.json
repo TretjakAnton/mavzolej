@@ -1,5 +1,5 @@
 {
-  "name": "testWork",
+  "name": "mavzolej",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -13,6 +13,7 @@
     "body-parser": "^1.15.2",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
+    "mysql": "^2.11.1",
     "react-redux": "^4.4.5",
     "react-router": "^2.4.1",
     "react-router-redux": "^4.0.5",

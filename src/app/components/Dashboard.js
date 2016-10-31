@@ -1,13 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { getTypes } from '../api/serverRequests'
 
 class Dashboard extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            userLogin: this.props.userCredentials
+            error: '',
         };
     };
+
+    componentWillMount(){
+        getTypes().then((data) => {
+            if(data.error){
+                this.setState({error: data.error})
+            } else {
+                console.log(data);
+            }
+        })
+    }
 
     render() {
         return <div className="flex-container">
