@@ -1,0 +1,307 @@
+@charset "utf-8";
+/* CSS Document */
+p {
+    text-indent: 20px; /* Отступ первой строки в пикселах */
+    font-family: 'Roboto Condensed', sans-serif;
+}
+* {
+    margin: 0;
+}
+html, body {
+    height: 100%;
+}
+.wrapper {
+    min-height: 100%;
+    margin-bottom: -80px;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+a{
+    outline: none !important;
+}
+
+header{
+
+}
+
+/*content style*/
+.content
+{
+    padding: 0;
+}
+
+.posts{
+    margin: 10px 10px;
+    padding: 5px 5px;
+    background-color: whitesmoke;
+    border: 1px solid #f1f1f1;
+}
+
+.posts:hover{
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+
+.headPost{
+    padding: 0 0 5px 0;
+}
+
+.posts .headPost .image img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.images{
+    padding: 5px;
+    text-align: center;
+}
+
+.images img{
+    padding: 0 2px 2px 2px;
+}
+
+.imageKol{
+    margin-top: -20px;
+}
+
+.inside{
+    float: left;
+}
+
+.btn{
+    outline: none !important;
+}
+
+.send{
+    margin-top: 20px;
+}
+/*end content style*/
+
+/* form style */
+
+.pad{
+    padding: 15px;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    background: red;
+    cursor: inherit;
+    display: block;
+}
+input[readonly] {
+    background-color: white !important;
+    cursor: text !important;
+}
+
+.headIm{
+    background-color: #2b2b2b;
+}
+.upHead{
+    text-align: center;
+    margin-top: 30px;
+}
+.inner{
+    padding-top: 7px;
+}
+.upHead p, .contacts p{
+    color: white;
+    text-indent: 0;!important;
+}
+
+.contacts{
+    float: right;
+    text-align: right;
+    font-size: 13px;
+}
+
+.textInfo{
+    padding: 12px;
+}
+
+.upHead{
+    padding: 0 5px 0 5px;
+}
+
+.fl-left{
+    float: left;
+}
+
+@font-face {
+    font-family: 'Conv_VIVADCL';
+    src: url('../fonts/VIVADCL.eot');
+    src: local('☺'), url('../fonts/VIVADCL.woff') format('woff'), url('../fonts/VIVADCL.ttf') format('truetype'), url('../fonts/VIVADCL.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.navbar-brand, .float-right, .info{
+    font-family: Conv_VIVADCL sans-serif;
+}
+
+.contacts span{
+    padding: 5px 6px 0 0;
+}
+/* end form style */
+
+/*footer styles*/
+footer, .push {
+    height: 80px;
+    clear: both;
+}
+
+footer{
+    background-image: url("../images/footer.jpg");
+}
+
+.float-right, .info{
+    padding: 5px;
+}
+
+.info{
+    float: left;
+    color: white;
+}
+
+.float-right{
+    float: right;
+}
+
+.noP{
+    padding: 0;
+}
+
+.infoFT{
+    padding: 30px 12px 0 12px;
+}
+
+.textFoot{
+    text-align: right;
+    color: white;
+    padding: 10px 12px 0 12px;
+}
+/*end footer styles*/
+
+.search{
+    padding-bottom: 15px;
+}
+
+#map {
+    height: 400px;
+}
+/*salvattore styles*/
+.column {
+    float: left;
+}
+.size-1of4 {
+    width: 25%;
+}
+.size-1of3 {
+    width: 33.333%;
+}
+.size-1of2 {
+    width: 50%;
+}
+
+@media screen and (max-width:767px){
+    #posts[data-columns]::before {
+        content: '2 .column.size-1of2';
+    }
+
+    .image img{
+        height: 120px;
+        width: auto;
+    }
+
+    .images img{
+        height: 70px;
+        width: auto;
+    }
+
+    .imgAdm{
+        height: 60px;
+        width: auto;
+    }
+    .textFoot, .infoFT{
+        font-size: 11px;
+    }
+}
+
+@media screen and (min-width:768px) and (max-width:991px){
+    #posts[data-columns]::before {
+        content: '2 .column.size-1of2';
+    }
+    .image img{
+        height: 200px;
+        width: auto;
+    }
+
+    .images img{
+        height: 90px;
+        width: auto;
+    }
+
+    .imgAdm{
+        height: 70px;
+        width: auto;
+    }
+}
+@media screen and (min-width:992px) and (max-width:1199px){
+    #posts[data-columns]::before {
+        content: '3 .column.size-1of3';
+    }
+    .image img{
+        height: 160px;
+        width: auto;
+    }
+
+    .images img{
+        height: 70px;
+        width: auto;
+    }
+
+    .imgAdm{
+        height: 90px;
+        width: auto;
+    }
+}
+@media screen and (min-width:1200px) {
+    #posts[data-columns]::before {
+        content: '3 .column.size-1of3';
+    }
+    .image img{
+        height: 200px;
+        width: auto;
+    }
+
+    .images img{
+        height: 80px;
+        width: auto;
+    }
+
+    .imgAdm{
+        height: 90px;
+        width: auto;
+    }
+
+
+}
+
+
+/*end salvattore styles*/

@@ -144,6 +144,8 @@ router.route('/pam')
         });
     });
 
+
+/*
 router.route('/image')
     .post('/upload', function (req, res) {
 
@@ -175,6 +177,7 @@ router.route('/image')
         // parse the incoming request containing the form data
         form.parse(req);
     });
+*/
 
 app.use('/api', router);
 

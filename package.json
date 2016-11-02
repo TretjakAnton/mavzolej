@@ -28,6 +28,8 @@
     "cookie-parser": "*",
     "express": "^4.14.0",
     "fetch-polyfill": "^0.8.2",
+    "formidable": "^1.0.17",
+    "fs": "0.0.1-security",
     "image-webpack-loader": "^3.0.0",
     "react-bootstrap": "^0.30.5",
     "webpack": "^1.13.1"

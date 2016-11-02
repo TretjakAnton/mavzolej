@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { getTypes } from '../api/serverRequests';
+import { getTypes } from '../../api/serverRequests';
 
-class Dashboard extends React.Component{
+class Types extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -21,10 +21,11 @@ class Dashboard extends React.Component{
 
     render() {
         return <div className="flex-container">
-            <div>{this.state.error}</div>
+            <div>{this.state.userLogin}</div>
         </div>
     }
 }
 
-export default Dashboard;
+
+export default Types;
 
