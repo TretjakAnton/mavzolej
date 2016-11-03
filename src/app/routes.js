@@ -6,6 +6,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import App from './containers/App'
 import Login from './components/LoginForm'
 import Dashboard from './components/Dashboard'
+import MainPages from './components/MainPages'
 
 import Admin from './containers/Admin'
 
@@ -22,10 +23,11 @@ function checkAuth(nextState, replace) {
 export const routes = (
   <Route path="/" component={App}>
     <Route path="admin" component={Admin} />
+    <Route path="admin" component={MainPages} />
     <Route path="login" component={Login} />
     <Route onEnter={checkAuth}>
       <Route path="dashboard" component={Dashboard} />
     </Route>
-    <IndexRoute component={Admin} />
+    <IndexRoute component={MainPages} />
   </Route>
 );

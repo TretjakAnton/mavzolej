@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { getTypes } from '../../api/serverRequests';
 
 class Types extends React.Component{

@@ -1,4 +1,4 @@
-import  React, { Component } from 'react';
+import  React from 'react';
 import Pam from './Pam';
 import Sizes from './Sizes';
 import Types from './Types';

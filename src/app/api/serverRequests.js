@@ -101,3 +101,17 @@ export function getPam(id_fake){
   })
   .then(response => response.json())
 }
+
+export function getByType(id_type){
+  return fetch(url + "/api/getByType",{
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      id_type: id_type
+    })
+  })
+  .then(response => response.json())
+}

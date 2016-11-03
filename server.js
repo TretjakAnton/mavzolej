@@ -144,7 +144,20 @@ router.route('/pam')
         });
     });
 
-
+router.route('/getByType')
+    .post(function (req, res) {
+        pool.getConnection(function (err, connection) {
+            var queryTo = 'SELECT * from pam WHERE id_type="'+req.body.id_type+'"';
+            connection.query(queryTo, function (err, rows) {
+                if (!err && rows.length > 0) {
+                    res.json(rows);
+                } else {
+                    res.json({error: err.message});
+                }
+                connection.release();
+            });
+        });
+    });
 /*
 router.route('/image')
     .post('/upload', function (req, res) {

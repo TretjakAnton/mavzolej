@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { getPam } from '../../api/serverRequests';
 
 class Pam extends React.Component{
