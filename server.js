@@ -38,21 +38,8 @@ router.route('/login')
     }
   });
 
-router.route('/allTypes')
+router.route('/Types')
     .post(function (req, res) {
-      pool.getConnection(function (err, connection) {
-        var queryTo = 'SELECT name_type from type';
-        connection.query(queryTo, function (err, rows) {
-          if (!err && rows.length > 0) {
-            res.json(rows);
-          } else {
-            res.json({error: err.message});
-          }
-          connection.release();
-        });
-      });
-    })
-    .put(function (req, res) {
         pool.getConnection(function (err, connection) {
             var queryTo = 'INSERT INTO type (name_type) VALUES ("'+req.body.name_type+'")';
             connection.query(queryTo, function (err) {
@@ -64,12 +51,51 @@ router.route('/allTypes')
                 connection.release();
             });
         });
+    })
+    .get(function(req, res){
+        pool.getConnection(function (err, connection) {
+            var queryTo = 'SELECT * from type';
+            connection.query(queryTo, function (err, rows) {
+                if (!err && rows.length > 0) {
+                    res.json(rows);
+                } else {
+                    res.json({error: err.message});
+                }
+                connection.release();
+            });
+        });
+    })
+    .put(function (req, res) {
+        pool.getConnection(function (err, connection) {
+            var queryTo = 'UPDATE type SET id_type="'+req.body.id_type+'" name_type="'+req.body.name_type+'"';
+            connection.query(queryTo, function (err) {
+                if (!err) {
+                    res.json({success: 'successful added'});
+                } else {
+                    res.json({error: err.message});
+                }
+                connection.release();
+            });
+        });
+    })
+    .delete(function (req, res) {
+        pool.getConnection(function (err, connection) {
+            var queryTo = 'DELETE FROM type WHERE id_type="'+req.body.id_type+'"';
+            connection.query(queryTo, function (err, rows) {
+                if (!err) {
+                    res.json({success: 'successful deleted'});
+                } else {
+                    res.json({error: err.message});
+                }
+                connection.release();
+            });
+        });
     });
 
 router.route('/pam')
     .post(function (req, res) {
       pool.getConnection(function (err, connection) {
-        var queryTo = 'INSERT INTO pam (id_fake, id_pam, id_type, opis, price, id_size) VALUES ("","'+req.body.id_pam+'","'+req.body.id_type+'","'+req.body.opis+'","'+req.body.id_price+'","'+req.body.id_size+'",)';
+        var queryTo = 'INSERT INTO pam (id_fake, id_pam, id_type, opis, price, id_size) VALUES ("","'+req.body.id_pam+'","'+req.body.id_type+'","'+req.body.opis+'","'+req.body.price+'","'+req.body.id_size+'")';
         connection.query(queryTo, function (err) {
           if (!err) {
             res.json({success: 'insert success'});
@@ -82,7 +108,7 @@ router.route('/pam')
     })
     .put(function (req, res) {
       pool.getConnection(function (err, connection) {
-        var queryTo = 'UPDATE pam SET id_pam="'+req.body.id_pam+'", id_type="'+req.body.id_type+'", opis="'+req.body.opis+'", price="'+req.body.id_price+'", id_size="'+req.body.id_size+'" WHERE id_fake="'+req.body.id_fake+'"';
+        var queryTo = 'UPDATE pam SET id_pam="'+req.body.id_pam+'", id_type="'+req.body.id_type+'", opis="'+req.body.opis+'", price="'+req.body.price+'", id_size="'+req.body.id_size+'" WHERE id_fake="'+req.body.id_fake+'"';
         connection.query(queryTo, function (err) {
           if (!err) {
             res.json({success: 'update success'});
@@ -95,9 +121,9 @@ router.route('/pam')
     })
     .delete(function (req, res) {
         pool.getConnection(function (err, connection) {
-            var queryTo = 'SELECT COUNT(*) FROM images WHERE id_zapis="'+req.body.id_zapis+'"';
+            var queryTo = 'SELECT COUNT(*) as imgCount FROM images WHERE id_zapis="'+req.body.id_fake+'"';
             connection.query(queryTo, function (err, rows) {
-                if (!err && rows.length > 1) {
+                if (!err && rows[0].imgCount > 1) {
                     pool.getConnection(function (err, connection) {
                         var queryTo = 'DELETE FROM images WHERE id_image="'+req.body.id_image+'"';
                         connection.query(queryTo, function (err) {
@@ -110,7 +136,7 @@ router.route('/pam')
                         });
                     });
                 }
-                if(!err && rows.length == 1){
+                if(!err && rows[0].imgCount == 1 || !err && rows[0].imgCount == 0){
                     pool.getConnection(function (err, connection) {
                         var queryTo = 'DELETE FROM pam WHERE id_fake="'+req.body.id_fake+'"';
                         connection.query(queryTo, function (err) {
@@ -132,7 +158,7 @@ router.route('/pam')
     })
     .get(function (req, res) {
         pool.getConnection(function (err, connection) {
-            var queryTo = 'SELECT * from pam WHERE id_fake="'+req.body.id_fake+'"';
+            var queryTo = 'SELECT * from pam WHERE id_fake="'+req.query.id_fake+'"';
             connection.query(queryTo, function (err, rows) {
                 if (!err && rows.length > 0) {
                     res.json(rows);
@@ -145,9 +171,9 @@ router.route('/pam')
     });
 
 router.route('/getByType')
-    .post(function (req, res) {
+    .get(function (req, res) {
         pool.getConnection(function (err, connection) {
-            var queryTo = 'SELECT * from pam WHERE id_type="'+req.body.id_type+'"';
+            var queryTo = 'SELECT * from pam WHERE id_type="'+req.query.id_type+'"';
             connection.query(queryTo, function (err, rows) {
                 if (!err && rows.length > 0) {
                     res.json(rows);

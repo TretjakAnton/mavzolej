@@ -1,5 +1,5 @@
 import React from 'react';
-import { getTypes } from '../api/serverRequests';
+import { getByType } from '../api/serverRequests';
 
 class Dashboard extends React.Component{
     constructor(props) {
@@ -10,7 +10,7 @@ class Dashboard extends React.Component{
     };
 
     componentWillMount(){
-        getTypes().then((data) => {
+        getByType('1').then((data) => {
             if(data.error){
                 this.setState({error: data.error})
             } else {

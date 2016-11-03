@@ -22,12 +22,12 @@ function checkAuth(nextState, replace) {
 
 export const routes = (
   <Route path="/" component={App}>
-    <Route path="admin" component={Admin} />
     <Route path="admin" component={MainPages} />
     <Route path="login" component={Login} />
+    <Route path="dashboard" component={Dashboard} />
     <Route onEnter={checkAuth}>
-      <Route path="dashboard" component={Dashboard} />
+        <Route path="admin" component={Admin} />
     </Route>
-    <IndexRoute component={MainPages} />
+    <IndexRoute component={Dashboard} />
   </Route>
 );
