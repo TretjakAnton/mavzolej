@@ -12,9 +12,13 @@ module.exports = {
     module: { //Обновлено
         loaders: [ //добавили babel-loader
             {
-                loaders: ['babel-loader'],
                 test: /\.js$/,
-                exclude: /node_modules/
+                exclude: /node_modules/,
+                loader: "babel",
+                query:
+                {
+                    presets:['react']
+                }
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,

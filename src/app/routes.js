@@ -27,8 +27,9 @@ export const routes = (
     <Route path="/login" component={Login} />
     <Route path="/dashboard" component={Dashboard} />
       <Route component={MainPage}>
+          <Route path="monuments/:id" component={MainPages}/>
           <Route path="/home" component={HomePage}/>
-          <IndexRedirect to="/home" />
+          <IndexRedirect to="/home"/>
       </Route>
     <Route onEnter={checkAuth}>
         <Route path="/admin" component={Admin} />

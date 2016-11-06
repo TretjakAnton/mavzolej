@@ -5,23 +5,26 @@ class MainPages extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-
+            typeId: this.props.params.id
         }
     }
 
     componentWillMount(){
-        getByType("1").then((data) => {
+        getByType(this.state.typeId).then((data) => {
             if(data.error){
                 this.setState({error: data.error})
             } else {
                 console.log(data);
-                this.setState({pams: data.rows})
+                this.setState({pams: data})
             }
         })
     }
 
     render(){
-        return <div>{this.pams}</div>
+        if(this.state.pams){
+            return <div>{this.state.pams[0].id_fake}</div>
+        }
+        return null;
     }
 }
 
