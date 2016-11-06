@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
-import { userCredentials } from './userInfo'
+import { allTypes } from './types'
 
 /*const userStatereducer = combineReducers({
     userCredentials: userCredentials,
@@ -8,5 +8,5 @@ import { userCredentials } from './userInfo'
 
 export default combineReducers({
     routing: routerReducer,
-    userState: userCredentials
+    allTypes: allTypes
 });

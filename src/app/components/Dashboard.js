@@ -1,5 +1,8 @@
 import React from 'react';
-import { getByType } from '../api/serverRequests';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { getAllTypes } from '../api/serverRequests';
+import { setTypes } from '../actions/Actions'
 
 class Dashboard extends React.Component{
     constructor(props) {
@@ -10,11 +13,12 @@ class Dashboard extends React.Component{
     };
 
     componentWillMount(){
-        getByType('1').then((data) => {
+        getAllTypes().then((data) => {
             if(data.error){
                 this.setState({error: data.error})
             } else {
                 console.log(data);
+                this.props.setTypes(data)
             }
         })
     }
@@ -26,5 +30,10 @@ class Dashboard extends React.Component{
     }
 }
 
-export default Dashboard;
+function mapDispatchToProps(dispatch) {
+    return {
+        setTypes: bindActionCreators(setTypes, dispatch),
+    }
+}
 
+export default connect(null, mapDispatchToProps)(Dashboard)

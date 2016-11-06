@@ -220,8 +220,8 @@ router.route('/image')
 
 app.use('/api', router);
 
-app.get('*', function (req, res) {
-  res.redirect('/');
+app.get('*', function (request, response){
+    response.sendFile(path.resolve(__dirname, 'src', 'index.html'))
 });
 
 

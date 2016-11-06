@@ -1,8 +1,8 @@
-export const USER_CREDENTIALS = 'USER_CREDENTIALS';
+export const ALL_TYPES = 'ALL_TYPES';
 
-export function setCredentials(userLogin){
+export function setTypes(types){
     return {
-        type: USER_CREDENTIALS,
-        userLogin: userLogin
+        type: ALL_TYPES,
+        types: types
     }
 }

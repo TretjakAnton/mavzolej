@@ -1,5 +1,5 @@
 import React from 'react';
-import { browserHistory, Route, IndexRoute } from 'react-router';
+import { IndexRedirect, browserHistory, Route, IndexRoute } from 'react-router';
 import configurateStore from './store/configuration';
 import { syncHistoryWithStore } from 'react-router-redux';
 
@@ -9,6 +9,8 @@ import Dashboard from './components/Dashboard'
 import MainPages from './components/MainPages'
 
 import Admin from './containers/Admin'
+import MainPage from './containers/MainPage/MainPage';
+import HomePage from './components/HomePage';
 
 export const store = configurateStore();
 export const history = syncHistoryWithStore(browserHistory, store);
@@ -22,12 +24,15 @@ function checkAuth(nextState, replace) {
 
 export const routes = (
   <Route path="/" component={App}>
-    <Route path="admin" component={MainPages} />
-    <Route path="login" component={Login} />
-    <Route path="dashboard" component={Dashboard} />
+    <Route path="/login" component={Login} />
+    <Route path="/dashboard" component={Dashboard} />
+      <Route component={MainPage}>
+          <Route path="/home" component={HomePage}/>
+          <IndexRedirect to="/home" />
+      </Route>
     <Route onEnter={checkAuth}>
-        <Route path="admin" component={Admin} />
+        <Route path="/admin" component={Admin} />
     </Route>
-    <IndexRoute component={Dashboard} />
+    <IndexRedirect to="/home" />
   </Route>
 );
