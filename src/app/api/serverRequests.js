@@ -21,7 +21,7 @@ export function getAllTypes(){
       .then(response => response.json())
 }
 
-export function addType(name){
+export function addType(name, directory){
   return fetch(url + "/api/Types",{
     method: 'POST',
     headers: {
@@ -29,13 +29,14 @@ export function addType(name){
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      name_type: name
+      name_type: name,
+      directory: directory
     })
   })
   .then(response => response.json())
 }
 
-export function updateType(id_type, name){
+export function updateType(id_type, name, directory){
   return fetch(url + "/api/Types",{
     method: 'PUT',
     headers: {
@@ -44,7 +45,8 @@ export function updateType(id_type, name){
     },
     body: JSON.stringify({
       id_type: id_type,
-      name_type: name
+      name_type: name,
+      directory: directory
     })
   })
       .then(response => response.json())
@@ -117,10 +119,17 @@ export function deletePam(id_image, id_fake){
 }
 
 export function getPam(id_fake){
-  return fetch(url + "/api/pam?id_fake="+id_fake,{
-    method: 'GET'
-  })
-  .then(response => response.json())
+  if(id_fake){
+    return fetch(url + "/api/pam?id_fake="+id_fake,{
+      method: 'GET'
+    })
+    .then(response => response.json())
+  } else {
+    return fetch(url + "/api/pam",{
+      method: 'GET'
+    })
+    .then(response => response.json())
+  }
 }
 
 export function getByType(id_type){
@@ -128,4 +137,21 @@ export function getByType(id_type){
     method: 'GET',
   })
   .then(response => response.json())
+}
+
+export function getSizes(){
+  return fetch(url + "/api/size",{method: 'GET'})
+      .then(response => response.json())
+}
+
+export function getImages(id_image){
+  if(id_image){
+    return fetch(url + "/api/images?id_image="+id_image,{
+      method: 'GET',
+    })
+    .then(response => response.json())
+  } else {
+    return fetch(url + "/api/images",{method: 'GET'})
+        .then(response => response.json())
+  }
 }

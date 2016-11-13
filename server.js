@@ -41,7 +41,7 @@ router.route('/login')
 router.route('/Types')
     .post(function (req, res) {
         pool.getConnection(function (err, connection) {
-            var queryTo = 'INSERT INTO type (name_type) VALUES ("'+req.body.name_type+'")';
+            var queryTo = 'INSERT INTO type (name_type, directory) VALUES ("'+req.body.name_type+'", "'+req.body.directory+'")';
             connection.query(queryTo, function (err) {
                 if (!err) {
                     res.json({success: 'successful added'});
@@ -67,7 +67,7 @@ router.route('/Types')
     })
     .put(function (req, res) {
         pool.getConnection(function (err, connection) {
-            var queryTo = 'UPDATE type SET id_type="'+req.body.id_type+'" name_type="'+req.body.name_type+'"';
+            var queryTo = 'UPDATE type SET id_type="'+req.body.id_type+'" name_type="'+req.body.name_type+'", directory="'+req.body.directory+'"';
             connection.query(queryTo, function (err) {
                 if (!err) {
                     res.json({success: 'successful added'});
@@ -158,7 +158,12 @@ router.route('/pam')
     })
     .get(function (req, res) {
         pool.getConnection(function (err, connection) {
-            var queryTo = 'SELECT * from pam WHERE id_fake="'+req.query.id_fake+'"';
+            var queryTo = '';
+            if(req.query.id_fake){
+                queryTo = 'SELECT * from pam WHERE id_fake="'+req.query.id_fake+'"';
+            } else {
+                queryTo = 'SELECT * from pam';
+            }
             connection.query(queryTo, function (err, rows) {
                 if (!err && rows.length > 0) {
                     res.json(rows);
@@ -184,8 +189,68 @@ router.route('/getByType')
             });
         });
     });
+
+router.route('/size')
+    .get(function (req, res) {
+        pool.getConnection(function (err, connection) {
+            var queryTo = 'SELECT * from size';
+            connection.query(queryTo, function (err, rows) {
+                if (!err && rows.length > 0) {
+                    res.json(rows);
+                } else {
+                    res.json({error: err.message});
+                }
+                connection.release();
+            });
+        });
+    })
+    .put(function (req, res) {
+        pool.getConnection(function (err, connection) {
+            var queryTo = 'INSERT INTO size (id_size, size_name, size_price) VALUES ("","'+req.body.size_name+'","'+req.body.size_price+'")';
+            connection.query(queryTo, function (err, rows) {
+                if (!err) {
+                    res.json({success: 'successful added'});
+                } else {
+                    res.json({error: err.message});
+                }
+                connection.release();
+            });
+        });
+    })
+    .delete(function (req, res) {
+        pool.getConnection(function (err, connection) {
+            var queryTo = 'DELETE FROM size WHERE id_size="'+req.body.id_size+'"';
+            connection.query(queryTo, function (err, rows) {
+                if (!err) {
+                    res.json({success: 'successful deleted'});
+                } else {
+                    res.json({error: err.message});
+                }
+                connection.release();
+            });
+        });
+    });
+
+router.route('/images')
+    .get(function (req, res) {
+        pool.getConnection(function (err, connection) {
+            var queryTo = '';
+            if(!req.body.id_image){
+                queryTo = 'SELECT * from images';
+            } else {
+                queryTo = 'SELECT * from images WHERE id_image="'+req.body.id_image+'"';
+            }
+            connection.query(queryTo, function (err, rows) {
+                if (!err && rows.length > 0) {
+                    res.json(rows);
+                } else {
+                    res.json({error: err.message});
+                }
+                connection.release();
+            });
+        });
+    });
 /*
-router.route('/image')
     .post('/upload', function (req, res) {
 
         // create an incoming form object
