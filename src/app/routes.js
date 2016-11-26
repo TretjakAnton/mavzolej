@@ -31,9 +31,9 @@ export const routes = (
           <Route path="/home" component={HomePage}/>
           <IndexRedirect to="/home"/>
       </Route>
-
+    /* <Route onEnter={checkAuth}> */
         <Route path="/admin" component={Admin} />
-
+    /* </Route> */
     <IndexRedirect to="/admin" />
   </Route>
 );
