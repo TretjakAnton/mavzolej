@@ -155,3 +155,15 @@ export function getImages(id_image){
         .then(response => response.json())
   }
 }
+
+export function addImages(images){
+  const formData = new FormData();
+  images.map((val) => {
+    formData.append(val.name, val);
+  });
+  return fetch(url + "/api/images",{
+    method: 'PUT',
+    body: formData
+  })
+  .then(response => response.json())
+}
