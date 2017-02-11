@@ -3,10 +3,10 @@ import { IndexRedirect, browserHistory, Route, IndexRoute } from 'react-router';
 import configurateStore from './store/configuration';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-import App from './containers/App'
-import Login from './components/LoginForm'
-import Dashboard from './components/Dashboard'
-import MainPages from './components/MainPages'
+import App from './containers/App';
+import Login from './components/LoginForm';
+import Dashboard from './components/Dashboard';
+import ProductEditor from './components/ProductEditor';
 
 import Admin from './containers/Admin'
 import MainPage from './containers/MainPage/MainPage';
@@ -27,7 +27,7 @@ export const routes = (
     <Route path="/login" component={Login} />
     <Route path="/dashboard" component={Dashboard} />
       <Route component={MainPage}>
-          <Route path="monuments/:id" component={MainPages}/>
+          <Route path="/monuments/:id" component={ProductEditor}/>
           <Route path="/home" component={HomePage}/>
           <IndexRedirect to="/home"/>
       </Route>

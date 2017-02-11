@@ -103,7 +103,7 @@ export function updatePam(id_fake, id_pam, id_type, opis, price, id_size){
   .then(response => response.json())
 }
 
-export function deletePam(id_image, id_fake){
+export function deletePam(id_image, id_fake, type_dir, image){
   return fetch(url + "/api/pam",{
     method: 'DELETE',
     headers: {
@@ -112,7 +112,8 @@ export function deletePam(id_image, id_fake){
     },
     body: JSON.stringify({
       id_image: id_image,
-      id_fake: id_fake
+      id_fake: id_fake,
+      type_dir: type_dir
     })
   })
   .then(response => response.json())
