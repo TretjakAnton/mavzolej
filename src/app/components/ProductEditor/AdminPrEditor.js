@@ -1,6 +1,13 @@
 import React from 'react';
-import { getPam, deletePam } from '../../api/newPam';
-import ImageLoader from 'react-imageloader';
+import {
+  Table,
+  FormControl
+} from 'react-bootstrap';
+import {
+  getPam,
+  deletePam
+} from '../../api/newPam';
+import Pages from '../Pages';
 
 export default class AdminPrEditor extends React.Component{
   constructor(props){
@@ -11,11 +18,17 @@ export default class AdminPrEditor extends React.Component{
       page: 1,
       countRows: 10,
       pams: null,
-      error: null
+      error: null,
+      DOMPages: null
     }
   }
 
   componentWillMount(){
+    this.getInfoForPage(null, this.state.curr_type.id_type);
+  };
+
+  changePage = (page) => {
+    this.setState({page: page});
     this.getInfoForPage(null, this.state.curr_type.id_type);
   };
 
@@ -45,12 +58,12 @@ export default class AdminPrEditor extends React.Component{
     var body = [];
     var head = [];
     head.push(
-      <thead>
-        <tr>
-          <th>image</th>
-          <th>id</th>
-          <th>price</th>
-          <th>control</th>
+      <thead key='8'>
+        <tr key='7'>
+          <th key='1'>image</th>
+          <th key='2'>id</th>
+          <th key='3'>price</th>
+          <th key='4'>control</th>
         </tr>
       </thead>
     );
@@ -58,32 +71,36 @@ export default class AdminPrEditor extends React.Component{
       var imgUrl = this.state.curr_type.folder + val.image;
       body.push(
         <tr key={key}>
-          <td><img src={'../../../media/'+imgUrl} style={imgStyle}/></td>
-          <td>{val.id_pam}</td>
-          <td>{val.price}</td>
-          <td>
-            <button>edit</button>
+          <td key={key + Math.random()}><img src={'../../../media/'+imgUrl} style={imgStyle}/></td>
+          <td key={key + Math.random()}>{val.id_pam}</td>
+          <td key={key + Math.random()}>{val.price}</td>
+          <td key={key + Math.random()}>
             <button onClick={() => deletePam(val.id_img, val.id_prod, imgUrl)}>delete</button>
           </td>
         </tr>
       )
     });
 
-    return (<table>{head.concat(<tbody>{body}</tbody>)}</table>);
+    return (<Table responsive>{head.concat(<tbody key="123">{body}</tbody>)}</Table>);
   };
 
   render(){
     return <div>
-      <select name="curr_type" value={this.state.curr_type} onChange={this.typeConrol}>
+      <FormControl componentClass="select" name="curr_type" value={this.state.curr_type} onChange={this.typeConrol}>
         {
           this.state.types.map((val, key) => {
             return <option key={key} value={val}>{val.name}</option>;
           })
         }
-      </select>
+      </FormControl>
       {this.state.pams &&
           this.pamsDom()
       }
+      <Pages
+        countRows={this.state.countRows}
+        type={this.state.curr_type.id_type}
+        onChange={this.changePage}
+      />
     </div>
   }
 }

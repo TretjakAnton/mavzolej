@@ -1,5 +1,12 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
+import {
+  Button,
+  FormControl,
+  ControlLabel,
+  FormGroup,
+  Col,
+}  from 'react-bootstrap';
 import { addPam } from '../../api/newPam';
 import AdminPrEditor from '../../components/ProductEditor/AdminPrEditor';
 import { connect } from 'react-redux';
@@ -98,17 +105,22 @@ class Pam extends React.Component {
             <p>Drop an image or click to select a file to upload.</p>
           </Dropzone>
           {this.state.uploadedFiles &&
-          <div>{this.generateDOM('preview')}</div>
+            <div>{this.generateDOM('preview')}</div>
           }
-          <input type="text" name="id_fake" value={this.state.id_fake} onChange={this.inputsConrol}/>
-          <select name="id_type" value={this.state.id_type} onChange={this.inputsConrol}>
-            {this.generateDOM('types')}
-          </select>
-          <input type="text" name="price" value={this.state.price} onChange={this.inputsConrol}/>
-          <button onClick={this.onSendAll}>Send</button>
-          <div>
+          <FormGroup>
+            <Col sm={6}>
+              <FormControl type="text" placeholder="номер памятника" name="id_fake" value={this.state.id_fake} onChange={this.inputsConrol} />
+              <ControlLabel>тип памятника</ControlLabel>
+              <FormControl componentClass="select" value={this.state.id_type} onChange={this.inputsConrol}>
+                {this.generateDOM('types')}
+              </FormControl>
+              <FormControl type="number" placeholder="цена" name="price" value={this.state.price} onChange={this.inputsConrol} />
+              <Button onClick={this.onSendAll}>
+                 Сохранть
+              </Button>
+            </Col>
+          </FormGroup>
             <AdminPrEditor types={this.state.types} />
-          </div>
         </div>
       }
     </div>

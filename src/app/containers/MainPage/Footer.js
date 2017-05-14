@@ -9,8 +9,8 @@ class Footer extends React.Component{
     };
 
     render() {
-        return <div className="flex-container">
-            <div>Footer</div>
+        return <div className="footer">
+            <div>Footer {this.state.error}</div>
         </div>
     }
 }

@@ -1,18 +1,19 @@
 import React from 'react';
 
-class Header extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            error: '',
-        };
+class Header extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: '',
     };
+  };
 
-    render() {
-        return <div className="flex-container">
-            <div>Header</div>
-        </div>
-    }
+  render() {
+    return <div className="header">
+      <div>Header</div>
+      {this.state.error}
+    </div>
+  }
 }
 
 export default Header;

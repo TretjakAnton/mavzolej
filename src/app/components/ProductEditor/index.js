@@ -21,7 +21,7 @@ export default class ProductEditor extends React.Component{
     if(this.state.contentFor == ADMIN){
       return <AdminPrEditor />
     } else if (this.state.contentFor == null || this.state.contentFor == undefined){
-      return <CustomerPrEditor />
+      return <CustomerPrEditor id_type={this.state.typeId} />
     }
   }
 }

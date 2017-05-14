@@ -1,20 +1,21 @@
 import React from 'react';
-import { getTypes } from '../../api/serverRequests';
+import { getAllTypes } from '../../api/Types';
 
 class Types extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
             error: '',
+          data: ''
         };
     };
 
     componentWillMount(){
-        getTypes().then((data) => {
+        getAllTypes().then((data) => {
             if(data.error){
                 this.setState({error: data.error})
             } else {
-                console.log(data);
+                this.setState({data: data.error})
             }
         })
     }

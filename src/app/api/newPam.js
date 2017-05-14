@@ -16,10 +16,15 @@ export function addPam(id_pam, type, price, images){
   .then(response => response.json())
 }
 
-export function getPam(id_prod, id_type, from, countRow) {
-  return fetch(url + `/api/monuments?id_fake=${id_prod}&id_type=${id_type}&from=${from}&countRow=${countRow}`, {
+export function getPam(id_prod, id_type, from, countRow, folder) {
+  return fetch(url + `/api/monuments?id_fake=${id_prod}&id_type=${id_type}&from=${from}&countRow=${countRow}&folder=${folder}`, {
     method: 'GET'
   })
+    .then(response => response.json())
+}
+
+export function getCountPams(id_type){
+  return fetch(`${url}/api/monumentsCount?id_type=${id_type}`, { method: 'GET' })
     .then(response => response.json())
 }
 

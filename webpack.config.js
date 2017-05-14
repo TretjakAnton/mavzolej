@@ -12,6 +12,10 @@ module.exports = {
     module: { //Обновлено
         loaders: [ //добавили babel-loader
             {
+              test: /\.css$/,
+              loader: "style-loader!css-loader"
+            },
+            {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: "babel",
