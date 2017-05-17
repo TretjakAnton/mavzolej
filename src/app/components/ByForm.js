@@ -4,12 +4,13 @@ import {
   Col
 }  from 'react-bootstrap';
 import { getForm } from '../api/Form';
-import Selection from './Selection';
 
 class ByForm extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
+      sum: null,
+      itemsList: null,
       formData: null,
       error: ''
     }
@@ -20,36 +21,127 @@ class ByForm extends React.Component{
       if (data.error) {
         this.setState({error: data.error})
       } else {
-        this.setState({formData: data})
+        let mas = [];
+        class formElement {
+          name = '';
+          type = '';
+          data = [];
+          currElem = null;
+
+          setCurrent = (item) => {
+            this.currElem = this.data.find((element) => element == item);
+          };
+
+          getCurrent = () => {
+            return this.currElem;
+          };
+        }
+
+        let currentObj = new formElement;
+
+        for (let i=0; i<data.length; i++){
+          let curr = data[i];
+          let next = data[i+1] || false;
+
+          currentObj.data.push({
+            description: curr.description,
+            price: curr.price,
+          });
+
+          if (next){
+            if(curr.name !== next.name) {
+              currentObj.name = curr.name;
+              currentObj.type = curr.type;
+              currentObj.setCurrent(currentObj.data[0]);
+              mas.push(currentObj);
+              currentObj = new formElement;
+            }
+          } else {
+            currentObj.name = curr.name;
+            currentObj.type = curr.type;
+            currentObj.setCurrent(currentObj.data[0]);
+            mas.push(currentObj);
+          }
+        }
+
+        this.setState({formData: mas});
+        this.changeSum();
       }
     })
   };
 
+
+  changeSum = () => {
+    let data = this.state.formData;
+    let newList = [];
+    let newSum = null;
+    data.map((element) => {
+      const currentInblock = element.getCurrent();
+      newSum += currentInblock.price;
+      newList.push({description: currentInblock.description, name: element.name})
+    });
+
+    this.setState({
+      itemsList: newList,
+      sum: newSum,
+    });
+
+    this.props.selectionHendler(newList, newSum);
+  };
+
+  createRadio = (element) => {
+    let domRadio = [];
+    domRadio.push(<span>{element.name}</span>);
+    element.data.map((item, key) => {
+      domRadio.push(
+        <Radio
+          key={key}
+          name={element.name}
+          value={item}
+          onChange={() => {element.setCurrent(item); this.changeSum()}}
+          checked={item == element.currElem}
+        >
+          {item.description}, {item.price}
+        </Radio>
+      )
+    });
+
+    return domRadio;
+  };
+
+  createSelect = (element) => {
+    const selection = (items) => <FormControl componentClass="select">{items}</FormControl>;
+    let options = [];
+    element.data.map((item, key) => {
+      options.push(
+        <option
+          key={key}
+          value={item}
+          onChange={() => {element.setCurrent(item); this.changeSum()}}
+        >
+          {item.description}, {item.price}
+        </option>
+      );
+    });
+    let domSelect = [];
+    domSelect.push(<span>{element.name}</span>);
+    domSelect.push(selection(options));
+    return domSelect;
+  };
+
   renderForm = () => {
-    var data = this.state.formData;
+    let data = this.state.formData;
     let elementsToRender = [];
-    let itemSelect = [];
 
-    elementsToRender.push(<span key={data[0].id_field + Math.random()}>{data[0].name}</span>);
-
-    for (var key in data) {
-      if (data[key].type == 'radio') {
-        elementsToRender.push(<Radio key={data[key].id_field} name={data[key].name}
-                                     value={data[key].price}> {data[key].description}, {data[key].price}</Radio>);
+    data.map((elem) => {
+      if (elem.type == 'radio') {
+        elementsToRender.push(this.createRadio(elem));
       }
-      if (data[key].type == 'select') {
-        itemSelect.push(data[key]);
-
-        if (data[parseInt(key) + 1] && data[key].name !== data[parseInt(key) + 1].name || !data[parseInt(key) + 1] && itemSelect.length > 0){
-          elementsToRender.push(<Selection key={data[0].id_field + Math.random()} items={itemSelect}/>);
-          itemSelect = [];
-        }
-
+      if (elem.type == 'select') {
+        elementsToRender.push(this.createSelect(elem));
       }
-      if (data[parseInt(key) + 1] && data[key].name !== data[parseInt(key) + 1].name) {
-        elementsToRender.push(<span key={data[key].id_field + Math.random()}>{ data[parseInt(key) + 1].name}</span>);
-      }
-    }
+    });
+
     return ( <Col sm={6}>{elementsToRender}</Col> );
   };
 

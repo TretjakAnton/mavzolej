@@ -19,7 +19,6 @@ export default class AdminPrEditor extends React.Component{
 
   componentWillMount(){
     this.getInfoForPage();
-
   };
 
   changePage = (page) => {

@@ -9,3 +9,109 @@ body {
 .header {
   height: 150px;
 }
+
+.slider-container {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.slider-lef-arrow {
+  font-size: 140px;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  transform: translate(0px, -50%);
+  cursor: pointer;
+}
+
+.slider-container-image {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.slider-right-arrow {
+  font-size: 140px;
+  color: white;
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  transform: translate(0px, -50%);
+  cursor: pointer;
+}
+
+.slider-close {
+  float: right;
+  color: white;
+  font-size: 30px;
+  margin-right: -28px;
+  cursor: pointer;
+}
+
+.slider-image {
+  height: 400px;
+}
+
+.slider-indicator {
+  float: right;
+  color: white;
+}
+
+.col-xs-6 {
+  position: inherit;
+}
+
+/*  form  */
+
+.form-container {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.form-content {
+  background-color: white;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.form-flex {
+  display: flex;
+}
+
+.form-left-side {
+  display: inline-block;
+  padding: 10px;
+}
+
+.form-right-side {
+  display: inline-block;
+  padding: 10px;
+  background-color: gray;
+}
+
+.form-price {
+  bottom: 10px;
+  position: absolute;
+  right: 10px;
+}
+
+.form-close {
+  float: right;
+  color: white;
+  font-size: 30px;
+  margin-right: -35px;
+  margin-top: -30px;
+  cursor: pointer;
+}

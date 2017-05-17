@@ -1,6 +1,7 @@
 var pool = require('./poolConnection').pool,
     fs = require('fs'),
-    formidable = require('formidable');
+    formidable = require('formidable'),
+    path = require('path');
 
 exports.setNewMon = (req, res) => {
   // create an incoming form object
@@ -30,12 +31,12 @@ exports.setNewMon = (req, res) => {
   form.multiples = true;
 
   // store all uploads in the /uploads directory
-  form.uploadDir = path.join(__dirname, '/src/media');
+  form.uploadDir = path.join(__dirname, '../media');
 
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
   form.on('file', function(field, file) {
-    fs.rename(file.path, path.join(path.join(__dirname, '/src/media/'+folder), file.name));
+    fs.rename(file.path, path.join(path.join(__dirname, '../media/'+folder), file.name));
     pool.getConnection(function (err, connection) {
       var queryTo = 'SELECT MAX(id_prod) as id FROM products';
       connection.query(queryTo, function (err, rows) {
@@ -141,7 +142,7 @@ exports.deleteMon = (req, res) => {
         pool.getConnection(function (err, connection) {
           connection.query(queryDelImg, function (err, rows) {
             if (!err) {
-              fs.unlinkSync(path.join(__dirname, '/src/media/' + req.body.imgUrl));
+              fs.unlinkSync(path.join(__dirname, '../media/' + req.body.imgUrl));
               pool.getConnection(function (err, connection) {
                 connection.query(queryDelItem, function (err, rows) {
                   if (!err) {

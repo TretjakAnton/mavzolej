@@ -19,7 +19,7 @@ exports.setNew = (req, res) => {
 
 exports.getForm = (req, res) => {
   pool.getConnection(function (err, connection) {
-    var queryTo = 'SELECT * from fields';
+    var queryTo = 'SELECT * FROM fields ORDER BY name';
     connection.query(queryTo, function (err, rows) {
       if (!err && rows.length > 0) {
         res.json(rows);
