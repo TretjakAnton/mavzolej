@@ -73,9 +73,7 @@ export default class AdminPrEditor extends React.Component{
 
   render(){
     return <div className="row">
-      {this.state.pams &&
-        this.pamsDom()
-      }
+      {this.state.pams && this.pamsDom()}
       <Pages
         countRows={this.state.countRows}
         type={this.props.id_type}

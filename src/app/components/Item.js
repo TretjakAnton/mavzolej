@@ -1,14 +1,17 @@
 import React from 'react';
-import { Table } from 'react-bootstrap';
+import { Table, Glyphicon, Button } from 'react-bootstrap';
 import Slider from './Slider';
 import SaleForm from '../containers/SaleForm'
 
 const styles = {
-  mainImage: {
-    height: "200px"
+  byButton: {
+    width: "100px",
+    alignSelf: "flex-end",
   },
-  images: {
-    height: "100px"
+  showHideButton: {
+    width: "100%",
+    outline: "none !important",
+    margin: "10px 0",
   },
 };
 
@@ -67,16 +70,27 @@ class Item extends React.Component{
     const formStatus = this.state.formStatus;
     const smallImgStatus = this.state.status;
     return (
-      <div className="item col-xs-6 col-md-4 col-lg-3">
+      <div className="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+        <div className="item">
         <div className="mainImg">
-          <img src={this.state.mainImg} style={styles.mainImage} onClick={() => this.runSlider(this.state.mainImg)}/>
+          <img src={this.state.mainImg} className="img-responsive" onClick={() => this.runSlider(this.state.mainImg)}/>
         </div>
-        <button onClick={this.showHideImages}>показать остальные</button>
+        <Button
+          bsStyle="primary"
+          bsSize="sm"
+          onClick={this.showHideImages}
+          style={styles.showHideButton}
+        >
+          показать остальные
+          <span className="pull-right">
+            {smallImgStatus ? <Glyphicon glyph="menu-up" /> : <Glyphicon glyph="menu-down" />}
+          </span>
+        </Button>
         {smallImgStatus &&
           <div className="images">
             {
               this.state.images.map((val, key) => {
-                return <img key={key} src={val} style={styles.images} onClick={() => this.runSlider(val)} />;
+                return <img key={key} src={val} className="img-responsive" onClick={() => this.runSlider(val)} />;
               })
             }
           </div>
@@ -94,10 +108,17 @@ class Item extends React.Component{
               </tr>
             </tbody>
           </Table>
-          <button className="btn btn-default" onClick={this.openForm}>Заказать</button>
+          <Button
+            style={styles.byButton}
+            onClick={this.openForm}
+          >
+            Заказать
+            <Glyphicon glyph="shopping-cart" />
+          </Button>
         </div>
         {sliderStatus && <Slider images={images} currImg={imageToShow} onClose={this.closeSlider}/> }
         {formStatus && <SaleForm info={info} image={this.state.mainImg} onClose={this.closeForm}/> }
+        </div>
       </div>
     )
   }

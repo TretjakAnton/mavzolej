@@ -12,11 +12,13 @@ export default class ProductEditor extends React.Component{
       success: ''
     }
   }
+
   componentWillMount() {
     if(this.props.params) {
       this.setState({typeId: this.props.params.id})
     }
   };
+
   render(){
     if(this.state.contentFor == ADMIN){
       return <AdminPrEditor />

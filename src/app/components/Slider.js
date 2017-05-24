@@ -1,54 +1,5 @@
 import React from 'react';
 
-const styles = {
-  openImage: {
-    height: "400px"
-  },
-  openedContainer: {
-    position: "absolute",
-    top: "0",
-    left: "0",
-    height: "100vh",
-    width: "100vw",
-    backgroundColor: "RGBA(0, 0, 0, 0.7)",
-  },
-  arrowLeft: {
-    fontSize: "140px",
-    color: "white",
-    position: "absolute",
-    top: "50%",
-    left: "0",
-    transform: "translate(0, -50%)",
-    cursor: "pointer",
-  },
-  arrowRight: {
-    fontSize: "140px",
-    color: "white",
-    position: "absolute",
-    top: "50%",
-    right: "0",
-    transform: "translate(0, -50%)",
-    cursor: "pointer",
-  },
-  openedImage: {
-    position: "fixed",
-    left: "50%",
-    top: "50%",
-    transform: "translate(-50%, -50%)",
-  },
-  rightCount: {
-    float: "right",
-    color: "white",
-  },
-  closeIcon: {
-    float: "right",
-    color: "white",
-    fontSize: "30px",
-    marginRight: "-28px",
-    cursor: "pointer",
-  },
-};
-
 class Slider extends React.Component {
   constructor (props) {
     super(props);

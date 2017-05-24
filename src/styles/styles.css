@@ -6,8 +6,36 @@ body {
   overflow-x: hidden !important;
 }
 
-.header {
-  height: 150px;
+.item {
+  border: 1px solid darkgray;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.main-image {
+  height: 200px;
+  margin: 0 auto;
+  display: block;
+}
+
+.show-button {
+  width: 100%;
+  outline: none !important;
+  margin: 10px 0;
+}
+
+.images {
+  padding: 10px;
+}
+
+.small-images {
+  height: 100px;
+}
+
+.information {
+  display: flex;
+  flex-direction: column;
 }
 
 .slider-container {
@@ -114,4 +142,15 @@ body {
   margin-right: -35px;
   margin-top: -30px;
   cursor: pointer;
+}
+
+/* admin menu */
+
+.add-menu-item {
+  display: inline-block;
+}
+
+.add-menu-item-right {
+  display: inline-block;
+  margin-left: 20px;
 }

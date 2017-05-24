@@ -72,21 +72,23 @@ class ByForm extends React.Component{
 
 
   changeSum = () => {
-    let data = this.state.formData;
-    let newList = [];
-    let newSum = null;
-    data.map((element) => {
-      const currentInblock = element.getCurrent();
-      newSum += currentInblock.price;
-      newList.push({description: currentInblock.description, name: element.name})
-    });
+    if(this.props.selectionHendler) {
+      let data = this.state.formData;
+      let newList = [];
+      let newSum = null;
+      data.map((element) => {
+        const currentInblock = element.getCurrent();
+        newSum += currentInblock.price;
+        newList.push({description: currentInblock.description, name: element.name})
+      });
 
-    this.setState({
-      itemsList: newList,
-      sum: newSum,
-    });
+      this.setState({
+        itemsList: newList,
+        sum: newSum,
+      });
 
-    this.props.selectionHendler(newList, newSum);
+      this.props.selectionHendler(newList, newSum);
+    }
   };
 
   createRadio = (element) => {

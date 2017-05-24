@@ -64,8 +64,8 @@ class AddControl extends React.Component{
     if (this.state.currentType == 'select') {
       return (
         <FormControl componentClass="select">
-          {this.state.controlObject.map((elem) => {
-            return <option key={elem.price + Math.random()}>{`${elem.description}, ${elem.price}`}</option>
+          {this.state.controlObject.map((elem, key) => {
+            return <option key={key}>{`${elem.description}, ${elem.price}`}</option>
           })}
         </FormControl>
       );
@@ -74,8 +74,8 @@ class AddControl extends React.Component{
     if (this.state.currentType == 'radio') {
       return (
         <FormGroup>
-          {this.state.controlObject.map((elem) => {
-            return <Radio key={elem.price + Math.random()}> {`${elem.description}, ${elem.price}`} </Radio>
+          {this.state.controlObject.map((elem, key) => {
+            return <Radio key={key}> {`${elem.description}, ${elem.price}`} </Radio>
           })}
         </FormGroup>
       );
@@ -97,7 +97,6 @@ class AddControl extends React.Component{
       description: '',
       price: ''
     });
-    console.log(this.state.controlObject)
   };
 
   send = () => {

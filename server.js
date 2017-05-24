@@ -40,6 +40,14 @@ router.route('/Types')
   .put(function (req, res) {typeControl.updateType(req, res)})
   .delete(function (req, res) {typeControl.deleteType(req, res)});
 
+var menuControl = require('./src/server/Menu');
+
+router.route('/menu')
+  .post(function (req, res) {menuControl.setNewItem(req, res)})
+  .get(function(req, res){menuControl.getAllMenuItems(req, res)})
+  .put(function (req, res) {menuControl.updateMenuItem(req, res)})
+  .delete(function (req, res) {menuControl.deleteMenuItem(req, res)});
+
 var monumentControl = require('./src/server/Monuments');
 
 router.route('/monuments')

@@ -1,8 +1,8 @@
 var pool = require('./poolConnection').pool;
 
-exports.setNewType = (req, res) => {
+exports.setNewItem = (req, res) => {
   pool.getConnection(function (err, connection) {
-    var queryTo = 'INSERT INTO type (name, folder, parent) VALUES ("'+req.body.name_type+'", "'+req.body.directory+'", "'+req.body.id_item+'")';
+    var queryTo = 'INSERT INTO menu (menu_name) VALUES ("'+req.body.menu_name+'")';
     connection.query(queryTo, function (err) {
       if (!err) {
         res.json({success: 'successful added'});
@@ -14,9 +14,9 @@ exports.setNewType = (req, res) => {
   });
 };
 
-exports.getAllTypes = (req, res) => {
+exports.getAllMenuItems = (req, res) => {
   pool.getConnection(function (err, connection) {
-    var queryTo = 'SELECT * from type INNER JOIN menu ON type.parent = menu.id_item GROUP BY menu.id_item';
+    var queryTo = 'SELECT * from menu';
     connection.query(queryTo, function (err, rows) {
       if (!err && rows.length > 0) {
         res.json(rows);
@@ -28,12 +28,12 @@ exports.getAllTypes = (req, res) => {
   });
 };
 
-exports.updateType = (req, res) => {
+exports.updateMenuItem = (req, res) => {
   pool.getConnection(function (err, connection) {
-    var queryTo = 'UPDATE type SET name="'+req.body.name_type+'", folder="'+req.body.directory+'" parent="'+req.body.id_item+'" WHERE id_type="'+req.body.id_type+'"';
+    var queryTo = 'UPDATE menu SET menu_name="'+req.body.menu_name+'" WHERE id_item="'+req.body.id_item+'"';
     connection.query(queryTo, function (err) {
       if (!err) {
-        res.json({success: 'successful added'});
+        res.json({success: 'successful updated'});
       } else {
         res.json({error: err.message});
       }
@@ -42,9 +42,9 @@ exports.updateType = (req, res) => {
   });
 };
 
-exports.deleteType = (req, res) => {
+exports.deleteMenuItem = (req, res) => {
   pool.getConnection(function (err, connection) {
-    var queryTo = 'DELETE FROM type WHERE id_type="'+req.body.id_type+'"';
+    var queryTo = 'DELETE FROM menu WHERE id_item="'+req.body.id_item+'"';
     connection.query(queryTo, function (err, rows) {
       if (!err) {
         res.json({success: 'successful deleted'});
