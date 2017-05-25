@@ -29,20 +29,27 @@ export default class AdminPrEditor extends React.Component{
 
   changePage = (page) => {
     this.setState({page: page});
-    this.getInfoForPage(null, this.state.curr_type.id_type);
+    this.getInfoForPage(null, this.state.curr_type.id_type, page);
   };
 
-  calcRange = () => {
-    return (this.state.page - 1) * this.state.countRows;
+  calcRange = (page) => {
+    return (page - 1) * this.state.countRows;
   };
 
   typeConrol = (event) => {
-    this.setState({curr_type: event.target.value});
-    this.getInfoForPage(null, event.target.value.id_type);
+    const newElem = this.state.types.find((elem) => {
+      if(elem.id_type == event.target.value){
+        return elem;
+      }
+    });
+    this.setState({curr_type: newElem});
+    this.getInfoForPage(null, newElem.id_type);
   };
 
-  getInfoForPage = (id_prod, id_type) => {
-    getPam(id_prod, id_type, this.calcRange(), this.state.countRows).then((data) => {
+  getInfoForPage = (id_prod, id_type, page) => {
+    const newPage = page || this.state.page;
+
+    getPam(id_prod, id_type, this.calcRange(newPage), this.state.countRows).then((data) => {
       if (data.error) {
         this.setState({error: data.error})
       } else {
@@ -86,10 +93,10 @@ export default class AdminPrEditor extends React.Component{
 
   render(){
     return <div>
-      <FormControl componentClass="select" name="curr_type" value={this.state.curr_type} onChange={this.typeConrol}>
+      <FormControl componentClass="select" name="curr_type" value={this.state.curr_type.id_type} onChange={this.typeConrol}>
         {
           this.state.types.map((val, key) => {
-            return <option key={key} value={val}>{val.name}</option>;
+            return <option key={key} value={val.id_type}>{val.name}</option>;
           })
         }
       </FormControl>

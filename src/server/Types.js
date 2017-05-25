@@ -16,7 +16,7 @@ exports.setNewType = (req, res) => {
 
 exports.getAllTypes = (req, res) => {
   pool.getConnection(function (err, connection) {
-    var queryTo = 'SELECT * from type INNER JOIN menu ON type.parent = menu.id_item GROUP BY menu.id_item';
+    var queryTo = 'SELECT * from type INNER JOIN menu ON type.parent = menu.id_item ORDER BY menu.id_item';
     connection.query(queryTo, function (err, rows) {
       if (!err && rows.length > 0) {
         res.json(rows);

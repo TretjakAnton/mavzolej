@@ -36,7 +36,14 @@ exports.setNewMon = (req, res) => {
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
   form.on('file', function(field, file) {
-    fs.rename(file.path, path.join(path.join(__dirname, '../media/'+folder), file.name));
+    var newFolder = path.join(__dirname, '../media/'+folder);
+
+    if (!fs.existsSync(newFolder)){
+      fs.mkdirSync(newFolder);
+    }
+
+    fs.rename(file.path, path.join(newFolder, file.name));
+
     pool.getConnection(function (err, connection) {
       var queryTo = 'SELECT MAX(id_prod) as id FROM products';
       connection.query(queryTo, function (err, rows) {

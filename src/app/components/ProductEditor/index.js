@@ -19,6 +19,10 @@ export default class ProductEditor extends React.Component{
     }
   };
 
+  componentWillReceiveProps = (newProps) => {
+    this.setState({typeId: newProps.params.id})
+  };
+
   render(){
     if(this.state.contentFor == ADMIN){
       return <AdminPrEditor />

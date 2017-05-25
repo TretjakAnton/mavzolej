@@ -41,9 +41,9 @@ class TypesControl extends React.Component {
     if (elem.target.name == 'name'){
       this.setState({
         newItem: {
-          id_type: this.state.item.id_type,
-          folder: this.state.item.folder,
-          menu_name: this.state.item.menu_name,
+          id_type: this.state.newItem.id_type,
+          folder: this.state.newItem.folder,
+          menu_name: this.state.newItem.menu_name,
           name: elem.target.value
         },
       })
@@ -51,9 +51,9 @@ class TypesControl extends React.Component {
     if (elem.target.name == 'folder'){
       this.setState({
         newItem: {
-          id_type: this.state.item.id_type,
-          menu_name: this.state.item.menu_name,
-          name: this.state.item.menu_name,
+          id_type: this.state.newItem.id_type,
+          menu_name: this.state.newItem.menu_name,
+          name: this.state.newItem.name,
           folder: elem.target.value
         },
       })
@@ -61,9 +61,9 @@ class TypesControl extends React.Component {
     if (elem.target.name == 'menu_name'){
       this.setState({
         newItem: {
-          id_type: this.state.item.id_type,
-          folder: this.state.item.folder,
-          name: this.state.item.menu_name,
+          id_type: this.state.newItem.id_type,
+          folder: this.state.newItem.folder,
+          name: this.state.newItem.name,
           menu_name: elem.target.value
         },
       })

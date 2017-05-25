@@ -13,7 +13,8 @@ export default class AdminPrEditor extends React.Component{
       countRows: 10,
       pams: null,
       error: null,
-      DOMPages: null
+      DOMPages: null,
+      id_type: this.props.id_type,
     }
   }
 
@@ -21,17 +22,25 @@ export default class AdminPrEditor extends React.Component{
     this.getInfoForPage();
   };
 
+  componentWillReceiveProps = (newProps) => {
+    this.setState({id_type: newProps.id_type});
+    this.getInfoForPage(newProps.id_type);
+  };
+
   changePage = (page) => {
     this.setState({page: page});
-    this.getInfoForPage();
+    this.getInfoForPage(null, page);
   };
 
-  calcRange = () => {
-    return (this.state.page - 1) * this.state.countRows;
+  calcRange = (page) => {
+    return (page - 1) * this.state.countRows;
   };
 
-  getInfoForPage = () => {
-    getPam(null, this.props.id_type, this.calcRange(), this.state.countRows, true).then((data) => {
+  getInfoForPage = (id, page) => {
+    const id_type = id || this.state.id_type;
+    const newPage = page || this.state.page;
+
+    getPam(null, id_type, this.calcRange(newPage), this.state.countRows, true).then((data) => {
       if (data.error) {
         this.setState({error: data.error})
       } else {
@@ -76,7 +85,7 @@ export default class AdminPrEditor extends React.Component{
       {this.state.pams && this.pamsDom()}
       <Pages
         countRows={this.state.countRows}
-        type={this.props.id_type}
+        type={this.state.id_type}
         onChange={this.changePage}
       />
     </div>

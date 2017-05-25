@@ -50,7 +50,17 @@ class Types extends React.Component{
 
   onAdd = (item) => {
     let newData = this.state.data;
-    newData.push(item);
+    const menu_item = this.state.data.find((elem) => {
+      if(elem.parent == item.menu_name){
+        return elem.menu_name
+      }
+    });
+    newData.push({
+      folder: item.folder,
+      name: item.name,
+      parent: item.menu_name,
+      menu_name: menu_item.menu_name,
+    });
 
     addType(item.name, item.folder, item.menu_name).then((data) => {
       if(data.error){

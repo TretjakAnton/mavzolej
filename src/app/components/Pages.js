@@ -24,7 +24,7 @@ export default class Pages extends React.Component{
       if(data.error){
         this.setState({error: data.error})
       } else {
-        const countPages = Math.round(data/this.props.countRows);
+        const countPages = Math.ceil(data/this.props.countRows);
         this.setState({countPages: countPages});
         this.calculatePages()
       }
@@ -38,9 +38,8 @@ export default class Pages extends React.Component{
 
   calculatePages = () => {
     const pages = [];
-    for(var i=0; i<=this.state.countPages; i++){
-      let page = i+1;
-      pages.push(<Button key={i} onClick={(page) => this.changePage}>{page}</Button>)
+    for(let i=1; i<=this.state.countPages; i++){
+      pages.push(<Button key={i} onClick={() => this.changePage(i)}>{i}</Button>)
     }
     this.setState({ DOMPages: pages });
   };
@@ -51,9 +50,9 @@ export default class Pages extends React.Component{
     if(this.state.countPages > 1){
       return <ButtonToolbar>
               <ButtonGroup>
-                <Button onClick={(prevPage) => this.changePage} > {`<`} </Button>
+                <Button onClick={() => this.changePage(prevPage)} > {`<`} </Button>
                 {this.state.DOMPages}
-                <Button onClick={(nextPage) => this.changePage} > {`>`} </Button>
+                <Button onClick={() => this.changePage(nextPage)} > {`>`} </Button>
               </ButtonGroup>
             </ButtonToolbar>
     }

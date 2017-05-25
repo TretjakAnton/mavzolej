@@ -55,7 +55,7 @@ class Pam extends React.Component {
   };
 
   onSendAll = () => {
-    var selectType = this.state.types.filter((type) => {
+    const selectType = this.state.types.filter((type) => {
       if(type.id_type == this.state.id_type)
         return type
     });
@@ -111,7 +111,7 @@ class Pam extends React.Component {
             <Col sm={6}>
               <FormControl type="text" placeholder="номер памятника" name="id_fake" value={this.state.id_fake} onChange={this.inputsConrol} />
               <ControlLabel>тип памятника</ControlLabel>
-              <FormControl componentClass="select" value={this.state.id_type} onChange={this.inputsConrol}>
+              <FormControl componentClass="select" name="id_type" value={this.state.id_type} onChange={this.inputsConrol}>
                 {this.generateDOM('types')}
               </FormControl>
               <FormControl type="number" placeholder="цена" name="price" value={this.state.price} onChange={this.inputsConrol} />
