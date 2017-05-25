@@ -93,7 +93,7 @@ class ByForm extends React.Component{
 
   createRadio = (element) => {
     let domRadio = [];
-    domRadio.push(<span>{element.name}</span>);
+    domRadio.push(<span style={{fontWeight: "bold"}}>{element.name}</span>);
     element.data.map((item, key) => {
       domRadio.push(
         <Radio
@@ -126,7 +126,7 @@ class ByForm extends React.Component{
       );
     });
     let domSelect = [];
-    domSelect.push(<span>{element.name}</span>);
+    domSelect.push(<span style={{fontWeight: "bold"}}>{element.name}</span>);
     domSelect.push(selection(options));
     return domSelect;
   };
@@ -144,7 +144,7 @@ class ByForm extends React.Component{
       }
     });
 
-    return ( <Col sm={6}>{elementsToRender}</Col> );
+    return elementsToRender;
   };
 
   render() {

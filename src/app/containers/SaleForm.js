@@ -1,4 +1,10 @@
 import React from 'react';
+import Dropzone from 'react-dropzone';
+import {
+  FormGroup,
+  ControlLabel,
+  FormControl,
+} from 'react-bootstrap';
 import ByForm from '../components/ByForm';
 
 class SaleForm extends React.Component {
@@ -10,6 +16,7 @@ class SaleForm extends React.Component {
       image: this.props.image,
       selectedItems: null,
       selectionPrice: null,
+      uploadedFiles: null,
     }
   }
 
@@ -24,6 +31,12 @@ class SaleForm extends React.Component {
     this.props.onClose();
   };
 
+  onImageDrop(files) {
+    this.setState({
+      uploadedFiles: files
+    });
+  }
+
   render () {
     return(
       <div className="form-container">
@@ -35,6 +48,21 @@ class SaleForm extends React.Component {
               <br/>
               <span>номер {this.state.id}</span>
               <ByForm selectionHendler={this.selectionsStatus} />
+              <hr />
+              <Dropzone
+                multiple={true}
+                accept="image/*"
+                onDrop={this.onImageDrop.bind(this)}>
+                <p>Перетащите изображение или нажмите для выбора файла</p>
+              </Dropzone>
+              {this.state.uploadedFiles && this.state.uploadedFiles.map((val, key) => {
+                return <img key={key} src={val.preview} style={{height: '150px'}}/>
+                })
+              }
+              <FormGroup controlId="formControlsTextarea">
+                <ControlLabel>Данные</ControlLabel>
+                <FormControl componentClass="textarea" placeholder="ФИО, Текст эпитафии" />
+              </FormGroup>
             </div>
 
             <div className="form-right-side">

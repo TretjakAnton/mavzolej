@@ -1,7 +1,6 @@
 import React from 'react';
 import { Table, Glyphicon, Button } from 'react-bootstrap';
 import Slider from './Slider';
-import SaleForm from '../containers/SaleForm'
 
 const styles = {
   byButton: {
@@ -24,7 +23,6 @@ class Item extends React.Component{
       images: this.props.images,
       info: this.props.info,
       status: false,
-      formStatus: false,
       sliderInfo: {
         imageToShow: null,
         status: false,
@@ -46,11 +44,7 @@ class Item extends React.Component{
   };
 
   openForm = () => {
-    this.setState({ formStatus: true });
-  };
-
-  closeForm = () => {
-    this.setState({ formStatus: false });
+    this.props.onSelect({image: this.state.mainImg, info: this.state.info});
   };
 
   closeSlider = () => {
@@ -67,7 +61,6 @@ class Item extends React.Component{
     const images = [this.state.mainImg, ...this.state.images];
     const sliderStatus = this.state.sliderInfo.status;
     const imageToShow = this.state.sliderInfo.imageToShow;
-    const formStatus = this.state.formStatus;
     const smallImgStatus = this.state.status;
     return (
       <div className="col-xs-6 col-sm-6 col-md-4 col-lg-3">
@@ -117,7 +110,6 @@ class Item extends React.Component{
           </Button>
         </div>
         {sliderStatus && <Slider images={images} currImg={imageToShow} onClose={this.closeSlider}/> }
-        {formStatus && <SaleForm info={info} image={this.state.mainImg} onClose={this.closeForm}/> }
         </div>
       </div>
     )

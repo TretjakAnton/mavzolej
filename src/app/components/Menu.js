@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
 import { getAllTypes } from '../api/Types';
 import {
   Navbar,
@@ -34,7 +34,7 @@ const navDropdown = (obj) => {
   const wrap = (items) => <NavDropdown id={obj.name} key={obj.name} title={obj.name}>{items}</NavDropdown>;
 
   obj.items.map((element, key) => {
-    itemToWrap.push(<MenuItem key={key} eventKey={key}><Link to={`/monuments/${element.id}`}>{element.name}</Link></MenuItem>);
+    itemToWrap.push(<LinkContainer key={key} to={`/monuments/${element.id}`}><MenuItem eventKey={key}>{element.name}</MenuItem></LinkContainer>);
   });
 
   return wrap(itemToWrap);
@@ -101,7 +101,7 @@ class Menu extends React.Component {
     this.state.data.map((elem, topKey) => {
       if(elem.name == 'Главное меню'){
         elem.items.map((data, key) => {
-          items.push(<NavItem key={topKey} eventKey={key}><Link key={topKey} to={`/monuments/${data.id}`}>{data.name}</Link></NavItem>)
+          items.push(<LinkContainer key={topKey} to={`/monuments/${data.id}`}><NavItem eventKey={key}>{data.name}</NavItem></LinkContainer>)
         });
       } else {
         items.push(navDropdown(elem))

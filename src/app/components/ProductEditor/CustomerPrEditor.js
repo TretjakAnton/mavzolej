@@ -1,5 +1,6 @@
 import React from 'react';
 import Item from '../Item';
+import SaleForm from '../../containers/SaleForm';
 import {
   getPam
 } from '../../api/newPam';
@@ -15,6 +16,11 @@ export default class AdminPrEditor extends React.Component{
       error: null,
       DOMPages: null,
       id_type: this.props.id_type,
+      form: {
+        status: false,
+        image: '',
+        info: '',
+      }
     }
   }
 
@@ -49,6 +55,26 @@ export default class AdminPrEditor extends React.Component{
     });
   };
 
+  openForm = (data) => {
+    this.setState({
+      form: {
+        status: true,
+        image: data.image,
+        info: data.info,
+      }
+    })
+  };
+
+  closeForm = () => {
+    this.setState({
+      form: {
+        status: false,
+        image: '',
+        info: '',
+      }
+    })
+  };
+
   pamsDom = () => {
     let images = [];
     let mainImg = null;
@@ -68,7 +94,7 @@ export default class AdminPrEditor extends React.Component{
           id: thisElem.id_pam,
           price: thisElem.price
         };
-        body.push(<Item key={thisElem.id_prod} mainImg={mainImg} images={images} info={info} />);
+        body.push(<Item key={thisElem.id_prod} mainImg={mainImg} images={images} info={info} onSelect={this.openForm} />);
         images = [];
         mainImg = null;
         info = null;
@@ -81,8 +107,10 @@ export default class AdminPrEditor extends React.Component{
   };
 
   render(){
+    const form = this.state.form;
     return <div className="row">
       {this.state.pams && this.pamsDom()}
+      {form.status && <SaleForm info={form.info} image={form.image} onClose={this.closeForm}/> }
       <Pages
         countRows={this.state.countRows}
         type={this.state.id_type}
