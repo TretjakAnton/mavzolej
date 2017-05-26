@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({
 router.route('/login')
   .post(function (req, res) {
     debugger;
-    if (req.body.login == 'Username' && req.body.password == 'Password') {
+    if (req.body.login == 'Oleg' && req.body.password == '0504065007oleg') {
       res.json({Auth: 'Logged'});
     } else {
       res.json({Auth: 'Denied'});

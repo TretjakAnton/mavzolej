@@ -20,11 +20,15 @@ export default class Pages extends React.Component{
   }
 
   componentWillMount(){
-    getCountPams(this.props.type).then((data) => {
+
+  };
+
+  componentWillReceiveProps = (newProps) => {
+    getCountPams(newProps.type).then((data) => {
       if(data.error){
         this.setState({error: data.error})
       } else {
-        const countPages = Math.ceil(data/this.props.countRows);
+        const countPages = Math.ceil(data/newProps.countRows);
         this.setState({countPages: countPages});
         this.calculatePages()
       }

@@ -37,40 +37,54 @@ class SaleForm extends React.Component {
     });
   }
 
+  textControl = (e) => {
+    this.setState({
+      textFIO: e.target.value
+    })
+  };
+
   render () {
+    const image = this.state.image;
+    const pamNumber = this.state.id;
+    const textFIO = this.state.textFIO;
+    const selectedItems = this.state.selectedItems;
+    const uploaded = this.state.uploadedFiles;
+    const pumPrice = this.state.price;
+    const selectionSum = this.state.selectionPrice;
     return(
       <div className="form-container">
         <div className="form-content">
           <span className="glyphicon glyphicon-remove form-close" onClick={this.close}></span>
           <div className="form-flex">
             <div className="form-left-side">
-              <img src={this.state.image} height="200px"/>
+              <img src={image} height="200px"/>
               <br/>
-              <span>номер {this.state.id}</span>
+              <span>номер {pamNumber}</span>
               <ByForm selectionHendler={this.selectionsStatus} />
               <hr />
               <Dropzone
                 multiple={true}
                 accept="image/*"
                 onDrop={this.onImageDrop.bind(this)}>
-                <p>Перетащите изображение или нажмите для выбора файла</p>
+                <p>Перетащите изображение или нажмите на поле для выбора файла</p>
               </Dropzone>
-              {this.state.uploadedFiles && this.state.uploadedFiles.map((val, key) => {
-                return <img key={key} src={val.preview} style={{height: '150px'}}/>
-                })
-              }
               <FormGroup controlId="formControlsTextarea">
                 <ControlLabel>Данные</ControlLabel>
-                <FormControl componentClass="textarea" placeholder="ФИО, Текст эпитафии" />
+                <FormControl onChange={this.textControl} componentClass="textarea" placeholder="ФИО, Текст эпитафии" />
               </FormGroup>
             </div>
-
             <div className="form-right-side">
               <span>Ваш заказ:</span>
+              <hr/>
+              {selectedItems && selectedItems.map((elem, key) => <span key={key}>{elem.name}: {elem.description}</span>) }
               <br/>
-              {this.state.selectedItems && this.state.selectedItems.map((elem, key) => <span key={key}>{elem.name}: {elem.description}</span>) }
+              {uploaded && uploaded.map((val, key) => {
+                return <img key={key} src={val.preview} style={{height: '150px'}}/>
+              })
+              }
+              <p>{textFIO}</p>
               <br/>
-              <span className="form-price">цена {this.state.price + this.state.selectionPrice}</span>
+              <span className="form-price">цена {pumPrice + selectionSum}</span>
             </div>
           </div>
         </div>

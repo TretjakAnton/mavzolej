@@ -7,7 +7,9 @@ class MainPage extends React.Component {
     return (
       <div id="content">
         <Header />
+        <div className="container-content">
           {this.props.children}
+        </div>
         <Footer />
       </div>
     )

@@ -3,7 +3,7 @@ import { setCredentials } from '../actions/Actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router';
-import { FormGroup, Button, FormControl, Glyphicon } from 'react-bootstrap';
+import { FormGroup, Button, FormControl, ControlLabel } from 'react-bootstrap';
 import { login } from '../api/serverRequests'
 
 class Login extends React.Component{
@@ -12,15 +12,10 @@ class Login extends React.Component{
     this.state = {
       userLogin: '',
       userPassword: '',
-      loginValidationState: '',
-      requestSend: false
     };
   };
 
   handleLoginChange = (evt) => {
-    if(this.loginValidationState !== ''){
-      this.setState({loginValidationState: ''});
-    }
     this.setState({userLogin: evt.target.value});
   };
 
@@ -29,31 +24,28 @@ class Login extends React.Component{
   };
 
   checkUser = () => {
-    this.setState({requestSend: true});
     login(this.state.userPassword, this.state.userLogin).then((data) => {
       if(data.Auth == 'Logged'){
         this.props.setCredential(this.state.userLogin);
-        browserHistory.push('/dashboard');
+        browserHistory.push('/admin');
       } else{
-        this.setState({loginValidationState: 'error'});
+        this.setState({error: 'error'});
       }
-      this.setState({requestSend: false});
     });
   };
 
   render() {
-    return <div>
-      <form>
-        <div>
-          <span>Login</span>
+    return <div className="login-form">
+      <form className="login-content">
+        <div className="login-header">
+          <ControlLabel>Login</ControlLabel>
         </div>
-        <FormGroup>
+        <FormGroup className="login-fields">
           <FormControl
             type="text"
             value={this.state.userLogin}
             placeholder="Login"
             onChange={this.handleLoginChange}
-            bsStyle={this.loginValidationState}
           />
           <FormControl.Feedback />
           <FormControl
@@ -63,18 +55,13 @@ class Login extends React.Component{
             onChange={this.handlePasswordChange}
           />
           <FormControl.Feedback />
-          <Button
-            bsSize="large"
-            onClick={this.checkUser}
-          >
-            Login →
-          </Button>
         </FormGroup>
         <Button
-          bsSize="large"
+          bsSize="sm"
           onClick={this.checkUser}
+          className="login-button"
         >
-          <Glyphicon glyph="cog" />
+          Login →
         </Button>
       </form>
     </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router';
 import { getAllTypes } from '../api/Types';
 import {
   Navbar,
@@ -13,7 +14,7 @@ const navbarInstance = (meuItems) => {return (
   <Navbar collapseOnSelect>
     <Navbar.Header>
       <Navbar.Brand>
-        <a href="#">React-Bootstrap</a>
+        <Link to="home">mavzolej-master</Link>
       </Navbar.Brand>
       <Navbar.Toggle />
     </Navbar.Header>
@@ -22,8 +23,9 @@ const navbarInstance = (meuItems) => {return (
         { meuItems }
       </Nav>
       <Nav pullRight>
-        <NavItem eventKey={1} href="#">Link Right</NavItem>
-        <NavItem eventKey={2} href="#">Link Right</NavItem>
+        <LinkContainer key="111" to={`/aboutUs`}>
+          <NavItem eventKey={2}>О нас</NavItem>
+        </LinkContainer>
       </Nav>
     </Navbar.Collapse>
   </Navbar>

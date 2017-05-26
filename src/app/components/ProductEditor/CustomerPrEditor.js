@@ -111,11 +111,13 @@ export default class AdminPrEditor extends React.Component{
     return <div className="row">
       {this.state.pams && this.pamsDom()}
       {form.status && <SaleForm info={form.info} image={form.image} onClose={this.closeForm}/> }
-      <Pages
-        countRows={this.state.countRows}
-        type={this.state.id_type}
-        onChange={this.changePage}
-      />
+      <div className="page-selector col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <Pages
+          countRows={this.state.countRows}
+          type={this.state.id_type}
+          onChange={this.changePage}
+        />
+      </div>
     </div>
   }
 }
