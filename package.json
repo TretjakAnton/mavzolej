@@ -12,6 +12,7 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "mysql": "^2.11.1",
+    "nodemailer": "^4.0.1",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-google-maps": "^6.3.0",

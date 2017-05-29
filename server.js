@@ -58,6 +58,11 @@ router.route('/monuments')
 router.route('/monumentsCount')
   .get(function(req, res) {monumentControl.getRowsCount(req, res)});
 
+var emailSender = require('./src/server/emailSender');
+
+router.route('/sendEmail')
+  .post(function(req, res) {emailSender.send(req, res)});
+
 app.use('/api', router);
 
 app.get('*', function (request, response){

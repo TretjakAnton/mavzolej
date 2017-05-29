@@ -4,7 +4,9 @@ import {
   FormGroup,
   ControlLabel,
   FormControl,
+  Button,
 } from 'react-bootstrap';
+import { sendEmail } from '../api/serverRequests';
 import ByForm from '../components/ByForm';
 
 class SaleForm extends React.Component {
@@ -17,6 +19,7 @@ class SaleForm extends React.Component {
       selectedItems: null,
       selectionPrice: null,
       uploadedFiles: null,
+      textFIO: '',
     }
   }
 
@@ -36,6 +39,18 @@ class SaleForm extends React.Component {
       uploadedFiles: files
     });
   }
+
+  sendOrder = () => {
+    const sendData = {
+      items: this.state.selectedItems,
+      images: this.state.uploadedFiles,
+      text: this.state.textFIO,
+      price: this.state.price + this.state.selectionPrice,
+    };
+    sendEmail(sendData).then((data) => {
+      console.log(data);
+    })
+  };
 
   textControl = (e) => {
     this.setState({
@@ -72,6 +87,12 @@ class SaleForm extends React.Component {
                 <ControlLabel>Данные</ControlLabel>
                 <FormControl onChange={this.textControl} componentClass="textarea" placeholder="ФИО, Текст эпитафии" />
               </FormGroup>
+
+              <Button
+                onClick={this.sendOrder}
+              >
+                Заказать
+              </Button>
             </div>
             <div className="form-right-side">
               <span>Ваш заказ:</span>
