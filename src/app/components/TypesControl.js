@@ -20,6 +20,7 @@ class TypesControl extends React.Component {
         name: this.props.item.name || '',
         folder: this.props.item.folder || '',
         menu_name: this.props.item.menu_name || '',
+        id_item: this.props.item.parent || '',
       },
       editStatus: false,
       addState: false,
@@ -64,7 +65,7 @@ class TypesControl extends React.Component {
           id_type: this.state.newItem.id_type,
           folder: this.state.newItem.folder,
           name: this.state.newItem.name,
-          menu_name: elem.target.value
+          id_item: elem.target.value
         },
       })
     }

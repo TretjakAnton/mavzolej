@@ -29,7 +29,7 @@ class Types extends React.Component{
   }
 
   onSave = (item) => {
-    updateType(item.id_type, item.name, item.folder, item.menu_name).then((data) => {
+    updateType(item.id_type, item.name, item.folder, item.id_item).then((data) => {
       if(data.error){
         this.setState({error: data.error})
       } else {

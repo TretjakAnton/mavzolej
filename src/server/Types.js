@@ -30,7 +30,7 @@ exports.getAllTypes = (req, res) => {
 
 exports.updateType = (req, res) => {
   pool.getConnection(function (err, connection) {
-    var queryTo = 'UPDATE type SET name="'+req.body.name_type+'", folder="'+req.body.directory+'" parent="'+req.body.id_item+'" WHERE id_type="'+req.body.id_type+'"';
+    var queryTo = 'UPDATE `type` SET `name`="'+req.body.name_type+'", `folder`="'+req.body.directory+'", `parent`="'+req.body.id_item+'" WHERE id_type="'+req.body.id_type+'"';
     connection.query(queryTo, function (err) {
       if (!err) {
         res.json({success: 'successful added'});
