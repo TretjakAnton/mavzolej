@@ -137,7 +137,8 @@ exports.deleteMon = (req, res) => {
         pool.getConnection(function (err, connection) {
           connection.query(queryDelImg, function (err, rows) {
             if (!err) {
-              fs.unlinkSync(path.join(__dirname, '/src/media/' + req.body.imgUrl));
+              var pathImg = path.join(__dirname, '/../media/' + req.body.imgUrl);
+              fs.unlinkSync(pathImg);
               res.json({success: 'successful deleted'});
             } else {
               res.json({error: err.message});

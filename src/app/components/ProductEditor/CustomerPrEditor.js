@@ -75,12 +75,6 @@ export default class AdminPrEditor extends React.Component{
     })
   };
 
-  pushItem = () => {
-    info = {
-
-    }
-  };
-
   pamsDom = () => {
     let images = [];
     let mainImg = null;

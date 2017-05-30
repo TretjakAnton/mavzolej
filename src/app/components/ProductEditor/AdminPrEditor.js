@@ -58,6 +58,23 @@ export default class AdminPrEditor extends React.Component{
     });
   };
 
+  dropElement = (id_img, id_prod, imgUrl) => {
+    deletePam(id_img, id_prod, imgUrl).then((data) => {
+      if(data.error){
+        this.setState({error: data.error})
+      } else {
+        let newPamState = this.state.pams;
+        let currImg = newPamState.find((elem) => {
+          if(elem.id_img == id_img && elem.id_prod == id_prod)
+            return elem;
+        });
+        let indexElem = newPamState.indexOf(currImg);
+        newPamState.splice(indexElem, 1);
+        this.setState({pams: newPamState})
+      }
+    });
+  };
+
   pamsDom = () => {
     var imgStyle = {
       height: "110px"
@@ -82,7 +99,7 @@ export default class AdminPrEditor extends React.Component{
           <td key={key + Math.random()}>{val.id_pam}</td>
           <td key={key + Math.random()}>{val.price}</td>
           <td key={key + Math.random()}>
-            <button onClick={() => deletePam(val.id_img, val.id_prod, imgUrl)}>delete</button>
+            <button onClick={() => this.dropElement(val.id_img, val.id_prod, imgUrl)}>delete</button>
           </td>
         </tr>
       )
