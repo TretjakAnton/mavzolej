@@ -75,29 +75,35 @@ export default class AdminPrEditor extends React.Component{
     })
   };
 
+  pushItem = () => {
+    info = {
+
+    }
+  };
+
   pamsDom = () => {
     let images = [];
     let mainImg = null;
-    let info = null;
+    const info = (id, price) => ({id: id, price: price});
     let body = [];
-    for(var i=0; i<this.state.pams.length; i++){
+    const arrLength = this.state.pams.length;
+    for(var i=0; i < arrLength; i++){
       let thisElem = this.state.pams[i];
       let nextElem = this.state.pams[i+1];
       let prevElem = this.state.pams[i-1];
       let imageAddress = `../../../media/${thisElem.folder}${thisElem.image}`;
-
       if(!prevElem || thisElem.id_pam !== prevElem.id_pam ){
-        mainImg=imageAddress
+        mainImg=imageAddress;
+        if(i == arrLength -1 || thisElem.id_pam !== nextElem.id_pam){
+            body.push(<Item key={thisElem.id_prod} mainImg={mainImg} images={images} info={info(thisElem.id_pam, thisElem.price)} onSelect={this.openForm} />);
+            images = [];
+            mainImg = null;
+        }
       } else if(!nextElem || thisElem.id_pam !== nextElem.id_pam) {
         images.push(imageAddress);
-        info = {
-          id: thisElem.id_pam,
-          price: thisElem.price
-        };
-        body.push(<Item key={thisElem.id_prod} mainImg={mainImg} images={images} info={info} onSelect={this.openForm} />);
+        body.push(<Item key={thisElem.id_prod} mainImg={mainImg} images={images} info={info(thisElem.id_pam, thisElem.price)} onSelect={this.openForm} />);
         images = [];
         mainImg = null;
-        info = null;
       } else {
         images.push(imageAddress);
       }

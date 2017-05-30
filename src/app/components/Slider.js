@@ -46,16 +46,21 @@ class Slider extends React.Component {
 
   render(){
     const imageToShow = this.state.current;
+    const arrowStatus = this.state.length > 1;
     return (
       <div className="slider-container">
-        <span className="glyphicon glyphicon-menu-left slider-lef-arrow" onClick={this.prevImg}></span>
+        {arrowStatus &&
+          <span className="glyphicon glyphicon-menu-left slider-lef-arrow" onClick={this.prevImg}></span>
+        }
         <div className="slider-container-image">
           <span className="glyphicon glyphicon-remove slider-close" onClick={this.closeModal}></span><br/>
           <img className="slider-image" src={imageToShow} /><br/>
           <span className="slider-indicator">{this.state.indexCurr} из {this.state.length}</span>
         </div>
-        <span className="glyphicon glyphicon-menu-right slider-right-arrow" onClick={this.nextImg}></span>
-      </div>
+        {arrowStatus &&
+          <span className="glyphicon glyphicon-menu-right slider-right-arrow" onClick={this.nextImg}></span>
+        }
+        </div>
     )
   }
 }

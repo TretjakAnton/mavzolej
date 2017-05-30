@@ -58,6 +58,7 @@ class Item extends React.Component{
 
   render() {
     const info = this.state.info;
+    const imgExist = this.state.images.length > 0;
     const images = [this.state.mainImg, ...this.state.images];
     const sliderStatus = this.state.sliderInfo.status;
     const imageToShow = this.state.sliderInfo.imageToShow;
@@ -68,17 +69,19 @@ class Item extends React.Component{
         <div className="mainImg">
           <img src={this.state.mainImg} className="img-responsive" onClick={() => this.runSlider(this.state.mainImg)}/>
         </div>
-        <Button
-          bsStyle="primary"
-          bsSize="sm"
-          onClick={this.showHideImages}
-          style={styles.showHideButton}
-        >
-          показать остальные
-          <span className="pull-right">
-            {smallImgStatus ? <Glyphicon glyph="menu-up" /> : <Glyphicon glyph="menu-down" />}
-          </span>
-        </Button>
+          {imgExist &&
+            <Button
+              bsStyle="primary"
+              bsSize="sm"
+              onClick={this.showHideImages}
+              style={styles.showHideButton}
+            >
+              показать остальные
+              <span className="pull-right">
+                {smallImgStatus ? <Glyphicon glyph="menu-up"/> : <Glyphicon glyph="menu-down"/>}
+              </span>
+            </Button>
+          }
         {smallImgStatus &&
           <div className="images">
             {
