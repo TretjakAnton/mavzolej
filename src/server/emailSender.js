@@ -12,7 +12,7 @@ var transporter = nodemailer.createTransport({
 });
 
 exports.send = (req, res) => {
-  var form = new formidable.IncomingForm();
+  /*var form = new formidable.IncomingForm();
   var text,
     price,
     items,
@@ -71,6 +71,6 @@ exports.send = (req, res) => {
     }
     console.log('Message %s sent: %s', info.messageId, info.response);
     return res.json({success: 'successful sanded'});
-  });
+  });*/
 
 };
