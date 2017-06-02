@@ -6,7 +6,7 @@ var path = require('path'),
   util = require('util'),
   router = express.Router();
 
-app.set('port', (process.env.PORT || 3000));
+app.set('port', (process.env.PORT || 64940));
 
 app.use('/', express.static(__dirname + '/src'));
 app.use(bodyParser.json()); // for parsing application/json
