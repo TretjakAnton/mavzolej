@@ -1,15 +1,15 @@
-var nodemailer = require('nodemailer'),
-    formidable = require('formidable'),
+//var nodemailer = require('nodemailer');
+var formidable = require('formidable'),
     path = require('path'),
     fs = require('fs');
 
-var transporter = nodemailer.createTransport({
+/*var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'mavzolej.master@gmail.com',
     pass: '0504065007'
   }
-});
+});*/
 
 exports.send = (req, res) => {
   /*var form = new formidable.IncomingForm();
