@@ -10,7 +10,7 @@ app.set('port', (process.env.PORT || 64940));
 
 app.use('/', express.static(__dirname + '/src'));
 app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({
   extended: true
 }));
