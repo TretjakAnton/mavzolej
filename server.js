@@ -6,7 +6,7 @@ var path = require('path'),
   util = require('util'),
   router = express.Router();
 
-app.set('port', (process.env.PORT || 64940));
+app.set('port', (process.env.PORT || 3000));
 
 app.use('/', express.static(__dirname + '/src'));
 app.use(bodyParser.json()); // for parsing application/json
@@ -70,7 +70,6 @@ app.get('*', function (request, response){
 });
 
 
-var server = app.listen(app.get('port'), function () {
-  console.log('Server started: http://localhost:' + app.get('port') + '/');
+app.listen(app.get('port'), function () {
+  console.log('Server started at port:' + app.get('port') + '/');
 });
-server.timeout = 5000;
