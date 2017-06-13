@@ -14,7 +14,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jsdom": "*",
     "body-parser": "^1.15.2",
     "express": "^4.15.3",
     "formidable": "^1.1.1",
