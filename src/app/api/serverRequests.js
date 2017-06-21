@@ -1,5 +1,5 @@
 import 'fetch-polyfill';
-const url = "http://localhost:3000";
+import { url } from '../Constants';
 
 export function login(password, login){
   return fetch(url + "/api/login",{
