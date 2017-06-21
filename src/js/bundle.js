@@ -29304,7 +29304,11 @@
 	    _react2.default.createElement(_reactRouter.Route, { path: '/home', component: _HomePage2.default }),
 	    _react2.default.createElement(_reactRouter.IndexRedirect, { to: '/home' })
 	  ),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/admin', component: _Admin2.default }),
+	  _react2.default.createElement(
+	    _reactRouter.Route,
+	    { onEnter: checkAuth },
+	    _react2.default.createElement(_reactRouter.Route, { path: '/admin', component: _Admin2.default })
+	  ),
 	  _react2.default.createElement(_reactRouter.IndexRedirect, { to: '/home' })
 	);
 
@@ -29771,7 +29775,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var url = exports.url = "http://localhost:3000";
+	//export const url = "http://localhost:3000";
+	var url = exports.url = "http://mavzolejmaster.com";
 	var ALL_TYPES = exports.ALL_TYPES = 'ALL_TYPES';
 	var ALL_SIZES = exports.ALL_SIZES = 'ALL_SIZES';
 	var USER_LOGIN = exports.USER_LOGIN = 'USER_LOGIN';
