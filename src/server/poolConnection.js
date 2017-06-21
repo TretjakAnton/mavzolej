@@ -5,6 +5,6 @@ exports.pool = mysql.createPool({
   port     : '3306',
   user     : 'root',
   password : '3263206toxa',
-  database : 'mavzolej'
+  database : 'newpam'
 });
 
