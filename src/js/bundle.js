@@ -49438,7 +49438,7 @@
 /* 541 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -49448,10 +49448,10 @@
 	
 	__webpack_require__(542);
 	
-	var url = "http://localhost:3000";
+	var _Constants = __webpack_require__(284);
 	
 	function login(password, login) {
-	  return fetch(url + "/api/login", {
+	  return fetch(_Constants.url + "/api/login", {
 	    method: 'POST',
 	    headers: {
 	      'Accept': 'application/json',
@@ -49475,7 +49475,7 @@
 	  info.images.map(function (val) {
 	    formData.append(val.name, val);
 	  });
-	  return fetch(url + "/api/sendEmail", {
+	  return fetch(_Constants.url + "/api/sendEmail", {
 	    method: 'POST',
 	    body: formData
 	  }).then(function (response) {
