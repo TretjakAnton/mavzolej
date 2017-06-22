@@ -8,8 +8,7 @@
     "build": "webpack --config webpack.config.js"
   },
   "engines": {
-    "node": "4.8.3",
-    "npm": "^4.6.1"
+    "node": "4.8.3"
   },
   "author": "",
   "license": "ISC",
