@@ -54262,7 +54262,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -54280,36 +54280,73 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var Footer = function (_React$Component) {
-	    _inherits(Footer, _React$Component);
+	  _inherits(Footer, _React$Component);
 	
-	    function Footer(props) {
-	        _classCallCheck(this, Footer);
+	  function Footer(props) {
+	    _classCallCheck(this, Footer);
 	
-	        var _this = _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).call(this, props));
 	
-	        _this.state = {
-	            error: ''
-	        };
-	        return _this;
+	    _this.state = {
+	      error: ''
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(Footer, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'footer row' },
+	        this.state.error,
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-lg-4 col-md-3 contacts' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'textInfo' },
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              _react2.default.createElement('span', { className: 'glyphicon glyphicon-earphone padding-right' }),
+	              '(050)406-50-07'
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              _react2.default.createElement('span', { className: 'glyphicon glyphicon-earphone padding-right' }),
+	              '(095)761-92-73'
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              _react2.default.createElement('span', { className: 'glyphicon glyphicon-earphone padding-right' }),
+	              '(096)850-83-01'
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              _react2.default.createElement('span', { className: 'glyphicon glyphicon-envelope padding-right' }),
+	              _react2.default.createElement(
+	                'a',
+	                { href: 'mailto:mavzolej-master@yandex.ru' },
+	                'mavzolej-master@yandex.ru'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              _react2.default.createElement('span', { className: 'glyphicon glyphicon-map-marker padding-right' }),
+	              '\u0433. \u0414\u0435\u0440\u0433\u0430\u0447\u0438, \u043F\u0435\u0440\u0435\u0443\u043B\u043E\u043A \u041A\u043E\u043C\u043C\u0443\u043D\u0430\u043B\u044C\u043D\u044B\u0439 \u21161'
+	            )
+	          )
+	        )
+	      );
 	    }
+	  }]);
 	
-	    _createClass(Footer, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'footer' },
-	                _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    'Footer ',
-	                    this.state.error
-	                )
-	            );
-	        }
-	    }]);
-	
-	    return Footer;
+	  return Footer;
 	}(_react2.default.Component);
 	
 	exports.default = Footer;
