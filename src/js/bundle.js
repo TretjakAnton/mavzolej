@@ -29776,7 +29776,7 @@
 	  value: true
 	});
 	//export const url = "http://localhost:3000";
-	var url = exports.url = "http://mavzolejmaster.com";
+	var url = exports.url = "mavzolejmaster.com";
 	var ALL_TYPES = exports.ALL_TYPES = 'ALL_TYPES';
 	var ALL_SIZES = exports.ALL_SIZES = 'ALL_SIZES';
 	var USER_LOGIN = exports.USER_LOGIN = 'USER_LOGIN';
@@ -53054,7 +53054,7 @@
 	      var items = [];
 	
 	      _this2.state.data.map(function (elem, topKey) {
-	        if (elem.name == 'Главное меню') {
+	        if (elem.name == 'Main menu') {
 	          elem.items.map(function (data, key) {
 	            items.push(_react2.default.createElement(
 	              _reactRouterBootstrap.LinkContainer,

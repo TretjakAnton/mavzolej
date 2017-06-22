@@ -101,7 +101,7 @@ class Menu extends React.Component {
     let items = [];
 
     this.state.data.map((elem, topKey) => {
-      if(elem.name == 'Главное меню'){
+      if(elem.name == 'Main menu'){
         elem.items.map((data, key) => {
           items.push(<LinkContainer key={key} to={`/monuments/${data.id}`}><NavItem eventKey={key}>{data.name}</NavItem></LinkContainer>)
         });
