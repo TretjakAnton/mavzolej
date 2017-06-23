@@ -29776,7 +29776,7 @@
 	  value: true
 	});
 	//export const url = "http://localhost:3000";
-	var url = exports.url = "mavzolejmaster.com";
+	var url = exports.url = "";
 	var ALL_TYPES = exports.ALL_TYPES = 'ALL_TYPES';
 	var ALL_SIZES = exports.ALL_SIZES = 'ALL_SIZES';
 	var USER_LOGIN = exports.USER_LOGIN = 'USER_LOGIN';
@@ -54271,6 +54271,8 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactRouter = __webpack_require__(182);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -54338,7 +54340,11 @@
 	              'p',
 	              null,
 	              _react2.default.createElement('span', { className: 'glyphicon glyphicon-map-marker padding-right' }),
-	              '\u0433. \u0414\u0435\u0440\u0433\u0430\u0447\u0438, \u043F\u0435\u0440\u0435\u0443\u043B\u043E\u043A \u041A\u043E\u043C\u043C\u0443\u043D\u0430\u043B\u044C\u043D\u044B\u0439 \u21161'
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: 'aboutUs' },
+	                '\u0433. \u0414\u0435\u0440\u0433\u0430\u0447\u0438, \u043F\u0435\u0440\u0435\u0443\u043B\u043E\u043A \u041A\u043E\u043C\u043C\u0443\u043D\u0430\u043B\u044C\u043D\u044B\u0439 \u21161'
+	              )
 	            )
 	          )
 	        )
@@ -54454,48 +54460,6 @@
 	                  )
 	                ),
 	                _react2.default.createElement('img', { src: '../../../media/squareDown.png', className: 'img-responsive' })
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'col-lg-4 col-md-3 hidden-sm hidden-xs contacts' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'textInfo' },
-	              _react2.default.createElement(
-	                'p',
-	                null,
-	                _react2.default.createElement('span', { className: 'glyphicon glyphicon-earphone padding-right' }),
-	                '(050)406-50-07'
-	              ),
-	              _react2.default.createElement(
-	                'p',
-	                null,
-	                _react2.default.createElement('span', { className: 'glyphicon glyphicon-earphone padding-right' }),
-	                '(095)761-92-73'
-	              ),
-	              _react2.default.createElement(
-	                'p',
-	                null,
-	                _react2.default.createElement('span', { className: 'glyphicon glyphicon-earphone padding-right' }),
-	                '(096)850-83-01'
-	              ),
-	              _react2.default.createElement(
-	                'p',
-	                null,
-	                _react2.default.createElement('span', { className: 'glyphicon glyphicon-envelope padding-right' }),
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: 'mailto:mavzolej-master@yandex.ru' },
-	                  'mavzolej-master@yandex.ru'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'p',
-	                null,
-	                _react2.default.createElement('span', { className: 'glyphicon glyphicon-map-marker padding-right' }),
-	                '\u0433. \u0414\u0435\u0440\u0433\u0430\u0447\u0438, \u043F\u0435\u0440\u0435\u0443\u043B\u043E\u043A \u041A\u043E\u043C\u043C\u0443\u043D\u0430\u043B\u044C\u043D\u044B\u0439 \u21161'
 	              )
 	            )
 	          )
@@ -64203,7 +64167,7 @@
 	
 	
 	// module
-	exports.push([module.id, "*,html {\n  margin: 0;\n}\n\nbody {\n  overflow-x: hidden !important;\n}\n\n.item {\n  border: 1px solid darkgray;\n  border-radius: 20px;\n  margin-bottom: 10px;\n  padding: 10px;\n}\n\n.main-image {\n  height: 200px;\n  margin: 0 auto;\n  display: block;\n}\n\n.show-button {\n  width: 100%;\n  outline: none !important;\n  margin: 10px 0;\n}\n\n.images {\n  padding: 10px;\n}\n\n.small-images {\n  height: 100px;\n}\n\n.information {\n  display: flex;\n  flex-direction: column;\n}\n\n.slider-container {\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  height: 100vh;\n  width: 100vw;\n  background-color: rgba(0, 0, 0, 0.7);\n}\n\n.slider-lef-arrow {\n  font-size: 140px;\n  color: white;\n  position: absolute;\n  top: 50%;\n  left: 0px;\n  transform: translate(0px, -50%);\n  cursor: pointer;\n}\n\n.slider-container-image {\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n\n.slider-right-arrow {\n  font-size: 140px;\n  color: white;\n  position: absolute;\n  top: 50%;\n  right: 0px;\n  transform: translate(0px, -50%);\n  cursor: pointer;\n}\n\n.slider-close {\n  float: right;\n  color: white;\n  font-size: 30px;\n  margin-right: -28px;\n  cursor: pointer;\n}\n\n.slider-image {\n  height: 400px;\n}\n\n.slider-indicator {\n  float: right;\n  color: white;\n}\n\n.col-xs-6 {\n  position: inherit;\n}\n\n/*  form  */\n\n.form-container {\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  height: 100vh;\n  width: 100vw;\n  background-color: rgba(0, 0, 0, 0.7);\n}\n\n.form-content {\n  background-color: white;\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n\n.form-flex {\n  display: flex;\n}\n\n.form-left-side {\n  display: inline-block;\n  padding: 10px;\n}\n\n.form-right-side {\n  display: inline-block;\n  padding: 10px;\n  background-color: gray;\n}\n\n.form-price {\n  bottom: 10px;\n  position: absolute;\n  right: 10px;\n}\n\n.form-close {\n  float: right;\n  color: white;\n  font-size: 30px;\n  margin-right: -35px;\n  margin-top: -30px;\n  cursor: pointer;\n}\n\n/* admin menu */\n\n.add-menu-item {\n  display: inline-block;\n}\n\n.add-menu-item-right {\n  display: inline-block;\n  margin-left: 20px;\n}\n\n/* header */\n\n.header {\n  background-color: #2b2b2b;\n  color: white;\n  height: 248px;\n}\n\n.header-menu {\n  padding: 10px 0;\n}\n\n.container-fluid {\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n}\n\n.contacts {\n  float: right;\n  text-align: right;\n  font-size: 14px;\n}\n\n.upHead {\n  text-align: center;\n  margin-top: 30px;\n}\n\n.textInfo {\n  padding: 15px 15px 0 10px;\n}\n\n.page-selector {\n  display: block;\n}\n\n.container-content {\n  min-height: calc(100vh - 328px);\n  padding: 15px 5px 15px 5px;\n}\n\n.login-form {\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  height: 100vh;\n  width: 100vw;\n  background-color: rgba(0, 0, 0, 0.7);\n}\n\n.login-content {\n  background-color: white;\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n  width: 280px;\n  height: 250px;\n  padding: 20px;\n  border-radius: 10px;\n}\n\n.login-header {\n  text-align: center;\n  font-size: 16px;\n}\n\n.login-fields {\n  padding: 20px 0;\n}\n\n.login-button {\n  position: absolute;\n  bottom: 20px;\n  right: 20px;\n}\n\n.footer {\n  width: 100vw;\n  background: gray;\n  height: 80px;\n}\n\n.padding-right {\n  padding-right: 5px;\n}", ""]);
+	exports.push([module.id, "*,html {\n  margin: 0;\n}\n\nbody {\n  overflow-x: hidden !important;\n}\n\n.item {\n  border: 1px solid darkgray;\n  border-radius: 20px;\n  margin-bottom: 10px;\n  padding: 10px;\n}\n\n.main-image {\n  height: 200px;\n  margin: 0 auto;\n  display: block;\n}\n\n.show-button {\n  width: 100%;\n  outline: none !important;\n  margin: 10px 0;\n}\n\n.images {\n  padding: 10px;\n}\n\n.small-images {\n  height: 100px;\n}\n\n.information {\n  display: flex;\n  flex-direction: column;\n}\n\n.slider-container {\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  height: 100vh;\n  width: 100vw;\n  background-color: rgba(0, 0, 0, 0.7);\n}\n\n.slider-lef-arrow {\n  font-size: 140px;\n  color: white;\n  position: absolute;\n  top: 50%;\n  left: 0px;\n  transform: translate(0px, -50%);\n  cursor: pointer;\n}\n\n.slider-container-image {\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n\n.slider-right-arrow {\n  font-size: 140px;\n  color: white;\n  position: absolute;\n  top: 50%;\n  right: 0px;\n  transform: translate(0px, -50%);\n  cursor: pointer;\n}\n\n.slider-close {\n  float: right;\n  color: white;\n  font-size: 30px;\n  margin-right: -28px;\n  cursor: pointer;\n}\n\n.slider-image {\n  height: 400px;\n}\n\n.slider-indicator {\n  float: right;\n  color: white;\n}\n\n.col-xs-6 {\n  position: inherit;\n}\n\n/*  form  */\n\n.form-container {\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  height: 100vh;\n  width: 100vw;\n  background-color: rgba(0, 0, 0, 0.7);\n}\n\n.form-content {\n  background-color: white;\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n\n.form-flex {\n  display: flex;\n}\n\n.form-left-side {\n  display: inline-block;\n  padding: 10px;\n}\n\n.form-right-side {\n  display: inline-block;\n  padding: 10px;\n  background-color: gray;\n}\n\n.form-price {\n  bottom: 10px;\n  position: absolute;\n  right: 10px;\n}\n\n.form-close {\n  float: right;\n  color: white;\n  font-size: 30px;\n  margin-right: -35px;\n  margin-top: -30px;\n  cursor: pointer;\n}\n\n/* admin menu */\n\n.add-menu-item {\n  display: inline-block;\n}\n\n.add-menu-item-right {\n  display: inline-block;\n  margin-left: 20px;\n}\n\n/* header */\n\n.header {\n  background-color: #2b2b2b;\n  color: white;\n  height: 248px;\n}\n\n.header-menu {\n  padding: 10px 0;\n}\n\n.container-fluid {\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n}\n\n.upHead {\n  text-align: center;\n  margin-top: 30px;\n}\n\n.page-selector {\n  display: block;\n}\n\n.container-content {\n  min-height: calc(100vh - 428px);\n  padding: 15px 5px 15px 5px;\n}\n\n.login-form {\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  height: 100vh;\n  width: 100vw;\n  background-color: rgba(0, 0, 0, 0.7);\n}\n\n.login-content {\n  background-color: white;\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n  width: 280px;\n  height: 250px;\n  padding: 20px;\n  border-radius: 10px;\n}\n\n.login-header {\n  text-align: center;\n  font-size: 16px;\n}\n\n.login-fields {\n  padding: 20px 0;\n}\n\n.login-button {\n  position: absolute;\n  bottom: 20px;\n  right: 20px;\n}\n\n.footer {\n  width: 100vw;\n  background: gray;\n  height: 180px;\n}\n\n.contacts {\n  float: right;\n  text-align: right;\n  font-size: 14px;\n}\n\n.textInfo {\n  padding: 15px 15px 0 10px;\n}\n\n.padding-right {\n  padding-right: 5px;\n}", ""]);
 	
 	// exports
 

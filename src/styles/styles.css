@@ -174,19 +174,9 @@ body {
   margin-left: auto;
 }
 
-.contacts {
-  float: right;
-  text-align: right;
-  font-size: 14px;
-}
-
 .upHead {
   text-align: center;
   margin-top: 30px;
-}
-
-.textInfo {
-  padding: 15px 15px 0 10px;
 }
 
 .page-selector {
@@ -194,7 +184,7 @@ body {
 }
 
 .container-content {
-  min-height: calc(100vh - 328px);
+  min-height: calc(100vh - 428px);
   padding: 15px 5px 15px 5px;
 }
 
@@ -237,7 +227,17 @@ body {
 .footer {
   width: 100vw;
   background: gray;
-  height: 80px;
+  height: 180px;
+}
+
+.contacts {
+  float: right;
+  text-align: right;
+  font-size: 14px;
+}
+
+.textInfo {
+  padding: 15px 15px 0 10px;
 }
 
 .padding-right {

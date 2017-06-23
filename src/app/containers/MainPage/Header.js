@@ -42,16 +42,6 @@ class Header extends React.Component {
             </Link>
           </div>
         </div>
-
-        <div className="col-lg-4 col-md-3 hidden-sm hidden-xs contacts">
-          <div className="textInfo">
-            <p><span className="glyphicon glyphicon-earphone padding-right"></span>(050)406-50-07</p>
-            <p><span className="glyphicon glyphicon-earphone padding-right"></span>(095)761-92-73</p>
-            <p><span className="glyphicon glyphicon-earphone padding-right"></span>(096)850-83-01</p>
-            <p><span className="glyphicon glyphicon-envelope padding-right"></span><a href="mailto:mavzolej-master@yandex.ru">mavzolej-master@yandex.ru</a></p>
-            <p><span className="glyphicon glyphicon-map-marker padding-right"></span>г. Дергачи, переулок Коммунальный №1</p>
-          </div>
-        </div>
       </div>
       <Menu />
     </div>
