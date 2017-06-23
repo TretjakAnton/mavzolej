@@ -8,3 +8,10 @@ exports.pool = mysql.createPool({
   database : 'newpam'
 });
 
+/*exports.pool = mysql.createPool({
+  host     : '127.0.0.1',
+  port     : '4444',
+  user     : 'root',
+  password : '',
+  database : 'newpam'
+});*/

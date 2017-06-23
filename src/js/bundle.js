@@ -53421,7 +53421,12 @@
 	    var _this = _possibleConstructorReturn(this, (Types.__proto__ || Object.getPrototypeOf(Types)).call(this, props));
 	
 	    _this.onSave = function (item) {
-	      (0, _Types.updateType)(item.id_type, item.name, item.folder, item.id_item).then(function (data) {
+	      var menu_item = _this.state.data.find(function (elem) {
+	        if (elem.menu_name == item.menu_name) {
+	          return elem.id_item;
+	        }
+	      });
+	      (0, _Types.updateType)(item.id_type, item.name, item.folder, menu_item.parent).then(function (data) {
 	        if (data.error) {
 	          _this.setState({ error: data.error });
 	        } else {
