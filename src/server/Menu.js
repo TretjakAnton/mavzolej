@@ -2,6 +2,7 @@ var pool = require('./poolConnection').pool;
 
 exports.setNewItem = (req, res) => {
   pool.getConnection(function (err, connection) {
+    if (err) throw err;
     var queryTo = 'INSERT INTO menu (menu_name) VALUES ("'+req.body.menu_name+'")';
     connection.query(queryTo, function (err) {
       if (!err) {
@@ -30,6 +31,7 @@ exports.getAllMenuItems = (req, res) => {
 
 exports.updateMenuItem = (req, res) => {
   pool.getConnection(function (err, connection) {
+    if (err) throw err;
     var queryTo = 'UPDATE menu SET menu_name="'+req.body.menu_name+'" WHERE id_item="'+req.body.id_item+'"';
     connection.query(queryTo, function (err) {
       if (!err) {
@@ -44,6 +46,7 @@ exports.updateMenuItem = (req, res) => {
 
 exports.deleteMenuItem = (req, res) => {
   pool.getConnection(function (err, connection) {
+    if (err) throw err;
     var queryTo = 'DELETE FROM menu WHERE id_item="'+req.body.id_item+'"';
     connection.query(queryTo, function (err, rows) {
       if (!err) {

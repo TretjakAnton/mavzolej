@@ -2,6 +2,7 @@ var pool = require('./poolConnection').pool;
 
 exports.setNew = (req, res) => {
   pool.getConnection(function (err, connection) {
+    if (err) throw err;
     const saveObj = req.body.data;
     for (var key in saveObj) {
       var queryTo = 'INSERT INTO fields (type, name, description, price) VALUES ("' + saveObj[key].type + '", "' + saveObj[key].name + '", "' + saveObj[key].description + '", "' + saveObj[key].price + '")';
@@ -19,6 +20,7 @@ exports.setNew = (req, res) => {
 
 exports.getForm = (req, res) => {
   pool.getConnection(function (err, connection) {
+    if (err) throw err;
     var queryTo = 'SELECT * FROM fields ORDER BY name';
     connection.query(queryTo, function (err, rows) {
       if (!err && rows.length > 0) {

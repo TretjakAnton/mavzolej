@@ -19,6 +19,7 @@ exports.setNewMon = (req, res) => {
     if(name == 'price'){
       price = val;
       pool.getConnection(function (err, connection) {
+        if (err) throw err;
         var queryTo = 'INSERT INTO products (id_pam, id_type, price) VALUES ("'+id+'", "'+id_type+'", "'+price+'")';
         connection.query(queryTo, function (err) {
           connection.release();
@@ -45,6 +46,7 @@ exports.setNewMon = (req, res) => {
     fs.rename(file.path, path.join(newFolder, file.name));
 
     pool.getConnection(function (err, connection) {
+      if (err) throw err;
       var queryTo = 'SELECT MAX(id_prod) as id FROM products';
       connection.query(queryTo, function (err, rows) {
         var imageTo = rows[0].id;
@@ -102,6 +104,7 @@ exports.getMon = (req, res) => {
         });
         listIdProd = listIdProd.slice(0, -1);
         pool.getConnection(function (err, connection) {
+          if (err) throw err;
           var queryTo = 'SELECT * FROM image WHERE id_pam IN ('+listIdProd+')';
           connection.query(queryTo, function (err, rows) {
             if (!err) {
@@ -129,6 +132,7 @@ exports.getMon = (req, res) => {
 
 exports.deleteMon = (req, res) => {
   pool.getConnection(function (err, connection) {
+    if (err) throw err;
     var queryDelItem = 'DELETE FROM products WHERE id_prod="'+req.body.id_prod+'"';
     var queryDelImg = 'DELETE FROM image WHERE id_img="'+req.body.id_img+'"';
     var queryCol = 'SELECT COUNT(*) AS col FROM image WHERE id_pam="'+req.body.id_prod+'"';
@@ -148,6 +152,7 @@ exports.deleteMon = (req, res) => {
         });
       } else {
         pool.getConnection(function (err, connection) {
+          if (err) throw err;
           connection.query(queryDelImg, function (err, rows) {
             if (!err) {
               fs.unlinkSync(path.join(__dirname, '../media/' + req.body.imgUrl));
@@ -182,6 +187,7 @@ exports.deleteMon = (req, res) => {
 
 exports.getRowsCount = (req, res) => {
   pool.getConnection(function (err, connection) {
+    if (err) throw err;
     var queryTo = 'SELECT COUNT(*) as count from products WHERE id_type="'+req.query.id_type+'"';
     connection.query(queryTo, function (err, rows) {
       if (!err && rows.length > 0) {
