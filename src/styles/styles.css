@@ -161,10 +161,20 @@ body {
   background-color: #2b2b2b;
   color: white;
   height: 248px;
+  position: relative;
 }
 
 .header-menu {
   padding: 10px 0;
+}
+.navbar {
+  margin-bottom: 0;
+}
+
+.navbar-default {
+  bottom: 0;
+  position: absolute;
+  width: 100vw;
 }
 
 .container-fluid {
@@ -225,21 +235,56 @@ body {
 }
 
 .footer {
-  width: 100vw;
-  background: gray;
+  position: relative;
+  background: #2b2b2b;
   height: 180px;
 }
 
 .contacts {
-  float: right;
-  text-align: right;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
   font-size: 14px;
+  color: white;
+  text-align: right;
 }
 
-.textInfo {
-  padding: 15px 15px 0 10px;
+.textInfo-items {
+  display: inline-block;
+  padding-right: 15px;
 }
 
 .padding-right {
   padding-right: 5px;
+}
+
+/*Home page*/
+
+.cont-left-bl,
+.center-bl,
+.right-block {
+  display: inline-block;
+  width: 400px;
+  vertical-align: top;
+}
+
+@media (min-width: 1200px) {
+  .wrap {
+    width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 800px) and (max-width: 1200px) {
+  .wrap {
+    width: 800px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 400px) and (max-width: 800px) {
+  .wrap {
+    width: 400px;
+    margin: 0 auto;
+  }
 }

@@ -11,10 +11,10 @@ class HomePage extends React.Component{
 
     render() {
         return (
-          <div className="content col-lg-offset-1 col-md-offset-1 col-lg-10 col-md-10 col-sm-12 col-xs-12">
+          <div className="content">
 
-              <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 popup-gallery">
-                  <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div className="wrap">
+                  <div className="cont-left-bl">
                       <Link to="monuments/1"><h4>Памятники и пейзажи</h4></Link>
                       <img src="../../media/dvoin.jpg" height="100px" />
                       <img src="../../media/odinarn.jpg" height="100px" />
@@ -27,7 +27,7 @@ class HomePage extends React.Component{
                           так и по собственному. Все детали прорабатываются и прорисовываются, после чего оговаривается цена.</p>
                   </div>
 
-                  <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 center_bl">
+                  <div className="center-bl">
                       <Link to="komplex"><h4>Мраморные и гранитные компексы</h4></Link>
                       <img src="../../media/gran-komp.jpg" height="100px" />
                       <img src="../../media/mram-komp.jpg" height="100px" />
@@ -37,7 +37,7 @@ class HomePage extends React.Component{
                           Каждый комплекс индивидуален и по этому выгодно выделяется на фоне остальных работ.</p>
                   </div>
 
-                  <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                  <div className="right-block">
                       <Link to="izdel"><h4>Изделия из гранита и мрамора</h4></Link>
                       <img src="../../media/balas.jpg" height="100px" />
                       <img src="../../media/bolls.jpg" height="100px" />

@@ -29775,7 +29775,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	//export const url = "http://localhost:3000";
+	// export const url = "http://localhost:3000";
 	var url = exports.url = "";
 	var ALL_TYPES = exports.ALL_TYPES = 'ALL_TYPES';
 	var ALL_SIZES = exports.ALL_SIZES = 'ALL_SIZES';
@@ -54309,46 +54309,54 @@
 	        this.state.error,
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'col-lg-4 col-md-3 contacts' },
+	          { className: 'col-lg-6 col-md-6 contacts' },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'textInfo' },
 	            _react2.default.createElement(
-	              'p',
-	              null,
-	              _react2.default.createElement('span', { className: 'glyphicon glyphicon-earphone padding-right' }),
-	              '(050)406-50-07'
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              _react2.default.createElement('span', { className: 'glyphicon glyphicon-earphone padding-right' }),
-	              '(095)761-92-73'
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              _react2.default.createElement('span', { className: 'glyphicon glyphicon-earphone padding-right' }),
-	              '(096)850-83-01'
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              _react2.default.createElement('span', { className: 'glyphicon glyphicon-envelope padding-right' }),
+	              'div',
+	              { className: 'textInfo-items' },
 	              _react2.default.createElement(
-	                'a',
-	                { href: 'mailto:mavzolej-master@yandex.ru' },
-	                'mavzolej-master@yandex.ru'
+	                'p',
+	                null,
+	                _react2.default.createElement('span', { className: 'glyphicon glyphicon-envelope padding-right' }),
+	                _react2.default.createElement(
+	                  'a',
+	                  { href: 'mailto:mavzolej-master@yandex.ru' },
+	                  'mavzolej-master@yandex.ru'
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                _react2.default.createElement('span', { className: 'glyphicon glyphicon-map-marker padding-right' }),
+	                _react2.default.createElement(
+	                  _reactRouter.Link,
+	                  { to: 'aboutUs' },
+	                  '\u0433. \u0414\u0435\u0440\u0433\u0430\u0447\u0438, \u043F\u0435\u0440\u0435\u0443\u043B\u043E\u043A \u041A\u043E\u043C\u043C\u0443\u043D\u0430\u043B\u044C\u043D\u044B\u0439 \u21161'
+	                )
 	              )
 	            ),
 	            _react2.default.createElement(
-	              'p',
-	              null,
-	              _react2.default.createElement('span', { className: 'glyphicon glyphicon-map-marker padding-right' }),
+	              'div',
+	              { className: 'textInfo-items' },
 	              _react2.default.createElement(
-	                _reactRouter.Link,
-	                { to: 'aboutUs' },
-	                '\u0433. \u0414\u0435\u0440\u0433\u0430\u0447\u0438, \u043F\u0435\u0440\u0435\u0443\u043B\u043E\u043A \u041A\u043E\u043C\u043C\u0443\u043D\u0430\u043B\u044C\u043D\u044B\u0439 \u21161'
+	                'p',
+	                null,
+	                _react2.default.createElement('span', { className: 'glyphicon glyphicon-earphone padding-right' }),
+	                '(050)406-50-07'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                _react2.default.createElement('span', { className: 'glyphicon glyphicon-earphone padding-right' }),
+	                '(095)761-92-73'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                _react2.default.createElement('span', { className: 'glyphicon glyphicon-earphone padding-right' }),
+	                '(096)850-83-01'
 	              )
 	            )
 	          )
@@ -54524,13 +54532,13 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'content col-lg-offset-1 col-md-offset-1 col-lg-10 col-md-10 col-sm-12 col-xs-12' },
+	                { className: 'content' },
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'col-lg-12 col-md-12 col-sm-12 col-xs-12 popup-gallery' },
+	                    { className: 'wrap' },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'col-lg-4 col-md-4 col-sm-4 col-xs-12' },
+	                        { className: 'cont-left-bl' },
 	                        _react2.default.createElement(
 	                            _reactRouter.Link,
 	                            { to: 'monuments/1' },
@@ -54564,7 +54572,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'col-lg-4 col-md-4 col-sm-4 col-xs-12 center_bl' },
+	                        { className: 'center-bl' },
 	                        _react2.default.createElement(
 	                            _reactRouter.Link,
 	                            { to: 'komplex' },
@@ -54589,7 +54597,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'col-lg-4 col-md-4 col-sm-4 col-xs-12' },
+	                        { className: 'right-block' },
 	                        _react2.default.createElement(
 	                            _reactRouter.Link,
 	                            { to: 'izdel' },
@@ -64172,7 +64180,7 @@
 	
 	
 	// module
-	exports.push([module.id, "*,html {\n  margin: 0;\n}\n\nbody {\n  overflow-x: hidden !important;\n}\n\n.item {\n  border: 1px solid darkgray;\n  border-radius: 20px;\n  margin-bottom: 10px;\n  padding: 10px;\n}\n\n.main-image {\n  height: 200px;\n  margin: 0 auto;\n  display: block;\n}\n\n.show-button {\n  width: 100%;\n  outline: none !important;\n  margin: 10px 0;\n}\n\n.images {\n  padding: 10px;\n}\n\n.small-images {\n  height: 100px;\n}\n\n.information {\n  display: flex;\n  flex-direction: column;\n}\n\n.slider-container {\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  height: 100vh;\n  width: 100vw;\n  background-color: rgba(0, 0, 0, 0.7);\n}\n\n.slider-lef-arrow {\n  font-size: 140px;\n  color: white;\n  position: absolute;\n  top: 50%;\n  left: 0px;\n  transform: translate(0px, -50%);\n  cursor: pointer;\n}\n\n.slider-container-image {\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n\n.slider-right-arrow {\n  font-size: 140px;\n  color: white;\n  position: absolute;\n  top: 50%;\n  right: 0px;\n  transform: translate(0px, -50%);\n  cursor: pointer;\n}\n\n.slider-close {\n  float: right;\n  color: white;\n  font-size: 30px;\n  margin-right: -28px;\n  cursor: pointer;\n}\n\n.slider-image {\n  height: 400px;\n}\n\n.slider-indicator {\n  float: right;\n  color: white;\n}\n\n.col-xs-6 {\n  position: inherit;\n}\n\n/*  form  */\n\n.form-container {\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  height: 100vh;\n  width: 100vw;\n  background-color: rgba(0, 0, 0, 0.7);\n}\n\n.form-content {\n  background-color: white;\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n\n.form-flex {\n  display: flex;\n}\n\n.form-left-side {\n  display: inline-block;\n  padding: 10px;\n}\n\n.form-right-side {\n  display: inline-block;\n  padding: 10px;\n  background-color: gray;\n}\n\n.form-price {\n  bottom: 10px;\n  position: absolute;\n  right: 10px;\n}\n\n.form-close {\n  float: right;\n  color: white;\n  font-size: 30px;\n  margin-right: -35px;\n  margin-top: -30px;\n  cursor: pointer;\n}\n\n/* admin menu */\n\n.add-menu-item {\n  display: inline-block;\n}\n\n.add-menu-item-right {\n  display: inline-block;\n  margin-left: 20px;\n}\n\n/* header */\n\n.header {\n  background-color: #2b2b2b;\n  color: white;\n  height: 248px;\n}\n\n.header-menu {\n  padding: 10px 0;\n}\n\n.container-fluid {\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n}\n\n.upHead {\n  text-align: center;\n  margin-top: 30px;\n}\n\n.page-selector {\n  display: block;\n}\n\n.container-content {\n  min-height: calc(100vh - 428px);\n  padding: 15px 5px 15px 5px;\n}\n\n.login-form {\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  height: 100vh;\n  width: 100vw;\n  background-color: rgba(0, 0, 0, 0.7);\n}\n\n.login-content {\n  background-color: white;\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n  width: 280px;\n  height: 250px;\n  padding: 20px;\n  border-radius: 10px;\n}\n\n.login-header {\n  text-align: center;\n  font-size: 16px;\n}\n\n.login-fields {\n  padding: 20px 0;\n}\n\n.login-button {\n  position: absolute;\n  bottom: 20px;\n  right: 20px;\n}\n\n.footer {\n  width: 100vw;\n  background: gray;\n  height: 180px;\n}\n\n.contacts {\n  float: right;\n  text-align: right;\n  font-size: 14px;\n}\n\n.textInfo {\n  padding: 15px 15px 0 10px;\n}\n\n.padding-right {\n  padding-right: 5px;\n}", ""]);
+	exports.push([module.id, "*,html {\n  margin: 0;\n}\n\nbody {\n  overflow-x: hidden !important;\n}\n\n.item {\n  border: 1px solid darkgray;\n  border-radius: 20px;\n  margin-bottom: 10px;\n  padding: 10px;\n}\n\n.main-image {\n  height: 200px;\n  margin: 0 auto;\n  display: block;\n}\n\n.show-button {\n  width: 100%;\n  outline: none !important;\n  margin: 10px 0;\n}\n\n.images {\n  padding: 10px;\n}\n\n.small-images {\n  height: 100px;\n}\n\n.information {\n  display: flex;\n  flex-direction: column;\n}\n\n.slider-container {\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  height: 100vh;\n  width: 100vw;\n  background-color: rgba(0, 0, 0, 0.7);\n}\n\n.slider-lef-arrow {\n  font-size: 140px;\n  color: white;\n  position: absolute;\n  top: 50%;\n  left: 0px;\n  transform: translate(0px, -50%);\n  cursor: pointer;\n}\n\n.slider-container-image {\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n\n.slider-right-arrow {\n  font-size: 140px;\n  color: white;\n  position: absolute;\n  top: 50%;\n  right: 0px;\n  transform: translate(0px, -50%);\n  cursor: pointer;\n}\n\n.slider-close {\n  float: right;\n  color: white;\n  font-size: 30px;\n  margin-right: -28px;\n  cursor: pointer;\n}\n\n.slider-image {\n  height: 400px;\n}\n\n.slider-indicator {\n  float: right;\n  color: white;\n}\n\n.col-xs-6 {\n  position: inherit;\n}\n\n/*  form  */\n\n.form-container {\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  height: 100vh;\n  width: 100vw;\n  background-color: rgba(0, 0, 0, 0.7);\n}\n\n.form-content {\n  background-color: white;\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n\n.form-flex {\n  display: flex;\n}\n\n.form-left-side {\n  display: inline-block;\n  padding: 10px;\n}\n\n.form-right-side {\n  display: inline-block;\n  padding: 10px;\n  background-color: gray;\n}\n\n.form-price {\n  bottom: 10px;\n  position: absolute;\n  right: 10px;\n}\n\n.form-close {\n  float: right;\n  color: white;\n  font-size: 30px;\n  margin-right: -35px;\n  margin-top: -30px;\n  cursor: pointer;\n}\n\n/* admin menu */\n\n.add-menu-item {\n  display: inline-block;\n}\n\n.add-menu-item-right {\n  display: inline-block;\n  margin-left: 20px;\n}\n\n/* header */\n\n.header {\n  background-color: #2b2b2b;\n  color: white;\n  height: 248px;\n  position: relative;\n}\n\n.header-menu {\n  padding: 10px 0;\n}\n.navbar {\n  margin-bottom: 0;\n}\n\n.navbar-default {\n  bottom: 0;\n  position: absolute;\n  width: 100vw;\n}\n\n.container-fluid {\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n}\n\n.upHead {\n  text-align: center;\n  margin-top: 30px;\n}\n\n.page-selector {\n  display: block;\n}\n\n.container-content {\n  min-height: calc(100vh - 428px);\n  padding: 15px 5px 15px 5px;\n}\n\n.login-form {\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  height: 100vh;\n  width: 100vw;\n  background-color: rgba(0, 0, 0, 0.7);\n}\n\n.login-content {\n  background-color: white;\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n  width: 280px;\n  height: 250px;\n  padding: 20px;\n  border-radius: 10px;\n}\n\n.login-header {\n  text-align: center;\n  font-size: 16px;\n}\n\n.login-fields {\n  padding: 20px 0;\n}\n\n.login-button {\n  position: absolute;\n  bottom: 20px;\n  right: 20px;\n}\n\n.footer {\n  position: relative;\n  background: #2b2b2b;\n  height: 180px;\n}\n\n.contacts {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  font-size: 14px;\n  color: white;\n  text-align: right;\n}\n\n.textInfo-items {\n  display: inline-block;\n  padding-right: 15px;\n}\n\n.padding-right {\n  padding-right: 5px;\n}\n\n/*Home page*/\n\n.cont-left-bl,\n.center-bl,\n.right-block {\n  display: inline-block;\n  width: 400px;\n  vertical-align: top;\n}\n\n@media (min-width: 1200px) {\n  .wrap {\n    width: 1200px;\n    margin: 0 auto;\n  }\n}\n\n@media (min-width: 800px) and (max-width: 1200px) {\n  .wrap {\n    width: 800px;\n    margin: 0 auto;\n  }\n}\n\n@media (min-width: 400px) and (max-width: 800px) {\n  .wrap {\n    width: 400px;\n    margin: 0 auto;\n  }\n}\n", ""]);
 	
 	// exports
 
