@@ -29776,7 +29776,7 @@
 	  value: true
 	});
 	//export const url = "http://localhost:3000";
-	var url = exports.url = "";
+	var url = exports.url = "mavzolejmaster.com";
 	var ALL_TYPES = exports.ALL_TYPES = 'ALL_TYPES';
 	var ALL_SIZES = exports.ALL_SIZES = 'ALL_SIZES';
 	var USER_LOGIN = exports.USER_LOGIN = 'USER_LOGIN';
