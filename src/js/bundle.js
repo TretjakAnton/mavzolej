@@ -29246,11 +29246,13 @@
 	
 	var _reactRouter = __webpack_require__(182);
 	
-	var _configuration = __webpack_require__(276);
+	var _index = __webpack_require__(276);
+	
+	var _configuration = __webpack_require__(277);
 	
 	var _configuration2 = _interopRequireDefault(_configuration);
 	
-	var _reactRouterRedux = __webpack_require__(278);
+	var _reactRouterRedux = __webpack_require__(279);
 	
 	var _App = __webpack_require__(287);
 	
@@ -29285,9 +29287,25 @@
 	var store = exports.store = (0, _configuration2.default)();
 	var history = exports.history = (0, _reactRouterRedux.syncHistoryWithStore)(_reactRouter.browserHistory, store);
 	
+	var checkCookie = function checkCookie() {
+	  var name = _index.COOKIE_NAME + "=";
+	  var decodedCookie = decodeURIComponent(document.cookie);
+	  var ca = decodedCookie.split(';');
+	  for (var i = 0; i < ca.length; i++) {
+	    var c = ca[i];
+	    while (c.charAt(0) == ' ') {
+	      c = c.substring(1);
+	    }
+	    if (c.indexOf(name) == 0) {
+	      return c.substring(name.length, c.length);
+	    }
+	  }
+	  return false;
+	};
+	
 	function checkAuth(nextState, replace) {
 	  var userState = store.getState().userLogin;
-	  if (userState == "") {
+	  if (userState == "" && !checkCookie()) {
 	    replace({ pathname: '/login' });
 	  }
 	}
@@ -29314,6 +29332,23 @@
 
 /***/ }),
 /* 276 */
+/***/ (function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	//export const url = "http://localhost:3000";
+	var url = exports.url = "";
+	var ALL_TYPES = exports.ALL_TYPES = 'ALL_TYPES';
+	var ALL_SIZES = exports.ALL_SIZES = 'ALL_SIZES';
+	var USER_LOGIN = exports.USER_LOGIN = 'USER_LOGIN';
+	var ADMIN = exports.ADMIN = 'ADMIN';
+	var COOKIE_NAME = exports.COOKIE_NAME = 'AUTHORIZATION';
+
+/***/ }),
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -29325,7 +29360,7 @@
 	
 	var _redux = __webpack_require__(254);
 	
-	var _reducers = __webpack_require__(277);
+	var _reducers = __webpack_require__(278);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
@@ -29340,7 +29375,7 @@
 	}
 
 /***/ }),
-/* 277 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29351,9 +29386,9 @@
 	
 	var _redux = __webpack_require__(254);
 	
-	var _reactRouterRedux = __webpack_require__(278);
+	var _reactRouterRedux = __webpack_require__(279);
 	
-	var _types = __webpack_require__(283);
+	var _types = __webpack_require__(284);
 	
 	var _sizes = __webpack_require__(285);
 	
@@ -29371,7 +29406,7 @@
 	});
 
 /***/ }),
-/* 278 */
+/* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29381,7 +29416,7 @@
 	});
 	exports.routerMiddleware = exports.routerActions = exports.goForward = exports.goBack = exports.go = exports.replace = exports.push = exports.CALL_HISTORY_METHOD = exports.routerReducer = exports.LOCATION_CHANGE = exports.syncHistoryWithStore = undefined;
 	
-	var _reducer = __webpack_require__(279);
+	var _reducer = __webpack_require__(280);
 	
 	Object.defineProperty(exports, 'LOCATION_CHANGE', {
 	  enumerable: true,
@@ -29396,7 +29431,7 @@
 	  }
 	});
 	
-	var _actions = __webpack_require__(280);
+	var _actions = __webpack_require__(281);
 	
 	Object.defineProperty(exports, 'CALL_HISTORY_METHOD', {
 	  enumerable: true,
@@ -29441,11 +29476,11 @@
 	  }
 	});
 	
-	var _sync = __webpack_require__(281);
+	var _sync = __webpack_require__(282);
 	
 	var _sync2 = _interopRequireDefault(_sync);
 	
-	var _middleware = __webpack_require__(282);
+	var _middleware = __webpack_require__(283);
 	
 	var _middleware2 = _interopRequireDefault(_middleware);
 	
@@ -29455,7 +29490,7 @@
 	exports.routerMiddleware = _middleware2['default'];
 
 /***/ }),
-/* 279 */
+/* 280 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -29498,7 +29533,7 @@
 	}
 
 /***/ }),
-/* 280 */
+/* 281 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -29540,7 +29575,7 @@
 	var routerActions = exports.routerActions = { push: push, replace: replace, go: go, goBack: goBack, goForward: goForward };
 
 /***/ }),
-/* 281 */
+/* 282 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29553,7 +29588,7 @@
 	
 	exports['default'] = syncHistoryWithStore;
 	
-	var _reducer = __webpack_require__(279);
+	var _reducer = __webpack_require__(280);
 	
 	var defaultSelectLocationState = function defaultSelectLocationState(state) {
 	  return state.routing;
@@ -29700,7 +29735,7 @@
 	}
 
 /***/ }),
-/* 282 */
+/* 283 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29710,7 +29745,7 @@
 	});
 	exports['default'] = routerMiddleware;
 	
-	var _actions = __webpack_require__(280);
+	var _actions = __webpack_require__(281);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -29738,7 +29773,7 @@
 	}
 
 /***/ }),
-/* 283 */
+/* 284 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29748,7 +29783,7 @@
 	});
 	exports.allTypes = allTypes;
 	
-	var _Constants = __webpack_require__(284);
+	var _Constants = __webpack_require__(276);
 	
 	var initialUserState = {
 	  types: ''
@@ -29767,22 +29802,6 @@
 	}
 
 /***/ }),
-/* 284 */
-/***/ (function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	// export const url = "http://localhost:3000";
-	var url = exports.url = "";
-	var ALL_TYPES = exports.ALL_TYPES = 'ALL_TYPES';
-	var ALL_SIZES = exports.ALL_SIZES = 'ALL_SIZES';
-	var USER_LOGIN = exports.USER_LOGIN = 'USER_LOGIN';
-	var ADMIN = exports.ADMIN = 'ADMIN';
-
-/***/ }),
 /* 285 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29793,7 +29812,7 @@
 	});
 	exports.allSizes = allSizes;
 	
-	var _Constants = __webpack_require__(284);
+	var _Constants = __webpack_require__(276);
 	
 	var initialUserState = {
 	  sizes: ''
@@ -29822,7 +29841,7 @@
 	});
 	exports.userLogin = userLogin;
 	
-	var _Constants = __webpack_require__(284);
+	var _Constants = __webpack_require__(276);
 	
 	var initialUserState = {
 	  user: ''
@@ -29917,6 +29936,8 @@
 	
 	var _serverRequests = __webpack_require__(541);
 	
+	var _index = __webpack_require__(276);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29924,6 +29945,13 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var setCookie = function setCookie(cookieValue, exdays) {
+	  var d = new Date();
+	  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+	  var expires = "expires=" + d.toUTCString();
+	  document.cookie = _index.COOKIE_NAME + "=" + cookieValue + ";" + expires + ";path=/";
+	};
 	
 	var Login = function (_React$Component) {
 	  _inherits(Login, _React$Component);
@@ -29945,6 +29973,7 @@
 	      (0, _serverRequests.login)(_this.state.userPassword, _this.state.userLogin).then(function (data) {
 	        if (data.Auth == 'Logged') {
 	          _this.props.setCredential(_this.state.userLogin);
+	          setCookie(data.Auth, 7);
 	          _reactRouter.browserHistory.push('/admin');
 	        } else {
 	          _this.setState({ error: 'error' });
@@ -30033,7 +30062,7 @@
 	exports.setTypes = setTypes;
 	exports.setSizes = setSizes;
 	
-	var _Constants = __webpack_require__(284);
+	var _Constants = __webpack_require__(276);
 	
 	function setCredentials(user) {
 	    return {
@@ -49448,7 +49477,7 @@
 	
 	__webpack_require__(542);
 	
-	var _Constants = __webpack_require__(284);
+	var _Constants = __webpack_require__(276);
 	
 	function login(password, login) {
 	  return fetch(_Constants.url + "/api/login", {
@@ -49870,7 +49899,7 @@
 	
 	var _CustomerPrEditor2 = _interopRequireDefault(_CustomerPrEditor);
 	
-	var _Constants = __webpack_require__(284);
+	var _Constants = __webpack_require__(276);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -50153,7 +50182,7 @@
 	exports.deletePam = deletePam;
 	exports.updatePam = updatePam;
 	
-	var _Constants = __webpack_require__(284);
+	var _Constants = __webpack_require__(276);
 	
 	function addPam(id_pam, type, price, images) {
 	  var formData = new FormData();
@@ -52149,7 +52178,7 @@
 	exports.getForm = getForm;
 	exports.setForm = setForm;
 	
-	var _Constants = __webpack_require__(284);
+	var _Constants = __webpack_require__(276);
 	
 	function getForm() {
 	  return fetch(_Constants.url + "/api/form", {
@@ -52481,7 +52510,7 @@
 	exports.updateType = updateType;
 	exports.deleteType = deleteType;
 	
-	var _Constants = __webpack_require__(284);
+	var _Constants = __webpack_require__(276);
 	
 	function getAllTypes() {
 	  return fetch(_Constants.url + "/api/Types", { method: 'GET' }).then(function (response) {
@@ -53326,7 +53355,7 @@
 	exports.updateMenuItem = updateMenuItem;
 	exports.deleteMenuItem = deleteMenuItem;
 	
-	var _Constants = __webpack_require__(284);
+	var _Constants = __webpack_require__(276);
 	
 	function getMenuItems() {
 	  return fetch(_Constants.url + "/api/menu", { method: 'GET' }).then(function (response) {
@@ -64180,7 +64209,7 @@
 	
 	
 	// module
-	exports.push([module.id, "*,html {\n  margin: 0;\n}\n\nbody {\n  overflow-x: hidden !important;\n}\n\n.item {\n  border: 1px solid darkgray;\n  border-radius: 20px;\n  margin-bottom: 10px;\n  padding: 10px;\n}\n\n.main-image {\n  height: 200px;\n  margin: 0 auto;\n  display: block;\n}\n\n.show-button {\n  width: 100%;\n  outline: none !important;\n  margin: 10px 0;\n}\n\n.images {\n  padding: 10px;\n}\n\n.small-images {\n  height: 100px;\n}\n\n.information {\n  display: flex;\n  flex-direction: column;\n}\n\n.slider-container {\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  height: 100vh;\n  width: 100vw;\n  background-color: rgba(0, 0, 0, 0.7);\n}\n\n.slider-lef-arrow {\n  font-size: 140px;\n  color: white;\n  position: absolute;\n  top: 50%;\n  left: 0px;\n  transform: translate(0px, -50%);\n  cursor: pointer;\n}\n\n.slider-container-image {\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n\n.slider-right-arrow {\n  font-size: 140px;\n  color: white;\n  position: absolute;\n  top: 50%;\n  right: 0px;\n  transform: translate(0px, -50%);\n  cursor: pointer;\n}\n\n.slider-close {\n  float: right;\n  color: white;\n  font-size: 30px;\n  margin-right: -28px;\n  cursor: pointer;\n}\n\n.slider-image {\n  height: 400px;\n}\n\n.slider-indicator {\n  float: right;\n  color: white;\n}\n\n.col-xs-6 {\n  position: inherit;\n}\n\n/*  form  */\n\n.form-container {\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  height: 100vh;\n  width: 100vw;\n  background-color: rgba(0, 0, 0, 0.7);\n}\n\n.form-content {\n  background-color: white;\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n\n.form-flex {\n  display: flex;\n}\n\n.form-left-side {\n  display: inline-block;\n  padding: 10px;\n}\n\n.form-right-side {\n  display: inline-block;\n  padding: 10px;\n  background-color: gray;\n}\n\n.form-price {\n  bottom: 10px;\n  position: absolute;\n  right: 10px;\n}\n\n.form-close {\n  float: right;\n  color: white;\n  font-size: 30px;\n  margin-right: -35px;\n  margin-top: -30px;\n  cursor: pointer;\n}\n\n/* admin menu */\n\n.add-menu-item {\n  display: inline-block;\n}\n\n.add-menu-item-right {\n  display: inline-block;\n  margin-left: 20px;\n}\n\n/* header */\n\n.header {\n  background-color: #2b2b2b;\n  color: white;\n  height: 248px;\n  position: relative;\n}\n\n.header-menu {\n  padding: 10px 0;\n}\n.navbar {\n  margin-bottom: 0;\n}\n\n.navbar-default {\n  bottom: 0;\n  position: absolute;\n  width: 100vw;\n}\n\n.container-fluid {\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n}\n\n.upHead {\n  text-align: center;\n  margin-top: 30px;\n}\n\n.page-selector {\n  display: block;\n}\n\n.container-content {\n  min-height: calc(100vh - 428px);\n  padding: 15px 5px 15px 5px;\n}\n\n.login-form {\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  height: 100vh;\n  width: 100vw;\n  background-color: rgba(0, 0, 0, 0.7);\n}\n\n.login-content {\n  background-color: white;\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n  width: 280px;\n  height: 250px;\n  padding: 20px;\n  border-radius: 10px;\n}\n\n.login-header {\n  text-align: center;\n  font-size: 16px;\n}\n\n.login-fields {\n  padding: 20px 0;\n}\n\n.login-button {\n  position: absolute;\n  bottom: 20px;\n  right: 20px;\n}\n\n.footer {\n  position: relative;\n  background: #2b2b2b;\n  height: 180px;\n}\n\n.contacts {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  font-size: 14px;\n  color: white;\n  text-align: right;\n}\n\n.textInfo-items {\n  display: inline-block;\n  padding-right: 15px;\n}\n\n.padding-right {\n  padding-right: 5px;\n}\n\n/*Home page*/\n\n.cont-left-bl,\n.center-bl,\n.right-block {\n  display: inline-block;\n  width: 400px;\n  vertical-align: top;\n}\n\n@media (min-width: 1200px) {\n  .wrap {\n    width: 1200px;\n    margin: 0 auto;\n  }\n}\n\n@media (min-width: 800px) and (max-width: 1200px) {\n  .wrap {\n    width: 800px;\n    margin: 0 auto;\n  }\n}\n\n@media (min-width: 400px) and (max-width: 800px) {\n  .wrap {\n    width: 400px;\n    margin: 0 auto;\n  }\n}\n", ""]);
+	exports.push([module.id, "*,html {\n  margin: 0;\n}\n\nbody {\n  overflow-x: hidden !important;\n}\n\n.item {\n  border: 1px solid darkgray;\n  border-radius: 20px;\n  margin-bottom: 10px;\n  padding: 10px;\n}\n\n.main-image {\n  height: 200px;\n  margin: 0 auto;\n  display: block;\n}\n\n.show-button {\n  width: 100%;\n  outline: none !important;\n  margin: 10px 0;\n}\n\n.images {\n  padding: 10px;\n}\n\n.small-images {\n  height: 100px;\n}\n\n.information {\n  display: flex;\n  flex-direction: column;\n}\n\n.slider-container {\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  height: 100vh;\n  width: 100vw;\n  background-color: rgba(0, 0, 0, 0.7);\n}\n\n.slider-lef-arrow {\n  font-size: 140px;\n  color: white;\n  position: absolute;\n  top: 50%;\n  left: 0px;\n  transform: translate(0px, -50%);\n  cursor: pointer;\n}\n\n.slider-container-image {\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n\n.slider-right-arrow {\n  font-size: 140px;\n  color: white;\n  position: absolute;\n  top: 50%;\n  right: 0px;\n  transform: translate(0px, -50%);\n  cursor: pointer;\n}\n\n.slider-close {\n  float: right;\n  color: white;\n  font-size: 30px;\n  margin-right: -28px;\n  cursor: pointer;\n}\n\n.slider-image {\n  height: 400px;\n}\n\n.slider-indicator {\n  float: right;\n  color: white;\n}\n\n.col-xs-6 {\n  position: inherit;\n}\n\n/*  form  */\n\n.form-container {\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  height: 100vh;\n  width: 100vw;\n  background-color: rgba(0, 0, 0, 0.7);\n}\n\n.form-content {\n  background-color: white;\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n\n.form-flex {\n  display: flex;\n}\n\n.form-left-side {\n  display: inline-block;\n  padding: 10px;\n}\n\n.form-right-side {\n  display: inline-block;\n  padding: 10px;\n  background-color: gray;\n}\n\n.form-price {\n  bottom: 10px;\n  position: absolute;\n  right: 10px;\n}\n\n.form-close {\n  float: right;\n  color: white;\n  font-size: 30px;\n  margin-right: -35px;\n  margin-top: -30px;\n  cursor: pointer;\n}\n\n/* admin menu */\n\n.add-menu-item {\n  display: inline-block;\n}\n\n.add-menu-item-right {\n  display: inline-block;\n  margin-left: 20px;\n}\n\n/* header */\n\n.header {\n  background-color: #2b2b2b;\n  color: white;\n  height: 248px;\n  position: relative;\n}\n\n.header .header-menu {\n  padding: 10px 0;\n}\n\n.header .navbar {\n  margin-bottom: 0;\n}\n\n.header .navbar-default {\n  bottom: 0;\n  position: absolute;\n  width: 100vw;\n}\n\n.container-fluid {\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n}\n\n.upHead {\n  text-align: center;\n  margin-top: 30px;\n}\n\n.page-selector {\n  display: block;\n}\n\n.container-content {\n  min-height: calc(100vh - 428px);\n  padding: 15px 5px 15px 5px;\n}\n\n.login-form {\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  height: 100vh;\n  width: 100vw;\n  background-color: rgba(0, 0, 0, 0.7);\n}\n\n.login-content {\n  background-color: white;\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n  width: 280px;\n  height: 250px;\n  padding: 20px;\n  border-radius: 10px;\n}\n\n.login-header {\n  text-align: center;\n  font-size: 16px;\n}\n\n.login-fields {\n  padding: 20px 0;\n}\n\n.login-button {\n  position: absolute;\n  bottom: 20px;\n  right: 20px;\n}\n\n.footer {\n  position: relative;\n  background: #2b2b2b;\n}\n\n.contacts {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  font-size: 14px;\n  color: white;\n  text-align: right;\n}\n\n.textInfo-items {\n  display: inline-block;\n  padding-right: 15px;\n}\n\n.padding-right {\n  padding-right: 5px;\n}\n\n/*Home page*/\n\n.cont-left-bl,\n.center-bl,\n.right-block {\n  display: inline-block;\n  width: 400px;\n  vertical-align: top;\n}\n\n@media (min-width: 1200px) {\n  .wrap {\n    width: 1200px;\n    margin: 0 auto;\n  }\n  .footer {\n    height: 180px;\n  }\n}\n\n@media (min-width: 800px) and (max-width: 1200px) {\n  .wrap {\n    width: 800px;\n    margin: 0 auto;\n  }\n  .footer {\n    height: 180px;\n  }\n}\n\n@media (min-width: 400px) and (max-width: 800px) {\n  .wrap {\n    width: 400px;\n    margin: 0 auto;\n  }\n  .footer {\n    height: 180px;\n  }\n}\n\n@media (min-width: 200px) and (max-width: 400px) {\n  .footer {\n    height: 206px;\n  }\n}\n", ""]);
 	
 	// exports
 

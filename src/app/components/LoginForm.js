@@ -5,6 +5,14 @@ import { connect } from 'react-redux'
 import { browserHistory } from 'react-router';
 import { FormGroup, Button, FormControl, ControlLabel } from 'react-bootstrap';
 import { login } from '../api/serverRequests'
+import { COOKIE_NAME } from '../Constants/index'
+
+const setCookie = (cookieValue, exdays) => {
+  let d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  let expires = "expires="+ d.toUTCString();
+  document.cookie = COOKIE_NAME + "=" + cookieValue + ";" + expires + ";path=/";
+};
 
 class Login extends React.Component{
   constructor() {
@@ -27,6 +35,7 @@ class Login extends React.Component{
     login(this.state.userPassword, this.state.userLogin).then((data) => {
       if(data.Auth == 'Logged'){
         this.props.setCredential(this.state.userLogin);
+        setCookie(data.Auth, 7);
         browserHistory.push('/admin');
       } else{
         this.setState({error: 'error'});
