@@ -1,18 +1,18 @@
-//var nodemailer = require('nodemailer');
+var nodemailer = require('nodemailer');
 var formidable = require('formidable'),
     path = require('path'),
     fs = require('fs');
 
-/*var transporter = nodemailer.createTransport({
+var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'mavzolej.master@gmail.com',
     pass: '0504065007'
   }
-});*/
+});
 
 exports.send = (req, res) => {
-  /*var form = new formidable.IncomingForm();
+  var form = new formidable.IncomingForm();
   var text,
     price,
     items,
@@ -71,6 +71,6 @@ exports.send = (req, res) => {
     }
     console.log('Message %s sent: %s', info.messageId, info.response);
     return res.json({success: 'successful sanded'});
-  });*/
+  });
 
 };
