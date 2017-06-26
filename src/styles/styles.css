@@ -164,14 +164,15 @@ body {
   position: relative;
 }
 
-.header-menu {
+.header .header-menu {
   padding: 10px 0;
 }
-.navbar {
+
+.header .navbar {
   margin-bottom: 0;
 }
 
-.navbar-default {
+.header .navbar-default {
   bottom: 0;
   position: absolute;
   width: 100vw;
@@ -237,7 +238,6 @@ body {
 .footer {
   position: relative;
   background: #2b2b2b;
-  height: 180px;
 }
 
 .contacts {
@@ -273,6 +273,9 @@ body {
     width: 1200px;
     margin: 0 auto;
   }
+  .footer {
+    height: 180px;
+  }
 }
 
 @media (min-width: 800px) and (max-width: 1200px) {
@@ -280,11 +283,23 @@ body {
     width: 800px;
     margin: 0 auto;
   }
+  .footer {
+    height: 180px;
+  }
 }
 
 @media (min-width: 400px) and (max-width: 800px) {
   .wrap {
     width: 400px;
     margin: 0 auto;
+  }
+  .footer {
+    height: 180px;
+  }
+}
+
+@media (min-width: 200px) and (max-width: 400px) {
+  .footer {
+    height: 206px;
   }
 }
