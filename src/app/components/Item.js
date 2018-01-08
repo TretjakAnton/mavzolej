@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table, Glyphicon, Button } from 'react-bootstrap';
+import { addBodyClass } from '../helpers';
 import Slider from './Slider';
 
 const styles = {
@@ -19,10 +20,10 @@ class Item extends React.Component{
     super(props);
     this.state = {
       error: '',
-      mainImg: this.props.mainImg,
-      images: this.props.images,
+      images: [],
       info: this.props.info,
       status: false,
+      scrollPos: 0,
       sliderInfo: {
         imageToShow: null,
         status: false,
@@ -30,21 +31,33 @@ class Item extends React.Component{
     };
   };
 
+  componentWillMount = () => {
+    const { info } = this.state;
+    let newImages = [];
+    info.images.map((image) => {
+      newImages.push(`../../../media${info.folder}/${image}`);
+    });
+    this.setState({ images: newImages });
+  }
+
   showHideImages = () => {
     this.setState({ status: !this.state.status })
   };
 
   runSlider = (image) => {
+    const scrollPos = document.body.scrollTop || document.documentElement.scrollTop;
     this.setState({
       sliderInfo: {
         imageToShow: image,
         status: true,
+        scrollPos: scrollPos,
       }
-    })
+    });
+    addBodyClass(true);
   };
 
   openForm = () => {
-    this.props.onSelect({image: this.state.mainImg, info: this.state.info});
+    this.props.onSelect({image: this.state.images[0], info: this.state.info});
   };
 
   closeSlider = () => {
@@ -52,22 +65,22 @@ class Item extends React.Component{
       sliderInfo: {
         imageToShow: null,
         status: false,
+        scrollPos: 0,
       }
-    })
+    });
+    addBodyClass(false, this.state.scrollPos);
   };
 
   render() {
-    const info = this.state.info;
-    const imgExist = this.state.images.length > 0;
-    const images = [this.state.mainImg, ...this.state.images];
+    const { info, images, status } = this.state;
+    const imgExist = images && images.length > 1;
     const sliderStatus = this.state.sliderInfo.status;
     const imageToShow = this.state.sliderInfo.imageToShow;
-    const smallImgStatus = this.state.status;
     return (
       <div className="col-xs-6 col-sm-6 col-md-4 col-lg-3">
         <div className="item">
         <div className="mainImg">
-          <img src={this.state.mainImg} className="img-responsive" onClick={() => this.runSlider(this.state.mainImg)}/>
+          <img src={images[0]} className="img-responsive" onClick={() => this.runSlider(images[0])}/>
         </div>
           {imgExist &&
             <Button
@@ -78,11 +91,11 @@ class Item extends React.Component{
             >
               показать остальные
               <span className="pull-right">
-                {smallImgStatus ? <Glyphicon glyph="menu-up"/> : <Glyphicon glyph="menu-down"/>}
+                {status ? <Glyphicon glyph="menu-up"/> : <Glyphicon glyph="menu-down"/>}
               </span>
             </Button>
           }
-        {smallImgStatus &&
+        {status &&
           <div className="images">
             {
               this.state.images.map((val, key) => {
@@ -96,7 +109,7 @@ class Item extends React.Component{
             <tbody>
               <tr>
                 <td>Номер памятника:</td>
-                <td>{info.id}</td>
+                <td>{info.id_pam}</td>
               </tr>
               <tr>
                 <td>Цена:</td>

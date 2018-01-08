@@ -1,52 +1,52 @@
 import { url } from '../Constants';
 
 export function getAllTypes(){
-  return fetch(url + "/api/Types",{method: 'GET'})
+  return fetch(url + "/api/newType",{method: 'OPTIONS'})
     .then(response => response.json())
 }
 
-export function addType(name, directory, id_item){
-  return fetch(url + "/api/Types",{
+export function addType(name, directory, menu_name){
+  return fetch(url + "/api/newType",{
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      name_type: name,
-      directory: directory,
-      id_item: id_item
+      type_name: name,
+      folder: directory,
+      menu_name: menu_name
     })
   })
     .then(response => response.json())
 }
 
-export function updateType(id_type, name, directory, id_item){
-  return fetch(url + "/api/Types",{
+export function updateType(type_name, folder, menu_name, oldType_name){
+  return fetch(url + "/api/newType",{
     method: 'PUT',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      id_type: id_type,
-      name_type: name,
-      directory: directory,
-      id_item: id_item
+      type_name: type_name,
+      folder: folder,
+      menu_name: menu_name,
+      oldType_name: oldType_name,
     })
   })
     .then(response => response.json())
 }
 
-export function deleteType(id_type){
-  return fetch(url + "/api/Types",{
+export function deleteType(type_name){
+  return fetch(url + "/api/newType",{
     method: 'DELETE',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      id_type: id_type
+      type_name: type_name
     })
   })
     .then(response => response.json())

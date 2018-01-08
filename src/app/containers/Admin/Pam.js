@@ -7,7 +7,7 @@ import {
   FormGroup,
   Col,
 }  from 'react-bootstrap';
-import { addPam } from '../../api/newPam';
+import { addUpdatePam } from '../../api/newPam';
 import AdminPrEditor from '../../components/ProductEditor/AdminPrEditor';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -23,7 +23,7 @@ class Pam extends React.Component {
       types: null,
       id_fake: '',
       price: '',
-      id_type: '',
+      type_name: '',
       uploadedFiles: []
     };
   };
@@ -36,7 +36,7 @@ class Pam extends React.Component {
         this.props.setTypes(data);
         this.setState({
           types: data,
-          id_type: data[0].id_type
+          type_name: data[0].type_name
         })
       }
     })
@@ -49,17 +49,17 @@ class Pam extends React.Component {
     if(event.target.name == "price"){
       this.setState({price: event.target.value})
     }
-    if(event.target.name == "id_type"){
-      this.setState({id_type: event.target.value})
+    if(event.target.name == "type_name"){
+      this.setState({type_name: event.target.value})
     }
   };
 
   onSendAll = () => {
     const selectType = this.state.types.filter((type) => {
-      if(type.id_type == this.state.id_type)
+      if(type.type_name == this.state.type_name)
         return type
     });
-    addPam(this.state.id_fake, selectType, this.state.price, this.state.uploadedFiles).then((data) => {
+    addUpdatePam(this.state.id_fake, selectType[0], this.state.price, this.state.uploadedFiles).then((data) => {
       if (data.error) {
         this.setState({error: data.error})
       } else {
@@ -77,7 +77,7 @@ class Pam extends React.Component {
     let domElements = [];
     if (name === 'types' && this.state.types !== null) {
       this.state.types.map((val, key) => {
-        domElements.push(<option key={key} value={val.id_type}>{val.name}</option>);
+        domElements.push(<option key={key} value={val.type_name}>{val.type_name}</option>);
       })
     }
     if (name === 'preview' && this.state.pam !== null) {
@@ -95,7 +95,7 @@ class Pam extends React.Component {
   }
 
   render() {
-    return <div>
+    return <div className="admin-controle-monuments">
       {this.state.types &&
         <div>
           <Dropzone
@@ -111,7 +111,7 @@ class Pam extends React.Component {
             <Col sm={6}>
               <FormControl type="text" placeholder="номер памятника" name="id_fake" value={this.state.id_fake} onChange={this.inputsConrol} />
               <ControlLabel>тип памятника</ControlLabel>
-              <FormControl componentClass="select" name="id_type" value={this.state.id_type} onChange={this.inputsConrol}>
+              <FormControl componentClass="select" name="type_name" value={this.state.type_name} onChange={this.inputsConrol}>
                 {this.generateDOM('types')}
               </FormControl>
               <FormControl type="number" placeholder="цена" name="price" value={this.state.price} onChange={this.inputsConrol} />
@@ -120,7 +120,9 @@ class Pam extends React.Component {
               </Button>
             </Col>
           </FormGroup>
+          <div className="show-monuments">
             <AdminPrEditor types={this.state.types} />
+          </div>
         </div>
       }
     </div>

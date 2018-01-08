@@ -20,7 +20,7 @@ class AddControl extends React.Component{
       error: '',
       controlObject: [
         {
-          type: '',
+          field_type: '',
           description: 'отсутствует',
           price: '',
           name: ''
@@ -50,12 +50,12 @@ class AddControl extends React.Component{
     this.setState({ add: true });
   };
 
-  addType(type) {
+  addType(field_type) {
     this.setState({ add: false });
     let newCOType = this.state.controlObject;
-    newCOType[0].type = type;
+    newCOType[0].field_type = field_type;
     this.setState({
-      currentType: type,
+      currentType: field_type,
       controlObject: newCOType
     });
   };
@@ -87,7 +87,7 @@ class AddControl extends React.Component{
   addToForm = () => {
     let newCO = this.state.controlObject;
     newCO.push({
-      type: this.state.currentType,
+      field_type: this.state.currentType,
       name: this.state.nameItem,
       description: this.state.description,
       price: this.state.price,
@@ -114,7 +114,7 @@ class AddControl extends React.Component{
       error: '',
       controlObject: [
         {
-          type: '',
+          field_type: '',
           description: 'отсутствует',
           price: '',
           name: ''

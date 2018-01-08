@@ -36,7 +36,7 @@ const navDropdown = (obj) => {
   const wrap = (items) => <NavDropdown id={obj.name} key={obj.name} title={obj.name}>{items}</NavDropdown>;
 
   obj.items.map((element, key) => {
-    itemToWrap.push(<LinkContainer key={key} to={`/monuments/${element.id}`}><MenuItem eventKey={key}>{element.name}</MenuItem></LinkContainer>);
+    itemToWrap.push(<LinkContainer key={key} to={`/monuments/${element.id}`}><MenuItem eventKey={key}>{element.id}</MenuItem></LinkContainer>);
   });
 
   return wrap(itemToWrap);
@@ -79,7 +79,7 @@ class Menu extends React.Component {
           const currEl = data[i];
           const next = data[i+1];
 
-          newItems.addItem({name: currEl.name, id: currEl.id_type});
+          newItems.addItem({name: currEl.menu_name, id: currEl.type_name});
 
           if(next) {
             if(next.menu_name !== currEl.menu_name){
@@ -101,9 +101,9 @@ class Menu extends React.Component {
     let items = [];
 
     this.state.data.map((elem, topKey) => {
-      if(elem.name == 'Main menu'){
+      if(elem.name == 'Главное'){
         elem.items.map((data, key) => {
-          items.push(<LinkContainer key={key} to={`/monuments/${data.id}`}><NavItem eventKey={key}>{data.name}</NavItem></LinkContainer>)
+          items.push(<LinkContainer key={key} to={`/monuments/${data.id}`}><NavItem eventKey={key}>{data.id}</NavItem></LinkContainer>)
         });
       } else {
         items.push(navDropdown(elem))

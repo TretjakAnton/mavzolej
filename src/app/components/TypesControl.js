@@ -10,17 +10,16 @@ class TypesControl extends React.Component {
       error: '',
       addElement: this.props.addElement,
       item: {
-        id_type: this.props.item.id_type || '',
-        name: this.props.item.name || '',
+        _id: this.props.item._id || '',
+        type_name: this.props.item.type_name || '',
         folder: this.props.item.folder || '',
         menu_name: this.props.item.menu_name || '',
       },
       newItem: {
-        id_type: this.props.item.id_type || '',
-        name: this.props.item.name || '',
+        _id: this.props.item._id || '',
+        type_name: this.props.item.type_name || '',
         folder: this.props.item.folder || '',
         menu_name: this.props.item.menu_name || '',
-        id_item: this.props.item.parent || '',
       },
       editStatus: false,
       addState: false,
@@ -42,19 +41,19 @@ class TypesControl extends React.Component {
     if (elem.target.name == 'name'){
       this.setState({
         newItem: {
-          id_type: this.state.newItem.id_type,
+          _id: this.state.newItem._id,
           folder: this.state.newItem.folder,
           menu_name: this.state.newItem.menu_name,
-          name: elem.target.value
+          type_name: elem.target.value
         },
       })
     }
     if (elem.target.name == 'folder'){
       this.setState({
         newItem: {
-          id_type: this.state.newItem.id_type,
+          _id: this.state.newItem._id,
           menu_name: this.state.newItem.menu_name,
-          name: this.state.newItem.name,
+          type_name: this.state.newItem.type_name,
           folder: elem.target.value
         },
       })
@@ -62,10 +61,10 @@ class TypesControl extends React.Component {
     if (elem.target.name == 'menu_name'){
       this.setState({
         newItem: {
-          id_type: this.state.newItem.id_type,
+          _id: this.state.newItem._id,
           folder: this.state.newItem.folder,
-          name: this.state.newItem.name,
-          id_item: elem.target.value
+          type_name: this.state.newItem.type_name,
+          menu_name: elem.target.value,
         },
       })
     }
@@ -90,22 +89,23 @@ class TypesControl extends React.Component {
 
   onSave = () => {
     this.setState({item: this.state.newItem});
-    this.props.onSaveItem(this.state.newItem);
+    this.props.onSaveItem({new: this.state.newItem, oldType_name: this.props.item.type_name});
+    this.onEdit();
   };
 
   editRender = () => {
     let items = [];
     const menuItems = this.state.menu;
-    items.push(<td key="1"><input type="text" name="name" value={ this.state.newItem.name } onChange={this.handleInputs} /></td>);
+    items.push(<td key="1"><input type="text" name="name" value={ this.state.newItem.type_name } onChange={this.handleInputs} /></td>);
     items.push(<td key="2"><input type="text" name="folder" value={ this.state.newItem.folder } onChange={this.handleInputs} /></td>);
-    items.push(<td key="3"><select name="menu_name" value={this.state.newItem.id_item} onChange={this.handleInputs}>{menuItems.map((item, key) => {return <option key={key} value={item.id_item}>{item.menu_name}</option>})}</select></td>);
+    items.push(<td key="3"><select name="menu_name" value={this.state.newItem.menu_name} onChange={this.handleInputs}>{menuItems.map((item, key) => {return <option key={key} value={item.menu_name}>{item.menu_name}</option>})}</select></td>);
     items.push(<td key="4"><Button onClick={this.onSave}>save</Button><Button onClick={this.onCancelEdit}>cancel</Button></td>);
     return items;
   };
 
   standardRender = () => {
     let items = [];
-    items.push(<td key="1">{ this.state.item.name }</td>);
+    items.push(<td key="1">{ this.state.item.type_name }</td>);
     items.push(<td key="2">{ this.state.item.folder }</td>);
     items.push(<td key="3">{ this.state.item.menu_name }</td>);
     items.push(<td key="4"><Button onClick={this.onEdit}>edit</Button><Button onClick={this.onDelete}>delete</Button></td>);
@@ -115,21 +115,20 @@ class TypesControl extends React.Component {
   addRender = () => {
     let items = [];
     const menuItems = this.state.menu;
-    items.push(<td key="1"><input type="text" name="name" value={ this.state.newItem.name } onChange={this.handleInputs} /></td>);
+    items.push(<td key="1"><input type="text" name="name" value={ this.state.newItem.type_name } onChange={this.handleInputs} /></td>);
     items.push(<td key="2"><input type="text" name="folder" value={ this.state.newItem.folder } onChange={this.handleInputs} /></td>);
-    items.push(<td key="3"><select name="menu_name" value={this.state.newItem.id_item} onChange={this.handleInputs}>{menuItems.map((item, key) => {return <option key={key} value={item.id_item}>{item.menu_name}</option>})}</select></td>);
+    items.push(<td key="3"><select name="menu_name" value={this.state.newItem.menu_name} onChange={this.handleInputs}>{menuItems.map((item, key) => {return <option key={key} value={item.menu_name}>{item.menu_name}</option>})}</select></td>);
     items.push(<td key="4"><Button onClick={this.addItem}>save</Button><Button onClick={this.onCancelAdd}>cancel</Button></td>);
     return items;
   };
 
   addElement = () => {
-    const defaultParent = this.state.menu[0].id_type || 1;
+    const defaultParent = this.state.menu[0].manu_name || "Главное";
     this.setState({
       addState: true,
       newItem: {
-        id_type: this.state.item.id_type,
         folder: this.state.item.folder,
-        name: this.state.item.menu_name,
+        type_name: this.state.item.type_name,
         menu_name: defaultParent
       }
     })

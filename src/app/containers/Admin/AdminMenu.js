@@ -34,7 +34,7 @@ class AdminMenu extends React.Component {
   };
 
   onSave = (item) => {
-    updateMenuItem(item.id_item, item.menu_name).then((data) => {
+    updateMenuItem(item.menu_name, item.oldMenu_name).then((data) => {
       if(data.error){
         this.setState({error: data.error})
       } else {
@@ -44,7 +44,7 @@ class AdminMenu extends React.Component {
   };
 
   onDelete = (item) => {
-    deleteMenuItem(item.id_item).then((data) => {
+    deleteMenuItem(item._id).then((data) => {
       if(data.error){
         this.setState({error: data.error})
       } else {

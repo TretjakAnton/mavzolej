@@ -6,6 +6,15 @@ body {
   overflow-x: hidden !important;
 }
 
+body.opened-slider,
+body.opened-form {
+  overflow: hidden;
+}
+
+#content {
+  padding: 0 20px;
+}
+
 .item {
   border: 1px solid darkgray;
   border-radius: 20px;
@@ -13,10 +22,21 @@ body {
   padding: 10px;
 }
 
+.item .mainImg .img-responsive,
 .main-image {
   height: 200px;
   margin: 0 auto;
   display: block;
+}
+
+.images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.images .img-responsive {
+  height: 100px;
 }
 
 .show-button {
@@ -104,18 +124,21 @@ body {
   height: 100vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
 }
 
 .form-content {
   background-color: white;
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 40px;
 }
 
 .form-flex {
   display: flex;
+  overflow: auto;
+  max-height: calc( 100vh - 70px );
 }
 
 .form-left-side {
@@ -124,6 +147,7 @@ body {
 }
 
 .form-right-side {
+  position: relative;
   display: inline-block;
   padding: 10px;
   background-color: gray;
@@ -258,6 +282,56 @@ body {
   padding-right: 5px;
 }
 
+.admin-image-container {
+  position: relative;
+  padding: 10px;
+  display: inline-block;
+  background-color: #f3f2f2;
+  margin: 5px;
+}
+
+.remove-image {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  font-size: 17px;
+}
+
+.delete-image-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-container {
+  position: relative;
+}
+
+.modal-container .modal, .modal-container .modal-backdrop {
+   position: absolute;
+}
+
+.contained-modal-title {
+  height: 500px;
+}
+
+.modal-content {
+  border: none;
+}
+
+.modal-content > .modal-dialog {
+  height: auto;
+  background-color: white;
+}
+
+.modal-open .modal {
+  overflow-y: hidden;
+}
+
+.modal-dialog {
+  height: 600px;
+}
+
 /*Home page*/
 
 .cont-left-bl,
@@ -302,4 +376,40 @@ body {
   .footer {
     height: 206px;
   }
+}
+
+.admin-controle-monuments .form-group {
+  height: 161px;
+  margin-top: 20px;
+}
+
+.admin-image-container > div {
+  max-height: 150px;
+}
+
+.deleting-item {
+  display: flex;
+  align-items: center;
+}
+
+.admin-image-control {
+  display: flex;
+  align-items: center;
+  overflow: auto;
+}
+
+.deleting-item > span {
+  min-width: 150px;
+}
+
+.show-monuments {
+  margin-top: 50px; 
+}
+
+.monum-table {
+  margin-top: 30px;
+}
+
+ul.nav.nav-tabs {
+  margin-bottom: 20px;
 }

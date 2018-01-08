@@ -19,22 +19,17 @@ class Types extends React.Component{
   };
 
   componentWillMount(){
-      getAllTypes().then((data) => {
-          if(data.error){
-              this.setState({error: data.error})
-          } else {
-              this.setState({data: data})
-          }
-      })
-  }
+    getAllTypes().then((data) => {
+        if(data.error){
+            this.setState({error: data.error})
+        } else {
+            this.setState({data: data})
+        }
+    })
+}
 
   onSave = (item) => {
-    const menu_item = this.state.data.find((elem) => {
-      if(elem.menu_name == item.menu_name){
-        return elem.id_item
-      }
-    });
-    updateType(item.id_type, item.name, item.folder, menu_item.parent).then((data) => {
+    updateType(item.new.type_name, item.new.folder, item.new.menu_name, item.oldType_name).then((data) => {
       if(data.error){
         this.setState({error: data.error})
       } else {
@@ -44,7 +39,7 @@ class Types extends React.Component{
   };
 
   onDelete = (item) => {
-    deleteType(item.id_item).then((data) => {
+    deleteType(item.type_name).then((data) => {
       if(data.error){
         this.setState({error: data.error})
       } else {
@@ -55,19 +50,14 @@ class Types extends React.Component{
 
   onAdd = (item) => {
     let newData = this.state.data;
-    const menu_item = this.state.data.find((elem) => {
-      if(elem.parent == item.menu_name){
-        return elem.menu_name
-      }
-    });
+
     newData.push({
       folder: item.folder,
-      name: item.name,
-      parent: item.menu_name,
-      menu_name: menu_item.menu_name,
+      type_name: item.type_name,
+      menu_name: item.menu_name,
     });
 
-    addType(item.name, item.folder, item.menu_name).then((data) => {
+    addType(item.type_name, item.folder, item.menu_name).then((data) => {
       if(data.error){
         this.setState({error: data.error})
       } else {
@@ -95,7 +85,15 @@ class Types extends React.Component{
           <tbody>
             {data &&
               data.map((element, key) => {
-                return <TypesControl key={key} onSaveItem={this.onSave} onDeletItem={this.onDelete} item={element} addElement={false}/>
+                return (
+                  <TypesControl
+                    key={key}
+                    onSaveItem={this.onSave}
+                    onDeletItem={this.onDelete}
+                    item={element}
+                    addElement={false}
+                  />
+                )
               })
             }
           </tbody>

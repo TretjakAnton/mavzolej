@@ -1,15 +1,15 @@
 import { url } from '../Constants';
 
 export function getForm() {
-  return fetch(url + "/api/form",{
-    method: 'GET',
+  return fetch(url + "/api/newFields",{
+    method: 'OPTIONS',
   })
     .then(response => response.json())
 }
 
 export function setForm( formData ) {
-  return fetch(url + "/api/form",{
-    method: 'PUT',
+  return fetch(url + "/api/newFields",{
+    method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'

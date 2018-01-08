@@ -7,7 +7,7 @@ class MenuControl extends React.Component {
     this.state = {
       error: '',
       data: {
-        id_item: this.props.item.id_item,
+        _id: this.props.item._id,
         menu_name: this.props.item.menu_name
       },
       newName: this.props.item.menu_name,
@@ -40,7 +40,12 @@ class MenuControl extends React.Component {
 
   onSave = () => {
     this.setState({data: {menu_name: this.state.newName}});
-    this.props.onSaveItem({id_item: this.state.data.id_item, menu_name: this.state.newName})
+    this.props.onSaveItem({
+      _id: this.state.data._id,
+      menu_name: this.state.newName,
+      oldMenu_name: this.state.data.menu_name
+    });
+    this.onEdit();
   };
 
   editRender = () => {

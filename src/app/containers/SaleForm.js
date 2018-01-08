@@ -13,11 +13,11 @@ class SaleForm extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      id: this.props.info.id,
+      id: this.props.info.id_pam,
       price: this.props.info.price,
       image: this.props.image,
       selectedItems: null,
-      selectionPrice: null,
+      selectionPrice: 0,
       uploadedFiles: null,
       textFIO: '',
     }
@@ -59,13 +59,16 @@ class SaleForm extends React.Component {
   };
 
   render () {
-    const image = this.state.image;
-    const pamNumber = this.state.id;
-    const textFIO = this.state.textFIO;
-    const selectedItems = this.state.selectedItems;
-    const uploaded = this.state.uploadedFiles;
-    const pumPrice = this.state.price;
-    const selectionSum = this.state.selectionPrice;
+    const {
+      image,
+      id,
+      textFIO,
+      selectedItems,
+      uploadedFiles,
+      price,
+      selectionPrice
+    } = this.state;
+    const getSummary = () => parseInt(price) + parseInt(selectionPrice);
     return(
       <div className="form-container">
         <div className="form-content">
@@ -74,7 +77,7 @@ class SaleForm extends React.Component {
             <div className="form-left-side">
               <img src={image} height="200px"/>
               <br/>
-              <span>номер {pamNumber}</span>
+              <span>номер {id}</span>
               <ByForm selectionHendler={this.selectionsStatus} />
               <hr />
               <Dropzone
@@ -99,13 +102,13 @@ class SaleForm extends React.Component {
               <hr/>
               {selectedItems && selectedItems.map((elem, key) => <span key={key}>{elem.name}: {elem.description}</span>) }
               <br/>
-              {uploaded && uploaded.map((val, key) => {
+              {uploadedFiles && uploadedFiles.map((val, key) => {
                 return <img key={key} src={val.preview} style={{height: '150px'}}/>
               })
               }
               <p>{textFIO}</p>
               <br/>
-              <span className="form-price">цена {pumPrice + selectionSum}</span>
+              <span className="form-price">цена {getSummary()}</span>
             </div>
           </div>
         </div>

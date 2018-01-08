@@ -15,10 +15,12 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+var database = require('./src/server/mongoConnect');
+database.connect(app);
+
 //api route config
 router.route('/login')
   .post(function (req, res) {
-    debugger;
     if (req.body.login == 'Oleg' && req.body.password == '0504065007oleg') {
       res.json({Auth: 'Logged'});
     } else {
@@ -26,49 +28,16 @@ router.route('/login')
     }
   });
 
-var formControl = require('./src/server/FormFields');
-
-router.route('/form')
-  .get(function(req, res) {formControl.getForm(req, res)})
-  .put(function(req, res) {formControl.setNew(req, res)});
-
-var typeControl = require('./src/server/Types');
-
-router.route('/Types')
-  .post(function (req, res) {typeControl.setNewType(req, res)})
-  .get(function(req, res){typeControl.getAllTypes(req, res)})
-  .put(function (req, res) {typeControl.updateType(req, res)})
-  .delete(function (req, res) {typeControl.deleteType(req, res)});
-
-var menuControl = require('./src/server/Menu');
-
-router.route('/menu')
-  .post(function (req, res) {menuControl.setNewItem(req, res)})
-  .get(function(req, res){menuControl.getAllMenuItems(req, res)})
-  .put(function (req, res) {menuControl.updateMenuItem(req, res)})
-  .delete(function (req, res) {menuControl.deleteMenuItem(req, res)});
-
-var monumentControl = require('./src/server/Monuments');
-
-router.route('/monuments')
-  .get(function (req, res) {monumentControl.getMon(req, res)})
-  .put(function (req, res) {monumentControl.setNewMon(req, res)})
-  .delete(function (req, res) {monumentControl.deleteMon(req, res)});
-
-router.route('/monumentsCount')
-  .get(function(req, res) {monumentControl.getRowsCount(req, res)});
-
 var emailSender = require('./src/server/emailSender');
 
 router.route('/sendEmail')
   .post(function(req, res) {emailSender.send(req, res)});
 
-app.use('/api', router);
-
 app.get('*', function (request, response){
   response.sendFile(path.resolve(__dirname, 'src', 'index.html'))
 });
 
+app.use('/api', router);
 
 app.listen(app.get('port'), function () {
   console.log('Server started at port:' + app.get('port') + '/');

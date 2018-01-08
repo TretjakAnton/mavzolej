@@ -24,7 +24,7 @@ class ByForm extends React.Component{
         let mas = [];
         class formElement {
           name = '';
-          type = '';
+          field_type = '';
           data = [];
           currElem = null;
 
@@ -45,20 +45,20 @@ class ByForm extends React.Component{
 
           currentObj.data.push({
             description: curr.description,
-            price: curr.price,
+            price: parseInt(curr.price) || 0,
           });
 
           if (next){
             if(curr.name !== next.name) {
               currentObj.name = curr.name;
-              currentObj.type = curr.type;
+              currentObj.field_type = curr.field_type;
               currentObj.setCurrent(currentObj.data[0]);
               mas.push(currentObj);
               currentObj = new formElement;
             }
           } else {
             currentObj.name = curr.name;
-            currentObj.type = curr.type;
+            currentObj.field_type = curr.field_type;
             currentObj.setCurrent(currentObj.data[0]);
             mas.push(currentObj);
           }
@@ -75,7 +75,7 @@ class ByForm extends React.Component{
     if(this.props.selectionHendler) {
       let data = this.state.formData;
       let newList = [];
-      let newSum = null;
+      let newSum = 0;
       data.map((element) => {
         const currentInblock = element.getCurrent();
         newSum += currentInblock.price;
@@ -136,10 +136,10 @@ class ByForm extends React.Component{
     let elementsToRender = [];
 
     data.map((elem) => {
-      if (elem.type == 'radio') {
+      if (elem.field_type == 'radio') {
         elementsToRender.push(this.createRadio(elem));
       }
-      if (elem.type == 'select') {
+      if (elem.field_type == 'select') {
         elementsToRender.push(this.createSelect(elem));
       }
     });

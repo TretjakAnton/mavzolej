@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: path.join(__dirname, './src', 'app', 'index.js'),
@@ -9,39 +10,30 @@ module.exports = {
         filename: 'bundle.js',
     },
     plugins: [],
-    module: { //Обновлено
-        loaders: [ //добавили babel-loader
+    module: {
+        rules: [
             {
               test: /\.css$/,
-              loader: "style-loader!css-loader"
+              use: [ 'style-loader', 'css-loader' ]
             },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: "babel",
-                query:
-                {
-                    presets:['react']
-                }
+                use: [{
+                  loader: "babel-loader",
+                }],
             },
             {
-              test: /\.(jpg|png|svg)$/,
-              loaders: [
+              test: /\.(jpg|jpeg|png|gif|svg)$/,
+              use: [
                 'file-loader',
                 {
                   loader: 'image-webpack-loader',
-                  query: {
-                    progressive: true,
-                    optimizationLevel: 7,
-                    interlaced: false,
-                    pngquant: {
-                      quality: '65-90',
-                      speed: 4
-                    }
-                  }
-                }
+                  options: {
+                    bypassOnDebug: true,
+                  },
+                },
               ],
-              include: './src/media'
             }
         ]
     }
