@@ -55269,6 +55269,12 @@ var SaleForm = function (_React$Component) {
                   onClick: this.sendOrder
                 },
                 '\u0417\u0430\u043A\u0430\u0437\u0430\u0442\u044C'
+              ),
+              _react2.default.createElement(
+                'span',
+                { className: 'form-price' },
+                '\u0446\u0435\u043D\u0430 ',
+                getSummary()
               )
             ),
             _react2.default.createElement(
@@ -55297,13 +55303,6 @@ var SaleForm = function (_React$Component) {
                 'p',
                 null,
                 textFIO
-              ),
-              _react2.default.createElement('br', null),
-              _react2.default.createElement(
-                'span',
-                { className: 'form-price' },
-                '\u0446\u0435\u043D\u0430 ',
-                getSummary()
               )
             )
           )
@@ -57115,7 +57114,7 @@ var Header = function (_React$Component) {
         { className: 'header' },
         _react2.default.createElement(
           'div',
-          { className: 'row' },
+          { className: 'row header-content' },
           _react2.default.createElement(
             'div',
             { className: 'col-lg-offset-4 col-md-offset-4 col-sm-offset-2 col-lg-4 col-md-5 col-sm-8 col-xs-12' },
@@ -57168,9 +57167,9 @@ var Header = function (_React$Component) {
                 _react2.default.createElement('img', { src: '../../../media/squareDown.png', className: 'img-responsive' })
               )
             )
-          )
-        ),
-        _react2.default.createElement(_Menu2.default, null)
+          ),
+          _react2.default.createElement(_Menu2.default, null)
+        )
       );
     }
   }]);
@@ -57470,38 +57469,42 @@ var AboutUs = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'content col-lg-offset-1 col-md-offset-1 col-lg-10 col-md-10 col-sm-12 col-xs-12' },
+        { className: 'row' },
         _react2.default.createElement(
           'div',
-          { className: 'clo-lg-6 col-md-6 col-sm-6 col-xs-12' },
-          _react2.default.createElement(GettingStartedGoogleMap, {
-            containerElement: _react2.default.createElement('div', { style: { height: "400px" } }),
-            mapElement: _react2.default.createElement('div', { style: { height: "400px" } })
-          })
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'clo-lg-6 col-md-6 col-sm-6 col-xs-12' },
+          { className: 'content col-lg-offset-1 col-md-offset-1 col-lg-10 col-md-10 col-sm-12 col-xs-12' },
           _react2.default.createElement(
-            'h1',
-            null,
-            '\u041D\u0410\u0428\u0418 \u041A\u041E\u041E\u0420\u0414\u0418\u041D\u0410\u0422\u042B:'
+            'div',
+            { className: 'clo-lg-6 col-md-6 col-sm-6 col-xs-12' },
+            _react2.default.createElement(GettingStartedGoogleMap, {
+              containerElement: _react2.default.createElement('div', { style: { height: "400px" } }),
+              mapElement: _react2.default.createElement('div', { style: { height: "400px" } })
+            })
           ),
           _react2.default.createElement(
-            'p',
-            null,
-            '\u0425\u0430\u0440\u044C\u043A\u043E\u0432\u0441\u043A\u0430\u044F \u043E\u0431\u043B\u0430\u0441\u0442\u044C, \u0433. \u0414\u0435\u0440\u0433\u0430\u0447\u0438,  \u043F\u0435\u0440\u0435\u0443\u043B\u043E\u043A \u041A\u043E\u043C\u043C\u0443\u043D\u0430\u043B\u044C\u043D\u044B\u0439, 1',
-            _react2.default.createElement('br', null),
-            '\u0422\u0435\u043B\u0435\u0444\u043E\u043D\u044B:  050-406-50-07, 095-761-92-73',
-            _react2.default.createElement('br', null),
-            '\u041E\u0440\u0438\u0435\u043D\u0442\u0438\u0440 \u0432 \u0414\u0435\u0440\u0433\u0430\u0447\u0430\u0445:',
-            _react2.default.createElement('br', null),
-            '\u043F\u0440\u0438 \u0434\u0432\u0438\u0436\u0435\u043D\u0438\u0438 \u0441\u043E \u0441\u0442\u043E\u0440\u043E\u043D\u044B \u0425\u0430\u0440\u044C\u043A\u043E\u0432\u0430 - \u043F\u043E \u0443\u043B\u0438\u0446\u0435 \u041F\u0435\u0442\u0440\u043E\u0432\u0441\u043A\u043E\u0433\u043E \u043F\u043E\u0441\u043B\u0435 \u043F\u0435\u0440\u0435\u043A\u0440\u0435\u0441\u0442\u043A\u0430, \u0440\u0435\u0433\u0443\u043B\u0438\u0440\u0443\u0435\u043C\u043E\u0433\u043E \u0441\u0432\u0435\u0442\u043E\u0444\u043E\u0440\u043E\u043C - \u0432\u0442\u043E\u0440\u043E\u0439 \u043F\u043E\u0432\u043E\u0440\u043E\u0442 \u043D\u0430\u043F\u0440\u0430\u0432\u043E;',
-            _react2.default.createElement('br', null),
-            '\u043F\u0440\u0438 \u0434\u0432\u0438\u0436\u0435\u043D\u0438\u0438 \u0441\u043E \u0441\u0442\u043E\u0440\u043E\u043D\u044B \u0421\u043B\u0430\u0442\u0438\u043D\u043E - \u043F\u043E \u0443\u043B\u0438\u0446\u0435 \u041F\u0435\u0442\u0440\u043E\u0432\u0441\u043A\u043E\u0433\u043E \u043F\u043E\u0440\u044F\u0434\u043A\u0430 500 \u043C\u0435\u0442\u0440\u043E\u0432 \u043E\u0442 \u0441\u0442\u0430\u0434\u0438\u043E\u043D\u0430 \u043F\u043E\u0432\u043E\u0440\u043E\u0442 \u043D\u0430\u043B\u0435\u0432\u043E.',
-            _react2.default.createElement('br', null),
-            'E-mail: mavzolej-master@yandex.ru',
-            _react2.default.createElement('br', null)
+            'div',
+            { className: 'clo-lg-6 col-md-6 col-sm-6 col-xs-12' },
+            _react2.default.createElement(
+              'h1',
+              null,
+              '\u041D\u0410\u0428\u0418 \u041A\u041E\u041E\u0420\u0414\u0418\u041D\u0410\u0422\u042B:'
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              '\u0425\u0430\u0440\u044C\u043A\u043E\u0432\u0441\u043A\u0430\u044F \u043E\u0431\u043B\u0430\u0441\u0442\u044C, \u0433. \u0414\u0435\u0440\u0433\u0430\u0447\u0438,  \u043F\u0435\u0440\u0435\u0443\u043B\u043E\u043A \u041A\u043E\u043C\u043C\u0443\u043D\u0430\u043B\u044C\u043D\u044B\u0439, 1',
+              _react2.default.createElement('br', null),
+              '\u0422\u0435\u043B\u0435\u0444\u043E\u043D\u044B:  050-406-50-07, 095-761-92-73',
+              _react2.default.createElement('br', null),
+              '\u041E\u0440\u0438\u0435\u043D\u0442\u0438\u0440 \u0432 \u0414\u0435\u0440\u0433\u0430\u0447\u0430\u0445:',
+              _react2.default.createElement('br', null),
+              '\u043F\u0440\u0438 \u0434\u0432\u0438\u0436\u0435\u043D\u0438\u0438 \u0441\u043E \u0441\u0442\u043E\u0440\u043E\u043D\u044B \u0425\u0430\u0440\u044C\u043A\u043E\u0432\u0430 - \u043F\u043E \u0443\u043B\u0438\u0446\u0435 \u041F\u0435\u0442\u0440\u043E\u0432\u0441\u043A\u043E\u0433\u043E \u043F\u043E\u0441\u043B\u0435 \u043F\u0435\u0440\u0435\u043A\u0440\u0435\u0441\u0442\u043A\u0430, \u0440\u0435\u0433\u0443\u043B\u0438\u0440\u0443\u0435\u043C\u043E\u0433\u043E \u0441\u0432\u0435\u0442\u043E\u0444\u043E\u0440\u043E\u043C - \u0432\u0442\u043E\u0440\u043E\u0439 \u043F\u043E\u0432\u043E\u0440\u043E\u0442 \u043D\u0430\u043F\u0440\u0430\u0432\u043E;',
+              _react2.default.createElement('br', null),
+              '\u043F\u0440\u0438 \u0434\u0432\u0438\u0436\u0435\u043D\u0438\u0438 \u0441\u043E \u0441\u0442\u043E\u0440\u043E\u043D\u044B \u0421\u043B\u0430\u0442\u0438\u043D\u043E - \u043F\u043E \u0443\u043B\u0438\u0446\u0435 \u041F\u0435\u0442\u0440\u043E\u0432\u0441\u043A\u043E\u0433\u043E \u043F\u043E\u0440\u044F\u0434\u043A\u0430 500 \u043C\u0435\u0442\u0440\u043E\u0432 \u043E\u0442 \u0441\u0442\u0430\u0434\u0438\u043E\u043D\u0430 \u043F\u043E\u0432\u043E\u0440\u043E\u0442 \u043D\u0430\u043B\u0435\u0432\u043E.',
+              _react2.default.createElement('br', null),
+              'E-mail: mavzolej-master@yandex.ru',
+              _react2.default.createElement('br', null)
+            )
           )
         )
       );
@@ -64264,7 +64267,7 @@ exports = module.exports = __webpack_require__(803)(undefined);
 
 
 // module
-exports.push([module.i, "*,html {\r\n  margin: 0;\r\n}\r\n\r\nbody {\r\n  overflow-x: hidden !important;\r\n}\r\n\r\nbody.opened-slider,\r\nbody.opened-form {\r\n  overflow: hidden;\r\n}\r\n\r\n#content {\r\n  padding: 0 20px;\r\n}\r\n\r\n.item {\r\n  border: 1px solid darkgray;\r\n  border-radius: 20px;\r\n  margin-bottom: 10px;\r\n  padding: 10px;\r\n}\r\n\r\n.item .mainImg .img-responsive,\r\n.main-image {\r\n  height: 200px;\r\n  margin: 0 auto;\r\n  display: block;\r\n}\r\n\r\n.images {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  justify-content: space-around;\r\n}\r\n\r\n.images .img-responsive {\r\n  height: 100px;\r\n}\r\n\r\n.show-button {\r\n  width: 100%;\r\n  outline: none !important;\r\n  margin: 10px 0;\r\n}\r\n\r\n.images {\r\n  padding: 10px;\r\n}\r\n\r\n.small-images {\r\n  height: 100px;\r\n}\r\n\r\n.information {\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n\r\n.slider-container {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  height: 100vh;\r\n  width: 100vw;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n}\r\n\r\n.slider-lef-arrow {\r\n  font-size: 140px;\r\n  color: white;\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 0px;\r\n  transform: translate(0px, -50%);\r\n  cursor: pointer;\r\n}\r\n\r\n.slider-container-image {\r\n  position: fixed;\r\n  left: 50%;\r\n  top: 50%;\r\n  transform: translate(-50%, -50%);\r\n}\r\n\r\n.slider-right-arrow {\r\n  font-size: 140px;\r\n  color: white;\r\n  position: absolute;\r\n  top: 50%;\r\n  right: 0px;\r\n  transform: translate(0px, -50%);\r\n  cursor: pointer;\r\n}\r\n\r\n.slider-close {\r\n  float: right;\r\n  color: white;\r\n  font-size: 30px;\r\n  margin-right: -28px;\r\n  cursor: pointer;\r\n}\r\n\r\n.slider-image {\r\n  height: 400px;\r\n}\r\n\r\n.slider-indicator {\r\n  float: right;\r\n  color: white;\r\n}\r\n\r\n.col-xs-6 {\r\n  position: inherit;\r\n}\r\n\r\n/*  form  */\r\n\r\n.form-container {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  height: 100vh;\r\n  width: 100vw;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n.form-content {\r\n  background-color: white;\r\n  width: 70%;\r\n  margin: 0 auto;\r\n  margin-top: 40px;\r\n}\r\n\r\n.form-flex {\r\n  display: flex;\r\n  overflow: auto;\r\n  max-height: calc( 100vh - 70px );\r\n}\r\n\r\n.form-left-side {\r\n  display: inline-block;\r\n  padding: 10px;\r\n}\r\n\r\n.form-right-side {\r\n  position: relative;\r\n  display: inline-block;\r\n  padding: 10px;\r\n  background-color: gray;\r\n}\r\n\r\n.form-price {\r\n  bottom: 10px;\r\n  position: absolute;\r\n  right: 10px;\r\n}\r\n\r\n.form-close {\r\n  float: right;\r\n  color: white;\r\n  font-size: 30px;\r\n  margin-right: -35px;\r\n  margin-top: -30px;\r\n  cursor: pointer;\r\n}\r\n\r\n/* admin menu */\r\n\r\n.add-menu-item {\r\n  display: inline-block;\r\n}\r\n\r\n.add-menu-item-right {\r\n  display: inline-block;\r\n  margin-left: 20px;\r\n}\r\n\r\n/* header */\r\n\r\n.header {\r\n  background-color: #2b2b2b;\r\n  color: white;\r\n  height: 248px;\r\n  position: relative;\r\n}\r\n\r\n.header .header-menu {\r\n  padding: 10px 0;\r\n}\r\n\r\n.header .navbar {\r\n  margin-bottom: 0;\r\n}\r\n\r\n.header .navbar-default {\r\n  bottom: 0;\r\n  position: absolute;\r\n  width: 100vw;\r\n}\r\n\r\n.container-fluid {\r\n  padding-right: 15px;\r\n  padding-left: 15px;\r\n  margin-right: auto;\r\n  margin-left: auto;\r\n}\r\n\r\n.upHead {\r\n  text-align: center;\r\n  margin-top: 30px;\r\n}\r\n\r\n.page-selector {\r\n  display: block;\r\n}\r\n\r\n.container-content {\r\n  min-height: calc(100vh - 428px);\r\n  padding: 15px 5px 15px 5px;\r\n}\r\n\r\n.login-form {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  height: 100vh;\r\n  width: 100vw;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n}\r\n\r\n.login-content {\r\n  background-color: white;\r\n  position: fixed;\r\n  left: 50%;\r\n  top: 50%;\r\n  transform: translate(-50%, -50%);\r\n  width: 280px;\r\n  height: 250px;\r\n  padding: 20px;\r\n  border-radius: 10px;\r\n}\r\n\r\n.login-header {\r\n  text-align: center;\r\n  font-size: 16px;\r\n}\r\n\r\n.login-fields {\r\n  padding: 20px 0;\r\n}\r\n\r\n.login-button {\r\n  position: absolute;\r\n  bottom: 20px;\r\n  right: 20px;\r\n}\r\n\r\n.footer {\r\n  position: relative;\r\n  background: #2b2b2b;\r\n}\r\n\r\n.contacts {\r\n  position: absolute;\r\n  bottom: 10px;\r\n  right: 10px;\r\n  font-size: 14px;\r\n  color: white;\r\n  text-align: right;\r\n}\r\n\r\n.textInfo-items {\r\n  display: inline-block;\r\n  padding-right: 15px;\r\n}\r\n\r\n.padding-right {\r\n  padding-right: 5px;\r\n}\r\n\r\n.admin-image-container {\r\n  position: relative;\r\n  padding: 10px;\r\n  display: inline-block;\r\n  background-color: #f3f2f2;\r\n  margin: 5px;\r\n}\r\n\r\n.remove-image {\r\n  position: absolute;\r\n  top: -6px;\r\n  right: -6px;\r\n  font-size: 17px;\r\n}\r\n\r\n.delete-image-modal {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n}\r\n\r\n.modal-container {\r\n  position: relative;\r\n}\r\n\r\n.modal-container .modal, .modal-container .modal-backdrop {\r\n   position: absolute;\r\n}\r\n\r\n.contained-modal-title {\r\n  height: 500px;\r\n}\r\n\r\n.modal-content {\r\n  border: none;\r\n}\r\n\r\n.modal-content > .modal-dialog {\r\n  height: auto;\r\n  background-color: white;\r\n}\r\n\r\n.modal-open .modal {\r\n  overflow-y: hidden;\r\n}\r\n\r\n.modal-dialog {\r\n  height: 600px;\r\n}\r\n\r\n/*Home page*/\r\n\r\n.cont-left-bl,\r\n.center-bl,\r\n.right-block {\r\n  display: inline-block;\r\n  width: 400px;\r\n  vertical-align: top;\r\n}\r\n\r\n@media (min-width: 1200px) {\r\n  .wrap {\r\n    width: 1200px;\r\n    margin: 0 auto;\r\n  }\r\n  .footer {\r\n    height: 180px;\r\n  }\r\n}\r\n\r\n@media (min-width: 800px) and (max-width: 1200px) {\r\n  .wrap {\r\n    width: 800px;\r\n    margin: 0 auto;\r\n  }\r\n  .footer {\r\n    height: 180px;\r\n  }\r\n}\r\n\r\n@media (min-width: 400px) and (max-width: 800px) {\r\n  .wrap {\r\n    width: 400px;\r\n    margin: 0 auto;\r\n  }\r\n  .footer {\r\n    height: 180px;\r\n  }\r\n}\r\n\r\n@media (min-width: 200px) and (max-width: 400px) {\r\n  .footer {\r\n    height: 206px;\r\n  }\r\n}\r\n\r\n.admin-controle-monuments .form-group {\r\n  height: 161px;\r\n  margin-top: 20px;\r\n}\r\n\r\n.admin-image-container > div {\r\n  max-height: 150px;\r\n}\r\n\r\n.deleting-item {\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n.admin-image-control {\r\n  display: flex;\r\n  align-items: center;\r\n  overflow: auto;\r\n}\r\n\r\n.deleting-item > span {\r\n  min-width: 150px;\r\n}\r\n\r\n.show-monuments {\r\n  margin-top: 50px; \r\n}\r\n\r\n.monum-table {\r\n  margin-top: 30px;\r\n}\r\n\r\nul.nav.nav-tabs {\r\n  margin-bottom: 20px;\r\n}", ""]);
+exports.push([module.i, "*,html {\r\n  margin: 0;\r\n}\r\n\r\nbody {\r\n  overflow-x: hidden !important;\r\n}\r\n\r\nbody.opened-slider,\r\nbody.opened-form {\r\n  overflow: hidden;\r\n}\r\n\r\n#content {\r\n  padding: 0 20px;\r\n}\r\n\r\n.item {\r\n  border: 1px solid darkgray;\r\n  border-radius: 20px;\r\n  margin-bottom: 10px;\r\n  padding: 10px;\r\n}\r\n\r\n.item .mainImg .img-responsive,\r\n.main-image {\r\n  height: 200px;\r\n  margin: 0 auto;\r\n  display: block;\r\n}\r\n\r\n.images {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  justify-content: space-around;\r\n}\r\n\r\n.images .img-responsive {\r\n  height: 100px;\r\n}\r\n\r\n.show-button {\r\n  width: 100%;\r\n  outline: none !important;\r\n  margin: 10px 0;\r\n}\r\n\r\n.images {\r\n  padding: 10px;\r\n}\r\n\r\n.small-images {\r\n  height: 100px;\r\n}\r\n\r\n.information {\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n\r\n.slider-container {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  height: 100vh;\r\n  width: 100vw;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n}\r\n\r\n.slider-lef-arrow {\r\n  font-size: 140px;\r\n  color: white;\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 0px;\r\n  transform: translate(0px, -50%);\r\n  cursor: pointer;\r\n}\r\n\r\n.slider-container-image {\r\n  position: fixed;\r\n  left: 50%;\r\n  top: 50%;\r\n  transform: translate(-50%, -50%);\r\n}\r\n\r\n.slider-right-arrow {\r\n  font-size: 140px;\r\n  color: white;\r\n  position: absolute;\r\n  top: 50%;\r\n  right: 0px;\r\n  transform: translate(0px, -50%);\r\n  cursor: pointer;\r\n}\r\n\r\n.slider-close {\r\n  float: right;\r\n  color: white;\r\n  font-size: 30px;\r\n  margin-right: -28px;\r\n  cursor: pointer;\r\n}\r\n\r\n.slider-image {\r\n  height: 400px;\r\n}\r\n\r\n.slider-indicator {\r\n  float: right;\r\n  color: white;\r\n}\r\n\r\n.col-xs-6 {\r\n  position: inherit;\r\n}\r\n\r\n/*  form  */\r\n\r\n.form-container {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  height: 100vh;\r\n  width: 100vw;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n}\r\n\r\n.form-content {\r\n  background-color: white;\r\n  max-width: 520px;\r\n  position: relative;\r\n}\r\n\r\n.form-flex {\r\n  display: flex;\r\n  overflow: auto;\r\n  max-height: calc( 100vh - 110px);\r\n}\r\n\r\n.form-left-side {\r\n  height: max-content;\r\n  display: block;\r\n  padding: 10px;\r\n  border-right: 1px solid gray;\r\n}\r\n\r\n.form-right-side {\r\n  display: block;\r\n  padding: 10px;\r\n}\r\n\r\n.form-price {\r\n  bottom: 10px;\r\n  position: absolute;\r\n  right: 40px;\r\n}\r\n\r\n.form-close {\r\n  float: right;\r\n  color: white;\r\n  font-size: 30px;\r\n  margin-right: -35px;\r\n  margin-top: -30px;\r\n  cursor: pointer;\r\n}\r\n\r\n/* admin menu */\r\n\r\n.add-menu-item {\r\n  display: inline-block;\r\n}\r\n\r\n.add-menu-item-right {\r\n  display: inline-block;\r\n  margin-left: 20px;\r\n}\r\n\r\n/* header */\r\n\r\n.header {\r\n  color: white;\r\n  height: 248px;\r\n  position: relative;\r\n}\r\n\r\n.header .header-menu {\r\n  padding: 10px 0;\r\n}\r\n\r\n.header .navbar {\r\n  margin-bottom: 0;\r\n}\r\n\r\n.header .navbar-default {\r\n  position: absolute;\r\n  bottom: 0;\r\n  width: calc(100vw - 26px);\r\n}\r\n\r\n.header .header-content {\r\n  background-color: black;\r\n  height: inherit;\r\n  border-radius: 5px;\r\n}\r\n\r\n.container-fluid {\r\n  padding-right: 15px;\r\n  padding-left: 15px;\r\n  margin-right: auto;\r\n  margin-left: auto;\r\n}\r\n\r\n.upHead {\r\n  text-align: center;\r\n  margin-top: 30px;\r\n}\r\n\r\n.page-selector {\r\n  display: block;\r\n}\r\n\r\n.container-content {\r\n  min-height: calc(100vh - 428px);\r\n  padding: 15px 5px 15px 5px;\r\n}\r\n\r\n.login-form {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  height: 100vh;\r\n  width: 100vw;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n}\r\n\r\n.login-content {\r\n  background-color: white;\r\n  position: fixed;\r\n  left: 50%;\r\n  top: 50%;\r\n  transform: translate(-50%, -50%);\r\n  width: 280px;\r\n  height: 250px;\r\n  padding: 20px;\r\n  border-radius: 10px;\r\n}\r\n\r\n.login-header {\r\n  text-align: center;\r\n  font-size: 16px;\r\n}\r\n\r\n.login-fields {\r\n  padding: 20px 0;\r\n}\r\n\r\n.login-button {\r\n  position: absolute;\r\n  bottom: 20px;\r\n  right: 20px;\r\n}\r\n\r\n.footer {\r\n  position: relative;\r\n  background: #2b2b2b;\r\n}\r\n\r\n.contacts {\r\n  position: absolute;\r\n  bottom: 10px;\r\n  right: 10px;\r\n  font-size: 14px;\r\n  color: white;\r\n  text-align: right;\r\n}\r\n\r\n.textInfo-items {\r\n  display: inline-block;\r\n  padding-right: 15px;\r\n}\r\n\r\n.padding-right {\r\n  padding-right: 5px;\r\n}\r\n\r\n.admin-image-container {\r\n  position: relative;\r\n  padding: 10px;\r\n  display: inline-block;\r\n  background-color: #f3f2f2;\r\n  margin: 5px;\r\n}\r\n\r\n.remove-image {\r\n  position: absolute;\r\n  top: -6px;\r\n  right: -6px;\r\n  font-size: 17px;\r\n}\r\n\r\n.delete-image-modal {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n}\r\n\r\n.modal-container {\r\n  position: relative;\r\n}\r\n\r\n.modal-container .modal, .modal-container .modal-backdrop {\r\n   position: absolute;\r\n}\r\n\r\n.contained-modal-title {\r\n  height: 500px;\r\n}\r\n\r\n.modal-content {\r\n  border: none;\r\n}\r\n\r\n.modal-content > .modal-dialog {\r\n  height: auto;\r\n  background-color: white;\r\n}\r\n\r\n.modal-open .modal {\r\n  overflow-y: hidden;\r\n}\r\n\r\n.modal-dialog {\r\n  height: 600px;\r\n}\r\n\r\n/*Home page*/\r\n\r\n.cont-left-bl,\r\n.center-bl,\r\n.right-block {\r\n  display: inline-block;\r\n  width: 400px;\r\n  vertical-align: top;\r\n}\r\n\r\n@media (min-width: 1200px) {\r\n  .wrap {\r\n    width: 1200px;\r\n    margin: 0 auto;\r\n  }\r\n  .footer {\r\n    height: 180px;\r\n  }\r\n}\r\n\r\n@media (min-width: 800px) and (max-width: 1200px) {\r\n  .wrap {\r\n    width: 800px;\r\n    margin: 0 auto;\r\n  }\r\n  .footer {\r\n    height: 180px;\r\n  }\r\n}\r\n\r\n@media (min-width: 400px) and (max-width: 800px) {\r\n  .wrap {\r\n    width: 400px;\r\n    margin: 0 auto;\r\n  }\r\n  .footer {\r\n    height: 180px;\r\n  }\r\n}\r\n\r\n@media (min-width: 200px) and (max-width: 400px) {\r\n  .footer {\r\n    height: 206px;\r\n  }\r\n}\r\n\r\n.admin-controle-monuments .form-group {\r\n  height: 161px;\r\n  margin-top: 20px;\r\n}\r\n\r\n.admin-image-container > div {\r\n  max-height: 150px;\r\n}\r\n\r\n.deleting-item {\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n.admin-image-control {\r\n  display: flex;\r\n  align-items: center;\r\n  overflow: auto;\r\n}\r\n\r\n.deleting-item > span {\r\n  min-width: 150px;\r\n}\r\n\r\n.show-monuments {\r\n  margin-top: 50px; \r\n}\r\n\r\n.monum-table {\r\n  margin-top: 30px;\r\n}\r\n\r\nul.nav.nav-tabs {\r\n  margin-bottom: 20px;\r\n}", ""]);
 
 // exports
 

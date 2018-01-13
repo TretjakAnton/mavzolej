@@ -126,37 +126,37 @@ body.opened-form {
   background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .form-content {
   background-color: white;
-  width: 70%;
-  margin: 0 auto;
-  margin-top: 40px;
+  max-width: 520px;
+  position: relative;
 }
 
 .form-flex {
   display: flex;
   overflow: auto;
-  max-height: calc( 100vh - 70px );
+  max-height: calc( 100vh - 110px);
 }
 
 .form-left-side {
-  display: inline-block;
+  height: max-content;
+  display: block;
   padding: 10px;
+  border-right: 1px solid gray;
 }
 
 .form-right-side {
-  position: relative;
-  display: inline-block;
+  display: block;
   padding: 10px;
-  background-color: gray;
 }
 
 .form-price {
   bottom: 10px;
   position: absolute;
-  right: 10px;
+  right: 40px;
 }
 
 .form-close {
@@ -182,7 +182,6 @@ body.opened-form {
 /* header */
 
 .header {
-  background-color: #2b2b2b;
   color: white;
   height: 248px;
   position: relative;
@@ -197,9 +196,15 @@ body.opened-form {
 }
 
 .header .navbar-default {
-  bottom: 0;
   position: absolute;
-  width: 100vw;
+  bottom: 0;
+  width: calc(100vw - 26px);
+}
+
+.header .header-content {
+  background-color: black;
+  height: inherit;
+  border-radius: 5px;
 }
 
 .container-fluid {

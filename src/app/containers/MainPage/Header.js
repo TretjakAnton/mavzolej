@@ -12,7 +12,7 @@ class Header extends React.Component {
 
   render() {
     return <div className="header">
-      <div className="row">
+      <div className="row header-content">
         <div className="col-lg-offset-4 col-md-offset-4 col-sm-offset-2 col-lg-4 col-md-5 col-sm-8 col-xs-12">
           <div className="col-lg-3 col-md-3 col-sm-3 col-xs-3 upHead">
             <Link to="komplex">
@@ -42,8 +42,8 @@ class Header extends React.Component {
             </Link>
           </div>
         </div>
+        <Menu />
       </div>
-      <Menu />
     </div>
   }
 }

@@ -96,6 +96,7 @@ class SaleForm extends React.Component {
               >
                 Заказать
               </Button>
+              <span className="form-price">цена {getSummary()}</span>
             </div>
             <div className="form-right-side">
               <span>Ваш заказ:</span>
@@ -107,8 +108,6 @@ class SaleForm extends React.Component {
               })
               }
               <p>{textFIO}</p>
-              <br/>
-              <span className="form-price">цена {getSummary()}</span>
             </div>
           </div>
         </div>
