@@ -418,3 +418,28 @@ body.opened-form {
 ul.nav.nav-tabs {
   margin-bottom: 20px;
 }
+
+.sending-email {
+  background-color: white;
+  position: absolute;
+  height: 100%;
+  width: 520px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sending-email span {
+  text-align: center;
+}
+
+.sending-email .response {
+  display: flex;
+  flex-direction: column;
+}
+
+.error-validation-text {
+  color: red;
+  text-align: left;
+}

@@ -9,7 +9,7 @@ var path = require('path'),
 app.set('port', (process.env.PORT || 3000));
 
 app.use('/', express.static(__dirname + '/src'));
-app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.json({limit: '50mb'})); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({
   extended: true

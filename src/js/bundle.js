@@ -24275,7 +24275,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.login = login;
-exports.sendEmail = sendEmail;
+exports.testMail = testMail;
 
 __webpack_require__(638);
 
@@ -24297,21 +24297,64 @@ function login(password, login) {
   });
 }
 
-function sendEmail(info) {
-  var formData = new FormData();
-  formData.append('text', info.text);
-  formData.append('price', info.price);
-  formData.append('items', info.items);
+function testMail(info) {
+  var formData = [];
 
-  info.images.map(function (val) {
-    formData.append(val.name, val);
-  });
-  return fetch(_Constants.url + "/api/sendEmail", {
-    method: 'POST',
-    body: formData
-  }).then(function (response) {
-    return response.json();
-  });
+  var getBase64 = function getBase64(file) {
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    return new Promise(function (resolve, reject) {
+      reader.onload = function (event) {
+        resolve(reader.result);
+      };
+    });
+  };
+
+  if (!info.images || info.images.length <= 0) {
+    return fetch(_Constants.url + "/api/sendEmail", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        text: info.text,
+        type: info.type,
+        id: info.id,
+        email: info.email,
+        price: info.price,
+        items: info.items,
+        images: []
+      })
+    }).then(function (response) {
+      return response.json();
+    });
+  } else {
+    return new Promise(function (resolve, reject) {
+      Promise.all(info.images.map(function (el) {
+        return getBase64(el);
+      })).then(function (values) {
+        fetch(_Constants.url + "/api/sendEmail", {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            text: info.text,
+            type: info.type,
+            id: info.id,
+            email: info.email,
+            price: info.price,
+            items: info.items,
+            images: values
+          })
+        }).then(function (response) {
+          return resolve(response.json());
+        });
+      });
+    });
+  }
 }
 
 /***/ }),
@@ -54764,7 +54807,7 @@ var AdminPrEditor = function (_React$Component) {
             onSelect: _this2.openForm
           });
         }),
-        form.status && _react2.default.createElement(_SaleForm2.default, { info: form.info, image: form.image, onClose: this.closeForm }),
+        form.status && _react2.default.createElement(_SaleForm2.default, { type: id_type, info: form.info, image: form.image, onClose: this.closeForm }),
         _react2.default.createElement(
           'div',
           { className: 'page-selector col-xs-12 col-sm-12 col-md-12 col-lg-12' },
@@ -55166,32 +55209,104 @@ var SaleForm = function (_React$Component) {
       _this.props.onClose();
     };
 
+    _this.validEmail = function (email) {
+      var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      var valid = re.test(email);
+      if (!valid) {
+        _this.setState({ emailValidation: 'error' });
+      } else {
+        _this.setState({ emailValidation: null });
+      }
+      return valid;
+    };
+
+    _this.validInfo = function () {
+      if (_this.state.textFIO == '') {
+        _this.setState({ informationValid: 'error' });
+        return false;
+      } else {
+        _this.setState({ informationValid: null });
+        return true;
+      }
+    };
+
     _this.sendOrder = function () {
+      var _this$state = _this.state,
+          email = _this$state.email,
+          loading = _this$state.loading,
+          selectedItems = _this$state.selectedItems,
+          uploadedFiles = _this$state.uploadedFiles,
+          textFIO = _this$state.textFIO,
+          id = _this$state.id,
+          type = _this$state.type;
+
       var sendData = {
-        items: _this.state.selectedItems,
-        images: _this.state.uploadedFiles,
-        text: _this.state.textFIO,
-        price: _this.state.price + _this.state.selectionPrice
+        id: id,
+        type: type,
+        email: email,
+        items: selectedItems,
+        images: uploadedFiles,
+        text: textFIO,
+        price: _this.getSummary()
       };
-      (0, _serverRequests.sendEmail)(sendData).then(function (data) {
-        console.log(data);
+      if (_this.validEmail(email) && _this.validInfo()) {
+        _this.setState({ loading: !loading });
+        (0, _serverRequests.testMail)(sendData).then(function (data) {
+          if (data.error) {
+            _this.setState({
+              loading: !loading,
+              error: data.error
+            });
+          } else if (data.success) {
+            _this.setState({
+              loading: !loading,
+              success: data.success
+            });
+          }
+        });
+      }
+    };
+
+    _this.backToMail = function () {
+      _this.setState({
+        error: null
       });
     };
 
     _this.textControl = function (e) {
       _this.setState({
-        textFIO: e.target.value
+        textFIO: e.target.value,
+        informationValid: null
       });
+    };
+
+    _this.emailControl = function (e) {
+      _this.setState({ email: e.target.value });
+    };
+
+    _this.getSummary = function () {
+      var _this$state2 = _this.state,
+          price = _this$state2.price,
+          selectionPrice = _this$state2.selectionPrice;
+
+      return parseInt(price) + parseInt(selectionPrice);
     };
 
     _this.state = {
       id: _this.props.info.id_pam,
+      type: _this.props.type,
       price: _this.props.info.price,
       image: _this.props.image,
       selectedItems: null,
       selectionPrice: 0,
       uploadedFiles: null,
-      textFIO: ''
+      textFIO: '',
+      loading: false,
+      error: null,
+      success: null,
+      email: '',
+      emailValidation: null,
+      informationValid: null
     };
     return _this;
   }
@@ -55212,18 +55327,57 @@ var SaleForm = function (_React$Component) {
           textFIO = _state.textFIO,
           selectedItems = _state.selectedItems,
           uploadedFiles = _state.uploadedFiles,
-          price = _state.price,
-          selectionPrice = _state.selectionPrice;
+          loading = _state.loading,
+          success = _state.success,
+          error = _state.error,
+          emailValidation = _state.emailValidation,
+          informationValid = _state.informationValid;
 
-      var getSummary = function getSummary() {
-        return parseInt(price) + parseInt(selectionPrice);
-      };
+
       return _react2.default.createElement(
         'div',
         { className: 'form-container' },
         _react2.default.createElement(
           'div',
           { className: 'form-content' },
+          loading && _react2.default.createElement(
+            'div',
+            { className: 'sending-email' },
+            '\u041F\u043E\u0436\u0430\u043B\u0443\u0439\u0441\u0442\u0430 \u043F\u043E\u0434\u043E\u0436\u0434\u0438\u0442\u0435, \u0438\u0434\u0435\u0442 \u043E\u0442\u043F\u0440\u0430\u0432\u043A\u0430 \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F'
+          ),
+          error && _react2.default.createElement(
+            'div',
+            { className: 'sending-email' },
+            _react2.default.createElement(
+              'div',
+              { className: 'response' },
+              _react2.default.createElement(
+                'span',
+                null,
+                '\u0427\u0442\u043E \u0442\u043E \u043F\u043E\u0448\u043B\u043E \u043D\u0435 \u0442\u0430\u043A, ',
+                _react2.default.createElement('br', null),
+                ' \u043F\u043E\u0436\u0430\u043B\u0443\u0439\u0441\u0442\u0430 \u043F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u0435 \u043F\u043E\u043F\u044B\u0442\u043A\u0443'
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.Button,
+                {
+                  onClick: this.backToMail
+                },
+                '\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u044C'
+              )
+            )
+          ),
+          success && _react2.default.createElement(
+            'div',
+            { className: 'sending-email' },
+            _react2.default.createElement(
+              'span',
+              null,
+              '\u0421\u043F\u0430\u0441\u0438\u0431\u043E, \u0432\u0430\u0448\u0435 \u043F\u0438\u0441\u044C\u043C\u043E \u0443\u0441\u043F\u0435\u0448\u043D\u043E \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E. ',
+              _react2.default.createElement('br', null),
+              ' \u041C\u044B \u0441 \u0432\u0430\u043C\u0438 \u0441\u0432\u044F\u0436\u0435\u043C\u0441\u044F \u0432 \u0431\u043B\u0438\u0436\u0430\u0439\u0448\u0435\u0435 \u0432\u0440\u0435\u043C\u044F'
+            )
+          ),
           _react2.default.createElement('span', { className: 'glyphicon glyphicon-remove form-close', onClick: this.close }),
           _react2.default.createElement(
             'div',
@@ -55257,11 +55411,56 @@ var SaleForm = function (_React$Component) {
                 _reactBootstrap.FormGroup,
                 { controlId: 'formControlsTextarea' },
                 _react2.default.createElement(
-                  _reactBootstrap.ControlLabel,
-                  null,
-                  '\u0414\u0430\u043D\u043D\u044B\u0435'
+                  _reactBootstrap.FormGroup,
+                  { validationState: informationValid },
+                  _react2.default.createElement(
+                    _reactBootstrap.ControlLabel,
+                    null,
+                    '\u0414\u0430\u043D\u043D\u044B\u0435'
+                  ),
+                  _react2.default.createElement(_reactBootstrap.FormControl, { onChange: this.textControl, componentClass: 'textarea', placeholder: '\u0424\u0418\u041E, \u0422\u0435\u043A\u0441\u0442 \u044D\u043F\u0438\u0442\u0430\u0444\u0438\u0438, \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u0430\u044F \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F' })
                 ),
-                _react2.default.createElement(_reactBootstrap.FormControl, { onChange: this.textControl, componentClass: 'textarea', placeholder: '\u0424\u0418\u041E, \u0422\u0435\u043A\u0441\u0442 \u044D\u043F\u0438\u0442\u0430\u0444\u0438\u0438' })
+                _react2.default.createElement(
+                  _reactBootstrap.FormGroup,
+                  { validationState: emailValidation },
+                  _react2.default.createElement(
+                    _reactBootstrap.ControlLabel,
+                    null,
+                    'Email'
+                  ),
+                  _react2.default.createElement(_reactBootstrap.FormControl, {
+                    onChange: this.emailControl,
+                    required: true,
+                    type: 'email',
+                    placeholder: 'your.email@example.com'
+                  })
+                )
+              ),
+              emailValidation && _react2.default.createElement(
+                'div',
+                { className: 'error-validation-text' },
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  '\u041F\u043E\u043B\u0435 Email \u043E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u043D\u043E ',
+                  _react2.default.createElement('br', null),
+                  ' \u0438 \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u0439 email'
+                )
+              ),
+              informationValid && _react2.default.createElement(
+                'div',
+                { className: 'error-validation-text' },
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  '\u041F\u043E\u043B\u0435 "\u0414\u0430\u043D\u043D\u044B\u0435" \u0434\u043E\u043B\u0436\u043D\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E',
+                  _react2.default.createElement('br', null),
+                  '\u0434\u043E\u0441\u0442\u0430\u0442\u043E\u0447\u043D\u0443\u044E \u0434\u043B\u044F \u0438\u0437\u0433\u043E\u0442\u043E\u0432\u043B\u0435\u043D\u0438\u044F \u043F\u0430\u043C\u044F\u0442\u043D\u0438\u043A\u0430 ',
+                  _react2.default.createElement('br', null),
+                  '(\u0424\u0418\u041E \u0443\u0441\u0435\u0431\u0448\u0435\u0433\u043E \u0438 \u0434\u0430\u0442\u0430 \u0440\u043E\u0436\u0434\u0435\u043D\u0438\u044F-\u0441\u043C\u0435\u0440\u0442\u0438) ',
+                  _react2.default.createElement('br', null),
+                  '\u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u0430\u044F \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F'
+                )
               ),
               _react2.default.createElement(
                 _reactBootstrap.Button,
@@ -55274,7 +55473,7 @@ var SaleForm = function (_React$Component) {
                 'span',
                 { className: 'form-price' },
                 '\u0446\u0435\u043D\u0430 ',
-                getSummary()
+                this.getSummary()
               )
             ),
             _react2.default.createElement(
@@ -55292,17 +55491,39 @@ var SaleForm = function (_React$Component) {
                   { key: key },
                   elem.name,
                   ': ',
-                  elem.description
+                  elem.description,
+                  _react2.default.createElement('br', null)
                 );
               }),
               _react2.default.createElement('br', null),
-              uploadedFiles && uploadedFiles.map(function (val, key) {
-                return _react2.default.createElement('img', { key: key, src: val.preview, style: { height: '150px' } });
-              }),
-              _react2.default.createElement(
-                'p',
+              uploadedFiles && _react2.default.createElement(
+                'div',
                 null,
-                textFIO
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  '\u041F\u0440\u0438\u043A\u0440\u0435\u043F\u043B\u0435\u043D\u043D\u044B\u0435 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F:'
+                ),
+                _react2.default.createElement('br', null),
+                uploadedFiles.map(function (val, key) {
+                  return _react2.default.createElement('img', { key: key, src: val.preview, style: { height: '150px' } });
+                })
+              ),
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  '\u0417\u0430\u043F\u043E\u043B\u043D\u0435\u043D\u043D\u0430\u044F \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F \u043E \u0443\u0441\u043E\u0431\u0448\u0435\u043C ',
+                  _react2.default.createElement('br', null),
+                  ' \u0438 \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u0430\u044F \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F'
+                ),
+                _react2.default.createElement(
+                  'p',
+                  null,
+                  textFIO
+                )
               )
             )
           )
@@ -64267,7 +64488,7 @@ exports = module.exports = __webpack_require__(803)(undefined);
 
 
 // module
-exports.push([module.i, "*,html {\r\n  margin: 0;\r\n}\r\n\r\nbody {\r\n  overflow-x: hidden !important;\r\n}\r\n\r\nbody.opened-slider,\r\nbody.opened-form {\r\n  overflow: hidden;\r\n}\r\n\r\n#content {\r\n  padding: 0 20px;\r\n}\r\n\r\n.item {\r\n  border: 1px solid darkgray;\r\n  border-radius: 20px;\r\n  margin-bottom: 10px;\r\n  padding: 10px;\r\n}\r\n\r\n.item .mainImg .img-responsive,\r\n.main-image {\r\n  height: 200px;\r\n  margin: 0 auto;\r\n  display: block;\r\n}\r\n\r\n.images {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  justify-content: space-around;\r\n}\r\n\r\n.images .img-responsive {\r\n  height: 100px;\r\n}\r\n\r\n.show-button {\r\n  width: 100%;\r\n  outline: none !important;\r\n  margin: 10px 0;\r\n}\r\n\r\n.images {\r\n  padding: 10px;\r\n}\r\n\r\n.small-images {\r\n  height: 100px;\r\n}\r\n\r\n.information {\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n\r\n.slider-container {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  height: 100vh;\r\n  width: 100vw;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n}\r\n\r\n.slider-lef-arrow {\r\n  font-size: 140px;\r\n  color: white;\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 0px;\r\n  transform: translate(0px, -50%);\r\n  cursor: pointer;\r\n}\r\n\r\n.slider-container-image {\r\n  position: fixed;\r\n  left: 50%;\r\n  top: 50%;\r\n  transform: translate(-50%, -50%);\r\n}\r\n\r\n.slider-right-arrow {\r\n  font-size: 140px;\r\n  color: white;\r\n  position: absolute;\r\n  top: 50%;\r\n  right: 0px;\r\n  transform: translate(0px, -50%);\r\n  cursor: pointer;\r\n}\r\n\r\n.slider-close {\r\n  float: right;\r\n  color: white;\r\n  font-size: 30px;\r\n  margin-right: -28px;\r\n  cursor: pointer;\r\n}\r\n\r\n.slider-image {\r\n  height: 400px;\r\n}\r\n\r\n.slider-indicator {\r\n  float: right;\r\n  color: white;\r\n}\r\n\r\n.col-xs-6 {\r\n  position: inherit;\r\n}\r\n\r\n/*  form  */\r\n\r\n.form-container {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  height: 100vh;\r\n  width: 100vw;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n}\r\n\r\n.form-content {\r\n  background-color: white;\r\n  max-width: 520px;\r\n  position: relative;\r\n}\r\n\r\n.form-flex {\r\n  display: flex;\r\n  overflow: auto;\r\n  max-height: calc( 100vh - 110px);\r\n}\r\n\r\n.form-left-side {\r\n  height: max-content;\r\n  display: block;\r\n  padding: 10px;\r\n  border-right: 1px solid gray;\r\n}\r\n\r\n.form-right-side {\r\n  display: block;\r\n  padding: 10px;\r\n}\r\n\r\n.form-price {\r\n  bottom: 10px;\r\n  position: absolute;\r\n  right: 40px;\r\n}\r\n\r\n.form-close {\r\n  float: right;\r\n  color: white;\r\n  font-size: 30px;\r\n  margin-right: -35px;\r\n  margin-top: -30px;\r\n  cursor: pointer;\r\n}\r\n\r\n/* admin menu */\r\n\r\n.add-menu-item {\r\n  display: inline-block;\r\n}\r\n\r\n.add-menu-item-right {\r\n  display: inline-block;\r\n  margin-left: 20px;\r\n}\r\n\r\n/* header */\r\n\r\n.header {\r\n  color: white;\r\n  height: 248px;\r\n  position: relative;\r\n}\r\n\r\n.header .header-menu {\r\n  padding: 10px 0;\r\n}\r\n\r\n.header .navbar {\r\n  margin-bottom: 0;\r\n}\r\n\r\n.header .navbar-default {\r\n  position: absolute;\r\n  bottom: 0;\r\n  width: calc(100vw - 26px);\r\n}\r\n\r\n.header .header-content {\r\n  background-color: black;\r\n  height: inherit;\r\n  border-radius: 5px;\r\n}\r\n\r\n.container-fluid {\r\n  padding-right: 15px;\r\n  padding-left: 15px;\r\n  margin-right: auto;\r\n  margin-left: auto;\r\n}\r\n\r\n.upHead {\r\n  text-align: center;\r\n  margin-top: 30px;\r\n}\r\n\r\n.page-selector {\r\n  display: block;\r\n}\r\n\r\n.container-content {\r\n  min-height: calc(100vh - 428px);\r\n  padding: 15px 5px 15px 5px;\r\n}\r\n\r\n.login-form {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  height: 100vh;\r\n  width: 100vw;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n}\r\n\r\n.login-content {\r\n  background-color: white;\r\n  position: fixed;\r\n  left: 50%;\r\n  top: 50%;\r\n  transform: translate(-50%, -50%);\r\n  width: 280px;\r\n  height: 250px;\r\n  padding: 20px;\r\n  border-radius: 10px;\r\n}\r\n\r\n.login-header {\r\n  text-align: center;\r\n  font-size: 16px;\r\n}\r\n\r\n.login-fields {\r\n  padding: 20px 0;\r\n}\r\n\r\n.login-button {\r\n  position: absolute;\r\n  bottom: 20px;\r\n  right: 20px;\r\n}\r\n\r\n.footer {\r\n  position: relative;\r\n  background: #2b2b2b;\r\n}\r\n\r\n.contacts {\r\n  position: absolute;\r\n  bottom: 10px;\r\n  right: 10px;\r\n  font-size: 14px;\r\n  color: white;\r\n  text-align: right;\r\n}\r\n\r\n.textInfo-items {\r\n  display: inline-block;\r\n  padding-right: 15px;\r\n}\r\n\r\n.padding-right {\r\n  padding-right: 5px;\r\n}\r\n\r\n.admin-image-container {\r\n  position: relative;\r\n  padding: 10px;\r\n  display: inline-block;\r\n  background-color: #f3f2f2;\r\n  margin: 5px;\r\n}\r\n\r\n.remove-image {\r\n  position: absolute;\r\n  top: -6px;\r\n  right: -6px;\r\n  font-size: 17px;\r\n}\r\n\r\n.delete-image-modal {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n}\r\n\r\n.modal-container {\r\n  position: relative;\r\n}\r\n\r\n.modal-container .modal, .modal-container .modal-backdrop {\r\n   position: absolute;\r\n}\r\n\r\n.contained-modal-title {\r\n  height: 500px;\r\n}\r\n\r\n.modal-content {\r\n  border: none;\r\n}\r\n\r\n.modal-content > .modal-dialog {\r\n  height: auto;\r\n  background-color: white;\r\n}\r\n\r\n.modal-open .modal {\r\n  overflow-y: hidden;\r\n}\r\n\r\n.modal-dialog {\r\n  height: 600px;\r\n}\r\n\r\n/*Home page*/\r\n\r\n.cont-left-bl,\r\n.center-bl,\r\n.right-block {\r\n  display: inline-block;\r\n  width: 400px;\r\n  vertical-align: top;\r\n}\r\n\r\n@media (min-width: 1200px) {\r\n  .wrap {\r\n    width: 1200px;\r\n    margin: 0 auto;\r\n  }\r\n  .footer {\r\n    height: 180px;\r\n  }\r\n}\r\n\r\n@media (min-width: 800px) and (max-width: 1200px) {\r\n  .wrap {\r\n    width: 800px;\r\n    margin: 0 auto;\r\n  }\r\n  .footer {\r\n    height: 180px;\r\n  }\r\n}\r\n\r\n@media (min-width: 400px) and (max-width: 800px) {\r\n  .wrap {\r\n    width: 400px;\r\n    margin: 0 auto;\r\n  }\r\n  .footer {\r\n    height: 180px;\r\n  }\r\n}\r\n\r\n@media (min-width: 200px) and (max-width: 400px) {\r\n  .footer {\r\n    height: 206px;\r\n  }\r\n}\r\n\r\n.admin-controle-monuments .form-group {\r\n  height: 161px;\r\n  margin-top: 20px;\r\n}\r\n\r\n.admin-image-container > div {\r\n  max-height: 150px;\r\n}\r\n\r\n.deleting-item {\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n.admin-image-control {\r\n  display: flex;\r\n  align-items: center;\r\n  overflow: auto;\r\n}\r\n\r\n.deleting-item > span {\r\n  min-width: 150px;\r\n}\r\n\r\n.show-monuments {\r\n  margin-top: 50px; \r\n}\r\n\r\n.monum-table {\r\n  margin-top: 30px;\r\n}\r\n\r\nul.nav.nav-tabs {\r\n  margin-bottom: 20px;\r\n}", ""]);
+exports.push([module.i, "*,html {\r\n  margin: 0;\r\n}\r\n\r\nbody {\r\n  overflow-x: hidden !important;\r\n}\r\n\r\nbody.opened-slider,\r\nbody.opened-form {\r\n  overflow: hidden;\r\n}\r\n\r\n#content {\r\n  padding: 0 20px;\r\n}\r\n\r\n.item {\r\n  border: 1px solid darkgray;\r\n  border-radius: 20px;\r\n  margin-bottom: 10px;\r\n  padding: 10px;\r\n}\r\n\r\n.item .mainImg .img-responsive,\r\n.main-image {\r\n  height: 200px;\r\n  margin: 0 auto;\r\n  display: block;\r\n}\r\n\r\n.images {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  justify-content: space-around;\r\n}\r\n\r\n.images .img-responsive {\r\n  height: 100px;\r\n}\r\n\r\n.show-button {\r\n  width: 100%;\r\n  outline: none !important;\r\n  margin: 10px 0;\r\n}\r\n\r\n.images {\r\n  padding: 10px;\r\n}\r\n\r\n.small-images {\r\n  height: 100px;\r\n}\r\n\r\n.information {\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n\r\n.slider-container {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  height: 100vh;\r\n  width: 100vw;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n}\r\n\r\n.slider-lef-arrow {\r\n  font-size: 140px;\r\n  color: white;\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 0px;\r\n  transform: translate(0px, -50%);\r\n  cursor: pointer;\r\n}\r\n\r\n.slider-container-image {\r\n  position: fixed;\r\n  left: 50%;\r\n  top: 50%;\r\n  transform: translate(-50%, -50%);\r\n}\r\n\r\n.slider-right-arrow {\r\n  font-size: 140px;\r\n  color: white;\r\n  position: absolute;\r\n  top: 50%;\r\n  right: 0px;\r\n  transform: translate(0px, -50%);\r\n  cursor: pointer;\r\n}\r\n\r\n.slider-close {\r\n  float: right;\r\n  color: white;\r\n  font-size: 30px;\r\n  margin-right: -28px;\r\n  cursor: pointer;\r\n}\r\n\r\n.slider-image {\r\n  height: 400px;\r\n}\r\n\r\n.slider-indicator {\r\n  float: right;\r\n  color: white;\r\n}\r\n\r\n.col-xs-6 {\r\n  position: inherit;\r\n}\r\n\r\n/*  form  */\r\n\r\n.form-container {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  height: 100vh;\r\n  width: 100vw;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n}\r\n\r\n.form-content {\r\n  background-color: white;\r\n  max-width: 520px;\r\n  position: relative;\r\n}\r\n\r\n.form-flex {\r\n  display: flex;\r\n  overflow: auto;\r\n  max-height: calc( 100vh - 110px);\r\n}\r\n\r\n.form-left-side {\r\n  height: max-content;\r\n  display: block;\r\n  padding: 10px;\r\n  border-right: 1px solid gray;\r\n}\r\n\r\n.form-right-side {\r\n  display: block;\r\n  padding: 10px;\r\n}\r\n\r\n.form-price {\r\n  bottom: 10px;\r\n  position: absolute;\r\n  right: 40px;\r\n}\r\n\r\n.form-close {\r\n  float: right;\r\n  color: white;\r\n  font-size: 30px;\r\n  margin-right: -35px;\r\n  margin-top: -30px;\r\n  cursor: pointer;\r\n}\r\n\r\n/* admin menu */\r\n\r\n.add-menu-item {\r\n  display: inline-block;\r\n}\r\n\r\n.add-menu-item-right {\r\n  display: inline-block;\r\n  margin-left: 20px;\r\n}\r\n\r\n/* header */\r\n\r\n.header {\r\n  color: white;\r\n  height: 248px;\r\n  position: relative;\r\n}\r\n\r\n.header .header-menu {\r\n  padding: 10px 0;\r\n}\r\n\r\n.header .navbar {\r\n  margin-bottom: 0;\r\n}\r\n\r\n.header .navbar-default {\r\n  position: absolute;\r\n  bottom: 0;\r\n  width: calc(100vw - 26px);\r\n}\r\n\r\n.header .header-content {\r\n  background-color: black;\r\n  height: inherit;\r\n  border-radius: 5px;\r\n}\r\n\r\n.container-fluid {\r\n  padding-right: 15px;\r\n  padding-left: 15px;\r\n  margin-right: auto;\r\n  margin-left: auto;\r\n}\r\n\r\n.upHead {\r\n  text-align: center;\r\n  margin-top: 30px;\r\n}\r\n\r\n.page-selector {\r\n  display: block;\r\n}\r\n\r\n.container-content {\r\n  min-height: calc(100vh - 428px);\r\n  padding: 15px 5px 15px 5px;\r\n}\r\n\r\n.login-form {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  height: 100vh;\r\n  width: 100vw;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n}\r\n\r\n.login-content {\r\n  background-color: white;\r\n  position: fixed;\r\n  left: 50%;\r\n  top: 50%;\r\n  transform: translate(-50%, -50%);\r\n  width: 280px;\r\n  height: 250px;\r\n  padding: 20px;\r\n  border-radius: 10px;\r\n}\r\n\r\n.login-header {\r\n  text-align: center;\r\n  font-size: 16px;\r\n}\r\n\r\n.login-fields {\r\n  padding: 20px 0;\r\n}\r\n\r\n.login-button {\r\n  position: absolute;\r\n  bottom: 20px;\r\n  right: 20px;\r\n}\r\n\r\n.footer {\r\n  position: relative;\r\n  background: #2b2b2b;\r\n}\r\n\r\n.contacts {\r\n  position: absolute;\r\n  bottom: 10px;\r\n  right: 10px;\r\n  font-size: 14px;\r\n  color: white;\r\n  text-align: right;\r\n}\r\n\r\n.textInfo-items {\r\n  display: inline-block;\r\n  padding-right: 15px;\r\n}\r\n\r\n.padding-right {\r\n  padding-right: 5px;\r\n}\r\n\r\n.admin-image-container {\r\n  position: relative;\r\n  padding: 10px;\r\n  display: inline-block;\r\n  background-color: #f3f2f2;\r\n  margin: 5px;\r\n}\r\n\r\n.remove-image {\r\n  position: absolute;\r\n  top: -6px;\r\n  right: -6px;\r\n  font-size: 17px;\r\n}\r\n\r\n.delete-image-modal {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n}\r\n\r\n.modal-container {\r\n  position: relative;\r\n}\r\n\r\n.modal-container .modal, .modal-container .modal-backdrop {\r\n   position: absolute;\r\n}\r\n\r\n.contained-modal-title {\r\n  height: 500px;\r\n}\r\n\r\n.modal-content {\r\n  border: none;\r\n}\r\n\r\n.modal-content > .modal-dialog {\r\n  height: auto;\r\n  background-color: white;\r\n}\r\n\r\n.modal-open .modal {\r\n  overflow-y: hidden;\r\n}\r\n\r\n.modal-dialog {\r\n  height: 600px;\r\n}\r\n\r\n/*Home page*/\r\n\r\n.cont-left-bl,\r\n.center-bl,\r\n.right-block {\r\n  display: inline-block;\r\n  width: 400px;\r\n  vertical-align: top;\r\n}\r\n\r\n@media (min-width: 1200px) {\r\n  .wrap {\r\n    width: 1200px;\r\n    margin: 0 auto;\r\n  }\r\n  .footer {\r\n    height: 180px;\r\n  }\r\n}\r\n\r\n@media (min-width: 800px) and (max-width: 1200px) {\r\n  .wrap {\r\n    width: 800px;\r\n    margin: 0 auto;\r\n  }\r\n  .footer {\r\n    height: 180px;\r\n  }\r\n}\r\n\r\n@media (min-width: 400px) and (max-width: 800px) {\r\n  .wrap {\r\n    width: 400px;\r\n    margin: 0 auto;\r\n  }\r\n  .footer {\r\n    height: 180px;\r\n  }\r\n}\r\n\r\n@media (min-width: 200px) and (max-width: 400px) {\r\n  .footer {\r\n    height: 206px;\r\n  }\r\n}\r\n\r\n.admin-controle-monuments .form-group {\r\n  height: 161px;\r\n  margin-top: 20px;\r\n}\r\n\r\n.admin-image-container > div {\r\n  max-height: 150px;\r\n}\r\n\r\n.deleting-item {\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n.admin-image-control {\r\n  display: flex;\r\n  align-items: center;\r\n  overflow: auto;\r\n}\r\n\r\n.deleting-item > span {\r\n  min-width: 150px;\r\n}\r\n\r\n.show-monuments {\r\n  margin-top: 50px; \r\n}\r\n\r\n.monum-table {\r\n  margin-top: 30px;\r\n}\r\n\r\nul.nav.nav-tabs {\r\n  margin-bottom: 20px;\r\n}\r\n\r\n.sending-email {\r\n  background-color: white;\r\n  position: absolute;\r\n  height: 100%;\r\n  width: 520px;\r\n  z-index: 1;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n}\r\n\r\n.sending-email span {\r\n  text-align: center;\r\n}\r\n\r\n.sending-email .response {\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n\r\n.error-validation-text {\r\n  color: red;\r\n  text-align: left;\r\n}", ""]);
 
 // exports
 
