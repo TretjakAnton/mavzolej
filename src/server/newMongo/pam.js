@@ -269,9 +269,9 @@ exports.updatePam = (req, res, db) => {
     _id: new mongo.ObjectID(req.body.model._id),
   };
 
-  let updatedPam = {
-    ...req.body.model
-  }
+  let updatedPam = {};
+  
+  for(var k in req.body.model) updatedPam[k]=req.body.model[k];
 
   delete updatedPam._id;
 
