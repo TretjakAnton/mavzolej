@@ -1,4 +1,5 @@
-import { Tabs, Tab } from 'react-bootstrap'
+import { Tabs, Tab } from 'react-bootstrap';
+//import Bootstra from 'react-bootstrap';
 import  React from 'react';
 import Pam from './Pam';
 import AdminMenu from './AdminMenu';
@@ -18,13 +19,41 @@ class Admin extends React.Component {
   render() {
     const { tabValue } = this.state;
     return (
-      <div id="content"  className="modal-container">
-        <Tabs onSelect={this.handleSelect} defaultActiveKey={1} id="uncontrolled-tab-example">
-          <Tab eventKey={1} title="Pam">   { tabValue == 1 && <Pam /> }       </Tab>
-          <Tab eventKey={2} title="Types"> { tabValue == 2 && <Types /> }     </Tab>
-          <Tab eventKey={3} title="Menu">  { tabValue == 3 && <AdminMenu /> } </Tab>
-          <Tab eventKey={4} title="Form">  { tabValue == 4 && <AdminForm /> } </Tab>
-        </Tabs>
+      <div>
+        <div className='tab-names'>
+          <ul>
+            <li
+              onClick={() => this.handleSelect(1)}
+              className={tabValue == 1 ? 'active-tab': ''}
+            >
+              Памятники
+            </li>
+            <li
+              onClick={() => this.handleSelect(2)}
+              className={tabValue == 2 ? 'active-tab': ''}
+            >
+              Типы
+            </li>
+            <li
+              onClick={() => this.handleSelect(3)}
+              className={tabValue == 3 ? 'active-tab': ''}
+            >
+              Меню
+            </li>
+            <li
+              onClick={() => this.handleSelect(4)}
+              className={tabValue == 4 ? 'active-tab': ''}
+            >
+              Форма
+            </li>
+          </ul>
+        </div>
+        <div id="content"  className="modal-container">
+          { tabValue == 1 && <Pam /> }
+          { tabValue == 2 && <Types /> }
+          { tabValue == 3 && <AdminMenu /> } 
+          { tabValue == 4 && <AdminForm /> } 
+        </div>
       </div>
     );
   }

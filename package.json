@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node --inspect-brk server.js",
+    "start": "node server.js",
+    "debbug": "node --inspect-brk server.js",
     "build": "webpack --config webpack.config.js"
   },
   "engines": {
@@ -47,8 +48,9 @@
     "fs": "0.0.1-security",
     "image-webpack-loader": "^3.4.2",
     "img-loader": "^1.3.1",
-    "react-bootstrap": "^0.30.5",
+    "react-bootstrap": "^0.32.1",
     "react-dropzone": "^3.7.3",
+    "reactstrap": "^5.0.0-beta",
     "style-loader": "^0.17.0",
     "url-loader": "^0.6.2",
     "webpack": "^3.10.0"

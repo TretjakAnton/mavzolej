@@ -36,7 +36,7 @@ class Pam extends React.Component {
         this.props.setTypes(data);
         this.setState({
           types: data,
-          type_name: data[0].type_name
+          type_name: data.length > 0 ? data[0].type_name : ''
         })
       }
     })

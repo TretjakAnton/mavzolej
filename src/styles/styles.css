@@ -443,3 +443,27 @@ ul.nav.nav-tabs {
   color: red;
   text-align: left;
 }
+
+.tab-names {
+  background-color: lightgray;
+}
+
+.tab-names > ul {
+  list-style: none;
+}
+
+.tab-names > ul > li {
+  display: inline-block;
+  padding: 20px 15px;
+  cursor: pointer;
+  border-right: 1px solid black; 
+}
+
+.tab-names > ul > li:first-child {
+  border-left: 1px solid black; 
+}
+
+.tab-names > ul > li.active-tab,
+.tab-names > ul > li:hover {
+  background: darkgray;
+}

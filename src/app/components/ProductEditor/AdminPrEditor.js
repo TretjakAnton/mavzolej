@@ -34,7 +34,9 @@ export default class AdminPrEditor extends React.Component {
   }
 
   componentWillMount() {
-    this.getInfoForPage(null, this.state.curr_type.type_name);
+    const { curr_type } = this.state;
+    const current = curr_type ? curr_type.type_name : '';
+    this.getInfoForPage(null, current);
   };
 
   changePage = (page) => {
@@ -241,7 +243,7 @@ export default class AdminPrEditor extends React.Component {
       </FormControl>)
     }
     return <div>
-      { getTypes(curr_type.type_name, this.typeConrol, "curr_type") }
+      { getTypes(curr_type ? curr_type.type_name: '', this.typeConrol, "curr_type") }
       { this.state.pams && this.pamsDom() }
       <Modal
         show={showModal}
@@ -323,7 +325,7 @@ export default class AdminPrEditor extends React.Component {
 
       <Pages
         countRows={this.state.countRows}
-        type={this.state.curr_type.type_name}
+        type={curr_type ? curr_type.type_name: ''}
         onChange={this.changePage}
       />
     </div>
