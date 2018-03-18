@@ -28,7 +28,7 @@ export default class Pages extends React.Component{
       if(data.error){
         this.setState({error: data.error})
       } else {
-        const countPages = Math.ceil(data/newProps.countRows);
+        const countPages = Math.ceil(data.length/newProps.countRows);
         this.setState({countPages: countPages});
         this.calculatePages()
       }

@@ -25523,7 +25523,7 @@ var Pages = function (_React$Component) {
         if (data.error) {
           _this.setState({ error: data.error });
         } else {
-          var countPages = Math.ceil(data / newProps.countRows);
+          var countPages = Math.ceil(data.length / newProps.countRows);
           _this.setState({ countPages: countPages });
           _this.calculatePages();
         }
