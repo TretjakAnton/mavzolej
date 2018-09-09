@@ -86,7 +86,7 @@ export default class AdminPrEditor extends React.Component{
       id_type
     } = this.state;
 
-    return <div className="row">
+    return <div className="row product-container">
       {pams && pams.map((el) => {
         return (
           <Item

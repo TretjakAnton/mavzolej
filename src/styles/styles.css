@@ -15,6 +15,11 @@ body.opened-form {
   padding: 0 20px;
 }
 
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .item {
   border: 1px solid darkgray;
   border-radius: 20px;
