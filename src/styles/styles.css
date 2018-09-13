@@ -11,10 +11,6 @@ body.opened-form {
   overflow: hidden;
 }
 
-#content {
-  padding: 0 20px;
-}
-
 .product-container {
   display: flex;
   flex-wrap: wrap;
@@ -203,7 +199,9 @@ body.opened-form {
 .header .navbar-default {
   position: absolute;
   bottom: 0;
-  width: calc(100vw - 26px);
+  width: 100vw;
+  right: 0;
+  left: 0;
 }
 
 .header .header-content {
