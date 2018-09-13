@@ -51,3 +51,4 @@ fabric.properties
 npm-debug.log
 /build/js/bundle.js
 /build/js/bundle.js.map
+src/media/**
