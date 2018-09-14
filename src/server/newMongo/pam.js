@@ -51,7 +51,7 @@ exports.setUpdateMon = (req, res, db) => {
     }
 
     let fileName = getRandomInt(8, 99999) + file.name;
-    
+
     fs.rename(file.path, path.join(newFolder, fileName), function (err) {
       if (err) throw err;
       console.log('renamed complete');
@@ -139,18 +139,19 @@ exports.setUpdateMon = (req, res, db) => {
           menu_name: menu_name,
         }
       }
+      var imgPath = path.join(__dirname, '../../media/images');
+      checkOfExisting(imgPath);
 
       db.find(search).toArray(function (err, docs) {
         assert.equal(err, null);
         let oldMon = docs[0];
 
         if(oldMon.folder != folder) {
-          let pathToNewFolder = path.join(__dirname, '../../media/images' + folder);
-          if (!fs.existsSync(pathToNewFolder)) {
-            fs.mkdirSync(pathToNewFolder);
-          }
-          let pathToOldFolder = path.join(__dirname, '../../media/images' + oldMon.folder);
+          let pathToNewFolder = path.join(imgPath, folder);
+          checkOfExisting(pathToNewFolder);
+          let pathToOldFolder = path.join(imgPath, oldMon.folder);
           oldMon.images.map((el) => {
+            checkOfExisting(pathToOldFolder);
             if(fs.existsSync(pathToOldFolder + '/' + el)) {
               fs.rename(pathToOldFolder + '/' + el, pathToNewFolder + '/' + el, function(response){
                 if (response && response.message) {
@@ -291,4 +292,10 @@ exports.updatePam = (req, res, db) => {
     console.log("Updated");
     res.send(result);
   });
+}
+
+function checkOfExisting(folder) {
+  if (!fs.existsSync(folder)) {
+    fs.mkdirSync(folder);
+  }
 }

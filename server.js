@@ -4,7 +4,8 @@ var path = require('path'),
   bodyParser = require('body-parser'),
   app = express(),
   util = require('util'),
-  router = express.Router();
+  router = express.Router(),
+  fs = require('fs');
 
 app.set('port', (process.env.PORT || 3000));
 
@@ -14,6 +15,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
+var imageDir = path.join(__dirname, 'src/media/images');
+if (!fs.existsSync(imageDir)) {
+  fs.mkdirSync(imageDir);
+}
 
 var database = require('./src/server/mongoConnect');
 database.connect(app);
