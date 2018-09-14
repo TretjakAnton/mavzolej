@@ -25940,7 +25940,7 @@ var navbarInstance = function navbarInstance(meuItems) {
         null,
         _react2.default.createElement(
           _reactRouter.Link,
-          { to: 'home' },
+          { to: '/home' },
           'mavzolej-master'
         )
       ),
@@ -58624,7 +58624,7 @@ var Footer = function (_React$Component) {
                 _react2.default.createElement(
                   'a',
                   { href: 'mailto:mavzolej-master@yandex.ru' },
-                  'mavzolej-master@yandex.ru'
+                  'mavzolej-master@gmail.com'
                 )
               ),
               _react2.default.createElement(
