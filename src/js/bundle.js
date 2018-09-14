@@ -25238,7 +25238,7 @@ var AdminPrEditor = function (_React$Component) {
             { key: key + Math.random() },
             _react2.default.createElement(_ImageControl2.default, {
               images: val.images,
-              previewFolder: '../../media' + _this.state.curr_type.folder
+              previewFolder: '../../media/images' + _this.state.curr_type.folder
             })
           ),
           _react2.default.createElement(
@@ -25384,7 +25384,7 @@ var AdminPrEditor = function (_React$Component) {
                 ),
                 _react2.default.createElement(_ImageControl2.default, {
                   images: itemToDelete.images,
-                  previewFolder: '../../media' + itemToDelete.folder
+                  previewFolder: '../../media/images' + itemToDelete.folder
                 })
               ),
               editing && _react2.default.createElement(
@@ -25418,7 +25418,7 @@ var AdminPrEditor = function (_React$Component) {
                 _react2.default.createElement(_ImageControl2.default, {
                   images: editing.images,
                   info: editing,
-                  previewFolder: '../../media' + editing.folder,
+                  previewFolder: '../../media/images' + editing.folder,
                   editing: true,
                   deleteImages: this.deleteImages,
                   addNewImages: this.addNewImages
@@ -56245,7 +56245,7 @@ var Item = function (_React$Component) {
 
       var newImages = [];
       info.images.map(function (image) {
-        newImages.push('../../../media' + info.folder + '/' + image);
+        newImages.push('../../../media/images' + info.folder + '/' + image);
       });
       _this.setState({ images: newImages });
     };

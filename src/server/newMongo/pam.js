@@ -36,16 +36,27 @@ exports.setUpdateMon = (req, res, db) => {
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
   form.on('file', function (field, file) {
-    var newFolder = path.join(__dirname, '../../media/images/' + folder);
+    var rootFolder = path.join(__dirname, '../../media/images')
+    if (!fs.existsSync(rootFolder)) {
+      fs.mkdirSync(rootFolder);
+    }
+    var newFolder = path.join(rootFolder, folder);
 
     if (!fs.existsSync(newFolder)) {
       fs.mkdirSync(newFolder);
     }
 
-    let fileName = Math.random(99999) + file.name;
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
 
-    fs.rename(file.path, path.join(newFolder, fileName));
-
+    let fileName = getRandomInt(8, 99999) + file.name;
+    
+    fs.rename(file.path, path.join(newFolder, fileName), function (err) {
+      if (err) throw err;
+      console.log('renamed complete');
+    });
+    
     let item = {
       db_type: 'pam',
       id_pam: id,
