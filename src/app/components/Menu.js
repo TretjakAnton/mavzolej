@@ -14,7 +14,7 @@ const navbarInstance = (meuItems) => {return (
   <Navbar collapseOnSelect>
     <Navbar.Header>
       <Navbar.Brand>
-        <Link to="home">mavzolej-master</Link>
+        <Link to="/home">mavzolej-master</Link>
       </Navbar.Brand>
       <Navbar.Toggle />
     </Navbar.Header>
