@@ -58633,7 +58633,7 @@ var Footer = function (_React$Component) {
                 _react2.default.createElement('span', { className: 'glyphicon glyphicon-map-marker padding-right' }),
                 _react2.default.createElement(
                   _reactRouter.Link,
-                  { to: 'aboutUs' },
+                  { to: '/aboutUs' },
                   '\u0433. \u0414\u0435\u0440\u0433\u0430\u0447\u0438, \u043F\u0435\u0440\u0435\u0443\u043B\u043E\u043A \u041A\u043E\u043C\u043C\u0443\u043D\u0430\u043B\u044C\u043D\u044B\u0439 \u21161'
                 )
               )

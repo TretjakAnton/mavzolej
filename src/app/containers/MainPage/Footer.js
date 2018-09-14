@@ -16,7 +16,7 @@ class Footer extends React.Component{
           <div className="textInfo">
             <div className="textInfo-items">
               <p><span className="glyphicon glyphicon-envelope padding-right"></span><a href="mailto:mavzolej-master@yandex.ru">mavzolej-master@gmail.com</a></p>
-              <p><span className="glyphicon glyphicon-map-marker padding-right"></span><Link to='aboutUs'>г. Дергачи, переулок Коммунальный №1</Link></p>
+              <p><span className="glyphicon glyphicon-map-marker padding-right"></span><Link to='/aboutUs'>г. Дергачи, переулок Коммунальный №1</Link></p>
             </div>
             <div className="textInfo-items">
               <p><span className="glyphicon glyphicon-earphone padding-right"></span>(050)406-50-07</p>
