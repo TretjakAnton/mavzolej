@@ -35,7 +35,7 @@ class Item extends React.Component{
     const { info } = this.state;
     let newImages = [];
     info.images.map((image) => {
-      newImages.push(`../../../media${info.folder}/${image}`);
+      newImages.push(`../../../media/images${info.folder}/${image}`);
     });
     this.setState({ images: newImages });
   }

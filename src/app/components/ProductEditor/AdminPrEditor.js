@@ -198,7 +198,7 @@ export default class AdminPrEditor extends React.Component {
           <td key={key + Math.random()}>
             <ImageControl
               images={val.images}
-              previewFolder={'../../media' + this.state.curr_type.folder}
+              previewFolder={'../../media/images' + this.state.curr_type.folder}
             />
           </td>
           <td key={key + Math.random()}>{val.id_pam}</td>
@@ -261,7 +261,7 @@ export default class AdminPrEditor extends React.Component {
                 <span>Номер памятника {itemToDelete.id_pam}</span>
                 <ImageControl
                   images={itemToDelete.images}
-                  previewFolder={'../../media' + itemToDelete.folder}
+                  previewFolder={'../../media/images' + itemToDelete.folder}
                 />
               </div>
             }
@@ -283,7 +283,7 @@ export default class AdminPrEditor extends React.Component {
                 <ImageControl
                   images={editing.images}
                   info={editing}
-                  previewFolder={'../../media' + editing.folder}
+                  previewFolder={'../../media/images' + editing.folder}
                   editing
                   deleteImages={this.deleteImages}
                   addNewImages={this.addNewImages}

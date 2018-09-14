@@ -31,12 +31,12 @@ exports.setUpdateMon = (req, res, db) => {
   form.multiples = true;
 
   // store all uploads in the /uploads directory
-  form.uploadDir = path.join(__dirname, '../../media');
+  form.uploadDir = path.join(__dirname, '../../media/images');
 
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
   form.on('file', function (field, file) {
-    var newFolder = path.join(__dirname, '../../media/' + folder);
+    var newFolder = path.join(__dirname, '../../media/images/' + folder);
 
     if (!fs.existsSync(newFolder)) {
       fs.mkdirSync(newFolder);
@@ -134,11 +134,11 @@ exports.setUpdateMon = (req, res, db) => {
         let oldMon = docs[0];
 
         if(oldMon.folder != folder) {
-          let pathToNewFolder = path.join(__dirname, '../../media' + folder);
+          let pathToNewFolder = path.join(__dirname, '../../media/images' + folder);
           if (!fs.existsSync(pathToNewFolder)) {
             fs.mkdirSync(pathToNewFolder);
           }
-          let pathToOldFolder = path.join(__dirname, '../../media' + oldMon.folder);
+          let pathToOldFolder = path.join(__dirname, '../../media/images' + oldMon.folder);
           oldMon.images.map((el) => {
             if(fs.existsSync(pathToOldFolder + '/' + el)) {
               fs.rename(pathToOldFolder + '/' + el, pathToNewFolder + '/' + el, function(response){
@@ -219,7 +219,7 @@ exports.deleteMon = (req, res, db) => {
       db.deleteOne(search, (err, resDelete) => {
         assert.equal(err, null);
         images.map((image) => {
-          var pathImg = path.join(__dirname, '/../../media' + folder + '/' + image);
+          var pathImg = path.join(__dirname, '/../../media/images' + folder + '/' + image);
           if (fs.existsSync(pathImg)) {
             fs.unlinkSync(pathImg);
           }
@@ -243,7 +243,7 @@ exports.deleteImage = (req, res, db) => {
   db.update(search, deleteItem, (err, result) => {
     assert.equal(err, null);
     console.log("Deleted");
-    var pathImg = path.join(__dirname, '/../../media/' + req.body.folder + '/' + req.body.image);
+    var pathImg = path.join(__dirname, '/../../media/images/' + req.body.folder + '/' + req.body.image);
     if (fs.existsSync(pathImg)) {
       fs.unlinkSync(pathImg);
     }
