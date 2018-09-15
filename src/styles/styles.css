@@ -59,6 +59,8 @@ body.opened-form {
   flex-direction: column;
 }
 
+/* Slider */
+
 .slider-container {
   position: absolute;
   top: 0px;
