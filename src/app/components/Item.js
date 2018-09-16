@@ -1,19 +1,23 @@
 import React from 'react';
 import { Table, Glyphicon, Button } from 'react-bootstrap';
-import { addBodyClass } from '../helpers';
-import Slider from './Slider';
 import SimpleModalSlideshow from 'react-simple-modal-slideshow';
+import Slider from "react-slick";
 
 const styles = {
   byButton: {
     width: "100px",
     alignSelf: "flex-end",
-  },
-  showHideButton: {
-    width: "100%",
-    outline: "none !important",
-    margin: "10px 0",
-  },
+  }
+};
+
+const slideSettings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  nextArrow: <Button className="right-arrow"><Glyphicon glyph="chevron-right" /></Button>,
+  prevArrow: <Button className="left-arrow"><Glyphicon glyph="chevron-left" /></Button>
 };
 
 class Item extends React.Component{
@@ -87,69 +91,59 @@ class Item extends React.Component{
 
   render() {
     const { info, images, status, sliderImages } = this.state;
-    const imgExist = images && images.length > 1;
     const sliderStatus = this.state.sliderInfo.status;
     const currentSlide = this.state.sliderInfo.currentSlide;
     const imageToShow = this.state.sliderInfo.imageToShow;
     return (
       <div className="col-xs-6 col-sm-6 col-md-4 col-lg-3">
         <div className="item">
-        <div className="mainImg">
-          <img src={images[0]} className="img-responsive" onClick={() => this.openSlideshow(0)}/>
-        </div>
-          {imgExist &&
-            <Button
-              bsStyle="primary"
-              bsSize="sm"
-              onClick={this.showHideImages}
-              style={styles.showHideButton}
-            >
-              показать остальные
-              <span className="pull-right">
-                {status ? <Glyphicon glyph="menu-up"/> : <Glyphicon glyph="menu-down"/>}
-              </span>
-            </Button>
-          }
-        {status &&
-          <div className="images">
-            {
-              this.state.images.map((val, key) => {
-                return <img key={key} src={val} className="img-responsive" onClick={() => this.openSlideshow(key)} />;
-              })
-            }
+          <div className="mainContainer">
+            <Slider {...slideSettings}>
+              {
+                this.state.images.map((val, key) => {
+                  return (
+                    <div key={key} className="slider-item">
+                      <img
+                        src={val}
+                        className="img-responsive"
+                        onClick={() => this.openSlideshow(key)}
+                      />
+                    </div>
+                  )
+                })
+              }
+            </Slider>
           </div>
-        }
-        <div className="information">
-          <Table responsive>
-            <tbody>
-              <tr>
-                <td>Номер памятника:</td>
-                <td>{info.id_pam}</td>
-              </tr>
-              <tr>
-                <td>Цена:</td>
-                <td>{info.price}</td>
-              </tr>
-            </tbody>
-          </Table>
-          <Button
-            style={styles.byButton}
-            onClick={this.openForm}
-          >
-            Заказать
-            <Glyphicon glyph="shopping-cart" />
-          </Button>
-        </div>
-        <SimpleModalSlideshow 
-          slides={sliderImages}
-          currentSlide={currentSlide}
-          open={sliderStatus}
-          onClose={this.closeSlider}
-          onNext={this.handleNextPrev}
-          onPrev={this.handleNextPrev}
-          classNamePrefix="modal-slideshow"
-        />
-        {/* sliderStatus && <Slider images={images} currImg={imageToShow} onClose={this.closeSlider}/> */}
+          <div className="information">
+            <Table responsive>
+              <tbody>
+                <tr>
+                  <td>Номер памятника:</td>
+                  <td>{info.id_pam}</td>
+                </tr>
+                <tr>
+                  <td>Цена:</td>
+                  <td>{info.price}</td>
+                </tr>
+              </tbody>
+            </Table>
+            <Button
+              style={styles.byButton}
+              onClick={this.openForm}
+            >
+              Заказать
+              <Glyphicon glyph="shopping-cart" />
+            </Button>
+          </div>
+          <SimpleModalSlideshow 
+            slides={sliderImages}
+            currentSlide={currentSlide}
+            open={sliderStatus}
+            onClose={this.closeSlider}
+            onNext={this.handleNextPrev}
+            onPrev={this.handleNextPrev}
+            classNamePrefix="modal-slideshow"
+          />
         </div>
       </div>
     )

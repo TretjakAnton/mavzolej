@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { routes, store, history } from './routes';
 import '../styles/styles.css';
 import '../styles/slider.scss';
+import '../styles/item.scss';
 
 ReactDOM.render(
     <Provider store={store}>
