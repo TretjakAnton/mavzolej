@@ -6,6 +6,7 @@ import { routes, store, history } from './routes';
 import '../styles/styles.css';
 import '../styles/slider.scss';
 import '../styles/item.scss';
+import '../styles/product-container.scss';
 
 ReactDOM.render(
     <Provider store={store}>

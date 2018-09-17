@@ -95,56 +95,54 @@ class Item extends React.Component{
     const currentSlide = this.state.sliderInfo.currentSlide;
     const imageToShow = this.state.sliderInfo.imageToShow;
     return (
-      <div className="col-xs-6 col-sm-6 col-md-4 col-lg-3">
-        <div className="item">
-          <div className="mainContainer">
-            <Slider {...slideSettings}>
-              {
-                this.state.images.map((val, key) => {
-                  return (
-                    <div key={key} className="slider-item">
-                      <img
-                        src={val}
-                        className="img-responsive"
-                        onClick={() => this.openSlideshow(key)}
-                      />
-                    </div>
-                  )
-                })
-              }
-            </Slider>
-          </div>
-          <div className="information">
-            <Table responsive>
-              <tbody>
-                <tr>
-                  <td>Номер памятника:</td>
-                  <td>{info.id_pam}</td>
-                </tr>
-                <tr>
-                  <td>Цена:</td>
-                  <td>{info.price}</td>
-                </tr>
-              </tbody>
-            </Table>
-            <Button
-              style={styles.byButton}
-              onClick={this.openForm}
-            >
-              Заказать
-              <Glyphicon glyph="shopping-cart" />
-            </Button>
-          </div>
-          <SimpleModalSlideshow 
-            slides={sliderImages}
-            currentSlide={currentSlide}
-            open={sliderStatus}
-            onClose={this.closeSlider}
-            onNext={this.handleNextPrev}
-            onPrev={this.handleNextPrev}
-            classNamePrefix="modal-slideshow"
-          />
+      <div className="item col-xs-6 col-sm-6 col-md-4 col-lg-3">
+        <div className="mainContainer">
+          <Slider {...slideSettings}>
+            {
+              this.state.images.map((val, key) => {
+                return (
+                  <div key={key} className="slider-item">
+                    <img
+                      src={val}
+                      className="img-responsive"
+                      onClick={() => this.openSlideshow(key)}
+                    />
+                  </div>
+                )
+              })
+            }
+          </Slider>
         </div>
+        <div className="information">
+          <Table responsive>
+            <tbody>
+              <tr>
+                <td>Номер памятника:</td>
+                <td>{info.id_pam}</td>
+              </tr>
+              <tr>
+                <td>Цена:</td>
+                <td>{info.price}</td>
+              </tr>
+            </tbody>
+          </Table>
+          <Button
+            style={styles.byButton}
+            onClick={this.openForm}
+          >
+            Заказать
+            <Glyphicon glyph="shopping-cart" />
+          </Button>
+        </div>
+        <SimpleModalSlideshow 
+          slides={sliderImages}
+          currentSlide={currentSlide}
+          open={sliderStatus}
+          onClose={this.closeSlider}
+          onNext={this.handleNextPrev}
+          onPrev={this.handleNextPrev}
+          classNamePrefix="modal-slideshow"
+        />
       </div>
     )
   }
