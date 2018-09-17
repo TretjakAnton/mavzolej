@@ -11,13 +11,14 @@ const styles = {
 };
 
 const slideSettings = {
-  dots: true,
+  dots: false,
   infinite: true,
   speed: 500,
   slidesToShow: 1,
   slidesToScroll: 1,
   nextArrow: <Button className="right-arrow"><Glyphicon glyph="chevron-right" /></Button>,
-  prevArrow: <Button className="left-arrow"><Glyphicon glyph="chevron-left" /></Button>
+  prevArrow: <Button className="left-arrow"><Glyphicon glyph="chevron-left" /></Button>,
+  lazyLoad: true
 };
 
 class Item extends React.Component{
@@ -32,7 +33,8 @@ class Item extends React.Component{
       sliderInfo: {
         status: false,
         currentSlide: 0
-      }
+      },
+      currentShowSlide: 1
     };
   };
 
@@ -90,16 +92,23 @@ class Item extends React.Component{
   }
 
   render() {
-    const { info, images, status, sliderImages } = this.state;
-    const sliderStatus = this.state.sliderInfo.status;
-    const currentSlide = this.state.sliderInfo.currentSlide;
-    const imageToShow = this.state.sliderInfo.imageToShow;
+    const { info, images, sliderImages, currentShowSlide, sliderInfo } = this.state;
+    const sliderStatus = sliderInfo.status;
+    const currentSlide = sliderInfo.currentSlide;
+    const imageToShow = sliderInfo.imageToShow;
     return (
       <div className="item col-xs-6 col-sm-6 col-md-4 col-lg-3">
         <div className="mainContainer">
-          <Slider {...slideSettings}>
+          <Slider
+            afterChange={
+              (currentShowSlide) => {
+                this.setState({ currentShowSlide: currentShowSlide + 1 })
+              }
+            }
+            {...slideSettings}
+          >
             {
-              this.state.images.map((val, key) => {
+              images.map((val, key) => {
                 return (
                   <div key={key} className="slider-item">
                     <img
@@ -112,6 +121,9 @@ class Item extends React.Component{
               })
             }
           </Slider>
+          {images.length > 1 && <div className="slider-status">
+            <span>{currentShowSlide} из {images.length}</span>
+          </div>}
         </div>
         <div className="information">
           <Table responsive>

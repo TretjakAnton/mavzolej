@@ -113,9 +113,8 @@ body.opened-form {
 .header .navbar-default {
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: calc(100% - 4px);
   right: 0;
-  left: 0;
 }
 
 .header .header-content {

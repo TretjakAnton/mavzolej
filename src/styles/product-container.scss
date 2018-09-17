@@ -2,6 +2,7 @@
   min-height: calc(100vh - 428px);
   padding: 15px 0;
   background-color: #e7e7e7;
+  position: relative;
 }
 
 .product-container {
@@ -9,4 +10,9 @@
   flex-wrap: wrap;
   justify-content: center;
   padding: 0 20px;
+
+  &.row {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }

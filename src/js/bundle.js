@@ -57428,6 +57428,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
@@ -57460,7 +57462,7 @@ var styles = {
 };
 
 var slideSettings = {
-  dots: true,
+  dots: false,
   infinite: true,
   speed: 500,
   slidesToShow: 1,
@@ -57474,7 +57476,8 @@ var slideSettings = {
     _reactBootstrap.Button,
     { className: 'left-arrow' },
     _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'chevron-left' })
-  )
+  ),
+  lazyLoad: true
 };
 
 var Item = function (_React$Component) {
@@ -57546,7 +57549,8 @@ var Item = function (_React$Component) {
       sliderInfo: {
         status: false,
         currentSlide: 0
-      }
+      },
+      currentShowSlide: 1
     };
     return _this;
   }
@@ -57559,12 +57563,13 @@ var Item = function (_React$Component) {
       var _state = this.state,
           info = _state.info,
           images = _state.images,
-          status = _state.status,
-          sliderImages = _state.sliderImages;
+          sliderImages = _state.sliderImages,
+          currentShowSlide = _state.currentShowSlide,
+          sliderInfo = _state.sliderInfo;
 
-      var sliderStatus = this.state.sliderInfo.status;
-      var currentSlide = this.state.sliderInfo.currentSlide;
-      var imageToShow = this.state.sliderInfo.imageToShow;
+      var sliderStatus = sliderInfo.status;
+      var currentSlide = sliderInfo.currentSlide;
+      var imageToShow = sliderInfo.imageToShow;
       return _react2.default.createElement(
         'div',
         { className: 'item col-xs-6 col-sm-6 col-md-4 col-lg-3' },
@@ -57573,8 +57578,12 @@ var Item = function (_React$Component) {
           { className: 'mainContainer' },
           _react2.default.createElement(
             _reactSlick2.default,
-            slideSettings,
-            this.state.images.map(function (val, key) {
+            _extends({
+              afterChange: function afterChange(currentShowSlide) {
+                _this2.setState({ currentShowSlide: currentShowSlide + 1 });
+              }
+            }, slideSettings),
+            images.map(function (val, key) {
               return _react2.default.createElement(
                 'div',
                 { key: key, className: 'slider-item' },
@@ -57587,6 +57596,17 @@ var Item = function (_React$Component) {
                 })
               );
             })
+          ),
+          images.length > 1 && _react2.default.createElement(
+            'div',
+            { className: 'slider-status' },
+            _react2.default.createElement(
+              'span',
+              null,
+              currentShowSlide,
+              ' \u0438\u0437 ',
+              images.length
+            )
           )
         ),
         _react2.default.createElement(
@@ -72400,7 +72420,7 @@ exports = module.exports = __webpack_require__(128)(undefined);
 
 
 // module
-exports.push([module.i, "*,html {\r\n  margin: 0;\r\n}\r\n\r\nbody {\r\n  overflow-x: hidden !important;\r\n}\r\n\r\nbody.opened-slider,\r\nbody.opened-form {\r\n  overflow: hidden;\r\n}\r\n\r\n.main-image {\r\n  height: 200px;\r\n  margin: 0 auto;\r\n  display: block;\r\n}\r\n\r\n.small-images {\r\n  height: 100px;\r\n}\r\n\r\n.information {\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n\r\n.col-xs-6 {\r\n  position: inherit;\r\n}\r\n\r\n/*  form  */\r\n\r\n.form-container {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  height: 100vh;\r\n  width: 100vw;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n}\r\n\r\n.form-content {\r\n  background-color: white;\r\n  max-width: 520px;\r\n  position: relative;\r\n}\r\n\r\n.form-flex {\r\n  display: flex;\r\n  overflow: auto;\r\n  max-height: calc( 100vh - 110px);\r\n}\r\n\r\n.form-left-side {\r\n  height: max-content;\r\n  display: block;\r\n  padding: 10px;\r\n  border-right: 1px solid gray;\r\n}\r\n\r\n.form-right-side {\r\n  display: block;\r\n  padding: 10px;\r\n}\r\n\r\n.form-price {\r\n  bottom: 10px;\r\n  position: absolute;\r\n  right: 40px;\r\n}\r\n\r\n.form-close {\r\n  float: right;\r\n  color: white;\r\n  font-size: 30px;\r\n  margin-right: -35px;\r\n  margin-top: -30px;\r\n  cursor: pointer;\r\n}\r\n\r\n/* admin menu */\r\n\r\n.add-menu-item {\r\n  display: inline-block;\r\n}\r\n\r\n.add-menu-item-right {\r\n  display: inline-block;\r\n  margin-left: 20px;\r\n}\r\n\r\n/* header */\r\n\r\n.header {\r\n  color: white;\r\n  height: 248px;\r\n  position: relative;\r\n}\r\n\r\n.header .header-menu {\r\n  padding: 10px 0;\r\n}\r\n\r\n.header .navbar {\r\n  margin-bottom: 0;\r\n}\r\n\r\n.header .navbar-default {\r\n  position: absolute;\r\n  bottom: 0;\r\n  width: 100%;\r\n  right: 0;\r\n  left: 0;\r\n}\r\n\r\n.header .header-content {\r\n  background-color: black;\r\n  height: inherit;\r\n  border-radius: 5px;\r\n}\r\n\r\n.container-fluid {\r\n  padding-right: 15px;\r\n  padding-left: 15px;\r\n  margin-right: auto;\r\n  margin-left: auto;\r\n}\r\n\r\n.upHead {\r\n  text-align: center;\r\n  margin-top: 30px;\r\n}\r\n\r\n.page-selector {\r\n  display: block;\r\n}\r\n\r\n.container-content {\r\n  min-height: calc(100vh - 428px);\r\n  padding: 15px 5px 15px 5px;\r\n}\r\n\r\n.login-form {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  height: 100vh;\r\n  width: 100vw;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n}\r\n\r\n.login-content {\r\n  background-color: white;\r\n  position: fixed;\r\n  left: 50%;\r\n  top: 50%;\r\n  transform: translate(-50%, -50%);\r\n  width: 280px;\r\n  height: 250px;\r\n  padding: 20px;\r\n  border-radius: 10px;\r\n}\r\n\r\n.login-header {\r\n  text-align: center;\r\n  font-size: 16px;\r\n}\r\n\r\n.login-fields {\r\n  padding: 20px 0;\r\n}\r\n\r\n.login-button {\r\n  position: absolute;\r\n  bottom: 20px;\r\n  right: 20px;\r\n}\r\n\r\n.footer {\r\n  position: relative;\r\n  background: #2b2b2b;\r\n}\r\n\r\n.contacts {\r\n  position: absolute;\r\n  bottom: 10px;\r\n  right: 10px;\r\n  font-size: 14px;\r\n  color: white;\r\n  text-align: right;\r\n}\r\n\r\n.textInfo-items {\r\n  display: inline-block;\r\n  padding-right: 15px;\r\n}\r\n\r\n.padding-right {\r\n  padding-right: 5px;\r\n}\r\n\r\n.admin-image-container {\r\n  position: relative;\r\n  padding: 10px;\r\n  display: inline-block;\r\n  background-color: #f3f2f2;\r\n  margin: 5px;\r\n}\r\n\r\n.remove-image {\r\n  position: absolute;\r\n  top: -6px;\r\n  right: -6px;\r\n  font-size: 17px;\r\n}\r\n\r\n.delete-image-modal {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n}\r\n\r\n.modal-container {\r\n  position: relative;\r\n}\r\n\r\n.modal-container .modal, .modal-container .modal-backdrop {\r\n   position: absolute;\r\n}\r\n\r\n.contained-modal-title {\r\n  height: 500px;\r\n}\r\n\r\n.modal-content {\r\n  border: none;\r\n}\r\n\r\n.modal-content > .modal-dialog {\r\n  height: auto;\r\n  background-color: white;\r\n}\r\n\r\n.modal-open .modal {\r\n  overflow-y: hidden;\r\n}\r\n\r\n.modal-dialog {\r\n  height: 600px;\r\n}\r\n\r\n/*Home page*/\r\n\r\n.cont-left-bl,\r\n.center-bl,\r\n.right-block {\r\n  display: inline-block;\r\n  width: 400px;\r\n  vertical-align: top;\r\n}\r\n\r\n@media (min-width: 1200px) {\r\n  .wrap {\r\n    width: 1200px;\r\n    margin: 0 auto;\r\n  }\r\n  .footer {\r\n    height: 180px;\r\n  }\r\n}\r\n\r\n@media (min-width: 800px) and (max-width: 1200px) {\r\n  .wrap {\r\n    width: 800px;\r\n    margin: 0 auto;\r\n  }\r\n  .footer {\r\n    height: 180px;\r\n  }\r\n}\r\n\r\n@media (min-width: 400px) and (max-width: 800px) {\r\n  .wrap {\r\n    width: 400px;\r\n    margin: 0 auto;\r\n  }\r\n  .footer {\r\n    height: 180px;\r\n  }\r\n}\r\n\r\n@media (min-width: 200px) and (max-width: 400px) {\r\n  .footer {\r\n    height: 206px;\r\n  }\r\n}\r\n\r\n.admin-controle-monuments .form-group {\r\n  height: 161px;\r\n  margin-top: 20px;\r\n}\r\n\r\n.admin-image-container > div {\r\n  max-height: 150px;\r\n}\r\n\r\n.deleting-item {\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n.admin-image-control {\r\n  display: flex;\r\n  align-items: center;\r\n  overflow: auto;\r\n}\r\n\r\n.deleting-item > span {\r\n  min-width: 150px;\r\n}\r\n\r\n.show-monuments {\r\n  margin-top: 50px; \r\n}\r\n\r\n.monum-table {\r\n  margin-top: 30px;\r\n}\r\n\r\nul.nav.nav-tabs {\r\n  margin-bottom: 20px;\r\n}\r\n\r\n.sending-email {\r\n  background-color: white;\r\n  position: absolute;\r\n  height: 100%;\r\n  width: 520px;\r\n  z-index: 1;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n}\r\n\r\n.sending-email span {\r\n  text-align: center;\r\n}\r\n\r\n.sending-email .response {\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n\r\n.error-validation-text {\r\n  color: red;\r\n  text-align: left;\r\n}\r\n\r\n.tab-names {\r\n  background-color: lightgray;\r\n}\r\n\r\n.tab-names > ul {\r\n  list-style: none;\r\n}\r\n\r\n.tab-names > ul > li {\r\n  display: inline-block;\r\n  padding: 20px 15px;\r\n  cursor: pointer;\r\n  border-right: 1px solid black; \r\n}\r\n\r\n.tab-names > ul > li:first-child {\r\n  border-left: 1px solid black; \r\n}\r\n\r\n.tab-names > ul > li.active-tab,\r\n.tab-names > ul > li:hover {\r\n  background: darkgray;\r\n}", ""]);
+exports.push([module.i, "*,html {\r\n  margin: 0;\r\n}\r\n\r\nbody {\r\n  overflow-x: hidden !important;\r\n}\r\n\r\nbody.opened-slider,\r\nbody.opened-form {\r\n  overflow: hidden;\r\n}\r\n\r\n.main-image {\r\n  height: 200px;\r\n  margin: 0 auto;\r\n  display: block;\r\n}\r\n\r\n.small-images {\r\n  height: 100px;\r\n}\r\n\r\n.information {\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n\r\n.col-xs-6 {\r\n  position: inherit;\r\n}\r\n\r\n/*  form  */\r\n\r\n.form-container {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  height: 100vh;\r\n  width: 100vw;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n}\r\n\r\n.form-content {\r\n  background-color: white;\r\n  max-width: 520px;\r\n  position: relative;\r\n}\r\n\r\n.form-flex {\r\n  display: flex;\r\n  overflow: auto;\r\n  max-height: calc( 100vh - 110px);\r\n}\r\n\r\n.form-left-side {\r\n  height: max-content;\r\n  display: block;\r\n  padding: 10px;\r\n  border-right: 1px solid gray;\r\n}\r\n\r\n.form-right-side {\r\n  display: block;\r\n  padding: 10px;\r\n}\r\n\r\n.form-price {\r\n  bottom: 10px;\r\n  position: absolute;\r\n  right: 40px;\r\n}\r\n\r\n.form-close {\r\n  float: right;\r\n  color: white;\r\n  font-size: 30px;\r\n  margin-right: -35px;\r\n  margin-top: -30px;\r\n  cursor: pointer;\r\n}\r\n\r\n/* admin menu */\r\n\r\n.add-menu-item {\r\n  display: inline-block;\r\n}\r\n\r\n.add-menu-item-right {\r\n  display: inline-block;\r\n  margin-left: 20px;\r\n}\r\n\r\n/* header */\r\n\r\n.header {\r\n  color: white;\r\n  height: 248px;\r\n  position: relative;\r\n}\r\n\r\n.header .header-menu {\r\n  padding: 10px 0;\r\n}\r\n\r\n.header .navbar {\r\n  margin-bottom: 0;\r\n}\r\n\r\n.header .navbar-default {\r\n  position: absolute;\r\n  bottom: 0;\r\n  width: calc(100% - 4px);\r\n  right: 0;\r\n}\r\n\r\n.header .header-content {\r\n  background-color: black;\r\n  height: inherit;\r\n  border-radius: 5px;\r\n}\r\n\r\n.container-fluid {\r\n  padding-right: 15px;\r\n  padding-left: 15px;\r\n  margin-right: auto;\r\n  margin-left: auto;\r\n}\r\n\r\n.upHead {\r\n  text-align: center;\r\n  margin-top: 30px;\r\n}\r\n\r\n.page-selector {\r\n  display: block;\r\n}\r\n\r\n.container-content {\r\n  min-height: calc(100vh - 428px);\r\n  padding: 15px 5px 15px 5px;\r\n}\r\n\r\n.login-form {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  height: 100vh;\r\n  width: 100vw;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n}\r\n\r\n.login-content {\r\n  background-color: white;\r\n  position: fixed;\r\n  left: 50%;\r\n  top: 50%;\r\n  transform: translate(-50%, -50%);\r\n  width: 280px;\r\n  height: 250px;\r\n  padding: 20px;\r\n  border-radius: 10px;\r\n}\r\n\r\n.login-header {\r\n  text-align: center;\r\n  font-size: 16px;\r\n}\r\n\r\n.login-fields {\r\n  padding: 20px 0;\r\n}\r\n\r\n.login-button {\r\n  position: absolute;\r\n  bottom: 20px;\r\n  right: 20px;\r\n}\r\n\r\n.footer {\r\n  position: relative;\r\n  background: #2b2b2b;\r\n}\r\n\r\n.contacts {\r\n  position: absolute;\r\n  bottom: 10px;\r\n  right: 10px;\r\n  font-size: 14px;\r\n  color: white;\r\n  text-align: right;\r\n}\r\n\r\n.textInfo-items {\r\n  display: inline-block;\r\n  padding-right: 15px;\r\n}\r\n\r\n.padding-right {\r\n  padding-right: 5px;\r\n}\r\n\r\n.admin-image-container {\r\n  position: relative;\r\n  padding: 10px;\r\n  display: inline-block;\r\n  background-color: #f3f2f2;\r\n  margin: 5px;\r\n}\r\n\r\n.remove-image {\r\n  position: absolute;\r\n  top: -6px;\r\n  right: -6px;\r\n  font-size: 17px;\r\n}\r\n\r\n.delete-image-modal {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n}\r\n\r\n.modal-container {\r\n  position: relative;\r\n}\r\n\r\n.modal-container .modal, .modal-container .modal-backdrop {\r\n   position: absolute;\r\n}\r\n\r\n.contained-modal-title {\r\n  height: 500px;\r\n}\r\n\r\n.modal-content {\r\n  border: none;\r\n}\r\n\r\n.modal-content > .modal-dialog {\r\n  height: auto;\r\n  background-color: white;\r\n}\r\n\r\n.modal-open .modal {\r\n  overflow-y: hidden;\r\n}\r\n\r\n.modal-dialog {\r\n  height: 600px;\r\n}\r\n\r\n/*Home page*/\r\n\r\n.cont-left-bl,\r\n.center-bl,\r\n.right-block {\r\n  display: inline-block;\r\n  width: 400px;\r\n  vertical-align: top;\r\n}\r\n\r\n@media (min-width: 1200px) {\r\n  .wrap {\r\n    width: 1200px;\r\n    margin: 0 auto;\r\n  }\r\n  .footer {\r\n    height: 180px;\r\n  }\r\n}\r\n\r\n@media (min-width: 800px) and (max-width: 1200px) {\r\n  .wrap {\r\n    width: 800px;\r\n    margin: 0 auto;\r\n  }\r\n  .footer {\r\n    height: 180px;\r\n  }\r\n}\r\n\r\n@media (min-width: 400px) and (max-width: 800px) {\r\n  .wrap {\r\n    width: 400px;\r\n    margin: 0 auto;\r\n  }\r\n  .footer {\r\n    height: 180px;\r\n  }\r\n}\r\n\r\n@media (min-width: 200px) and (max-width: 400px) {\r\n  .footer {\r\n    height: 206px;\r\n  }\r\n}\r\n\r\n.admin-controle-monuments .form-group {\r\n  height: 161px;\r\n  margin-top: 20px;\r\n}\r\n\r\n.admin-image-container > div {\r\n  max-height: 150px;\r\n}\r\n\r\n.deleting-item {\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n.admin-image-control {\r\n  display: flex;\r\n  align-items: center;\r\n  overflow: auto;\r\n}\r\n\r\n.deleting-item > span {\r\n  min-width: 150px;\r\n}\r\n\r\n.show-monuments {\r\n  margin-top: 50px; \r\n}\r\n\r\n.monum-table {\r\n  margin-top: 30px;\r\n}\r\n\r\nul.nav.nav-tabs {\r\n  margin-bottom: 20px;\r\n}\r\n\r\n.sending-email {\r\n  background-color: white;\r\n  position: absolute;\r\n  height: 100%;\r\n  width: 520px;\r\n  z-index: 1;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n}\r\n\r\n.sending-email span {\r\n  text-align: center;\r\n}\r\n\r\n.sending-email .response {\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n\r\n.error-validation-text {\r\n  color: red;\r\n  text-align: left;\r\n}\r\n\r\n.tab-names {\r\n  background-color: lightgray;\r\n}\r\n\r\n.tab-names > ul {\r\n  list-style: none;\r\n}\r\n\r\n.tab-names > ul > li {\r\n  display: inline-block;\r\n  padding: 20px 15px;\r\n  cursor: pointer;\r\n  border-right: 1px solid black; \r\n}\r\n\r\n.tab-names > ul > li:first-child {\r\n  border-left: 1px solid black; \r\n}\r\n\r\n.tab-names > ul > li.active-tab,\r\n.tab-names > ul > li:hover {\r\n  background: darkgray;\r\n}", ""]);
 
 // exports
 
@@ -72585,7 +72605,7 @@ exports = module.exports = __webpack_require__(128)(undefined);
 
 
 // module
-exports.push([module.i, ".item {\n  padding: 10px;\n  z-index: 1;\n  border: 1px solid #ebebeb;\n  border-width: 0 1px 1px 0;\n  transition: box-shadow .3s;\n  background: #fff;\n  max-width: 350px; }\n  .item:hover {\n    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.15);\n    z-index: 2; }\n  .item .mainContainer {\n    margin-bottom: 20px; }\n    .item .mainContainer .slider-item {\n      display: flex !important;\n      align-items: center;\n      justify-content: center;\n      outline: none; }\n      .item .mainContainer .slider-item .img-responsive {\n        height: 200px; }\n    .item .mainContainer .slick-next,\n    .item .mainContainer .slick-prev {\n      background: transparent;\n      height: 100%;\n      width: 30px;\n      transition: background .45s ease-in-out;\n      -moz-transition: background .45s ease-in-out;\n      -webkit-transition: background .45s ease-in-out;\n      z-index: 10;\n      outline: none;\n      border-radius: 0; }\n      .item .mainContainer .slick-next:hover,\n      .item .mainContainer .slick-prev:hover {\n        background: rgba(0, 0, 0, 0.4); }\n      .item .mainContainer .slick-next:before,\n      .item .mainContainer .slick-prev:before {\n        display: none; }\n      .item .mainContainer .slick-next span,\n      .item .mainContainer .slick-prev span {\n        display: block; }\n        .item .mainContainer .slick-next span:before,\n        .item .mainContainer .slick-prev span:before {\n          font-size: 14px;\n          color: black; }\n    .item .mainContainer .slick-next {\n      right: 0; }\n    .item .mainContainer .slick-prev {\n      left: 0; }\n", ""]);
+exports.push([module.i, ".item {\n  padding: 10px;\n  z-index: 1;\n  border: 1px solid #ebebeb;\n  border-width: 0 1px 1px 0;\n  transition: box-shadow .3s;\n  background: #fff;\n  max-width: 350px; }\n  .item:hover {\n    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.15);\n    z-index: 2; }\n  .item .mainContainer .slider-item {\n    display: flex !important;\n    align-items: center;\n    justify-content: center;\n    outline: none; }\n    .item .mainContainer .slider-item .img-responsive {\n      height: 200px; }\n  .item .mainContainer .slider-status {\n    display: flex;\n    justify-content: center;\n    padding: 10px 0; }\n  .item .mainContainer .slick-next,\n  .item .mainContainer .slick-prev {\n    background: transparent;\n    height: 100%;\n    width: 30px;\n    transition: background .45s ease-in-out;\n    -moz-transition: background .45s ease-in-out;\n    -webkit-transition: background .45s ease-in-out;\n    z-index: 10;\n    outline: none;\n    border-radius: 0; }\n    .item .mainContainer .slick-next:hover,\n    .item .mainContainer .slick-prev:hover {\n      background: rgba(0, 0, 0, 0.4); }\n    .item .mainContainer .slick-next:before,\n    .item .mainContainer .slick-prev:before {\n      display: none; }\n    .item .mainContainer .slick-next span,\n    .item .mainContainer .slick-prev span {\n      display: block; }\n      .item .mainContainer .slick-next span:before,\n      .item .mainContainer .slick-prev span:before {\n        font-size: 14px;\n        color: black; }\n  .item .mainContainer .slick-next {\n    right: 0; }\n  .item .mainContainer .slick-prev {\n    left: 0; }\n", ""]);
 
 // exports
 
@@ -72630,7 +72650,7 @@ exports = module.exports = __webpack_require__(128)(undefined);
 
 
 // module
-exports.push([module.i, ".container-content {\n  min-height: calc(100vh - 428px);\n  padding: 15px 0;\n  background-color: #e7e7e7; }\n\n.product-container {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n  padding: 0 20px; }\n", ""]);
+exports.push([module.i, ".container-content {\n  min-height: calc(100vh - 428px);\n  padding: 15px 0;\n  background-color: #e7e7e7; }\n\n.product-container {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n  padding: 0 20px; }\n  .product-container.row {\n    margin-left: 0;\n    margin-right: 0; }\n", ""]);
 
 // exports
 

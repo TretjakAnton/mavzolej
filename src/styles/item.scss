@@ -13,8 +13,6 @@
   }
   
   .mainContainer {
-    margin-bottom: 20px;
-
     .slider-item {
       display: flex !important;
       align-items: center;
@@ -24,6 +22,12 @@
       .img-responsive {
         height: 200px;
       }      
+    }
+
+    .slider-status {
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
     }
 
     .slick-next,
