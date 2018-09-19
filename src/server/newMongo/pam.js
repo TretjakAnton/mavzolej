@@ -7,7 +7,7 @@ var mongo = require('mongodb');
 exports.setUpdateMon = (req, res, db) => {
   // create an incoming form object
   let form = new formidable.IncomingForm();
-  let id, folder, price, type_name, menu_name, oldImg;
+  let id, folder, description, price, type_name, menu_name, oldImg;
   let _id = false;
 
   form.on('field', function (name, val) {
@@ -25,6 +25,8 @@ exports.setUpdateMon = (req, res, db) => {
       menu_name = val;
     if (name == 'price')
       price = val;
+    if (name == 'description')
+      description = val;
   });
 
   // specify that we want to allow the user to upload multiple files in a single request
@@ -57,10 +59,13 @@ exports.setUpdateMon = (req, res, db) => {
       console.log('renamed complete');
     });
     
+    console.log(description);
+    
     let item = {
       db_type: 'pam',
       id_pam: id,
       price: price,
+      description: description,
       type_name: type_name,
       folder: folder,
       menu_name: menu_name,
@@ -88,6 +93,7 @@ exports.setUpdateMon = (req, res, db) => {
         db_type: 'pam',
         id_pam: id,
         price: price,
+        description: description,
         type_name: type_name,
         folder: folder,
         menu_name: menu_name
@@ -134,6 +140,7 @@ exports.setUpdateMon = (req, res, db) => {
           db_type: 'pam',
           id_pam: id,
           price: price,
+          description: description,
           type_name: type_name,
           folder: folder,
           menu_name: menu_name,

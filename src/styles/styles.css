@@ -33,7 +33,7 @@ body.opened-form {
 /*  form  */
 
 .form-container {
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: 0px;
   height: 100vh;
@@ -42,6 +42,7 @@ body.opened-form {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 3;
 }
 
 .form-content {
@@ -137,6 +138,7 @@ body.opened-form {
 
 .page-selector {
   display: block;
+  align-self: flex-end;
 }
 
 .container-content {

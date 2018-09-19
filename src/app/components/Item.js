@@ -3,13 +3,6 @@ import { Table, Glyphicon, Button } from 'react-bootstrap';
 import SimpleModalSlideshow from 'react-simple-modal-slideshow';
 import Slider from "react-slick";
 
-const styles = {
-  byButton: {
-    width: "100px",
-    alignSelf: "flex-end",
-  }
-};
-
 const slideSettings = {
   dots: false,
   infinite: true,
@@ -132,20 +125,24 @@ class Item extends React.Component{
                 <td>Номер памятника:</td>
                 <td>{info.id_pam}</td>
               </tr>
+              {info.description && <tr>
+                <td>Описание:</td>
+                <td>{info.description}</td>
+              </tr>}
               <tr>
                 <td>Цена:</td>
                 <td>{info.price}</td>
               </tr>
             </tbody>
           </Table>
-          <Button
-            style={styles.byButton}
+        </div>
+        <Button
+            className="shop-button"
             onClick={this.openForm}
           >
             Заказать
             <Glyphicon glyph="shopping-cart" />
-          </Button>
-        </div>
+        </Button>
         <SimpleModalSlideshow 
           slides={sliderImages}
           currentSlide={currentSlide}

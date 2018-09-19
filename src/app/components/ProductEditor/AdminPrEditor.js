@@ -128,7 +128,7 @@ export default class AdminPrEditor extends React.Component {
 
     const changedType = types.find((el) => el.type_name === editing.type_name);
 
-    addUpdatePam(editing.id_pam, changedType, editing.price, addingImages, editing._id, editing.images ).then((data) => {
+    addUpdatePam(editing.id_pam, changedType, editing.description, editing.price, addingImages, editing._id, editing.images ).then((data) => {
       if (data.error) {
         console.log(data.error);
         this.cancelModal();
@@ -170,6 +170,8 @@ export default class AdminPrEditor extends React.Component {
       state = { id_pam: event.target.value }
     if (event.target.name === 'price')
       state = { price: event.target.value }
+    if (event.target.name === 'description')
+      state = { description: event.target.value }
     
     this.setState({
       editing: {
@@ -188,7 +190,8 @@ export default class AdminPrEditor extends React.Component {
           <th key='1'>image</th>
           <th key='2'>id</th>
           <th key='3'>price</th>
-          <th key='4'>control</th>
+          <th key='4'>description</th>
+          <th key='5'>control</th>
         </tr>
       </thead>
     );
@@ -203,6 +206,7 @@ export default class AdminPrEditor extends React.Component {
           </td>
           <td key={key + Math.random()}>{val.id_pam}</td>
           <td key={key + Math.random()}>{val.price}</td>
+          <td key={key + Math.random()}>{val.description}</td>
           <td key={key + Math.random()}>
             <button onClick={() => this.setToEdit(val)}>edit</button>
             <button onClick={() => this.setToDelete(val)}>delete</button>
@@ -294,6 +298,15 @@ export default class AdminPrEditor extends React.Component {
                     type="number"
                     name="price"
                     value={editing.price}
+                    onChange={this.inputsConrol}
+                  />
+                </div>
+                <div className="deleting-item col-xs-11">
+                  <span>Описание</span> 
+                  <FormControl
+                    type="text"
+                    name="description"
+                    value={editing.description}
                     onChange={this.inputsConrol}
                   />
                 </div>

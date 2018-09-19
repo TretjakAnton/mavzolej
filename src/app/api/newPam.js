@@ -1,6 +1,6 @@
 import { url } from '../Constants';
 
-export function addUpdatePam(id_pam, type, price, images, _id, oldImges) {
+export function addUpdatePam(id_pam, type, description, price, images, _id, oldImges) {
   const formData = new FormData();
   if (_id) {
     formData.append('_id', _id);
@@ -10,6 +10,7 @@ export function addUpdatePam(id_pam, type, price, images, _id, oldImges) {
   formData.append('folder', type.folder);
   formData.append('type_name', type.type_name);
   formData.append('menu_name', type.menu_name);
+  formData.append('description', description);
   formData.append('price', price);
   if (images) {
     images.map((val) => {

@@ -23,6 +23,7 @@ class Pam extends React.Component {
       types: null,
       id_fake: '',
       price: '',
+      description: '',
       type_name: '',
       uploadedFiles: []
     };
@@ -49,23 +50,28 @@ class Pam extends React.Component {
     if(event.target.name == "price"){
       this.setState({price: event.target.value})
     }
+    if(event.target.name == "description"){
+      this.setState({description: event.target.value})
+    }
     if(event.target.name == "type_name"){
       this.setState({type_name: event.target.value})
     }
   };
 
   onSendAll = () => {
+    const {id_fake, price, uploadedFiles, description} = this.state;
     const selectType = this.state.types.filter((type) => {
       if(type.type_name == this.state.type_name)
         return type
     });
-    addUpdatePam(this.state.id_fake, selectType[0], this.state.price, this.state.uploadedFiles).then((data) => {
+    addUpdatePam(id_fake, selectType[0], description, price, uploadedFiles).then((data) => {
       if (data.error) {
         this.setState({error: data.error})
       } else {
         this.setState({
           success: data.success,
           id_fake: '',
+          description: '',
           price: '',
           uploadedFiles: []
         })
@@ -114,6 +120,7 @@ class Pam extends React.Component {
               <FormControl componentClass="select" name="type_name" value={this.state.type_name} onChange={this.inputsConrol}>
                 {this.generateDOM('types')}
               </FormControl>
+              <FormControl type="text" placeholder="описание" name="description" value={this.state.description} onChange={this.inputsConrol} />
               <FormControl type="number" placeholder="цена" name="price" value={this.state.price} onChange={this.inputsConrol} />
               <Button onClick={this.onSendAll}>
                  Сохранть

@@ -1,4 +1,5 @@
 .item {
+  position: relative;
   padding: 10px;
   z-index: 1;
   border: 1px solid #ebebeb;
@@ -6,10 +7,19 @@
   transition: box-shadow .3s;
   background: #fff;
   max-width: 350px;
+  min-height: 500px;
+  padding-bottom: 50px;
 
   &:hover {
     box-shadow: 0 0 30px 0 rgba(0,0,0,.15);
     z-index: 2;
+  }
+
+  .shop-button {
+    position: absolute;
+    width: 100px;
+    bottom: 10px;
+    right: 10px;
   }
   
   .mainContainer {
