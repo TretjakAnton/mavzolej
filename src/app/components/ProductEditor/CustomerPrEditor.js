@@ -11,7 +11,6 @@ export default class AdminPrEditor extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      page: 1,
       countRows: 10,
       pams: null,
       error: null,
@@ -25,7 +24,7 @@ export default class AdminPrEditor extends React.Component{
     }
   }
 
-  componentWillMount(){
+  componentWillMount() {
     this.getInfoForPage();
   };
 
@@ -44,8 +43,11 @@ export default class AdminPrEditor extends React.Component{
   };
 
   getInfoForPage = (id, page) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const pageHref = parseInt(urlParams.get('page'));
+
     const id_type = id || this.state.id_type;
-    const newPage = page || this.state.page;
+    const newPage = page || pageHref || 1;
 
     getPam(null, id_type, this.calcRange(newPage), this.state.countRows, true).then((data) => {
       if (data.error) {

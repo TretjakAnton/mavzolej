@@ -21,7 +21,6 @@ export default class AdminPrEditor extends React.Component {
       types: this.props.types,
       curr_type: this.props.types[0],
       editing: null,
-      page: 1,
       countRows: 10,
       pams: null,
       error: null,
@@ -59,7 +58,10 @@ export default class AdminPrEditor extends React.Component {
   };
 
   getInfoForPage = (id_prod, type_name, page) => {
-    const newPage = page || this.state.page;
+    const urlParams = new URLSearchParams(window.location.search);
+    const pageHref = parseInt(urlParams.get('page'));
+
+    const newPage = page || pageHref || 1;
 
     getPam(id_prod, type_name, this.calcRange(newPage), this.state.countRows).then((data) => {
       if (data.error) {

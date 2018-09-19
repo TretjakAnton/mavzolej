@@ -36,6 +36,7 @@ export default class Pages extends React.Component{
   };
 
   changePage = (page) => {
+    window.history.pushState('', `page ${page}`, `${window.location.pathname}?page=${page}`);
     this.setState({currentPage: page});
     this.props.onChange(page);
   };
