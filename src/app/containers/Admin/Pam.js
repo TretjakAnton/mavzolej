@@ -120,7 +120,7 @@ class Pam extends React.Component {
               <FormControl componentClass="select" name="type_name" value={this.state.type_name} onChange={this.inputsConrol}>
                 {this.generateDOM('types')}
               </FormControl>
-              <FormControl type="text" placeholder="описание" name="description" value={this.state.description} onChange={this.inputsConrol} />
+              <textarea style={{width: '100%', height: '100px'}} type="textarea" placeholder="описание" name="description" value={this.state.description} onChange={this.inputsConrol} />
               <FormControl type="number" placeholder="цена" name="price" value={this.state.price} onChange={this.inputsConrol} />
               <Button onClick={this.onSendAll}>
                  Сохранть

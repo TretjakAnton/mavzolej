@@ -11,6 +11,23 @@ body.opened-form {
   overflow: hidden;
 }
 
+.admin-controle-monuments {
+  padding: 0 25px;
+}
+
+.form-group input,
+.form-group select {
+  margin: 15px 0;
+}
+
+.form-group > div {
+  padding: 0;
+}
+
+.description {
+  white-space: normal !important;
+}
+
 .main-image {
   height: 200px;
   margin: 0 auto;
@@ -302,7 +319,6 @@ body.opened-form {
 }
 
 .admin-controle-monuments .form-group {
-  height: 161px;
   margin-top: 20px;
 }
 

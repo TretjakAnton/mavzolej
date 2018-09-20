@@ -3,7 +3,7 @@ import {
   Modal,
   Table,
   FormControl,
-  Button,
+  Button
 } from 'react-bootstrap';
 import {
   getPam,
@@ -208,7 +208,7 @@ export default class AdminPrEditor extends React.Component {
           </td>
           <td key={key + Math.random()}>{val.id_pam}</td>
           <td key={key + Math.random()}>{val.price}</td>
-          <td key={key + Math.random()}>{val.description}</td>
+          <td className="description" key={key + Math.random()}>{val.description}</td>
           <td key={key + Math.random()}>
             <button onClick={() => this.setToEdit(val)}>edit</button>
             <button onClick={() => this.setToDelete(val)}>delete</button>
@@ -305,8 +305,7 @@ export default class AdminPrEditor extends React.Component {
                 </div>
                 <div className="deleting-item col-xs-11">
                   <span>Описание</span> 
-                  <FormControl
-                    type="text"
+                  <textarea style={{width: '100%', height: '100px'}}
                     name="description"
                     value={editing.description}
                     onChange={this.inputsConrol}
