@@ -274,39 +274,38 @@ body.opened-form {
 
 /*Home page*/
 
-.cont-left-bl,
-.center-bl,
-.right-block {
-  display: inline-block;
-  width: 400px;
-  vertical-align: top;
+.content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrap {
+  font-size: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  word-break: break-word;
+  text-align: justify;
+}
+
+.wrap h2 {
+  text-align: center;
 }
 
 @media (min-width: 1200px) {
-  .wrap {
-    width: 1200px;
-    margin: 0 auto;
-  }
   .footer {
     height: 180px;
   }
 }
 
 @media (min-width: 800px) and (max-width: 1200px) {
-  .wrap {
-    width: 800px;
-    margin: 0 auto;
-  }
   .footer {
     height: 180px;
   }
 }
 
 @media (min-width: 400px) and (max-width: 800px) {
-  .wrap {
-    width: 400px;
-    margin: 0 auto;
-  }
   .footer {
     height: 180px;
   }
