@@ -24,7 +24,7 @@ const navbarInstance = (meuItems) => {return (
       </Nav>
       <Nav pullRight>
         <LinkContainer key="111" to={`/aboutUs`}>
-          <NavItem eventKey={2}>О нас</NavItem>
+          <NavItem eventKey={2}>Контакты</NavItem>
         </LinkContainer>
       </Nav>
     </Navbar.Collapse>
@@ -81,12 +81,10 @@ class Menu extends React.Component {
 
           newItems.addItem({name: currEl.menu_name, id: currEl.type_name});
 
-          if(next) {
-            if(next.menu_name !== currEl.menu_name){
-              menuData.push(newItems);
-              newItems = new menuItems();
-              newItems.setName(next.menu_name);
-            }
+          if(next && next.menu_name !== currEl.menu_name) {
+            menuData.push(newItems);
+            newItems = new menuItems();
+            newItems.setName(next.menu_name);
           } else {
             menuData.push(newItems);
           }
