@@ -30,6 +30,7 @@ class HomePage extends React.Component{
                 </div>
 
                 <h2>Спасибо за проявленный интерес к нашему сайту.</h2> 
+                <Link to="/aboutUs">Наши контакты и карта проезда</Link>
             </div>
           </div>
         )
