@@ -1,18 +1,42 @@
 .header {
     .header-container {
         display: flex;
-        align-items: center;
-        justify-content: center;
 
         &__left,
         &__right,
         &__center {
             width: 300px;
+            padding: 0 15px;
         }
 
         &__left {
-            font-size: 22px;
+            font-size: 18px;
             text-align: right;
+        }
+
+        @media (min-width: 570px) and (max-width: 700px) {
+            &__left {
+                font-size: 16px;
+            }
+
+            &__right {
+                font-size: 13px;
+            }
+        }
+
+        @media screen and (max-width: 570px) {
+            &__center {
+                display: none;
+            }
+
+            &__left,
+            &__right {
+                font-size: 12px;
+                text-align: center;
+            }
+
+            flex-direction: column;
+            align-items: center;
         }
     }
 }
