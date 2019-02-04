@@ -148,14 +148,22 @@ body.opened-form {
   margin-left: auto;
 }
 
-.upHead {
-  text-align: center;
-  margin-top: 30px;
-}
-
 .page-selector {
   display: block;
   align-self: flex-end;
+}
+
+.page-selector > div {
+  margin-top: 20px;
+}
+
+.page-selector > div {
+  margin-top: 20px;
+}
+
+.page-selector > div > div.btn-group {
+  display: flex;
+  justify-content: center;
 }
 
 .container-content {
