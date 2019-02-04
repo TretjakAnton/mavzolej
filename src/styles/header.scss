@@ -9,6 +9,11 @@
             padding: 0 15px;
         }
 
+        &__left,
+        &__right {
+            padding-top: 20px;
+        }
+
         &__left {
             font-size: 18px;
             text-align: right;
@@ -32,6 +37,7 @@
             &__left,
             &__right {
                 font-size: 12px;
+                padding-top: 0; 
                 text-align: center;
             }
 
