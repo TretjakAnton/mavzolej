@@ -104,7 +104,8 @@ class Menu extends React.Component {
           items.push(<LinkContainer key={data.id} to={`/monuments/${data.id}`}><NavItem eventKey={key}>{data.id}</NavItem></LinkContainer>)
         });
       } else {
-        if(elem.name !== this.state.data[topKey - 1].name){
+        var prevName = this.state.data[topKey - 1] && this.state.data[topKey - 1].name || '';
+        if(elem.name !== prevName){
           items.push(navDropdown(elem))
         }
       }
