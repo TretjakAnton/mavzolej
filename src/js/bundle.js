@@ -27267,7 +27267,7 @@ var navDropdown = function navDropdown(obj) {
   var wrap = function wrap(items) {
     return _react2.default.createElement(
       _reactBootstrap.NavDropdown,
-      { id: obj.name, key: obj.name + '-' + items.length, title: obj.name },
+      { id: obj.name, key: obj.name + '-' + Math.random(10), title: obj.name },
       items
     );
   };

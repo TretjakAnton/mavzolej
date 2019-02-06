@@ -33,7 +33,7 @@ const navbarInstance = (meuItems) => {return (
 
 const navDropdown = (obj) => {
   let itemToWrap = [];
-  const wrap = (items) => <NavDropdown id={obj.name} key={`${obj.name}-${items.length}`} title={obj.name}>{items}</NavDropdown>;
+  const wrap = (items) => <NavDropdown id={obj.name} key={`${obj.name}-${Math.random(10)}`} title={obj.name}>{items}</NavDropdown>;
 
   obj.items.map((element, key) => {
     itemToWrap.push(<LinkContainer key={element.id} to={`/monuments/${element.id}`}><MenuItem eventKey={key}>{element.id}</MenuItem></LinkContainer>);
