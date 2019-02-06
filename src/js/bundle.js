@@ -27275,7 +27275,7 @@ var navDropdown = function navDropdown(obj) {
   obj.items.map(function (element, key) {
     itemToWrap.push(_react2.default.createElement(
       _reactRouterBootstrap.LinkContainer,
-      { key: key, to: '/monuments/' + element.id },
+      { key: element.id, to: '/monuments/' + element.id },
       _react2.default.createElement(
         _reactBootstrap.MenuItem,
         { eventKey: key },
@@ -27350,7 +27350,7 @@ var Menu = function (_React$Component) {
           elem.items.map(function (data, key) {
             items.push(_react2.default.createElement(
               _reactRouterBootstrap.LinkContainer,
-              { key: key, to: '/monuments/' + data.id },
+              { key: data.id, to: '/monuments/' + data.id },
               _react2.default.createElement(
                 _reactBootstrap.NavItem,
                 { eventKey: key },
