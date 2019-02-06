@@ -27359,7 +27359,9 @@ var Menu = function (_React$Component) {
             ));
           });
         } else {
-          items.push(navDropdown(elem));
+          if (elem.name !== _this2.state.data[topKey - 1].name) {
+            items.push(navDropdown(elem));
+          }
         }
       });
 
