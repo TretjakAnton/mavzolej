@@ -372,3 +372,8 @@ ul.nav.nav-tabs {
 .tab-names > ul > li:hover {
   background: darkgray;
 }
+
+.navbar-default .navbar-nav > li > a,
+.navbar-nav > li > .dropdown-menu {
+  font-size: 18px;
+}

@@ -33,10 +33,10 @@ const navbarInstance = (meuItems) => {return (
 
 const navDropdown = (obj) => {
   let itemToWrap = [];
-  const wrap = (items) => <NavDropdown id={obj.name} key={obj.name} title={obj.name}>{items}</NavDropdown>;
+  const wrap = (items) => <NavDropdown id={obj.name} key={`${obj.name}-${Math.random(10)}`} title={obj.name}>{items}</NavDropdown>;
 
   obj.items.map((element, key) => {
-    itemToWrap.push(<LinkContainer key={key} to={`/monuments/${element.id}`}><MenuItem eventKey={key}>{element.id}</MenuItem></LinkContainer>);
+    itemToWrap.push(<LinkContainer key={element.id} to={`/monuments/${element.id}`}><MenuItem eventKey={key}>{element.id}</MenuItem></LinkContainer>);
   });
 
   return wrap(itemToWrap);
@@ -102,10 +102,13 @@ class Menu extends React.Component {
     this.state.data.map((elem, topKey) => {
       if(elem.name == 'Главное'){
         elem.items.map((data, key) => {
-          items.push(<LinkContainer key={key} to={`/monuments/${data.id}`}><NavItem eventKey={key}>{data.id}</NavItem></LinkContainer>)
+          items.push(<LinkContainer key={data.id} to={`/monuments/${data.id}`}><NavItem eventKey={key}>{data.id}</NavItem></LinkContainer>)
         });
       } else {
-        items.push(navDropdown(elem))
+        var prevName = this.state.data[topKey - 1] && this.state.data[topKey - 1].name || '';
+        if(elem.name !== prevName){
+          items.push(navDropdown(elem))
+        }
       }
     });
 
