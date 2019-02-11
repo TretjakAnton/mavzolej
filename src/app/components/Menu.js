@@ -64,9 +64,10 @@ class Menu extends React.Component {
     this.state = {
       data: null,
     }
+    this.initData();
   }
 
-  componentWillMount = () => {
+  initData = () => {
     getAllTypes().then((data) => {
       if(data.error){
         this.setState({error: data.error})

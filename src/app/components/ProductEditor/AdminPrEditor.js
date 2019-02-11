@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Modal,
-  Table,
   FormControl,
   Button
 } from 'react-bootstrap';
@@ -13,6 +12,7 @@ import {
 } from '../../api/newPam';
 import Pages from '../Pages';
 import ImageControl from '../ImageControl';
+import AdminTable from './AdminTable';
 
 export default class AdminPrEditor extends React.Component {
   constructor(props) {
@@ -30,6 +30,12 @@ export default class AdminPrEditor extends React.Component {
       addingImages: null,
       deletingImages: [],
     }
+  }
+
+  componentWillReceiveProps() {
+    const { curr_type, page } = this.state;
+    const current = curr_type ? curr_type.type_name : '';
+    this.getInfoForPage(null, current, page);
   }
 
   componentWillMount() {
@@ -183,43 +189,6 @@ export default class AdminPrEditor extends React.Component {
     })
   }
 
-  pamsDom = () => {
-    var body = [];
-    var head = [];
-    head.push(
-      <thead key='8'>
-        <tr key='7'>
-          <th key='1'>image</th>
-          <th key='2'>id</th>
-          <th key='3'>price</th>
-          <th key='4'>description</th>
-          <th key='5'>control</th>
-        </tr>
-      </thead>
-    );
-    this.state.pams.map((val, key) => {
-      body.push(
-        <tr key={key}>
-          <td key={key + Math.random()}>
-            <ImageControl
-              images={val.images}
-              previewFolder={'../../media/images' + this.state.curr_type.folder}
-            />
-          </td>
-          <td key={key + Math.random()}>{val.id_pam}</td>
-          <td key={key + Math.random()}>{val.price}</td>
-          <td className="description" key={key + Math.random()}>{val.description}</td>
-          <td key={key + Math.random()}>
-            <button onClick={() => this.setToEdit(val)}>edit</button>
-            <button onClick={() => this.setToDelete(val)}>delete</button>
-          </td>
-        </tr>
-      )
-    });
-
-    return (<Table responsive className="monum-table">{head.concat(<tbody key="123">{body}</tbody>)}</Table>);
-  };
-
   deleteImages = (image) => {
     let newArr = this.state.deletingImages;
     newArr.push(image);
@@ -250,7 +219,14 @@ export default class AdminPrEditor extends React.Component {
     }
     return <div>
       { getTypes(curr_type ? curr_type.type_name: '', this.typeConrol, "curr_type") }
-      { this.state.pams && this.pamsDom() }
+      { this.state.pams && 
+        <AdminTable 
+          pams={this.state.pams} 
+          folder={this.state.curr_type.folder}
+          setToEdit={this.setToEdit}
+          setToDelete={this.setToDelete}
+        />
+      }
       <Modal
         show={showModal}
         onHide={this.cancelModal}

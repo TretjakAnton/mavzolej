@@ -8,7 +8,7 @@ import {
   getCountPams
 } from '../api/newPam';
 
-export default class Pages extends React.Component{
+export default class Pages extends React.PureComponent {
   constructor(props){
     super(props);
     this.state = {
@@ -17,23 +17,22 @@ export default class Pages extends React.Component{
       error: null,
       DOMPages: null
     }
+    this.initPages();
   }
 
-  componentWillMount(){
-
-  };
-
-  componentWillReceiveProps = (newProps) => {
-    getCountPams(newProps.type).then((data) => {
+  initPages = () => {
+    getCountPams(this.props.type).then((data) => {
       if(data.error){
         this.setState({error: data.error})
       } else {
-        const countPages = Math.ceil(data.length/newProps.countRows);
-        this.setState({countPages: countPages});
-        this.calculatePages()
+        const countPages = Math.ceil(data.length/this.props.countRows);
+        this.setState({
+          countPages: countPages,
+          DOMPages: this.calculatePages(countPages)
+        });
       }
     });
-  };
+  }
 
   changePage = (page) => {
     window.history.pushState('', `page ${page}`, `${window.location.pathname}?page=${page}`);
@@ -41,12 +40,12 @@ export default class Pages extends React.Component{
     this.props.onChange(page);
   };
 
-  calculatePages = () => {
+  calculatePages = (countPages) => {
     const pages = [];
-    for(let i=1; i<=this.state.countPages; i++){
+    for(let i=1; i <= countPages; i++){
       pages.push(<Button key={i} onClick={() => this.changePage(i)}>{i}</Button>)
     }
-    this.setState({ DOMPages: pages });
+    return pages;
   };
 
   render(){

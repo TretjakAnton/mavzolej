@@ -27,9 +27,10 @@ class Pam extends React.Component {
       type_name: '',
       uploadedFiles: []
     };
+    this.initData();
   };
 
-  componentWillMount() {
+  initData() {
     getAllTypes().then((data) => {
       if (data.error) {
         this.setState({error: data.error})
@@ -38,7 +39,7 @@ class Pam extends React.Component {
         this.setState({
           types: data,
           type_name: data.length > 0 ? data[0].type_name : ''
-        })
+        });
       }
     })
   };
@@ -74,7 +75,7 @@ class Pam extends React.Component {
           description: '',
           price: '',
           uploadedFiles: []
-        })
+        });
       }
     });
   };
@@ -115,7 +116,7 @@ class Pam extends React.Component {
           }
           <FormGroup>
             <Col sm={6}>
-              <FormControl type="text" placeholder="номер памятника" name="id_fake" value={this.state.id_fake} onChange={this.inputsConrol} />
+              <FormControl type="number" placeholder="номер памятника" name="id_fake" value={this.state.id_fake} onChange={this.inputsConrol} />
               <ControlLabel>тип памятника</ControlLabel>
               <FormControl componentClass="select" name="type_name" value={this.state.type_name} onChange={this.inputsConrol}>
                 {this.generateDOM('types')}
