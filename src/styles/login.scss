@@ -1,0 +1,42 @@
+.login {
+
+    &__form {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+    
+    &__content {
+        background-color: white;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 280px;
+        height: 250px;
+        padding: 20px;
+        border-radius: 10px;
+    }
+  
+    &__header {
+        text-align: center;
+        font-size: 16px;
+    }
+  
+    &__fields {
+        padding: 20px 0;
+    }
+
+    &__error {
+        color: red;
+    }
+  
+    &__button {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+    }
+}

@@ -20,6 +20,7 @@ class Login extends React.Component{
     this.state = {
       userLogin: '',
       userPassword: '',
+      error: ''
     };
   };
 
@@ -32,48 +33,61 @@ class Login extends React.Component{
   };
 
   checkUser = () => {
+    this.setState({error: ''});
+
     login(this.state.userPassword, this.state.userLogin).then((data) => {
       if(data.Auth == 'Logged'){
         this.props.setCredential(this.state.userLogin);
         setCookie(data.Auth, 7);
         browserHistory.push('/admin');
-      } else{
-        this.setState({error: 'error'});
+      } else {
+        this.setState({error: 'Login or password is wrong'});
       }
     });
   };
 
   render() {
-    return <div className="login-form">
-      <form className="login-content">
-        <div className="login-header">
-          <ControlLabel>Login</ControlLabel>
-        </div>
-        <FormGroup className="login-fields">
-          <FormControl
-            type="text"
-            value={this.state.userLogin}
-            placeholder="Login"
-            onChange={this.handleLoginChange}
-          />
-          <FormControl.Feedback />
-          <FormControl
-            type="password"
-            value={this.state.userPassword}
-            placeholder="Password"
-            onChange={this.handlePasswordChange}
-          />
-          <FormControl.Feedback />
-        </FormGroup>
-        <Button
-          bsSize="sm"
-          onClick={this.checkUser}
-          className="login-button"
-        >
-          Login →
-        </Button>
-      </form>
-    </div>
+    const {error} = this.state;
+    return (
+      <div className="login__form">
+        <form className="login__content">
+
+          <div className="login__header">
+            <ControlLabel>Login</ControlLabel>
+          </div>
+
+          <FormGroup className="login__fields">
+            <FormControl
+              type="text"
+              value={this.state.userLogin}
+              placeholder="Login"
+              onChange={this.handleLoginChange}
+            />
+
+            <FormControl
+              type="password"
+              value={this.state.userPassword}
+              placeholder="Password"
+              onChange={this.handlePasswordChange}
+            />
+
+            {error && 
+              <div className="login__error">
+                {error}
+              </div>
+            }
+          </FormGroup>
+          
+          <Button
+            bsSize="sm"
+            onClick={this.checkUser}
+            className="login__button"
+          >
+            Login →
+          </Button>
+        </form>
+      </div>
+    );
   }
 }
 
