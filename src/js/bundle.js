@@ -57431,20 +57431,20 @@ var CustomerPrEditor = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (CustomerPrEditor.__proto__ || Object.getPrototypeOf(CustomerPrEditor)).call(this, props));
 
     _this.changePage = function (page) {
-      _this.setState({ page: page });
       _this.getInfoForPage(_this.state.id_type, page);
     };
 
-    _this.calcRange = function (page) {
-      return (page - 1) * _this.state.countRows;
-    };
-
     _this.getInfoForPage = function (id, page) {
-      (0, _newPam.getPam)(null, id, _this.calcRange(page), _this.state.countRows, true).then(function (data) {
+      var currPage = (page - 1) * _this.state.countRows;
+
+      (0, _newPam.getPam)(null, id, currPage, _this.state.countRows, true).then(function (data) {
         if (data.error) {
           _this.setState({ error: data.error });
         } else {
-          _this.setState({ pams: data });
+          _this.setState({
+            pams: data,
+            page: page
+          });
         }
       });
     };
@@ -57486,15 +57486,11 @@ var CustomerPrEditor = function (_React$Component) {
         info: ''
       }
     };
+    _this.getInfoForPage(_this.state.id_type, _this.state.page);
     return _this;
   }
 
   _createClass(CustomerPrEditor, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      this.getInfoForPage(this.state.id_type, this.state.page);
-    }
-  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;

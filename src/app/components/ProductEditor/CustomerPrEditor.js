@@ -25,27 +25,24 @@ export default class CustomerPrEditor extends React.Component{
         info: '',
       }
     }
+    this.getInfoForPage(this.state.id_type, this.state.page);
   }
 
-  componentWillMount() {
-    this.getInfoForPage(this.state.id_type, this.state.page);
-  };
-
   changePage = (page) => {
-    this.setState({page: page});
     this.getInfoForPage(this.state.id_type, page);
   };
 
-  calcRange = (page) => {
-    return (page - 1) * this.state.countRows;
-  };
-
   getInfoForPage = (id, page) => {
-    getPam(null, id, this.calcRange(page), this.state.countRows, true).then((data) => {
+    const currPage = (page - 1) * this.state.countRows;
+
+    getPam(null, id, currPage, this.state.countRows, true).then((data) => {
       if (data.error) {
         this.setState({error: data.error})
       } else {
-        this.setState({pams: data})
+        this.setState({
+          pams: data,
+          page: page
+        });
       }
     });
   };
