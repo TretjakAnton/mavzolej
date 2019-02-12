@@ -503,7 +503,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__StyleConfig__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__StyleConfig__ = __webpack_require__(22);
 
 
 // TODO: The publicly exposed parts of this should be in lib/BootstrapUtils.
@@ -776,7 +776,7 @@ module.exports = invariant;
 
 
 
-var emptyFunction = __webpack_require__(33);
+var emptyFunction = __webpack_require__(34);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -1475,6 +1475,49 @@ module.exports = warning;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return Size; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SIZE_MAP; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DEVICE_SIZES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return State; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return Style; });
+var Size = {
+  LARGE: 'large',
+  SMALL: 'small',
+  XSMALL: 'xsmall'
+};
+
+var SIZE_MAP = {
+  large: 'lg',
+  medium: 'md',
+  small: 'sm',
+  xsmall: 'xs',
+  lg: 'lg',
+  md: 'md',
+  sm: 'sm',
+  xs: 'xs'
+};
+
+var DEVICE_SIZES = ['lg', 'md', 'sm', 'xs'];
+
+var State = {
+  SUCCESS: 'success',
+  WARNING: 'warning',
+  DANGER: 'danger',
+  INFO: 'info'
+};
+
+var Style = {
+  DEFAULT: 'default',
+  PRIMARY: 'primary',
+  LINK: 'link',
+  INVERSE: 'inverse'
+};
+
+/***/ }),
+/* 23 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Accordion__ = __webpack_require__(517);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Accordion", function() { return __WEBPACK_IMPORTED_MODULE_0__Accordion__["a"]; });
@@ -1756,49 +1799,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-
-/***/ }),
-/* 23 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return Size; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SIZE_MAP; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DEVICE_SIZES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return State; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return Style; });
-var Size = {
-  LARGE: 'large',
-  SMALL: 'small',
-  XSMALL: 'xsmall'
-};
-
-var SIZE_MAP = {
-  large: 'lg',
-  medium: 'md',
-  small: 'sm',
-  xsmall: 'xs',
-  lg: 'lg',
-  md: 'md',
-  sm: 'sm',
-  xs: 'xs'
-};
-
-var DEVICE_SIZES = ['lg', 'md', 'sm', 'xs'];
-
-var State = {
-  SUCCESS: 'success',
-  WARNING: 'warning',
-  DANGER: 'danger',
-  INFO: 'info'
-};
-
-var Style = {
-  DEFAULT: 'default',
-  PRIMARY: 'primary',
-  LINK: 'link',
-  INVERSE: 'inverse'
-};
 
 /***/ }),
 /* 24 */
@@ -2501,6 +2501,24 @@ module.exports = root;
 
 /***/ }),
 /* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//export const url = "http://localhost:3000";
+var url = exports.url = "";
+var ALL_TYPES = exports.ALL_TYPES = 'ALL_TYPES';
+var ALL_SIZES = exports.ALL_SIZES = 'ALL_SIZES';
+var USER_LOGIN = exports.USER_LOGIN = 'USER_LOGIN';
+var ADMIN = exports.ADMIN = 'ADMIN';
+var COOKIE_NAME = exports.COOKIE_NAME = 'AUTHORIZATION';
+
+/***/ }),
+/* 31 */
 /***/ (function(module, exports) {
 
 var core = module.exports = { version: '2.5.2' };
@@ -2508,7 +2526,7 @@ if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports) {
 
 /**
@@ -2540,7 +2558,7 @@ module.exports = isArray;
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2718,7 +2736,7 @@ function enhanceElement(getInstanceFromComponent, publicMethodMap, eventMap, con
 }
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2760,7 +2778,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2786,24 +2804,6 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = { debugTool: debugTool };
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-//export const url = "http://localhost:3000";
-var url = exports.url = "";
-var ALL_TYPES = exports.ALL_TYPES = 'ALL_TYPES';
-var ALL_SIZES = exports.ALL_SIZES = 'ALL_SIZES';
-var USER_LOGIN = exports.USER_LOGIN = 'USER_LOGIN';
-var ADMIN = exports.ADMIN = 'ADMIN';
-var COOKIE_NAME = exports.COOKIE_NAME = 'AUTHORIZATION';
 
 /***/ }),
 /* 36 */
@@ -3301,7 +3301,7 @@ module.exports = warning;
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(46);
-var core = __webpack_require__(30);
+var core = __webpack_require__(31);
 var ctx = __webpack_require__(156);
 var hide = __webpack_require__(67);
 var PROTOTYPE = 'prototype';
@@ -3399,7 +3399,7 @@ var _assign = __webpack_require__(15);
 
 var PooledClass = __webpack_require__(49);
 
-var emptyFunction = __webpack_require__(33);
+var emptyFunction = __webpack_require__(34);
 var warning = __webpack_require__(11);
 
 var didWarnForAddedNewProperty = false;
@@ -5087,7 +5087,7 @@ module.exports = reactProdInvariant;
 
 
 var ReactRef = __webpack_require__(377);
-var ReactInstrumentation = __webpack_require__(34);
+var ReactInstrumentation = __webpack_require__(35);
 
 var warning = __webpack_require__(11);
 
@@ -6878,7 +6878,7 @@ module.exports = {};
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_prop_types_extra_lib_elementType__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_prop_types_extra_lib_elementType___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_prop_types_extra_lib_elementType__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__utils_bootstrapUtils__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__utils_StyleConfig__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__utils_StyleConfig__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__SafeAnchor__ = __webpack_require__(36);
 
 
@@ -9677,7 +9677,7 @@ exports.deletePam = deletePam;
 exports.deleteImage = deleteImage;
 exports.updatePam = updatePam;
 
-var _Constants = __webpack_require__(35);
+var _Constants = __webpack_require__(30);
 
 function addUpdatePam(id_pam, type, description, price, images, _id, oldImges) {
   var formData = new FormData();
@@ -11492,7 +11492,7 @@ module.exports = getEventModifierState;
 var DOMLazyTree = __webpack_require__(63);
 var Danger = __webpack_require__(388);
 var ReactDOMComponentTree = __webpack_require__(16);
-var ReactInstrumentation = __webpack_require__(34);
+var ReactInstrumentation = __webpack_require__(35);
 
 var createMicrosoftUnsafeLocalFunction = __webpack_require__(139);
 var setInnerHTML = __webpack_require__(96);
@@ -12149,7 +12149,7 @@ var _prodInvariant = __webpack_require__(12);
 
 var ReactCurrentOwner = __webpack_require__(37);
 var ReactInstanceMap = __webpack_require__(81);
-var ReactInstrumentation = __webpack_require__(34);
+var ReactInstrumentation = __webpack_require__(35);
 var ReactUpdates = __webpack_require__(38);
 
 var invariant = __webpack_require__(10);
@@ -12385,7 +12385,7 @@ module.exports = ReactUpdateQueue;
 
 var _assign = __webpack_require__(15);
 
-var emptyFunction = __webpack_require__(33);
+var emptyFunction = __webpack_require__(34);
 var warning = __webpack_require__(11);
 
 var validateDOMNesting = emptyFunction;
@@ -13720,7 +13720,7 @@ exports.f = __webpack_require__(41);
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(46);
-var core = __webpack_require__(30);
+var core = __webpack_require__(31);
 var LIBRARY = __webpack_require__(166);
 var wksExt = __webpack_require__(169);
 var defineProperty = __webpack_require__(47).f;
@@ -15745,7 +15745,7 @@ exports.addType = addType;
 exports.updateType = updateType;
 exports.deleteType = deleteType;
 
-var _Constants = __webpack_require__(35);
+var _Constants = __webpack_require__(30);
 
 function getAllTypes() {
   return fetch(_Constants.url + "/api/newType", { method: 'OPTIONS' }).then(function (response) {
@@ -16157,7 +16157,7 @@ module.exports = baseRest;
 /* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isArray = __webpack_require__(31),
+var isArray = __webpack_require__(32),
     isSymbol = __webpack_require__(121);
 
 /** Used to match property names within property paths. */
@@ -16882,7 +16882,7 @@ module.exports = function(isValidElement) {
 
 
 
-var emptyFunction = __webpack_require__(33);
+var emptyFunction = __webpack_require__(34);
 var invariant = __webpack_require__(10);
 var warning = __webpack_require__(11);
 var assign = __webpack_require__(15);
@@ -18187,7 +18187,7 @@ module.exports = CSSProperty;
 
 var DOMProperty = __webpack_require__(44);
 var ReactDOMComponentTree = __webpack_require__(16);
-var ReactInstrumentation = __webpack_require__(34);
+var ReactInstrumentation = __webpack_require__(35);
 
 var quoteAttributeValueForBrowser = __webpack_require__(402);
 var warning = __webpack_require__(11);
@@ -19111,7 +19111,7 @@ module.exports = traverseAllChildren;
  * @typechecks
  */
 
-var emptyFunction = __webpack_require__(33);
+var emptyFunction = __webpack_require__(34);
 
 /**
  * Upstream version of event listener. Does not take into account specific
@@ -19371,7 +19371,7 @@ var ReactDOMContainerInfo = __webpack_require__(444);
 var ReactDOMFeatureFlags = __webpack_require__(445);
 var ReactFeatureFlags = __webpack_require__(211);
 var ReactInstanceMap = __webpack_require__(81);
-var ReactInstrumentation = __webpack_require__(34);
+var ReactInstrumentation = __webpack_require__(35);
 var ReactMarkupChecksum = __webpack_require__(446);
 var ReactReconciler = __webpack_require__(62);
 var ReactUpdateQueue = __webpack_require__(145);
@@ -21977,7 +21977,7 @@ exports.setCredentials = setCredentials;
 exports.setTypes = setTypes;
 exports.setSizes = setSizes;
 
-var _Constants = __webpack_require__(35);
+var _Constants = __webpack_require__(30);
 
 function setCredentials(user) {
     return {
@@ -23835,7 +23835,7 @@ Grid.defaultProps = defaultProps;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_prop_types__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__utils_bootstrapUtils__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__utils_StyleConfig__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__utils_StyleConfig__ = __webpack_require__(22);
 
 
 
@@ -26116,7 +26116,7 @@ exports.testMail = testMail;
 
 __webpack_require__(659);
 
-var _Constants = __webpack_require__(35);
+var _Constants = __webpack_require__(30);
 
 function login(password, login) {
   return fetch(_Constants.url + "/api/login", {
@@ -26205,29 +26205,23 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(22);
+var _AdminPrEditor = __webpack_require__(660);
+
+var _AdminPrEditor2 = _interopRequireDefault(_AdminPrEditor);
+
+var _CustomerPrEditor = __webpack_require__(662);
+
+var _CustomerPrEditor2 = _interopRequireDefault(_CustomerPrEditor);
+
+var _Constants = __webpack_require__(30);
 
 var _newPam = __webpack_require__(116);
-
-var _Pages = __webpack_require__(308);
-
-var _Pages2 = _interopRequireDefault(_Pages);
-
-var _ImageControl = __webpack_require__(309);
-
-var _ImageControl2 = _interopRequireDefault(_ImageControl);
-
-var _AdminTable = __webpack_require__(661);
-
-var _AdminTable2 = _interopRequireDefault(_AdminTable);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26237,97 +26231,43 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var AdminPrEditor = function (_React$Component) {
-  _inherits(AdminPrEditor, _React$Component);
+var ProductEditor = function (_React$Component) {
+  _inherits(ProductEditor, _React$Component);
 
-  function AdminPrEditor(props) {
-    _classCallCheck(this, AdminPrEditor);
+  function ProductEditor(props) {
+    _classCallCheck(this, ProductEditor);
 
-    var _this = _possibleConstructorReturn(this, (AdminPrEditor.__proto__ || Object.getPrototypeOf(AdminPrEditor)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (ProductEditor.__proto__ || Object.getPrototypeOf(ProductEditor)).call(this, props));
 
-    _this.changePage = function (page) {
-      _this.setState({ page: page });
-      _this.getInfoForPage(null, _this.state.curr_type.type_name, page);
-    };
+    _this.getPamInfo = function (id_prod, type_name, page, countRows, trueFalse) {
+      var currPage = (page - 1) * countRows;
 
-    _this.calcRange = function (page) {
-      return (page - 1) * _this.state.countRows;
-    };
-
-    _this.typeConrol = function (event) {
-      var newElem = _this.state.types.find(function (elem) {
-        if (elem.type_name == event.target.value) {
-          return elem;
-        }
-      });
-      _this.setState({ curr_type: newElem });
-      _this.getInfoForPage(null, newElem.type_name);
-    };
-
-    _this.getInfoForPage = function (id_prod, type_name, page) {
-      var urlParams = new URLSearchParams(window.location.search);
-      var pageHref = parseInt(urlParams.get('page'));
-
-      var newPage = page || pageHref || 1;
-
-      (0, _newPam.getPam)(id_prod, type_name, _this.calcRange(newPage), _this.state.countRows).then(function (data) {
+      (0, _newPam.getPam)(id_prod, type_name, currPage, countRows, trueFalse).then(function (data) {
         if (data.error) {
           _this.setState({ error: data.error });
         } else {
-          _this.setState({ pams: data });
+          _this.setState({
+            pams: data,
+            page: page
+          });
         }
       });
     };
 
-    _this.setToDelete = function (pam) {
-      _this.setState({
-        itemToDelete: pam,
-        showModal: true
-      });
-    };
-
-    _this.dropElement = function () {
-      var _this$state = _this.state,
-          itemToDelete = _this$state.itemToDelete,
-          pams = _this$state.pams;
-
+    _this.deletePamById = function (itemToDelete) {
       (0, _newPam.deletePam)(itemToDelete._id).then(function (data) {
         if (data.error) {
           _this.setState({ error: data.error });
-          _this.cancelModal();
         } else {
-          var newPamState = pams;
-          var indexElem = newPamState.indexOf(itemToDelete);
-          newPamState.splice(indexElem, 1);
+          var newPamState = _this.state.pams.filter(function (el) {
+            return el !== itemToDelete;
+          });
           _this.setState({ pams: newPamState });
-          _this.cancelModal();
         }
       });
     };
 
-    _this.setToEdit = function (pam) {
-      _this.setState({
-        editing: pam,
-        showModal: true
-      });
-    };
-
-    _this.saveChanges = function () {
-      var _this$state2 = _this.state,
-          pams = _this$state2.pams,
-          editing = _this$state2.editing,
-          types = _this$state2.types,
-          addingImages = _this$state2.addingImages,
-          deletingImages = _this$state2.deletingImages;
-
-      var index = void 0;
-      pams.find(function (el, valIndex) {
-        if (el._id === editing._id) {
-          index = valIndex;
-        }
-      });
-      if (index == undefined) return;
-
+    _this.saveChanges = function (editing, addingImages, deletingImages) {
       deletingImages.map(function (el) {
         (0, _newPam.deleteImage)(editing._id, el, editing.folder).then(function (data) {
           if (data.error) {
@@ -26338,281 +26278,76 @@ var AdminPrEditor = function (_React$Component) {
         });
       });
 
-      var changedType = types.find(function (el) {
+      var changedType = _this.state.types.find(function (el) {
         return el.type_name === editing.type_name;
       });
 
       (0, _newPam.addUpdatePam)(editing.id_pam, changedType, editing.description, editing.price, addingImages, editing._id, editing.images).then(function (data) {
         if (data.error) {
           console.log(data.error);
-          _this.cancelModal();
+          _this.setState({ error: data.error });
         } else {
-          var newPam = pams;
-          newPam.splice(index, 1);
+          var newPam = _this.state.pams.filter(function (el) {
+            return el._id !== editing._id;
+          });
+          newPam.push(data);
 
-          console.log("success");
-          _this.cancelModal();
           _this.setState({
-            pam: newPam.push(data)
+            pams: newPam
           });
         }
       });
     };
 
-    _this.cancelModal = function () {
-      _this.setState({
-        editing: null,
-        itemToDelete: null,
-        showModal: false,
-        addingImages: null,
-        deletingImages: []
-      });
-    };
-
-    _this.editTypeConrol = function (event) {
-      _this.setState({
-        editing: _extends({}, _this.state.editing, {
-          type_name: event.target.value
-        })
-      });
-    };
-
-    _this.inputsConrol = function (event) {
-      var state = {};
-      if (event.target.name === 'id_pam') state = { id_pam: event.target.value };
-      if (event.target.name === 'price') state = { price: event.target.value };
-      if (event.target.name === 'description') state = { description: event.target.value };
-
-      _this.setState({
-        editing: _extends({}, _this.state.editing, state)
-      });
-    };
-
-    _this.deleteImages = function (image) {
-      var newArr = _this.state.deletingImages;
-      newArr.push(image);
-      _this.setState({
-        deletingImages: newArr
-      });
-    };
-
-    _this.addNewImages = function (images) {
-      _this.setState({
-        addingImages: images
-      });
-    };
+    var urlParams = new URLSearchParams(window.location.search);
+    var pageHref = parseInt(urlParams.get('page'));
 
     _this.state = {
-      types: _this.props.types,
-      curr_type: _this.props.types[0],
-      editing: null,
-      countRows: 10,
+      contentFor: props.content,
+      error: '',
+      success: '',
+      page: pageHref || 1,
       pams: null,
-      error: null,
-      DOMPages: null,
-      showModal: false,
-      itemToDelete: null,
-      addingImages: null,
-      deletingImages: []
+      typeId: props.params ? props.params.id : '',
+      types: props.types || []
     };
     return _this;
   }
 
-  _createClass(AdminPrEditor, [{
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps() {
-      var _state = this.state,
-          curr_type = _state.curr_type,
-          page = _state.page;
-
-      var current = curr_type ? curr_type.type_name : '';
-      this.getInfoForPage(null, current, page);
-    }
-  }, {
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      var curr_type = this.state.curr_type;
-
-      var current = curr_type ? curr_type.type_name : '';
-      this.getInfoForPage(null, current);
-    }
-  }, {
+  _createClass(ProductEditor, [{
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _state = this.state,
+          page = _state.page,
+          pams = _state.pams,
+          contentFor = _state.contentFor,
+          typeId = _state.typeId;
 
-      var _state2 = this.state,
-          curr_type = _state2.curr_type,
-          showModal = _state2.showModal,
-          itemToDelete = _state2.itemToDelete,
-          editing = _state2.editing;
 
-      var getTypes = function getTypes(value, change, name) {
-        return _react2.default.createElement(
-          _reactBootstrap.FormControl,
-          { componentClass: 'select', name: name, value: value, onChange: change },
-          _this2.state.types.map(function (val, key) {
-            return _react2.default.createElement(
-              'option',
-              { key: key, value: val.type_name },
-              val.type_name
-            );
-          })
-        );
-      };
-      return _react2.default.createElement(
-        'div',
-        null,
-        getTypes(curr_type ? curr_type.type_name : '', this.typeConrol, "curr_type"),
-        this.state.pams && _react2.default.createElement(_AdminTable2.default, {
-          pams: this.state.pams,
-          folder: this.state.curr_type.folder,
-          setToEdit: this.setToEdit,
-          setToDelete: this.setToDelete
-        }),
-        _react2.default.createElement(
-          _reactBootstrap.Modal,
-          {
-            show: showModal,
-            onHide: this.cancelModal,
-            'aria-labelledby': 'contained-modal-title'
-          },
-          _react2.default.createElement(
-            _reactBootstrap.Modal.Dialog,
-            null,
-            _react2.default.createElement(
-              _reactBootstrap.Modal.Header,
-              null,
-              _react2.default.createElement(
-                _reactBootstrap.Modal.Title,
-                null,
-                '\u0423\u0434\u0430\u043B\u0435\u043D\u0438\u0435 \u043F\u0430\u043C\u044F\u0442\u043D\u0438\u043A\u0430'
-              )
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Modal.Body,
-              null,
-              itemToDelete && _react2.default.createElement(
-                'div',
-                { className: 'delete-image-modal' },
-                _react2.default.createElement(
-                  'span',
-                  null,
-                  '\u041D\u043E\u043C\u0435\u0440 \u043F\u0430\u043C\u044F\u0442\u043D\u0438\u043A\u0430 ',
-                  itemToDelete.id_pam
-                ),
-                _react2.default.createElement(_ImageControl2.default, {
-                  images: itemToDelete.images,
-                  previewFolder: '../../media/images' + itemToDelete.folder
-                })
-              ),
-              editing && _react2.default.createElement(
-                'div',
-                { className: 'delete-image-modal' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'deleting-item col-xs-11' },
-                  _react2.default.createElement(
-                    'span',
-                    null,
-                    '\u041D\u043E\u043C\u0435\u0440 \u043F\u0430\u043C\u044F\u0442\u043D\u0438\u043A\u0430'
-                  ),
-                  _react2.default.createElement(_reactBootstrap.FormControl, {
-                    type: 'number',
-                    name: 'id_pam',
-                    value: editing.id_pam,
-                    onChange: this.inputsConrol
-                  })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'deleting-item col-xs-11' },
-                  _react2.default.createElement(
-                    'span',
-                    null,
-                    '\u0442\u0438\u043F \u043F\u0430\u043C\u044F\u0442\u043D\u0438\u043A\u0430'
-                  ),
-                  getTypes(editing.type_name, this.editTypeConrol, "edit_type")
-                ),
-                _react2.default.createElement(_ImageControl2.default, {
-                  images: editing.images,
-                  info: editing,
-                  previewFolder: '../../media/images' + editing.folder,
-                  editing: true,
-                  deleteImages: this.deleteImages,
-                  addNewImages: this.addNewImages
-                }),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'deleting-item col-xs-11' },
-                  _react2.default.createElement(
-                    'span',
-                    null,
-                    '\u0426\u0435\u043D\u0430'
-                  ),
-                  _react2.default.createElement(_reactBootstrap.FormControl, {
-                    type: 'number',
-                    name: 'price',
-                    value: editing.price,
-                    onChange: this.inputsConrol
-                  })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'deleting-item col-xs-11' },
-                  _react2.default.createElement(
-                    'span',
-                    null,
-                    '\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435'
-                  ),
-                  _react2.default.createElement('textarea', { style: { width: '100%', height: '100px' },
-                    name: 'description',
-                    value: editing.description,
-                    onChange: this.inputsConrol
-                  })
-                )
-              )
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Modal.Footer,
-              null,
-              _react2.default.createElement(
-                _reactBootstrap.Button,
-                { onClick: this.cancelModal },
-                '\u041E\u0442\u043C\u0435\u043D\u0438\u0442\u044C'
-              ),
-              itemToDelete && _react2.default.createElement(
-                _reactBootstrap.Button,
-                {
-                  bsStyle: 'primary',
-                  onClick: this.dropElement
-                },
-                '\u0423\u0434\u0430\u043B\u0438\u0442\u044C'
-              ),
-              editing && _react2.default.createElement(
-                _reactBootstrap.Button,
-                {
-                  bsStyle: 'primary',
-                  onClick: this.saveChanges
-                },
-                '\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C'
-              )
-            )
-          )
-        ),
-        _react2.default.createElement(_Pages2.default, {
-          countRows: this.state.countRows,
-          type: curr_type ? curr_type.type_name : '',
-          onChange: this.changePage
-        })
-      );
+      if (contentFor == _Constants.ADMIN) {
+        return _react2.default.createElement(_AdminPrEditor2.default, {
+          page: page,
+          pams: pams,
+          getPamInfo: this.getPamInfo,
+          deletePamById: this.deletePamById,
+          types: this.props.types,
+          saveChanges: this.saveChanges
+        });
+      } else if (contentFor == null || contentFor == undefined) {
+        return _react2.default.createElement(_CustomerPrEditor2.default, {
+          pams: pams,
+          getPamInfo: this.getPamInfo,
+          id_type: typeId,
+          page: page
+        });
+      }
     }
   }]);
 
-  return AdminPrEditor;
+  return ProductEditor;
 }(_react2.default.Component);
 
-exports.default = AdminPrEditor;
+exports.default = ProductEditor;
 
 /***/ }),
 /* 308 */
@@ -26631,7 +26366,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(22);
+var _reactBootstrap = __webpack_require__(23);
 
 var _newPam = __webpack_require__(116);
 
@@ -26784,8 +26519,6 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(22);
-
 var _reactDropzone = __webpack_require__(181);
 
 var _reactDropzone2 = _interopRequireDefault(_reactDropzone);
@@ -26807,13 +26540,9 @@ var ImageControl = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (ImageControl.__proto__ || Object.getPrototypeOf(ImageControl)).call(this, props));
 
     _this.setDeletingImages = function (image) {
-      var _this$state = _this.state,
-          images = _this$state.images,
-          info = _this$state.info;
-
-      var index = images.indexOf(image);
-      var newImages = images;
-      newImages.splice(index, 1);
+      var newImages = _this.state.images.filter(function (el) {
+        return el !== image;
+      });
 
       _this.setState({
         images: newImages
@@ -26822,11 +26551,9 @@ var ImageControl = function (_React$Component) {
     };
 
     _this.deleteUpdated = function (image) {
-      var uploadedFiles = _this.state.uploadedFiles;
-
-      var index = uploadedFiles.indexOf(image);
-      var newImages = uploadedFiles;
-      newImages.splice(index, 1);
+      var newImages = _this.state.uploadedFiles.filter(function (el) {
+        return el !== image;
+      });
 
       _this.setState({
         uploadedFiles: newImages
@@ -26838,7 +26565,9 @@ var ImageControl = function (_React$Component) {
       var uploadedFiles = _this.state.uploadedFiles;
 
       var domElements = [];
+
       if (uploadedFiles && uploadedFiles.length <= 0) return;
+
       uploadedFiles.map(function (val, key) {
         domElements.push(_react2.default.createElement(
           'div',
@@ -26871,15 +26600,18 @@ var ImageControl = function (_React$Component) {
       var uploadedFiles = this.state.uploadedFiles;
 
       var newFiles = files;
+
       if (uploadedFiles && uploadedFiles.length > 0) {
         newFiles = uploadedFiles;
         files.map(function (el) {
           newFiles.push(el);
         });
       }
+
       this.setState({
         uploadedFiles: newFiles
       });
+
       this.props.addNewImages(newFiles);
     }
   }, {
@@ -27065,7 +26797,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(22);
+var _reactBootstrap = __webpack_require__(23);
 
 var _Form = __webpack_require__(313);
 
@@ -27285,7 +27017,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.getForm = getForm;
 exports.setForm = setForm;
 
-var _Constants = __webpack_require__(35);
+var _Constants = __webpack_require__(30);
 
 function getForm() {
   return fetch(_Constants.url + "/api/newFields", {
@@ -27331,7 +27063,7 @@ var _reactRouter = __webpack_require__(50);
 
 var _Types = __webpack_require__(182);
 
-var _reactBootstrap = __webpack_require__(22);
+var _reactBootstrap = __webpack_require__(23);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27675,7 +27407,7 @@ exports.addMenuItem = addMenuItem;
 exports.updateMenuItem = updateMenuItem;
 exports.deleteMenuItem = deleteMenuItem;
 
-var _Constants = __webpack_require__(35);
+var _Constants = __webpack_require__(30);
 
 function getMenuItems() {
   return fetch(_Constants.url + "/api/newMenu", { method: 'OPTIONS' }).then(function (response) {
@@ -28730,7 +28462,7 @@ module.exports = isPrototype;
 
 var castPath = __webpack_require__(345),
     isArguments = __webpack_require__(186),
-    isArray = __webpack_require__(31),
+    isArray = __webpack_require__(32),
     isIndex = __webpack_require__(119),
     isLength = __webpack_require__(193),
     toKey = __webpack_require__(129);
@@ -28773,7 +28505,7 @@ module.exports = hasPath;
 /* 345 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isArray = __webpack_require__(31),
+var isArray = __webpack_require__(32),
     isKey = __webpack_require__(195),
     stringToPath = __webpack_require__(765),
     toString = __webpack_require__(785);
@@ -28803,7 +28535,7 @@ module.exports = castPath;
 var baseMatches = __webpack_require__(790),
     baseMatchesProperty = __webpack_require__(818),
     identity = __webpack_require__(75),
-    isArray = __webpack_require__(31),
+    isArray = __webpack_require__(32),
     property = __webpack_require__(822);
 
 /**
@@ -29149,7 +28881,7 @@ _reactDom2.default.render(_react2.default.createElement(
 var PooledClass = __webpack_require__(356);
 var ReactElement = __webpack_require__(48);
 
-var emptyFunction = __webpack_require__(33);
+var emptyFunction = __webpack_require__(34);
 var traverseAllChildren = __webpack_require__(357);
 
 var twoArgumentPooler = PooledClass.twoArgumentPooler;
@@ -31150,7 +30882,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 if (process.env.NODE_ENV !== 'production') {
-  var ReactInstrumentation = __webpack_require__(34);
+  var ReactInstrumentation = __webpack_require__(35);
   var ReactDOMUnknownPropertyHook = __webpack_require__(451);
   var ReactDOMNullInputValuePropHook = __webpack_require__(452);
   var ReactDOMInvalidARIAHook = __webpack_require__(453);
@@ -33325,7 +33057,7 @@ var DOMLazyTree = __webpack_require__(63);
 var ExecutionEnvironment = __webpack_require__(19);
 
 var createNodesFromMarkup = __webpack_require__(389);
-var emptyFunction = __webpack_require__(33);
+var emptyFunction = __webpack_require__(34);
 var invariant = __webpack_require__(10);
 
 var Danger = {
@@ -33743,11 +33475,11 @@ var ReactDOMInput = __webpack_require__(405);
 var ReactDOMOption = __webpack_require__(406);
 var ReactDOMSelect = __webpack_require__(220);
 var ReactDOMTextarea = __webpack_require__(407);
-var ReactInstrumentation = __webpack_require__(34);
+var ReactInstrumentation = __webpack_require__(35);
 var ReactMultiChild = __webpack_require__(408);
 var ReactServerRenderingTransaction = __webpack_require__(417);
 
-var emptyFunction = __webpack_require__(33);
+var emptyFunction = __webpack_require__(34);
 var escapeTextContentForBrowser = __webpack_require__(97);
 var invariant = __webpack_require__(10);
 var isEventSupported = __webpack_require__(135);
@@ -34770,7 +34502,7 @@ module.exports = AutoFocusUtils;
 
 var CSSProperty = __webpack_require__(217);
 var ExecutionEnvironment = __webpack_require__(19);
-var ReactInstrumentation = __webpack_require__(34);
+var ReactInstrumentation = __webpack_require__(35);
 
 var camelizeStyleName = __webpack_require__(396);
 var dangerousStyleValue = __webpack_require__(398);
@@ -36012,13 +35744,13 @@ var _prodInvariant = __webpack_require__(12);
 
 var ReactComponentEnvironment = __webpack_require__(141);
 var ReactInstanceMap = __webpack_require__(81);
-var ReactInstrumentation = __webpack_require__(34);
+var ReactInstrumentation = __webpack_require__(35);
 
 var ReactCurrentOwner = __webpack_require__(37);
 var ReactReconciler = __webpack_require__(62);
 var ReactChildReconciler = __webpack_require__(409);
 
-var emptyFunction = __webpack_require__(33);
+var emptyFunction = __webpack_require__(34);
 var flattenChildren = __webpack_require__(416);
 var invariant = __webpack_require__(10);
 
@@ -36623,7 +36355,7 @@ var ReactComponentEnvironment = __webpack_require__(141);
 var ReactCurrentOwner = __webpack_require__(37);
 var ReactErrorUtils = __webpack_require__(133);
 var ReactInstanceMap = __webpack_require__(81);
-var ReactInstrumentation = __webpack_require__(34);
+var ReactInstrumentation = __webpack_require__(35);
 var ReactNodeTypes = __webpack_require__(222);
 var ReactReconciler = __webpack_require__(62);
 
@@ -37814,7 +37546,7 @@ var _assign = __webpack_require__(15);
 
 var PooledClass = __webpack_require__(49);
 var Transaction = __webpack_require__(94);
-var ReactInstrumentation = __webpack_require__(34);
+var ReactInstrumentation = __webpack_require__(35);
 var ReactServerUpdateQueue = __webpack_require__(418);
 
 /**
@@ -38421,7 +38153,7 @@ var _assign = __webpack_require__(15);
 var ReactUpdates = __webpack_require__(38);
 var Transaction = __webpack_require__(94);
 
-var emptyFunction = __webpack_require__(33);
+var emptyFunction = __webpack_require__(34);
 
 var RESET_BATCHED_UPDATES = {
   initialize: emptyFunction,
@@ -38730,7 +38462,7 @@ var CallbackQueue = __webpack_require__(210);
 var PooledClass = __webpack_require__(49);
 var ReactBrowserEventEmitter = __webpack_require__(98);
 var ReactInputSelection = __webpack_require__(227);
-var ReactInstrumentation = __webpack_require__(34);
+var ReactInstrumentation = __webpack_require__(35);
 var Transaction = __webpack_require__(94);
 var ReactUpdateQueue = __webpack_require__(145);
 
@@ -39811,7 +39543,7 @@ var SyntheticTransitionEvent = __webpack_require__(442);
 var SyntheticUIEvent = __webpack_require__(80);
 var SyntheticWheelEvent = __webpack_require__(443);
 
-var emptyFunction = __webpack_require__(33);
+var emptyFunction = __webpack_require__(34);
 var getEventCharCode = __webpack_require__(147);
 var invariant = __webpack_require__(10);
 
@@ -43539,7 +43271,7 @@ Provider.childContextTypes = {
 
 
 
-var emptyFunction = __webpack_require__(33);
+var emptyFunction = __webpack_require__(34);
 var invariant = __webpack_require__(10);
 var ReactPropTypesSecret = __webpack_require__(131);
 
@@ -44765,7 +44497,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = __webpack_require__(50);
 
-var _index = __webpack_require__(35);
+var _index = __webpack_require__(30);
 
 var _configuration = __webpack_require__(508);
 
@@ -44781,7 +44513,7 @@ var _LoginForm = __webpack_require__(516);
 
 var _LoginForm2 = _interopRequireDefault(_LoginForm);
 
-var _ProductEditor = __webpack_require__(660);
+var _ProductEditor = __webpack_require__(307);
 
 var _ProductEditor2 = _interopRequireDefault(_ProductEditor);
 
@@ -45121,7 +44853,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.allTypes = allTypes;
 
-var _Constants = __webpack_require__(35);
+var _Constants = __webpack_require__(30);
 
 var initialUserState = {
   types: ''
@@ -45151,7 +44883,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.allSizes = allSizes;
 
-var _Constants = __webpack_require__(35);
+var _Constants = __webpack_require__(30);
 
 var initialUserState = {
   sizes: ''
@@ -45181,7 +44913,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.userLogin = userLogin;
 
-var _Constants = __webpack_require__(35);
+var _Constants = __webpack_require__(30);
 
 var initialUserState = {
   user: ''
@@ -45274,11 +45006,11 @@ var _reactRedux = __webpack_require__(154);
 
 var _reactRouter = __webpack_require__(50);
 
-var _reactBootstrap = __webpack_require__(22);
+var _reactBootstrap = __webpack_require__(23);
 
 var _serverRequests = __webpack_require__(306);
 
-var _index = __webpack_require__(35);
+var _index = __webpack_require__(30);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -45450,7 +45182,7 @@ var Accordion = function (_React$Component) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(519);
-module.exports = __webpack_require__(30).Object.assign;
+module.exports = __webpack_require__(31).Object.assign;
 
 
 /***/ }),
@@ -45737,7 +45469,7 @@ __webpack_require__(536);
 __webpack_require__(541);
 __webpack_require__(542);
 __webpack_require__(543);
-module.exports = __webpack_require__(30).Symbol;
+module.exports = __webpack_require__(31).Symbol;
 
 
 /***/ }),
@@ -46128,7 +45860,7 @@ module.exports = { "default": __webpack_require__(545), __esModule: true };
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(546);
-module.exports = __webpack_require__(30).Object.setPrototypeOf;
+module.exports = __webpack_require__(31).Object.setPrototypeOf;
 
 
 /***/ }),
@@ -46182,7 +45914,7 @@ module.exports = { "default": __webpack_require__(549), __esModule: true };
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(550);
-var $Object = __webpack_require__(30).Object;
+var $Object = __webpack_require__(31).Object;
 module.exports = function create(P, D) {
   return $Object.create(P, D);
 };
@@ -46526,7 +46258,7 @@ function isReactComponent(component) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(554);
-module.exports = __webpack_require__(30).Object.entries;
+module.exports = __webpack_require__(31).Object.entries;
 
 
 /***/ }),
@@ -46568,7 +46300,7 @@ $export($export.S, 'Object', {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_prop_types__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__utils_bootstrapUtils__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__utils_StyleConfig__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__utils_StyleConfig__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__CloseButton__ = __webpack_require__(171);
 
 
@@ -46643,7 +46375,7 @@ Alert.defaultProps = defaultProps;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(557);
-module.exports = __webpack_require__(30).Object.values;
+module.exports = __webpack_require__(31).Object.values;
 
 
 /***/ }),
@@ -47830,7 +47562,7 @@ Checkbox.defaultProps = defaultProps;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_prop_types_extra_lib_elementType___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_prop_types_extra_lib_elementType__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__utils_bootstrapUtils__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__utils_capitalize__ = __webpack_require__(276);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__utils_StyleConfig__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__utils_StyleConfig__ = __webpack_require__(22);
 
 
 
@@ -48049,7 +47781,7 @@ ControlLabel.contextTypes = contextTypes;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_prop_types_extra_lib_elementType__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_prop_types_extra_lib_elementType___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_prop_types_extra_lib_elementType__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__utils_bootstrapUtils__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__utils_StyleConfig__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__utils_StyleConfig__ = __webpack_require__(22);
 
 
 
@@ -48540,7 +48272,7 @@ DropdownMenu.defaultProps = defaultProps;
 
 __webpack_require__(263);
 __webpack_require__(578);
-module.exports = __webpack_require__(30).Array.from;
+module.exports = __webpack_require__(31).Array.from;
 
 
 /***/ }),
@@ -48641,7 +48373,7 @@ module.exports = function (object, index, value) {
 var classof = __webpack_require__(583);
 var ITERATOR = __webpack_require__(41)('iterator');
 var Iterators = __webpack_require__(88);
-module.exports = __webpack_require__(30).getIteratorMethod = function (it) {
+module.exports = __webpack_require__(31).getIteratorMethod = function (it) {
   if (it != undefined) return it[ITERATOR]
     || it['@@iterator']
     || Iterators[classof(it)];
@@ -48912,7 +48644,7 @@ Form.defaultProps = defaultProps;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__FormControlFeedback__ = __webpack_require__(588);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__FormControlStatic__ = __webpack_require__(589);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__utils_bootstrapUtils__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__utils_StyleConfig__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__utils_StyleConfig__ = __webpack_require__(22);
 
 
 
@@ -49222,7 +48954,7 @@ FormControlStatic.defaultProps = defaultProps;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_prop_types__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__utils_bootstrapUtils__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__utils_StyleConfig__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__utils_StyleConfig__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__utils_ValidComponentChildren__ = __webpack_require__(24);
 
 
@@ -49494,7 +49226,7 @@ Image.defaultProps = defaultProps;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__InputGroupAddon__ = __webpack_require__(594);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__InputGroupButton__ = __webpack_require__(595);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__utils_bootstrapUtils__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__utils_StyleConfig__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__utils_StyleConfig__ = __webpack_require__(22);
 
 
 
@@ -49750,7 +49482,7 @@ Jumbotron.defaultProps = defaultProps;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__utils_bootstrapUtils__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__utils_StyleConfig__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__utils_StyleConfig__ = __webpack_require__(22);
 
 
 
@@ -50588,7 +50320,7 @@ MenuItem.defaultProps = defaultProps;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__utils_bootstrapUtils__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__utils_createChainedFunction__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__utils_splitComponentProps__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__utils_StyleConfig__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__utils_StyleConfig__ = __webpack_require__(22);
 
 
 
@@ -52226,7 +51958,7 @@ module.exports = exports['default'];
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_prop_types__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__utils_bootstrapUtils__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__utils_StyleConfig__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__utils_StyleConfig__ = __webpack_require__(22);
 
 
 
@@ -52333,7 +52065,7 @@ ModalDialog.propTypes = propTypes;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__NavbarHeader__ = __webpack_require__(622);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__NavbarToggle__ = __webpack_require__(623);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__utils_bootstrapUtils__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__utils_StyleConfig__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__utils_StyleConfig__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__utils_createChainedFunction__ = __webpack_require__(18);
 
 
@@ -54511,7 +54243,7 @@ var Last = createButton('Last', '\xBB');
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_warning__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__utils_bootstrapUtils__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__utils_StyleConfig__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__utils_StyleConfig__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__PanelBody__ = __webpack_require__(639);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__PanelHeading__ = __webpack_require__(640);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__PanelTitle__ = __webpack_require__(642);
@@ -55294,7 +55026,7 @@ Popover.defaultProps = defaultProps;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_prop_types__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__utils_bootstrapUtils__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__utils_StyleConfig__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__utils_StyleConfig__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__utils_ValidComponentChildren__ = __webpack_require__(24);
 
 
@@ -56736,7 +56468,7 @@ Tooltip.defaultProps = defaultProps;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils_bootstrapUtils__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__utils_StyleConfig__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__utils_StyleConfig__ = __webpack_require__(22);
 
 
 
@@ -57169,21 +56901,29 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _AdminPrEditor = __webpack_require__(307);
+var _reactBootstrap = __webpack_require__(23);
 
-var _AdminPrEditor2 = _interopRequireDefault(_AdminPrEditor);
+var _newPam = __webpack_require__(116);
 
-var _CustomerPrEditor = __webpack_require__(662);
+var _Pages = __webpack_require__(308);
 
-var _CustomerPrEditor2 = _interopRequireDefault(_CustomerPrEditor);
+var _Pages2 = _interopRequireDefault(_Pages);
 
-var _Constants = __webpack_require__(35);
+var _ImageControl = __webpack_require__(309);
+
+var _ImageControl2 = _interopRequireDefault(_ImageControl);
+
+var _AdminTable = __webpack_require__(661);
+
+var _AdminTable2 = _interopRequireDefault(_AdminTable);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -57193,48 +56933,295 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ProductEditor = function (_React$Component) {
-  _inherits(ProductEditor, _React$Component);
+var AdminPrEditor = function (_React$PureComponent) {
+  _inherits(AdminPrEditor, _React$PureComponent);
 
-  function ProductEditor(props) {
-    _classCallCheck(this, ProductEditor);
+  function AdminPrEditor(props) {
+    _classCallCheck(this, AdminPrEditor);
 
-    var _this = _possibleConstructorReturn(this, (ProductEditor.__proto__ || Object.getPrototypeOf(ProductEditor)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (AdminPrEditor.__proto__ || Object.getPrototypeOf(AdminPrEditor)).call(this, props));
 
-    _this.componentWillReceiveProps = function (newProps) {
-      _this.setState({ typeId: newProps.params.id });
+    _this.changePage = function (page) {
+      _this.props.getPamInfo(null, _this.state.curr_type.type_name, page, _this.state.countRows, false);
+    };
+
+    _this.typeConrol = function (event) {
+      var newElem = _this.props.types.find(function (elem) {
+        if (elem.type_name == event.target.value) {
+          return elem;
+        }
+      });
+      _this.setState({ curr_type: newElem });
+      _this.props.getPamInfo(null, newElem.type_name, _this.state.page, _this.state.countRows, false);
+    };
+
+    _this.setToDelete = function (pam) {
+      _this.setState({
+        itemToDelete: pam,
+        showModal: true
+      });
+    };
+
+    _this.dropElement = function () {
+      _this.props.deletePamById(_this.state.itemToDelete);
+      _this.cancelModal();
+    };
+
+    _this.setToEdit = function (pam) {
+      _this.setState({
+        editing: pam,
+        showModal: true
+      });
+    };
+
+    _this.saveChanges = function () {
+      var _this$state = _this.state,
+          editing = _this$state.editing,
+          addingImages = _this$state.addingImages,
+          deletingImages = _this$state.deletingImages;
+
+
+      _this.props.saveChanges(editing, addingImages, deletingImages);
+      _this.cancelModal();
+    };
+
+    _this.cancelModal = function () {
+      _this.setState({
+        editing: null,
+        itemToDelete: null,
+        showModal: false,
+        addingImages: null,
+        deletingImages: []
+      });
+    };
+
+    _this.editTypeConrol = function (event) {
+      _this.setState({
+        editing: _extends({}, _this.state.editing, {
+          type_name: event.target.value
+        })
+      });
+    };
+
+    _this.inputsConrol = function (event) {
+      var state = {};
+      if (event.target.name === 'id_pam') state = { id_pam: event.target.value };
+      if (event.target.name === 'price') state = { price: event.target.value };
+      if (event.target.name === 'description') state = { description: event.target.value };
+
+      _this.setState({
+        editing: _extends({}, _this.state.editing, state)
+      });
+    };
+
+    _this.deleteImages = function (image) {
+      var newArr = _this.state.deletingImages;
+      newArr.push(image);
+      _this.setState({
+        deletingImages: newArr
+      });
+    };
+
+    _this.addNewImages = function (images) {
+      _this.setState({
+        addingImages: images
+      });
     };
 
     _this.state = {
-      contentFor: _this.props.content,
-      error: '',
-      success: ''
+      page: props.page,
+      curr_type: props.types[0],
+      editing: null,
+      countRows: 10,
+      error: props.error || '',
+      showModal: false,
+      itemToDelete: null,
+      addingImages: null,
+      deletingImages: []
     };
+    var current = _this.state.curr_type ? _this.state.curr_type.type_name : '';
+    _this.props.getPamInfo(null, current, props.page, _this.state.countRows, false);
     return _this;
   }
 
-  _createClass(ProductEditor, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      if (this.props.params) {
-        this.setState({ typeId: this.props.params.id });
-      }
-    }
-  }, {
+  _createClass(AdminPrEditor, [{
     key: 'render',
     value: function render() {
-      if (this.state.contentFor == _Constants.ADMIN) {
-        return _react2.default.createElement(_AdminPrEditor2.default, null);
-      } else if (this.state.contentFor == null || this.state.contentFor == undefined) {
-        return _react2.default.createElement(_CustomerPrEditor2.default, { id_type: this.state.typeId });
-      }
+      var _this2 = this;
+
+      var _state = this.state,
+          curr_type = _state.curr_type,
+          showModal = _state.showModal,
+          itemToDelete = _state.itemToDelete,
+          editing = _state.editing;
+
+      var getTypes = function getTypes(value, change, name) {
+        return _react2.default.createElement(
+          _reactBootstrap.FormControl,
+          { componentClass: 'select', name: name, value: value, onChange: change },
+          _this2.props.types.map(function (val, key) {
+            return _react2.default.createElement(
+              'option',
+              { key: key, value: val.type_name },
+              val.type_name
+            );
+          })
+        );
+      };
+      return _react2.default.createElement(
+        'div',
+        null,
+        getTypes(curr_type ? curr_type.type_name : '', this.typeConrol, "curr_type"),
+        this.props.pams && _react2.default.createElement(_AdminTable2.default, {
+          pams: this.props.pams,
+          folder: this.state.curr_type.folder,
+          setToEdit: this.setToEdit,
+          setToDelete: this.setToDelete
+        }),
+        _react2.default.createElement(
+          _reactBootstrap.Modal,
+          {
+            show: showModal,
+            onHide: this.cancelModal,
+            'aria-labelledby': 'contained-modal-title'
+          },
+          _react2.default.createElement(
+            _reactBootstrap.Modal.Dialog,
+            null,
+            _react2.default.createElement(
+              _reactBootstrap.Modal.Header,
+              null,
+              _react2.default.createElement(
+                _reactBootstrap.Modal.Title,
+                null,
+                '\u0423\u0434\u0430\u043B\u0435\u043D\u0438\u0435 \u043F\u0430\u043C\u044F\u0442\u043D\u0438\u043A\u0430'
+              )
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Modal.Body,
+              null,
+              itemToDelete && _react2.default.createElement(
+                'div',
+                { className: 'delete-image-modal' },
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  '\u041D\u043E\u043C\u0435\u0440 \u043F\u0430\u043C\u044F\u0442\u043D\u0438\u043A\u0430 ',
+                  itemToDelete.id_pam
+                ),
+                _react2.default.createElement(_ImageControl2.default, {
+                  images: itemToDelete.images,
+                  previewFolder: '../../media/images' + itemToDelete.folder
+                })
+              ),
+              editing && _react2.default.createElement(
+                'div',
+                { className: 'delete-image-modal' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'deleting-item col-xs-11' },
+                  _react2.default.createElement(
+                    'span',
+                    null,
+                    '\u041D\u043E\u043C\u0435\u0440 \u043F\u0430\u043C\u044F\u0442\u043D\u0438\u043A\u0430'
+                  ),
+                  _react2.default.createElement(_reactBootstrap.FormControl, {
+                    type: 'number',
+                    name: 'id_pam',
+                    value: editing.id_pam,
+                    onChange: this.inputsConrol
+                  })
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'deleting-item col-xs-11' },
+                  _react2.default.createElement(
+                    'span',
+                    null,
+                    '\u0442\u0438\u043F \u043F\u0430\u043C\u044F\u0442\u043D\u0438\u043A\u0430'
+                  ),
+                  getTypes(editing.type_name, this.editTypeConrol, "edit_type")
+                ),
+                _react2.default.createElement(_ImageControl2.default, {
+                  images: editing.images,
+                  info: editing,
+                  previewFolder: '../../media/images' + editing.folder,
+                  editing: true,
+                  deleteImages: this.deleteImages,
+                  addNewImages: this.addNewImages
+                }),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'deleting-item col-xs-11' },
+                  _react2.default.createElement(
+                    'span',
+                    null,
+                    '\u0426\u0435\u043D\u0430'
+                  ),
+                  _react2.default.createElement(_reactBootstrap.FormControl, {
+                    type: 'number',
+                    name: 'price',
+                    value: editing.price,
+                    onChange: this.inputsConrol
+                  })
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'deleting-item col-xs-11' },
+                  _react2.default.createElement(
+                    'span',
+                    null,
+                    '\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435'
+                  ),
+                  _react2.default.createElement('textarea', { style: { width: '100%', height: '100px' },
+                    name: 'description',
+                    value: editing.description,
+                    onChange: this.inputsConrol
+                  })
+                )
+              )
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Modal.Footer,
+              null,
+              _react2.default.createElement(
+                _reactBootstrap.Button,
+                { onClick: this.cancelModal },
+                '\u041E\u0442\u043C\u0435\u043D\u0438\u0442\u044C'
+              ),
+              itemToDelete && _react2.default.createElement(
+                _reactBootstrap.Button,
+                {
+                  bsStyle: 'primary',
+                  onClick: this.dropElement
+                },
+                '\u0423\u0434\u0430\u043B\u0438\u0442\u044C'
+              ),
+              editing && _react2.default.createElement(
+                _reactBootstrap.Button,
+                {
+                  bsStyle: 'primary',
+                  onClick: this.saveChanges
+                },
+                '\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C'
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(_Pages2.default, {
+          countRows: this.state.countRows,
+          type: curr_type ? curr_type.type_name : '',
+          onChange: this.changePage,
+          currentPage: this.props.page
+        })
+      );
     }
   }]);
 
-  return ProductEditor;
-}(_react2.default.Component);
+  return AdminPrEditor;
+}(_react2.default.PureComponent);
 
-exports.default = ProductEditor;
+exports.default = AdminPrEditor;
 
 /***/ }),
 /* 661 */
@@ -57257,7 +57244,7 @@ var _ImageControl = __webpack_require__(309);
 
 var _ImageControl2 = _interopRequireDefault(_ImageControl);
 
-var _reactBootstrap = __webpack_require__(22);
+var _reactBootstrap = __webpack_require__(23);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -57406,8 +57393,6 @@ var _SaleForm = __webpack_require__(688);
 
 var _SaleForm2 = _interopRequireDefault(_SaleForm);
 
-var _newPam = __webpack_require__(116);
-
 var _helpers = __webpack_require__(689);
 
 var _Pages = __webpack_require__(308);
@@ -57431,22 +57416,7 @@ var CustomerPrEditor = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (CustomerPrEditor.__proto__ || Object.getPrototypeOf(CustomerPrEditor)).call(this, props));
 
     _this.changePage = function (page) {
-      _this.getInfoForPage(_this.state.id_type, page);
-    };
-
-    _this.getInfoForPage = function (id, page) {
-      var currPage = (page - 1) * _this.state.countRows;
-
-      (0, _newPam.getPam)(null, id, currPage, _this.state.countRows, true).then(function (data) {
-        if (data.error) {
-          _this.setState({ error: data.error });
-        } else {
-          _this.setState({
-            pams: data,
-            page: page
-          });
-        }
-      });
+      _this.props.getPamInfo(null, _this.props.id_type, page, _this.state.countRows, true);
     };
 
     _this.openForm = function (data) {
@@ -57471,22 +57441,16 @@ var CustomerPrEditor = function (_React$Component) {
       (0, _helpers.addBodyClass)(false);
     };
 
-    var urlParams = new URLSearchParams(window.location.search);
-    var pageHref = parseInt(urlParams.get('page'));
-
     _this.state = {
       countRows: 10,
-      page: pageHref || 1,
-      pams: null,
       error: null,
-      id_type: _this.props.id_type,
       form: {
         status: false,
         image: '',
         info: ''
       }
     };
-    _this.getInfoForPage(_this.state.id_type, _this.state.page);
+    _this.props.getPamInfo(null, _this.props.id_type, _this.props.page, _this.state.countRows, true);
     return _this;
   }
 
@@ -57497,10 +57461,11 @@ var CustomerPrEditor = function (_React$Component) {
 
       var _state = this.state,
           form = _state.form,
-          pams = _state.pams,
-          countRows = _state.countRows,
-          id_type = _state.id_type,
-          page = _state.page;
+          countRows = _state.countRows;
+      var _props = this.props,
+          pams = _props.pams,
+          id_type = _props.id_type,
+          page = _props.page;
 
 
       return _react2.default.createElement(
@@ -57552,7 +57517,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(22);
+var _reactBootstrap = __webpack_require__(23);
 
 var _reactSimpleModalSlideshow = __webpack_require__(664);
 
@@ -63177,7 +63142,7 @@ var _reactDropzone = __webpack_require__(181);
 
 var _reactDropzone2 = _interopRequireDefault(_reactDropzone);
 
-var _reactBootstrap = __webpack_require__(22);
+var _reactBootstrap = __webpack_require__(23);
 
 var _serverRequests = __webpack_require__(306);
 
@@ -63577,7 +63542,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _reactBootstrap = __webpack_require__(22);
+var _reactBootstrap = __webpack_require__(23);
 
 var _react = __webpack_require__(0);
 
@@ -63723,13 +63688,13 @@ var _reactDropzone = __webpack_require__(181);
 
 var _reactDropzone2 = _interopRequireDefault(_reactDropzone);
 
-var _reactBootstrap = __webpack_require__(22);
+var _reactBootstrap = __webpack_require__(23);
 
 var _newPam = __webpack_require__(116);
 
-var _AdminPrEditor = __webpack_require__(307);
+var _ProductEditor = __webpack_require__(307);
 
-var _AdminPrEditor2 = _interopRequireDefault(_AdminPrEditor);
+var _ProductEditor2 = _interopRequireDefault(_ProductEditor);
 
 var _reactRedux = __webpack_require__(154);
 
@@ -63738,6 +63703,8 @@ var _redux = __webpack_require__(82);
 var _Actions = __webpack_require__(256);
 
 var _Types = __webpack_require__(182);
+
+var _Constants = __webpack_require__(30);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -63907,7 +63874,7 @@ var Pam = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'show-monuments' },
-            _react2.default.createElement(_AdminPrEditor2.default, { types: this.state.types })
+            _react2.default.createElement(_ProductEditor2.default, { content: _Constants.ADMIN, types: this.state.types })
           )
         )
       );
@@ -63942,7 +63909,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(22);
+var _reactBootstrap = __webpack_require__(23);
 
 var _MenuControl = __webpack_require__(693);
 
@@ -64158,7 +64125,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(22);
+var _reactBootstrap = __webpack_require__(23);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -64380,7 +64347,7 @@ var _TypesControl = __webpack_require__(697);
 
 var _TypesControl2 = _interopRequireDefault(_TypesControl);
 
-var _reactBootstrap = __webpack_require__(22);
+var _reactBootstrap = __webpack_require__(23);
 
 var _Types = __webpack_require__(182);
 
@@ -64543,7 +64510,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(22);
+var _reactBootstrap = __webpack_require__(23);
 
 var _Menu = __webpack_require__(316);
 
@@ -64939,7 +64906,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = __webpack_require__(22);
+var _reactBootstrap = __webpack_require__(23);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -65994,7 +65961,7 @@ function withGoogleMap(WrappedComponent) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(708);
-var $Object = __webpack_require__(30).Object;
+var $Object = __webpack_require__(31).Object;
 module.exports = function defineProperty(it, key, desc) {
   return $Object.defineProperty(it, key, desc);
 };
@@ -66020,7 +65987,7 @@ module.exports = { "default": __webpack_require__(710), __esModule: true };
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(711);
-module.exports = __webpack_require__(30).Object.getPrototypeOf;
+module.exports = __webpack_require__(31).Object.getPrototypeOf;
 
 
 /***/ }),
@@ -66044,7 +66011,7 @@ __webpack_require__(712)('getPrototypeOf', function () {
 
 // most Object methods by ES6 should accept primitives
 var $export = __webpack_require__(40);
-var core = __webpack_require__(30);
+var core = __webpack_require__(31);
 var fails = __webpack_require__(70);
 module.exports = function (KEY, exec) {
   var fn = (core.Object || {})[KEY] || Object[KEY];
@@ -66139,7 +66106,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _constants = __webpack_require__(26);
 
-var _enhanceElement = __webpack_require__(32);
+var _enhanceElement = __webpack_require__(33);
 
 var _enhanceElement2 = _interopRequireDefault(_enhanceElement);
 
@@ -66364,7 +66331,7 @@ var LodashWrapper = __webpack_require__(183),
     flatRest = __webpack_require__(718),
     getData = __webpack_require__(190),
     getFuncName = __webpack_require__(326),
-    isArray = __webpack_require__(31),
+    isArray = __webpack_require__(32),
     isLaziable = __webpack_require__(327);
 
 /** Error message constants. */
@@ -66540,7 +66507,7 @@ module.exports = baseFlatten;
 
 var Symbol = __webpack_require__(84),
     isArguments = __webpack_require__(186),
-    isArray = __webpack_require__(31);
+    isArray = __webpack_require__(32);
 
 /** Built-in value references. */
 var spreadableSymbol = Symbol ? Symbol.isConcatSpreadable : undefined;
@@ -66771,7 +66738,7 @@ module.exports = realNames;
 var LazyWrapper = __webpack_require__(191),
     LodashWrapper = __webpack_require__(183),
     baseLodash = __webpack_require__(185),
-    isArray = __webpack_require__(31),
+    isArray = __webpack_require__(32),
     isObjectLike = __webpack_require__(53),
     wrapperClone = __webpack_require__(731);
 
@@ -67629,7 +67596,7 @@ module.exports = toFinite;
 var arrayEach = __webpack_require__(337),
     baseEach = __webpack_require__(339),
     castFunction = __webpack_require__(761),
-    isArray = __webpack_require__(31);
+    isArray = __webpack_require__(32);
 
 /**
  * Iterates over elements of `collection` and invokes `iteratee` for each element.
@@ -67728,7 +67695,7 @@ module.exports = createBaseFor;
 
 var baseTimes = __webpack_require__(753),
     isArguments = __webpack_require__(186),
-    isArray = __webpack_require__(31),
+    isArray = __webpack_require__(32),
     isBuffer = __webpack_require__(341),
     isIndex = __webpack_require__(119),
     isTypedArray = __webpack_require__(342);
@@ -68821,7 +68788,7 @@ module.exports = toString;
 
 var Symbol = __webpack_require__(84),
     arrayMap = __webpack_require__(787),
-    isArray = __webpack_require__(31),
+    isArray = __webpack_require__(32),
     isSymbol = __webpack_require__(121);
 
 /** Used as references for various `Number` constants. */
@@ -68893,7 +68860,7 @@ var arrayReduce = __webpack_require__(789),
     baseEach = __webpack_require__(339),
     baseIteratee = __webpack_require__(346),
     baseReduce = __webpack_require__(825),
-    isArray = __webpack_require__(31);
+    isArray = __webpack_require__(32);
 
 /**
  * Reduces `collection` to a value which is the accumulated result of running
@@ -69204,7 +69171,7 @@ var Stack = __webpack_require__(347),
     equalByTag = __webpack_require__(803),
     equalObjects = __webpack_require__(807),
     getTag = __webpack_require__(813),
-    isArray = __webpack_require__(31),
+    isArray = __webpack_require__(32),
     isBuffer = __webpack_require__(341),
     isTypedArray = __webpack_require__(342);
 
@@ -69710,7 +69677,7 @@ module.exports = getAllKeys;
 /***/ (function(module, exports, __webpack_require__) {
 
 var arrayPush = __webpack_require__(318),
-    isArray = __webpack_require__(31);
+    isArray = __webpack_require__(32);
 
 /**
  * The base implementation of `getAllKeys` and `getAllKeysIn` which uses
@@ -70280,7 +70247,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _constants = __webpack_require__(26);
 
-var _enhanceElement = __webpack_require__(32);
+var _enhanceElement = __webpack_require__(33);
 
 var _enhanceElement2 = _interopRequireDefault(_enhanceElement);
 
@@ -70553,7 +70520,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _constants = __webpack_require__(26);
 
-var _enhanceElement = __webpack_require__(32);
+var _enhanceElement = __webpack_require__(33);
 
 var _enhanceElement2 = _interopRequireDefault(_enhanceElement);
 
@@ -70703,7 +70670,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _constants = __webpack_require__(26);
 
-var _enhanceElement = __webpack_require__(32);
+var _enhanceElement = __webpack_require__(33);
 
 var _enhanceElement2 = _interopRequireDefault(_enhanceElement);
 
@@ -70851,7 +70818,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _constants = __webpack_require__(26);
 
-var _enhanceElement = __webpack_require__(32);
+var _enhanceElement = __webpack_require__(33);
 
 var _enhanceElement2 = _interopRequireDefault(_enhanceElement);
 
@@ -71006,7 +70973,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _constants = __webpack_require__(26);
 
-var _enhanceElement = __webpack_require__(32);
+var _enhanceElement = __webpack_require__(33);
 
 var _enhanceElement2 = _interopRequireDefault(_enhanceElement);
 
@@ -71171,7 +71138,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _constants = __webpack_require__(26);
 
-var _enhanceElement = __webpack_require__(32);
+var _enhanceElement = __webpack_require__(33);
 
 var _enhanceElement2 = _interopRequireDefault(_enhanceElement);
 
@@ -71313,7 +71280,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _constants = __webpack_require__(26);
 
-var _enhanceElement = __webpack_require__(32);
+var _enhanceElement = __webpack_require__(33);
 
 var _enhanceElement2 = _interopRequireDefault(_enhanceElement);
 
@@ -71414,7 +71381,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _constants = __webpack_require__(26);
 
-var _enhanceElement = __webpack_require__(32);
+var _enhanceElement = __webpack_require__(33);
 
 var _enhanceElement2 = _interopRequireDefault(_enhanceElement);
 
@@ -71514,7 +71481,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _constants = __webpack_require__(26);
 
-var _enhanceElement = __webpack_require__(32);
+var _enhanceElement = __webpack_require__(33);
 
 var _enhanceElement2 = _interopRequireDefault(_enhanceElement);
 
@@ -71635,7 +71602,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _constants = __webpack_require__(26);
 
-var _enhanceElement = __webpack_require__(32);
+var _enhanceElement = __webpack_require__(33);
 
 var _enhanceElement2 = _interopRequireDefault(_enhanceElement);
 
@@ -71749,7 +71716,7 @@ var _reactDom = __webpack_require__(17);
 
 var _constants = __webpack_require__(26);
 
-var _enhanceElement = __webpack_require__(32);
+var _enhanceElement = __webpack_require__(33);
 
 var _enhanceElement2 = _interopRequireDefault(_enhanceElement);
 
@@ -71916,7 +71883,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _constants = __webpack_require__(26);
 
-var _enhanceElement = __webpack_require__(32);
+var _enhanceElement = __webpack_require__(33);
 
 var _enhanceElement2 = _interopRequireDefault(_enhanceElement);
 

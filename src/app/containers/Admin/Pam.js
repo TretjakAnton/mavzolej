@@ -8,11 +8,12 @@ import {
   Col,
 }  from 'react-bootstrap';
 import { addUpdatePam } from '../../api/newPam';
-import AdminPrEditor from '../../components/ProductEditor/AdminPrEditor';
+import ProductEditor from '../../components/ProductEditor';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setTypes } from '../../actions/Actions';
 import { getAllTypes } from '../../api/Types';
+import { ADMIN } from '../../Constants';
 
 class Pam extends React.Component {
   constructor(props) {
@@ -129,7 +130,8 @@ class Pam extends React.Component {
             </Col>
           </FormGroup>
           <div className="show-monuments">
-            <AdminPrEditor types={this.state.types} />
+            {/* <AdminPrEditor types={this.state.types} /> */}
+            <ProductEditor content={ADMIN} types={this.state.types} />
           </div>
         </div>
       }

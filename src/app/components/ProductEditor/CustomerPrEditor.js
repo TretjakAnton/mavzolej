@@ -1,50 +1,27 @@
 import React from 'react';
 import Item from '../Item';
 import SaleForm from '../../containers/SaleForm';
-import {
-  getPam
-} from '../../api/newPam';
 import { addBodyClass } from '../../helpers';
 import Pages from '../Pages';
 
 export default class CustomerPrEditor extends React.Component{
   constructor(props){
     super(props);
-    const urlParams = new URLSearchParams(window.location.search);
-    const pageHref = parseInt(urlParams.get('page'));
 
     this.state = {
       countRows: 10,
-      page: pageHref || 1,
-      pams: null,
       error: null,
-      id_type: this.props.id_type,
       form: {
         status: false,
         image: '',
         info: '',
       }
     }
-    this.getInfoForPage(this.state.id_type, this.state.page);
+    this.props.getPamInfo(null, this.props.id_type, this.props.page, this.state.countRows, true);
   }
 
   changePage = (page) => {
-    this.getInfoForPage(this.state.id_type, page);
-  };
-
-  getInfoForPage = (id, page) => {
-    const currPage = (page - 1) * this.state.countRows;
-
-    getPam(null, id, currPage, this.state.countRows, true).then((data) => {
-      if (data.error) {
-        this.setState({error: data.error})
-      } else {
-        this.setState({
-          pams: data,
-          page: page
-        });
-      }
-    });
+    this.props.getPamInfo(null, this.props.id_type, page, this.state.countRows, true);
   };
 
   openForm = (data) => {
@@ -72,11 +49,9 @@ export default class CustomerPrEditor extends React.Component{
   render(){
     const {
       form,
-      pams,
-      countRows,
-      id_type,
-      page
+      countRows            
     } = this.state;
+    const {pams, id_type, page} = this.props;
 
     return <div className="row product-container">
       {pams && pams.map((el) => {

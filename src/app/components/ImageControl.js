@@ -1,8 +1,4 @@
 import React from 'react';
-import {
-  Modal,
-  Button
-} from 'react-bootstrap';
 import Dropzone from 'react-dropzone';
 
 export default class ImageControl extends React.Component {
@@ -16,10 +12,7 @@ export default class ImageControl extends React.Component {
   }
 
   setDeletingImages = (image) => {
-    const { images, info } = this.state;
-    const index = images.indexOf(image);
-    let newImages = images;
-    newImages.splice(index, 1);
+    let newImages = this.state.images.filter(el => el !== image);
 
     this.setState({
       images: newImages,
@@ -28,10 +21,7 @@ export default class ImageControl extends React.Component {
   }
 
   deleteUpdated = (image) => {
-    const { uploadedFiles } = this.state;
-    const index = uploadedFiles.indexOf(image);
-    let newImages = uploadedFiles;
-    newImages.splice(index, 1);
+    const newImages = this.state.uploadedFiles.filter(el => el !== image);    
 
     this.setState({
       uploadedFiles: newImages
@@ -42,7 +32,9 @@ export default class ImageControl extends React.Component {
   generateImages = (name) => {
     const { uploadedFiles } = this.state;
     let domElements = [];
+
     if( uploadedFiles && uploadedFiles.length <= 0 ) return;
+
     uploadedFiles.map((val, key) => {
       domElements.push(
         <div 
@@ -63,15 +55,18 @@ export default class ImageControl extends React.Component {
   onImageDrop(files) {
     const { uploadedFiles } = this.state;
     let newFiles = files;
+
     if( uploadedFiles && uploadedFiles.length > 0 ) {
       newFiles = uploadedFiles;
       files.map((el) => {
         newFiles.push(el);
       });
     }
+
     this.setState({
       uploadedFiles: newFiles
     });
+
     this.props.addNewImages(newFiles);
   }
 
