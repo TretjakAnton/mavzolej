@@ -63,7 +63,7 @@ exports.setUpdateMon = (req, res, db) => {
     
     let item = {
       db_type: 'pam',
-      id_pam: id,
+      id_pam: parseInt(id),
       price: price,
       description: description,
       type_name: type_name,
@@ -91,7 +91,7 @@ exports.setUpdateMon = (req, res, db) => {
     } else {
       const search = {
         db_type: 'pam',
-        id_pam: id,
+        id_pam: parseInt(id),
         price: price,
         description: description,
         type_name: type_name,
@@ -138,7 +138,7 @@ exports.setUpdateMon = (req, res, db) => {
       setItem = {
         $set: {
           db_type: 'pam',
-          id_pam: id,
+          id_pam: parseInt(id),
           price: price,
           description: description,
           type_name: type_name,
@@ -196,7 +196,7 @@ exports.getMon = (req, res, db) => {
       type_name: req.body.type_name
     };
 
-    db.find(search).skip(parseInt(req.body.from)).limit(parseInt(req.body.countRow)).toArray(function (err, docs) {
+    db.find(search).sort({id_pam: 1}).skip(parseInt(req.body.from)).limit(parseInt(req.body.countRow)).toArray(function (err, docs) {
       assert.equal(err, null);
       res.json(docs);
     });
@@ -206,7 +206,7 @@ exports.getMon = (req, res, db) => {
       db_type: 'pam',
     };
 
-    db.find(search).skip(parseInt(req.body.from)).limit(parseInt(req.body.countRow)).toArray(function (err, docs) {
+    db.find(search).sort({id_pam: 1}).skip(parseInt(req.body.from)).limit(parseInt(req.body.countRow)).toArray(function (err, docs) {
       assert.equal(err, null);
       res.json(docs);
     });
@@ -214,7 +214,7 @@ exports.getMon = (req, res, db) => {
   if (req.body.id_pam && !req.body.type_name && (!req.body.from && req.body.from !== 0) && !req.body.countRow && !req.body.folder) {
     const search = {
       db_type: 'pam',
-      id_pam: req.body.id_pam,
+      id_pam: parseInt(req.body.id_pam),
     };
 
     db.find(search).toArray(function (err, docs) {
@@ -293,6 +293,7 @@ exports.updatePam = (req, res, db) => {
   for(var k in req.body.model) updatedPam[k]=req.body.model[k];
 
   delete updatedPam._id;
+  updatedPam.id_pam = parseInt(updatedPam.id_pam);
 
   db.update(search, updatedPam, (err, result) => {
     assert.equal(err, null);

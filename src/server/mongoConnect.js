@@ -23,6 +23,11 @@ exports.connect = (app) => {
       }
       require('./routes')(app, db.collection('notes'));
     });
+    db.collection('notes').find({db_type: 'pam'}).forEach(element => {
+      element.id_pam = parseInt(element.id_pam);
+      db.collection('notes').save(element);
+      console.log('elements updated for numbers');
+    });
   });
 }
 
@@ -38,7 +43,7 @@ function initDB(db) {
   const menuItem = {
     db_type: 'menu',
     menu_name: 'Главное',
-  };
+  };  
 
   db.collection('notes').insert(menuItem, (err, result) => {
     if (err) { 
