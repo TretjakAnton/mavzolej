@@ -12,10 +12,9 @@ export default class Pages extends React.PureComponent {
   constructor(props){
     super(props);
     this.state = {
-      currentPage: null,
+      currentPage: props.currentPage,
       countPages: null,
-      error: null,
-      DOMPages: null
+      error: null
     }
     this.initPages();
   }
@@ -27,38 +26,47 @@ export default class Pages extends React.PureComponent {
       } else {
         const countPages = Math.ceil(data.length/this.props.countRows);
         this.setState({
-          countPages: countPages,
-          DOMPages: this.calculatePages(countPages)
+          countPages: countPages
         });
       }
     });
   }
 
   changePage = (page) => {
-    window.history.pushState('', `page ${page}`, `${window.location.pathname}?page=${page}`);
-    this.setState({currentPage: page});
-    this.props.onChange(page);
+    if(page && page <= this.state.countPages){
+      window.history.pushState('', `page ${page}`, `${window.location.pathname}?page=${page}`);
+      this.setState({currentPage: page});
+      this.props.onChange(page);
+    }
   };
 
-  calculatePages = (countPages) => {
+  calculatePages = () => {
+    const {currentPage, countPages} = this.state;
     const pages = [];
     for(let i=1; i <= countPages; i++){
-      pages.push(<Button key={i} onClick={() => this.changePage(i)}>{i}</Button>)
+      if(currentPage === i) {
+        pages.push(<Button key={i} onClick={() => this.changePage(i)}><b>{i}</b></Button>)
+      } else {
+        pages.push(<Button key={i} onClick={() => this.changePage(i)}>{i}</Button>)
+      }
     }
     return pages;
   };
 
   render(){
-    const prevPage = this.state.currentPage - 1;
-    const nextPage = this.state.currentPage + 1;
-    if(this.state.countPages > 1){
-      return <ButtonToolbar>
-              <ButtonGroup>
-                <Button onClick={() => this.changePage(prevPage)} > {`<`} </Button>
-                {this.state.DOMPages}
-                <Button onClick={() => this.changePage(nextPage)} > {`>`} </Button>
-              </ButtonGroup>
-            </ButtonToolbar>
+    const {currentPage, countPages} = this.state;
+    const prevPage = currentPage - 1;
+    const nextPage = currentPage + 1;
+    if(countPages > 1){
+      return (
+        <ButtonToolbar>
+          <ButtonGroup>
+            <Button onClick={() => this.changePage(prevPage)} > {`<`} </Button>
+              {this.calculatePages()}
+            <Button onClick={() => this.changePage(nextPage)} > {`>`} </Button>
+          </ButtonGroup>
+        </ButtonToolbar>
+      )
     }
     return null;
   }

@@ -26658,30 +26658,49 @@ var Pages = function (_React$PureComponent) {
         } else {
           var countPages = Math.ceil(data.length / _this.props.countRows);
           _this.setState({
-            countPages: countPages,
-            DOMPages: _this.calculatePages(countPages)
+            countPages: countPages
           });
         }
       });
     };
 
     _this.changePage = function (page) {
-      window.history.pushState('', 'page ' + page, window.location.pathname + '?page=' + page);
-      _this.setState({ currentPage: page });
-      _this.props.onChange(page);
+      if (page && page <= _this.state.countPages) {
+        window.history.pushState('', 'page ' + page, window.location.pathname + '?page=' + page);
+        _this.setState({ currentPage: page });
+        _this.props.onChange(page);
+      }
     };
 
-    _this.calculatePages = function (countPages) {
+    _this.calculatePages = function () {
+      var _this$state = _this.state,
+          currentPage = _this$state.currentPage,
+          countPages = _this$state.countPages;
+
       var pages = [];
 
       var _loop = function _loop(i) {
-        pages.push(_react2.default.createElement(
-          _reactBootstrap.Button,
-          { key: i, onClick: function onClick() {
-              return _this.changePage(i);
-            } },
-          i
-        ));
+        if (currentPage === i) {
+          pages.push(_react2.default.createElement(
+            _reactBootstrap.Button,
+            { key: i, onClick: function onClick() {
+                return _this.changePage(i);
+              } },
+            _react2.default.createElement(
+              'b',
+              null,
+              i
+            )
+          ));
+        } else {
+          pages.push(_react2.default.createElement(
+            _reactBootstrap.Button,
+            { key: i, onClick: function onClick() {
+                return _this.changePage(i);
+              } },
+            i
+          ));
+        }
       };
 
       for (var i = 1; i <= countPages; i++) {
@@ -26691,10 +26710,9 @@ var Pages = function (_React$PureComponent) {
     };
 
     _this.state = {
-      currentPage: null,
+      currentPage: props.currentPage,
       countPages: null,
-      error: null,
-      DOMPages: null
+      error: null
     };
     _this.initPages();
     return _this;
@@ -26705,9 +26723,13 @@ var Pages = function (_React$PureComponent) {
     value: function render() {
       var _this2 = this;
 
-      var prevPage = this.state.currentPage - 1;
-      var nextPage = this.state.currentPage + 1;
-      if (this.state.countPages > 1) {
+      var _state = this.state,
+          currentPage = _state.currentPage,
+          countPages = _state.countPages;
+
+      var prevPage = currentPage - 1;
+      var nextPage = currentPage + 1;
+      if (countPages > 1) {
         return _react2.default.createElement(
           _reactBootstrap.ButtonToolbar,
           null,
@@ -26723,7 +26745,7 @@ var Pages = function (_React$PureComponent) {
               '<',
               ' '
             ),
-            this.state.DOMPages,
+            this.calculatePages(),
             _react2.default.createElement(
               _reactBootstrap.Button,
               { onClick: function onClick() {
@@ -57400,22 +57422,17 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var AdminPrEditor = function (_React$Component) {
-  _inherits(AdminPrEditor, _React$Component);
+var CustomerPrEditor = function (_React$Component) {
+  _inherits(CustomerPrEditor, _React$Component);
 
-  function AdminPrEditor(props) {
-    _classCallCheck(this, AdminPrEditor);
+  function CustomerPrEditor(props) {
+    _classCallCheck(this, CustomerPrEditor);
 
-    var _this = _possibleConstructorReturn(this, (AdminPrEditor.__proto__ || Object.getPrototypeOf(AdminPrEditor)).call(this, props));
-
-    _this.componentWillReceiveProps = function (newProps) {
-      _this.setState({ id_type: newProps.id_type });
-      _this.getInfoForPage(newProps.id_type);
-    };
+    var _this = _possibleConstructorReturn(this, (CustomerPrEditor.__proto__ || Object.getPrototypeOf(CustomerPrEditor)).call(this, props));
 
     _this.changePage = function (page) {
       _this.setState({ page: page });
-      _this.getInfoForPage(null, page);
+      _this.getInfoForPage(_this.state.id_type, page);
     };
 
     _this.calcRange = function (page) {
@@ -57423,13 +57440,7 @@ var AdminPrEditor = function (_React$Component) {
     };
 
     _this.getInfoForPage = function (id, page) {
-      var urlParams = new URLSearchParams(window.location.search);
-      var pageHref = parseInt(urlParams.get('page'));
-
-      var id_type = id || _this.state.id_type;
-      var newPage = page || pageHref || 1;
-
-      (0, _newPam.getPam)(null, id_type, _this.calcRange(newPage), _this.state.countRows, true).then(function (data) {
+      (0, _newPam.getPam)(null, id, _this.calcRange(page), _this.state.countRows, true).then(function (data) {
         if (data.error) {
           _this.setState({ error: data.error });
         } else {
@@ -57460,11 +57471,14 @@ var AdminPrEditor = function (_React$Component) {
       (0, _helpers.addBodyClass)(false);
     };
 
+    var urlParams = new URLSearchParams(window.location.search);
+    var pageHref = parseInt(urlParams.get('page'));
+
     _this.state = {
       countRows: 10,
+      page: pageHref || 1,
       pams: null,
       error: null,
-      DOMPages: null,
       id_type: _this.props.id_type,
       form: {
         status: false,
@@ -57475,10 +57489,10 @@ var AdminPrEditor = function (_React$Component) {
     return _this;
   }
 
-  _createClass(AdminPrEditor, [{
+  _createClass(CustomerPrEditor, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      this.getInfoForPage();
+      this.getInfoForPage(this.state.id_type, this.state.page);
     }
   }, {
     key: 'render',
@@ -57489,7 +57503,8 @@ var AdminPrEditor = function (_React$Component) {
           form = _state.form,
           pams = _state.pams,
           countRows = _state.countRows,
-          id_type = _state.id_type;
+          id_type = _state.id_type,
+          page = _state.page;
 
 
       return _react2.default.createElement(
@@ -57509,17 +57524,18 @@ var AdminPrEditor = function (_React$Component) {
           _react2.default.createElement(_Pages2.default, {
             countRows: countRows,
             type: id_type,
-            onChange: this.changePage
+            onChange: this.changePage,
+            currentPage: page
           })
         )
       );
     }
   }]);
 
-  return AdminPrEditor;
+  return CustomerPrEditor;
 }(_react2.default.Component);
 
-exports.default = AdminPrEditor;
+exports.default = CustomerPrEditor;
 
 /***/ }),
 /* 663 */
@@ -72468,7 +72484,7 @@ exports = module.exports = __webpack_require__(76)(undefined);
 
 
 // module
-exports.push([module.i, "*,html {\n  margin: 0;\n}\n\nbody {\n  overflow-x: hidden !important;\n}\n\nbody.opened-slider,\nbody.opened-form {\n  overflow: hidden;\n}\n\n.admin-controle-monuments {\n  padding: 0 25px;\n}\n\n.form-group input,\n.form-group select {\n  margin: 15px 0;\n}\n\n.form-group > div {\n  padding: 0;\n}\n\n.description {\n  white-space: normal !important;\n}\n\n.main-image {\n  height: 200px;\n  margin: 0 auto;\n  display: block;\n}\n\n.small-images {\n  height: 100px;\n}\n\n.information {\n  display: flex;\n  flex-direction: column;\n}\n\n.col-xs-6 {\n  position: inherit;\n}\n\n/*  form  */\n\n.form-container {\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  height: 100vh;\n  width: 100vw;\n  background-color: rgba(0, 0, 0, 0.7);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  z-index: 3;\n}\n\n.form-content {\n  background-color: white;\n  max-width: 520px;\n  position: relative;\n}\n\n.form-flex {\n  display: flex;\n  overflow: auto;\n  max-height: calc( 100vh - 110px);\n}\n\n.form-left-side {\n  height: max-content;\n  display: block;\n  padding: 10px;\n  border-right: 1px solid gray;\n}\n\n.form-right-side {\n  display: block;\n  padding: 10px;\n}\n\n.form-price {\n  bottom: 10px;\n  position: absolute;\n  right: 40px;\n}\n\n.form-close {\n  float: right;\n  color: white;\n  font-size: 30px;\n  margin-right: -35px;\n  margin-top: -30px;\n  cursor: pointer;\n}\n\n/* admin menu */\n\n.add-menu-item {\n  display: inline-block;\n}\n\n.add-menu-item-right {\n  display: inline-block;\n  margin-left: 20px;\n}\n\n/* header */\n\n.header {\n  color: white;\n  height: 248px;\n  position: relative;\n}\n\n.header .header-menu {\n  padding: 10px 0;\n}\n\n.header .navbar {\n  margin-bottom: 0;\n}\n\n.header .navbar-default {\n  position: absolute;\n  bottom: 0;\n  width: calc(100% - 4px);\n  right: 0;\n}\n\n.header .header-content {\n  background-color: black;\n  height: inherit;\n  border-radius: 5px;\n}\n\n.container-fluid {\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n}\n\n.page-selector {\n  display: block;\n  align-self: flex-end;\n}\n\n.page-selector > div {\n  margin-top: 20px;\n}\n\n.page-selector > div {\n  margin-top: 20px;\n}\n\n.page-selector > div > div.btn-group {\n  display: flex;\n  justify-content: center;\n}\n\n.container-content {\n  min-height: calc(100vh - 428px);\n  padding: 15px 5px 15px 5px;\n}\n\n.footer {\n  position: relative;\n  background: #2b2b2b;\n}\n\n.contacts {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  font-size: 14px;\n  color: white;\n  text-align: right;\n}\n\n.textInfo-items {\n  display: inline-block;\n  padding-right: 15px;\n}\n\n.padding-right {\n  padding-right: 5px;\n}\n\n.admin-image-container {\n  position: relative;\n  padding: 10px;\n  display: inline-block;\n  background-color: #f3f2f2;\n  margin: 5px;\n}\n\n.remove-image {\n  position: absolute;\n  top: -6px;\n  right: -6px;\n  font-size: 17px;\n}\n\n.delete-image-modal {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.modal-container {\n  position: relative;\n}\n\n.modal-container .modal, .modal-container .modal-backdrop {\n   position: absolute;\n}\n\n.contained-modal-title {\n  height: 500px;\n}\n\n.modal-content {\n  border: none;\n}\n\n.modal-content > .modal-dialog {\n  height: auto;\n  background-color: white;\n}\n\n.modal-open .modal {\n  overflow-y: hidden;\n}\n\n.modal-dialog {\n  height: 600px;\n}\n\n/*Home page*/\n\n.content {\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.wrap {\n  font-size: 20px;\n  max-width: 800px;\n  margin: 0 auto;\n  word-break: break-word;\n  text-align: justify;\n}\n\n.wrap h2 {\n  text-align: center;\n}\n\n@media (min-width: 1200px) {\n  .footer {\n    height: 180px;\n  }\n}\n\n@media (min-width: 800px) and (max-width: 1200px) {\n  .footer {\n    height: 180px;\n  }\n}\n\n@media (min-width: 400px) and (max-width: 800px) {\n  .footer {\n    height: 180px;\n  }\n}\n\n@media (min-width: 200px) and (max-width: 400px) {\n  .footer {\n    height: 206px;\n  }\n}\n\n.admin-controle-monuments .form-group {\n  margin-top: 20px;\n}\n\n.admin-image-container > div {\n  max-height: 150px;\n}\n\n.deleting-item {\n  display: flex;\n  align-items: center;\n}\n\n.admin-image-control {\n  display: flex;\n  align-items: center;\n  overflow: auto;\n}\n\n.deleting-item > span {\n  min-width: 150px;\n}\n\n.show-monuments {\n  margin-top: 50px; \n}\n\n.monum-table {\n  margin-top: 30px;\n}\n\nul.nav.nav-tabs {\n  margin-bottom: 20px;\n}\n\n.sending-email {\n  background-color: white;\n  position: absolute;\n  height: 100%;\n  width: 520px;\n  z-index: 1;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.sending-email span {\n  text-align: center;\n}\n\n.sending-email .response {\n  display: flex;\n  flex-direction: column;\n}\n\n.error-validation-text {\n  color: red;\n  text-align: left;\n}\n\n.tab-names {\n  background-color: lightgray;\n}\n\n.tab-names > ul {\n  list-style: none;\n}\n\n.tab-names > ul > li {\n  display: inline-block;\n  padding: 20px 15px;\n  cursor: pointer;\n  border-right: 1px solid black; \n}\n\n.tab-names > ul > li:first-child {\n  border-left: 1px solid black; \n}\n\n.tab-names > ul > li.active-tab,\n.tab-names > ul > li:hover {\n  background: darkgray;\n}\n\n.navbar-default .navbar-nav > li > a,\n.navbar-nav > li > .dropdown-menu {\n  font-size: 18px;\n}\n", ""]);
+exports.push([module.i, "*,html {\n  margin: 0;\n}\n\nbody {\n  overflow-x: hidden !important;\n}\n\nbody.opened-slider,\nbody.opened-form {\n  overflow: hidden;\n}\n\nbutton.btn.btn-default {\n  outline: none;\n}\n\n.admin-controle-monuments {\n  padding: 0 25px;\n}\n\n.form-group input,\n.form-group select {\n  margin: 15px 0;\n}\n\n.form-group > div {\n  padding: 0;\n}\n\n.description {\n  white-space: normal !important;\n}\n\n.main-image {\n  height: 200px;\n  margin: 0 auto;\n  display: block;\n}\n\n.small-images {\n  height: 100px;\n}\n\n.information {\n  display: flex;\n  flex-direction: column;\n}\n\n.col-xs-6 {\n  position: inherit;\n}\n\n/*  form  */\n\n.form-container {\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  height: 100vh;\n  width: 100vw;\n  background-color: rgba(0, 0, 0, 0.7);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  z-index: 3;\n}\n\n.form-content {\n  background-color: white;\n  max-width: 520px;\n  position: relative;\n}\n\n.form-flex {\n  display: flex;\n  overflow: auto;\n  max-height: calc( 100vh - 110px);\n}\n\n.form-left-side {\n  height: max-content;\n  display: block;\n  padding: 10px;\n  border-right: 1px solid gray;\n}\n\n.form-right-side {\n  display: block;\n  padding: 10px;\n}\n\n.form-price {\n  bottom: 10px;\n  position: absolute;\n  right: 40px;\n}\n\n.form-close {\n  float: right;\n  color: white;\n  font-size: 30px;\n  margin-right: -35px;\n  margin-top: -30px;\n  cursor: pointer;\n}\n\n/* admin menu */\n\n.add-menu-item {\n  display: inline-block;\n}\n\n.add-menu-item-right {\n  display: inline-block;\n  margin-left: 20px;\n}\n\n/* header */\n\n.header {\n  color: white;\n  height: 248px;\n  position: relative;\n}\n\n.header .header-menu {\n  padding: 10px 0;\n}\n\n.header .navbar {\n  margin-bottom: 0;\n}\n\n.header .navbar-default {\n  position: absolute;\n  bottom: 0;\n  width: calc(100% - 4px);\n  right: 0;\n}\n\n.header .header-content {\n  background-color: black;\n  height: inherit;\n  border-radius: 5px;\n}\n\n.container-fluid {\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n}\n\n.page-selector {\n  display: block;\n  align-self: flex-end;\n}\n\n.page-selector > div {\n  margin-top: 20px;\n}\n\n.page-selector > div {\n  margin-top: 20px;\n}\n\n.page-selector > div > div.btn-group {\n  display: flex;\n  justify-content: center;\n}\n\n.container-content {\n  min-height: calc(100vh - 428px);\n  padding: 15px 5px 15px 5px;\n}\n\n.footer {\n  position: relative;\n  background: #2b2b2b;\n}\n\n.contacts {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  font-size: 14px;\n  color: white;\n  text-align: right;\n}\n\n.textInfo-items {\n  display: inline-block;\n  padding-right: 15px;\n}\n\n.padding-right {\n  padding-right: 5px;\n}\n\n.admin-image-container {\n  position: relative;\n  padding: 10px;\n  display: inline-block;\n  background-color: #f3f2f2;\n  margin: 5px;\n}\n\n.remove-image {\n  position: absolute;\n  top: -6px;\n  right: -6px;\n  font-size: 17px;\n}\n\n.delete-image-modal {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.modal-container {\n  position: relative;\n}\n\n.modal-container .modal, .modal-container .modal-backdrop {\n   position: absolute;\n}\n\n.contained-modal-title {\n  height: 500px;\n}\n\n.modal-content {\n  border: none;\n}\n\n.modal-content > .modal-dialog {\n  height: auto;\n  background-color: white;\n}\n\n.modal-open .modal {\n  overflow-y: hidden;\n}\n\n.modal-dialog {\n  height: 600px;\n}\n\n/*Home page*/\n\n.content {\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.wrap {\n  font-size: 20px;\n  max-width: 800px;\n  margin: 0 auto;\n  word-break: break-word;\n  text-align: justify;\n}\n\n.wrap h2 {\n  text-align: center;\n}\n\n@media (min-width: 1200px) {\n  .footer {\n    height: 180px;\n  }\n}\n\n@media (min-width: 800px) and (max-width: 1200px) {\n  .footer {\n    height: 180px;\n  }\n}\n\n@media (min-width: 400px) and (max-width: 800px) {\n  .footer {\n    height: 180px;\n  }\n}\n\n@media (min-width: 200px) and (max-width: 400px) {\n  .footer {\n    height: 206px;\n  }\n}\n\n.admin-controle-monuments .form-group {\n  margin-top: 20px;\n}\n\n.admin-image-container > div {\n  max-height: 150px;\n}\n\n.deleting-item {\n  display: flex;\n  align-items: center;\n}\n\n.admin-image-control {\n  display: flex;\n  align-items: center;\n  overflow: auto;\n}\n\n.deleting-item > span {\n  min-width: 150px;\n}\n\n.show-monuments {\n  margin-top: 50px; \n}\n\n.monum-table {\n  margin-top: 30px;\n}\n\nul.nav.nav-tabs {\n  margin-bottom: 20px;\n}\n\n.sending-email {\n  background-color: white;\n  position: absolute;\n  height: 100%;\n  width: 520px;\n  z-index: 1;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.sending-email span {\n  text-align: center;\n}\n\n.sending-email .response {\n  display: flex;\n  flex-direction: column;\n}\n\n.error-validation-text {\n  color: red;\n  text-align: left;\n}\n\n.tab-names {\n  background-color: lightgray;\n}\n\n.tab-names > ul {\n  list-style: none;\n}\n\n.tab-names > ul > li {\n  display: inline-block;\n  padding: 20px 15px;\n  cursor: pointer;\n  border-right: 1px solid black; \n}\n\n.tab-names > ul > li:first-child {\n  border-left: 1px solid black; \n}\n\n.tab-names > ul > li.active-tab,\n.tab-names > ul > li:hover {\n  background: darkgray;\n}\n\n.navbar-default .navbar-nav > li > a,\n.navbar-nav > li > .dropdown-menu {\n  font-size: 18px;\n}\n", ""]);
 
 // exports
 

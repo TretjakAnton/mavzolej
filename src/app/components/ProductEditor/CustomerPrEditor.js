@@ -7,14 +7,17 @@ import {
 import { addBodyClass } from '../../helpers';
 import Pages from '../Pages';
 
-export default class AdminPrEditor extends React.Component{
+export default class CustomerPrEditor extends React.Component{
   constructor(props){
     super(props);
+    const urlParams = new URLSearchParams(window.location.search);
+    const pageHref = parseInt(urlParams.get('page'));
+
     this.state = {
       countRows: 10,
+      page: pageHref || 1,
       pams: null,
       error: null,
-      DOMPages: null,
       id_type: this.props.id_type,
       form: {
         status: false,
@@ -25,17 +28,12 @@ export default class AdminPrEditor extends React.Component{
   }
 
   componentWillMount() {
-    this.getInfoForPage();
-  };
-
-  componentWillReceiveProps = (newProps) => {
-    this.setState({id_type: newProps.id_type});
-    this.getInfoForPage(newProps.id_type);
+    this.getInfoForPage(this.state.id_type, this.state.page);
   };
 
   changePage = (page) => {
     this.setState({page: page});
-    this.getInfoForPage(null, page);
+    this.getInfoForPage(this.state.id_type, page);
   };
 
   calcRange = (page) => {
@@ -43,13 +41,7 @@ export default class AdminPrEditor extends React.Component{
   };
 
   getInfoForPage = (id, page) => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const pageHref = parseInt(urlParams.get('page'));
-
-    const id_type = id || this.state.id_type;
-    const newPage = page || pageHref || 1;
-
-    getPam(null, id_type, this.calcRange(newPage), this.state.countRows, true).then((data) => {
+    getPam(null, id, this.calcRange(page), this.state.countRows, true).then((data) => {
       if (data.error) {
         this.setState({error: data.error})
       } else {
@@ -85,7 +77,8 @@ export default class AdminPrEditor extends React.Component{
       form,
       pams,
       countRows,
-      id_type
+      id_type,
+      page
     } = this.state;
 
     return <div className="row product-container">
@@ -104,6 +97,7 @@ export default class AdminPrEditor extends React.Component{
           countRows={countRows}
           type={id_type}
           onChange={this.changePage}
+          currentPage={page}
         />
       </div>
     </div>

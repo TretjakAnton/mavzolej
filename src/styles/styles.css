@@ -11,6 +11,10 @@ body.opened-form {
   overflow: hidden;
 }
 
+button.btn.btn-default {
+  outline: none;
+}
+
 .admin-controle-monuments {
   padding: 0 25px;
 }
