@@ -63923,6 +63923,8 @@ var _Menu3 = __webpack_require__(316);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -63983,8 +63985,7 @@ var AdminMenu = function (_React$Component) {
     };
 
     _this.addItem = function () {
-      var newData = _this.state.data;
-      newData.push(_this.state.newItem);
+      var newData = [].concat(_toConsumableArray(_this.state.data)).push(_this.state.newItem);
       _this.setState({
         data: newData,
         newItem: { menu_name: '' },
@@ -64353,6 +64354,8 @@ var _Types = __webpack_require__(182);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -64388,9 +64391,7 @@ var Types = function (_React$Component) {
     };
 
     _this.onAdd = function (item) {
-      var newData = _this.state.data;
-
-      newData.push({
+      var newData = [].concat(_toConsumableArray(_this.state.data)).push({
         folder: item.folder,
         type_name: item.type_name,
         menu_name: item.menu_name
@@ -64413,12 +64414,13 @@ var Types = function (_React$Component) {
       data: '',
       success: ''
     };
+    _this.initData();
     return _this;
   }
 
   _createClass(Types, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
+    key: 'initData',
+    value: function initData() {
       var _this2 = this;
 
       (0, _Types.getAllTypes)().then(function (data) {

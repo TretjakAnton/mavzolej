@@ -69,8 +69,7 @@ class AdminMenu extends React.Component {
   };
 
   addItem = () => {
-    let newData = this.state.data;
-    newData.push(this.state.newItem);
+    const newData = [...this.state.data].push(this.state.newItem);
     this.setState({
       data: newData,
       newItem: { menu_name: '' },

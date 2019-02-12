@@ -16,9 +16,10 @@ class Types extends React.Component{
         data: '',
         success: '',
       };
+      this.initData();
   };
 
-  componentWillMount(){
+  initData(){
     getAllTypes().then((data) => {
         if(data.error){
             this.setState({error: data.error})
@@ -49,9 +50,7 @@ class Types extends React.Component{
   };
 
   onAdd = (item) => {
-    let newData = this.state.data;
-
-    newData.push({
+    const newData = [...this.state.data].push({
       folder: item.folder,
       type_name: item.type_name,
       menu_name: item.menu_name,
