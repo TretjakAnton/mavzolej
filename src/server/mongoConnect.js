@@ -23,11 +23,12 @@ exports.connect = (app) => {
       }
       require('./routes')(app, db.collection('notes'));
     });
-    db.collection('notes').find({db_type: 'pam'}).forEach(element => {
-      element.id_pam = parseInt(element.id_pam);
-      db.collection('notes').save(element);
-      console.log('elements updated for numbers');
-    });
+    // db.collection('notes').find({db_type: 'pam'}).forEach(element => {
+    //   element.id_pam = parseInt(element.id_pam);
+    //   db.collection('notes').save(element);
+    //   console.log('elements updated for numbers');
+    // });
+    // update all pam id_pam to Int to have normal sorting
   });
 }
 
