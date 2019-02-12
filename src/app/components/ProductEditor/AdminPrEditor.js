@@ -4,12 +4,6 @@ import {
   FormControl,
   Button
 } from 'react-bootstrap';
-import {
-  getPam,
-  deletePam,
-  addUpdatePam,
-  deleteImage,
-} from '../../api/newPam';
 import Pages from '../Pages';
 import ImageControl from '../ImageControl';
 import AdminTable from './AdminTable';
