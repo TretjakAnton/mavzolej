@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table, Glyphicon, Button } from 'react-bootstrap';
-import SimpleModalSlideshow from 'react-simple-modal-slideshow';
+import Lightbox from 'react-images';
 import Slider from "react-slick";
 
 const slideSettings = {
@@ -29,19 +29,16 @@ class Item extends React.Component{
       },
       currentShowSlide: 1
     };
+    this.initData();
   };
 
-  componentWillMount = () => {
+  initData = () => {
     const { info } = this.state;
     let newImages = [];
     let newSliderImages = [];
     info.images.map((image) => {
       newImages.push(`../../../media/images${info.folder}/${image}`);
-      newSliderImages.push({
-        media: (
-          <img src={`../../../media/images${info.folder}/${image}`} />
-        ),
-      });
+      newSliderImages.push({ src: `../../../media/images${info.folder}/${image}` });
     });
     this.setState({
       images: newImages,
@@ -66,11 +63,22 @@ class Item extends React.Component{
     });
   };
 
-  handleNextPrev = (index) => {
+  handleNext = () => {
+    const nextSlide = this.state.sliderInfo.currentSlide + 1;
     this.setState({
       sliderInfo: {
         status: true,
-        currentSlide: index,
+        currentSlide: nextSlide,
+      }
+    });
+  };
+
+  handlePrev = () => {
+    const prevSlide = this.state.sliderInfo.currentSlide - 1;
+    this.setState({
+      sliderInfo: {
+        status: true,
+        currentSlide: prevSlide,
       }
     });
   };
@@ -88,7 +96,7 @@ class Item extends React.Component{
     const { info, images, sliderImages, currentShowSlide, sliderInfo } = this.state;
     const sliderStatus = sliderInfo.status;
     const currentSlide = sliderInfo.currentSlide;
-    const imageToShow = sliderInfo.imageToShow;
+
     return (
       <div className="item col-xs-6 col-sm-6 col-md-4 col-lg-3">
         <div className="mainContainer">
@@ -143,14 +151,13 @@ class Item extends React.Component{
             Заказать
             <Glyphicon glyph="shopping-cart" />
         </Button>
-        <SimpleModalSlideshow 
-          slides={sliderImages}
-          currentSlide={currentSlide}
-          open={sliderStatus}
+        <Lightbox
+          images={sliderImages}
+          currentImage={currentSlide}
+          isOpen={sliderStatus}
           onClose={this.closeSlider}
-          onNext={this.handleNextPrev}
-          onPrev={this.handleNextPrev}
-          classNamePrefix="modal-slideshow"
+          onClickPrev={this.handlePrev}
+          onClickNext={this.handleNext}
         />
       </div>
     )
