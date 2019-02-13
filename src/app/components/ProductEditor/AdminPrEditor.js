@@ -40,6 +40,10 @@ export default class AdminPrEditor extends React.PureComponent {
     this.props.getPamInfo(null, newElem.type_name, this.state.page, this.state.countRows, false);
   };
 
+  reload = () => {
+    this.props.getPamInfo(null, this.state.curr_type.type_name, this.state.page, this.state.countRows, false);
+  }
+
   setToDelete = (pam) => {
     this.setState({
       itemToDelete: pam,
@@ -135,8 +139,11 @@ export default class AdminPrEditor extends React.PureComponent {
       </FormControl>)
     }
     return (
-      <div>
+      <div className="admin-product-editor">
         { getTypes(curr_type ? curr_type.type_name: '', this.typeConrol, "curr_type") }
+
+        <Button className="reload-button" onClick={this.reload}>Перезагрузить</Button>
+
         { this.props.pams && 
           <AdminTable 
             pams={this.props.pams} 

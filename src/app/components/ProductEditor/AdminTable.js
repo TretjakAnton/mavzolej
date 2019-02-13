@@ -1,7 +1,8 @@
 import React, {PureComponent} from 'react';
 import ImageControl from '../ImageControl';
 import {
-  Table
+  Table,
+  Button
 } from 'react-bootstrap';
 
 export default class AdminTable extends PureComponent {
@@ -34,8 +35,8 @@ export default class AdminTable extends PureComponent {
                 {val.description}
               </td>
               <td key={val.id_pam + "4"}>
-                <button onClick={() => this.props.setToEdit(val)}>edit</button>
-                <button onClick={() => this.props.setToDelete(val)}>delete</button>
+                <Button onClick={() => this.props.setToEdit(val)}>edit</Button>
+                <Button onClick={() => this.props.setToDelete(val)}>delete</Button>
               </td>
             </tr>
           )

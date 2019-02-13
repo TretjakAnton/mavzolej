@@ -3,9 +3,7 @@ import Dropzone from 'react-dropzone';
 import {
   Button,
   FormControl,
-  ControlLabel,
-  FormGroup,
-  Col,
+  ControlLabel
 }  from 'react-bootstrap';
 import { addUpdatePam } from '../../api/newPam';
 import ProductEditor from '../../components/ProductEditor';
@@ -22,12 +20,13 @@ class Pam extends React.Component {
       error: '',
       success: '',
       types: null,
-      id_fake: '',
-      price: '',
-      description: '',
-      type_name: '',
       uploadedFiles: []
     };
+    this.id_fake = React.createRef();
+    this.price = React.createRef();
+    this.description = React.createRef();
+    this.type_name = React.createRef();
+
     this.initData();
   };
 
@@ -45,36 +44,23 @@ class Pam extends React.Component {
     })
   };
 
-  inputsConrol = (event) => {
-    if(event.target.name == "id_fake"){
-      this.setState({id_fake: event.target.value})
-    }
-    if(event.target.name == "price"){
-      this.setState({price: event.target.value})
-    }
-    if(event.target.name == "description"){
-      this.setState({description: event.target.value})
-    }
-    if(event.target.name == "type_name"){
-      this.setState({type_name: event.target.value})
-    }
-  };
-
   onSendAll = () => {
-    const {id_fake, price, uploadedFiles, description} = this.state;
+    const id_fake = this.id_fake.current.value;
+    const price = this.price.current.value;
+    const description = this.description.current.value;
+    const type_name = this.type_name.current.value;
+    
     const selectType = this.state.types.filter((type) => {
-      if(type.type_name == this.state.type_name)
+      if(type.type_name == type_name)
         return type
     });
-    addUpdatePam(id_fake, selectType[0], description, price, uploadedFiles).then((data) => {
+    
+    addUpdatePam(id_fake, selectType[0], description, price, this.state.uploadedFiles).then((data) => {
       if (data.error) {
         this.setState({error: data.error})
       } else {
         this.setState({
           success: data.success,
-          id_fake: '',
-          description: '',
-          price: '',
           uploadedFiles: []
         });
       }
@@ -90,7 +76,7 @@ class Pam extends React.Component {
     }
     if (name === 'preview' && this.state.pam !== null) {
       this.state.uploadedFiles.map((val, key) => {
-        domElements.push(<img key={key} src={val.preview} style={{height: '150px'}}/>)
+        domElements.push(<img key={key} src={val.preview} style={{height: '160px'}}/>)
       })
     }
     return domElements;
@@ -105,32 +91,36 @@ class Pam extends React.Component {
   render() {
     return <div className="admin-controle-monuments">
       {this.state.types &&
-        <div>
-          <Dropzone
-            multiple={true}
-            accept="image/*"
-            onDrop={this.onImageDrop.bind(this)}>
-            <p>Drop an image or click to select a file to upload.</p>
-          </Dropzone>
-          {this.state.uploadedFiles &&
-            <div>{this.generateDOM('preview')}</div>
-          }
-          <FormGroup>
-            <Col sm={6}>
-              <FormControl type="number" placeholder="номер памятника" name="id_fake" value={this.state.id_fake} onChange={this.inputsConrol} />
-              <ControlLabel>тип памятника</ControlLabel>
-              <FormControl componentClass="select" name="type_name" value={this.state.type_name} onChange={this.inputsConrol}>
-                {this.generateDOM('types')}
-              </FormControl>
-              <textarea style={{width: '100%', height: '100px'}} type="textarea" placeholder="описание" name="description" value={this.state.description} onChange={this.inputsConrol} />
-              <FormControl type="number" placeholder="цена" name="price" value={this.state.price} onChange={this.inputsConrol} />
-              <Button onClick={this.onSendAll}>
-                 Сохранть
-              </Button>
-            </Col>
-          </FormGroup>
+        <div className="admin-add-container">
+
+          <div className="admin-add-images">
+            <Dropzone
+              multiple={true}
+              accept="image/*"
+              onDrop={this.onImageDrop.bind(this)}>
+              <p>Что бы загрузить файл/файлы, перетащиите их в эту область</p>
+            </Dropzone>
+            {this.state.uploadedFiles &&
+              <div className="admin-image-prev">
+                {this.generateDOM('preview')}
+              </div>
+            }
+          </div>
+          
+          <div className="admin-form-control">
+            <FormControl type="number" placeholder="номер памятника" name="id_fake" inputRef={this.id_fake} />
+            <ControlLabel>тип памятника</ControlLabel>
+            <FormControl componentClass="select" name="type_name" inputRef={this.type_name}>
+              {this.generateDOM('types')}
+            </FormControl>
+            <textarea style={{width: '100%', height: '100px'}} type="textarea" placeholder="описание" name="description" ref={this.description} />
+            <FormControl type="number" placeholder="цена" name="price" inputRef={this.price} />
+            <Button onClick={this.onSendAll}>
+                Сохранть
+            </Button>
+          </div>
+
           <div className="show-monuments">
-            {/* <AdminPrEditor types={this.state.types} /> */}
             <ProductEditor content={ADMIN} types={this.state.types} />
           </div>
         </div>

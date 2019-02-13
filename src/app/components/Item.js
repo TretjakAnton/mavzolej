@@ -17,11 +17,19 @@ const slideSettings = {
 class Item extends React.Component{
   constructor(props) {
     super(props);
+    
+    let newImages = [];
+    let newSliderImages = [];
+    props.info.images.map((image) => {
+      newImages.push(`../../../media/images${props.info.folder}/${image}`);
+      newSliderImages.push({ src: `../../../media/images${props.info.folder}/${image}` });
+    });
+
     this.state = {
       error: '',
-      images: [],
-      sliderImages: [],
-      info: this.props.info,
+      images: newImages,
+      sliderImages: newSliderImages,
+      info: props.info,
       status: false,
       sliderInfo: {
         status: false,
@@ -29,22 +37,7 @@ class Item extends React.Component{
       },
       currentShowSlide: 1
     };
-    this.initData();
   };
-
-  initData = () => {
-    const { info } = this.state;
-    let newImages = [];
-    let newSliderImages = [];
-    info.images.map((image) => {
-      newImages.push(`../../../media/images${info.folder}/${image}`);
-      newSliderImages.push({ src: `../../../media/images${info.folder}/${image}` });
-    });
-    this.setState({
-      images: newImages,
-      sliderImages: newSliderImages
-    });
-  }
 
   showHideImages = () => {
     this.setState({ status: !this.state.status })
