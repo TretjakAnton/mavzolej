@@ -44,24 +44,25 @@ class Types extends React.Component{
       if(data.error){
         this.setState({error: data.error})
       } else {
-        this.setState({success: data})
+        const newData = [...this.state.data];
+        this.setState({
+          success: data,
+          data: newData.filter(el => el._id !== item._id)
+        })
       }
     })
   };
 
   onAdd = (item) => {
-    const newData = [...this.state.data].push({
-      folder: item.folder,
-      type_name: item.type_name,
-      menu_name: item.menu_name,
-    });
+    const newData = [...this.state.data];
 
     addType(item.type_name, item.folder, item.menu_name).then((data) => {
       if(data.error){
         this.setState({error: data.error})
       } else {
+        newData.push(data);
         this.setState({
-          success: data,
+          success: true,
           data: newData,
         })
       }
@@ -81,21 +82,23 @@ class Types extends React.Component{
               <th>Контроль</th>
             </tr>
           </thead>
-          <tbody>
-            {data &&
-              data.map((element, key) => {
-                return (
-                  <TypesControl
-                    key={key}
-                    onSaveItem={this.onSave}
-                    onDeletItem={this.onDelete}
-                    item={element}
-                    addElement={false}
-                  />
-                )
-              })
-            }
-          </tbody>
+          {data && data.length !== 0 &&
+            <tbody>
+              {
+                data.map((element, key) => {
+                  return (
+                    <TypesControl
+                      key={key}
+                      onSaveItem={this.onSave}
+                      onDeletItem={this.onDelete}
+                      item={element}
+                      addElement={false}
+                    />
+                  )
+                })
+              }
+            </tbody>
+          }
         </Table>
         <TypesControl onAdd={this.onAdd} item={''} addElement={true}/>
       </div>

@@ -1,8 +1,8 @@
 var MongoClient = require('mongodb').MongoClient,
     assert = require('assert');
 
-// var url = 'mongodb://localhost:27017/testdb';
-var url = process.env.MONGO_URL;
+var url = 'mongodb://localhost:27017/testdb';
+// var url = process.env.MONGO_URL;
 //'mongodb://localhost:27017/myproject';
 
 exports.connect = (app) => {

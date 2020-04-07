@@ -7,26 +7,26 @@ var mongo = require('mongodb');
 exports.setUpdateMon = (req, res, db) => {
   // create an incoming form object
   let form = new formidable.IncomingForm();
-  let id, folder, description, price, type_name, menu_name, oldImg;
-  let _id = false;
+  let params = { _id: false }; // id, folder, description, price, type_name, menu_name, oldImg
+  const arrayOfImg = [];
 
   form.on('field', function (name, val) {
     if (name == 'id_pam')
-      id = val;
+      params.id = val;
     if (name == '_id')
-      _id = val;
+      params._id = val;
     if (name == 'oldImg')
-      oldImg = val;
+      params.oldImg = val;
     if (name == 'folder')
-      folder = val;
+      params.folder = val;
     if (name == 'type_name')
-      type_name = val;
+      params.type_name = val;
     if (name == 'menu_name')
-      menu_name = val;
+      params.menu_name = val;
     if (name == 'price')
-      price = val;
+      params.price = val;
     if (name == 'description')
-      description = val;
+      params.description = val;
   });
 
   // specify that we want to allow the user to upload multiple files in a single request
@@ -42,7 +42,7 @@ exports.setUpdateMon = (req, res, db) => {
     if (!fs.existsSync(rootFolder)) {
       fs.mkdirSync(rootFolder);
     }
-    var newFolder = path.join(rootFolder, folder);
+    var newFolder = path.join(rootFolder, params.folder);
 
     if (!fs.existsSync(newFolder)) {
       fs.mkdirSync(newFolder);
@@ -59,67 +59,7 @@ exports.setUpdateMon = (req, res, db) => {
       console.log('renamed complete');
     });
     
-    console.log(description);
-    
-    let item = {
-      db_type: 'pam',
-      id_pam: parseInt(id),
-      price: price,
-      description: description,
-      type_name: type_name,
-      folder: folder,
-      menu_name: menu_name,
-      images: [
-        fileName
-      ]
-    }
-
-    if (_id) {
-      const search = {
-        db_type: 'pam',
-        _id: new mongo.ObjectID(_id),
-      };
-
-      setItem = {
-        $push: { 'images': fileName }
-      }
-
-      db.update(search, setItem, (err, result) => {
-        assert.equal(err, null);
-        console.log("successfully added");
-      });
-    } else {
-      const search = {
-        db_type: 'pam',
-        id_pam: parseInt(id),
-        price: price,
-        description: description,
-        type_name: type_name,
-        folder: folder,
-        menu_name: menu_name
-      }
-
-      imagePush = {
-        $push: { 'images': fileName }
-      }
-
-      db.find(search).toArray(function (err, docs) {
-        if (assert.equal(err, null) || docs.length === 0) {
-          db.insert(item, (err, result) => {
-            if (err) {
-              console.log({ 'error': 'An error has occurred' });
-            } else {
-              console.log("success");
-            }
-          });
-        } else {
-          db.update(search, imagePush, (err, result) => {
-            assert.equal(err, null);
-            console.log("successfully added");
-          });
-        }
-      });
-    }
+    arrayOfImg.push(fileName);
   });
 
   // log any errors that occur
@@ -130,20 +70,21 @@ exports.setUpdateMon = (req, res, db) => {
 
   // once all the files have been uploaded, send a response to the client
   form.on('end', function () {
-    if (_id) {
+    saveOrUpdateItem(arrayOfImg, params, db);
+    if (params._id) {
       const search = {
         db_type: 'pam',
-        _id: new mongo.ObjectID(_id),
+        _id: new mongo.ObjectID(params._id),
       };
       setItem = {
         $set: {
           db_type: 'pam',
-          id_pam: parseInt(id),
-          price: price,
-          description: description,
-          type_name: type_name,
-          folder: folder,
-          menu_name: menu_name,
+          id_pam: parseInt(params.id),
+          price: params.price,
+          description: params.description,
+          type_name: params.type_name,
+          folder: params.folder,
+          menu_name: params.menu_name,
         }
       }
       var imgPath = path.join(__dirname, '../../media/images');
@@ -153,8 +94,8 @@ exports.setUpdateMon = (req, res, db) => {
         assert.equal(err, null);
         let oldMon = docs[0];
 
-        if(oldMon.folder != folder) {
-          let pathToNewFolder = path.join(imgPath, folder);
+        if(oldMon.folder != params.folder) {
+          let pathToNewFolder = path.join(imgPath, params.folder);
           checkOfExisting(pathToNewFolder);
           let pathToOldFolder = path.join(imgPath, oldMon.folder);
           oldMon.images.map((el) => {
@@ -186,6 +127,44 @@ exports.setUpdateMon = (req, res, db) => {
 
   // parse the incoming request containing the form data
   form.parse(req);
+};
+
+saveOrUpdateItem = (images, params, db) => {
+  if (params._id) {
+    const search = {
+      db_type: 'pam',
+      _id: new mongo.ObjectID(params._id),
+    };
+
+    setItem = {
+      $push: { 'images': images }
+    }
+
+    db.update(search, setItem, (err, result) => {
+      assert.equal(err, null);
+      console.log("successfully added");
+    });
+  } else {
+    let item = {
+      db_type: 'pam',
+      id_pam: parseInt(params.id),
+      price: params.price,
+      description: params.description,
+      type_name: params.type_name,
+      folder: params.folder,
+      menu_name: params.menu_name,
+      images
+    }
+
+    db.insert(item, (err, result) => {
+      if (err) {
+        console.log({ 'error': 'An error has occurred' });
+      } else {
+        console.log("success");
+      }
+    });
+  }
+
 };
 
 exports.getMon = (req, res, db) => {

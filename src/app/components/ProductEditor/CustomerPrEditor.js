@@ -4,7 +4,7 @@ import SaleForm from '../../containers/SaleForm';
 import { addBodyClass } from '../../helpers';
 import Pages from '../Pages';
 
-export default class CustomerPrEditor extends React.Component{
+class CustomerPrEditor extends React.Component {
   constructor(props){
     super(props);
 
@@ -18,6 +18,12 @@ export default class CustomerPrEditor extends React.Component{
       }
     }
     this.props.getPamInfo(null, this.props.id_type, this.props.page, this.state.countRows, true);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.id_type !== prevProps.id_type) {
+      this.props.getPamInfo(null, this.props.id_type, this.props.page, this.state.countRows, true);
+    }
   }
 
   changePage = (page) => {
@@ -75,3 +81,5 @@ export default class CustomerPrEditor extends React.Component{
     </div>
   }
 }
+
+export default CustomerPrEditor;

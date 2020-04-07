@@ -86,7 +86,8 @@ class Menu extends React.Component {
             menuData.push(newItems);
             newItems = new menuItems();
             newItems.setName(next.menu_name);
-          } else {
+          } 
+          if (!next) {
             menuData.push(newItems);
           }
         }
@@ -99,9 +100,9 @@ class Menu extends React.Component {
   createMenu = () => {
     let items = [];
 
-    this.state.data.map((elem, topKey) => {
+    this.state.data.forEach((elem, topKey) => {
       if(elem.name == 'Главное'){
-        elem.items.map((data, key) => {
+        elem.items.forEach((data, key) => {
           items.push(<LinkContainer key={data.id} to={`/monuments/${data.id}`}><NavItem eventKey={key}>{data.id}</NavItem></LinkContainer>)
         });
       } else {

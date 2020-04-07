@@ -16333,6 +16333,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
@@ -16443,6 +16445,15 @@ var ProductEditor = function (_React$Component) {
   }
 
   _createClass(ProductEditor, [{
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      if (this.props.params && this.props.params.id !== prevProps.params.id) {
+        this.setState(_extends({}, this.state, {
+          typeId: this.props.params.id
+        }));
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _state = this.state,
@@ -18065,7 +18076,8 @@ var Menu = function (_React$Component) {
               menuData.push(newItems);
               newItems = new menuItems();
               newItems.setName(next.menu_name);
-            } else {
+            }
+            if (!next) {
               menuData.push(newItems);
             }
           }
@@ -18078,9 +18090,9 @@ var Menu = function (_React$Component) {
     _this2.createMenu = function () {
       var items = [];
 
-      _this2.state.data.map(function (elem, topKey) {
+      _this2.state.data.forEach(function (elem, topKey) {
         if (elem.name == 'Главное') {
-          elem.items.map(function (data, key) {
+          elem.items.forEach(function (data, key) {
             items.push(_react2.default.createElement(
               _reactRouterBootstrap.LinkContainer,
               { key: data.id, to: '/monuments/' + data.id },
@@ -63017,13 +63029,13 @@ var AdminTable = function (_PureComponent) {
           )
         )
       ));
-      this.props.pams.map(function (val) {
+      this.props.pams.map(function (val, index) {
         body.push(_react2.default.createElement(
           'tr',
-          { key: val.id_pam + "01" },
+          { key: val.id_pam + index },
           _react2.default.createElement(
             'td',
-            { key: val.id_pam + "5" },
+            { key: val.id_pam + index },
             _react2.default.createElement(_ImageControl2.default, {
               images: val.images,
               previewFolder: '../../media/images' + _this2.props.folder
@@ -63031,12 +63043,12 @@ var AdminTable = function (_PureComponent) {
           ),
           _react2.default.createElement(
             'td',
-            { key: val.id_pam + "1" },
+            { key: val.id_pam + index },
             val.id_pam
           ),
           _react2.default.createElement(
             'td',
-            { key: val.id_pam + "2" },
+            { key: val.id_pam + index },
             val.price
           ),
           _react2.default.createElement(
@@ -63046,7 +63058,7 @@ var AdminTable = function (_PureComponent) {
           ),
           _react2.default.createElement(
             'td',
-            { key: val.id_pam + "4" },
+            { key: val.id_pam + index },
             _react2.default.createElement(
               _reactBootstrap.Button,
               { onClick: function onClick() {
@@ -63169,6 +63181,13 @@ var CustomerPrEditor = function (_React$Component) {
   }
 
   _createClass(CustomerPrEditor, [{
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      if (this.props.id_type !== prevProps.id_type) {
+        this.props.getPamInfo(null, this.props.id_type, this.props.page, this.state.countRows, true);
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -71717,24 +71736,27 @@ var Types = function (_React$Component) {
         if (data.error) {
           _this.setState({ error: data.error });
         } else {
-          _this.setState({ success: data });
+          var newData = [].concat(_toConsumableArray(_this.state.data));
+          _this.setState({
+            success: data,
+            data: newData.filter(function (el) {
+              return el._id !== item._id;
+            })
+          });
         }
       });
     };
 
     _this.onAdd = function (item) {
-      var newData = [].concat(_toConsumableArray(_this.state.data)).push({
-        folder: item.folder,
-        type_name: item.type_name,
-        menu_name: item.menu_name
-      });
+      var newData = [].concat(_toConsumableArray(_this.state.data));
 
       (0, _Types.addType)(item.type_name, item.folder, item.menu_name).then(function (data) {
         if (data.error) {
           _this.setState({ error: data.error });
         } else {
+          newData.push(data);
           _this.setState({
-            success: data,
+            success: true,
             data: newData
           });
         }
@@ -71803,10 +71825,10 @@ var Types = function (_React$Component) {
               )
             )
           ),
-          _react2.default.createElement(
+          data && data.length !== 0 && _react2.default.createElement(
             'tbody',
             null,
-            data && data.map(function (element, key) {
+            data.map(function (element, key) {
               return _react2.default.createElement(_TypesControl2.default, {
                 key: key,
                 onSaveItem: _this3.onSave,

@@ -20,21 +20,21 @@ export default class AdminTable extends PureComponent {
             </tr>
           </thead>
         );
-        this.props.pams.map((val) => {
+        this.props.pams.map((val, index) => {
           body.push(
-            <tr key={val.id_pam + "01"}>
-              <td key={val.id_pam + "5"}>
+            <tr key={val.id_pam + index}>
+              <td key={val.id_pam + index}>
                 <ImageControl
                   images={val.images}
                   previewFolder={'../../media/images' + this.props.folder}
                 />
               </td>
-              <td key={val.id_pam + "1"}>{val.id_pam}</td>
-              <td key={val.id_pam + "2"}>{val.price}</td>
+              <td key={val.id_pam + index}>{val.id_pam}</td>
+              <td key={val.id_pam + index}>{val.price}</td>
               <td className="description" key={val.id_pam + "3"}>
                 {val.description}
               </td>
-              <td key={val.id_pam + "4"}>
+              <td key={val.id_pam + index}>
                 <Button onClick={() => this.props.setToEdit(val)}>edit</Button>
                 <Button onClick={() => this.props.setToDelete(val)}>delete</Button>
               </td>

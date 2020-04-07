@@ -26,6 +26,15 @@ export default class ProductEditor extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.params && this.props.params.id !== prevProps.params.id) {
+      this.setState({
+        ...this.state,
+        typeId: this.props.params.id
+      });
+    }
+  }
+
   getPamInfo = (id_prod, type_name, page, countRows, trueFalse) => {
     const currPage = (page - 1) * countRows;
 
