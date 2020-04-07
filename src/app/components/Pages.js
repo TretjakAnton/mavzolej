@@ -19,6 +19,12 @@ export default class Pages extends React.PureComponent {
     this.initPages();
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.id_type !== prevProps.id_type) {
+      this.initPages();
+    }
+  }
+
   initPages = () => {
     getCountPams(this.props.type).then((data) => {
       if(data.error){
