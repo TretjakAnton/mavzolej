@@ -19,7 +19,7 @@
     "express": "^4.15.3",
     "formidable": "^1.1.1",
     "jsdom": "*",
-    "mongodb": "^2.2.5",
+    "mongodb": "^3.1.13",
     "mysql": "^2.11.1",
     "nodemailer": "^4.0.1",
     "react": "16.8",
